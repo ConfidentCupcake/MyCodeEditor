@@ -11,9 +11,9 @@ class EmptyState(QObject):
         self.label = QLabel(message,view.viewport())
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setWordWrap(True)
-        self.label.setAttribute(Qt.QA_TransparentForMouseEvents)
+        self.label.setAttribute(Qt.WA_TransparentForMouseEvents)
         view.viewport().installEventFilter(self)
-        for signal in (view.model().rowInserted, view.model().rowsRemoved, view.model().modelReset):
+        for signal in (view.model().rowsInserted, view.model().rowsRemoved, view.model().modelReset):
             signal.connect(self.refresh)
         self.refresh()
         
@@ -22,7 +22,7 @@ class EmptyState(QObject):
         if sip.isdeleted(self.view) or sip.isdeleted(self.label):
             return
         self.label.setGeometry(self.view.viewport().rect())
-        self.label.setVisible(self.view.viewport().rowCount() == 0)
+        self.label.setVisible(self.view.model().rowCount() == 0)
         self.label.raise_()
         
     def eventFilter(self, watched, event):

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import datetime
 import json
 import os
@@ -26,6 +27,8 @@ import resources_rc  # noqa: F401 - register resources generated from icons/reso
 from code_inteligence.find_replace import FindReplaceBar
 from code_inteligence.multi_tab_view import MultiTabView
 from code_inteligence.breadcrumb_symbols import scope_ranges
+from code_inteligence.command_registry import CommandRegistry
+from code_inteligence.command_palette import CommandPaletteDialog
 from con_term.console_widget import ConsoleWidget
 from con_term.terminal_widget import TerminalWidget
 from cozy.cat_controller import CatController
@@ -124,6 +127,7 @@ def resource_path(relative_path: str) -> str:
 
 
 class MainWindow(QMainWindow):
+    """Manage editor, tabs, shared services, menus and application shutdown."""
     update_available = pyqtSignal(str, str)
     update_check_finished = pyqtSignal(bool, str)
     WIDTH = 1400
@@ -145,7 +149,8 @@ class MainWindow(QMainWindow):
                 return candidate
         return folder
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Initialize this main component."""
         super().__init__()
         self.update_check_finished.connect(self._show_update_check_result)
         self._dirty_editors = set()
@@ -225,9 +230,10 @@ class MainWindow(QMainWindow):
            """
         self.init_ui()
         
+        self._install_command_palette()
+        
         self.outline_empty = EmptyState(self.outline_tree, 'No outline entries.\nOpen a document with headings or declarations.')
         self.search_empty = EmptyState(self.search_list_view, 'No search result.\nEnter a query above to search this workspace.')
-
         
         self.encoding_status = StatusItem('UTF-8', self._choose_document_encoding, self)
         self.eol_status = StatusItem('LF', self._choose_document_eol, self)
@@ -240,7 +246,8 @@ class MainWindow(QMainWindow):
         self._status_timer.timeout.connect(self._refresh_document_status)
         self._status_timer.start(250)
         
-        self._apply_density(self.settings.value('layout_density', 'comfortable', type=str))
+        density: str = self.settings.value('layout_density', 'comfortable', type=str)
+        self._apply_density(density if density in {'compact', 'comfortable'} else 'comfortable')
 
         self.breadcrumbs = Breadcrumbs(self)
         self.breadcrumb_bar = QToolBar('Breadcrumbs', self)
@@ -253,7 +260,7 @@ class MainWindow(QMainWindow):
         self.breadcrumbs.line_requested.connect(self._jump_breadcrumb)
         self._breadcrumb_timer = QTimer(self)
         self._breadcrumb_timer.setSingleShot(True)
-        self._breadcrumb_timer.setInterval(350)
+        self._breadcrumb_timer.setInterval(180)
         self._breadcrumb_timer.timeout.connect(self._refresh_breadcrumbs)
         self.tab_view.currentEditorChanged.connect(lambda *args: self._refresh_breadcrumbs())
         # Also catches Save As / rename without rewriting their save lifecycle.
@@ -792,7 +799,7 @@ class MainWindow(QMainWindow):
         self.document_status.setText(f"Selected {selected} | {'Modified' if editor.isModified() else 'Saved'} | {activity}")
         
     def _choose_document_encoding(self):
-        """Change the UTF-8 seralization flag and paricipate in dirty tracking."""
+        """Change the UTF-8 serialization flag and participate in dirty tracking."""
         editor = self.current_editor()
         if editor is None or editor.isReadOnly():
             return
@@ -828,7 +835,7 @@ class MainWindow(QMainWindow):
             return
         value, ok = QInputDialog.getItem(self, 'Indentation', 'Mode:', ['Tabs: 4', 'Spaces: 2', 'Spaces: 4', 'Spaces: 8'], 2, False)
         if ok:
-            editor.setIndentationUseTabs(value.startswith('Tabs'))
+            editor.setIndentationsUseTabs(value.startswith('Tabs'))
             editor.setTabWidth(int(value[-1]))
             editor.setIndentationWidth(int(value[-1]))
         self._refresh_document_status()
@@ -933,6 +940,7 @@ class MainWindow(QMainWindow):
         self.update_cursor_position(line, column)
 
     def set_up_menu(self):
+        """Sets up the top area menu."""
         menu_bar = self.menuBar()
         
         density_menu = menu_bar.addMenu('Layout Denisty')
@@ -1210,6 +1218,45 @@ class MainWindow(QMainWindow):
 
         check_updates_action = help_menu.addAction("Check for Updates")
         check_updates_action.triggered.connect(lambda: self.check_for_updates(manual=True))
+        
+        # Stable IDs survive translated or renamed menu labels.
+        new_file.setObjectName("menu.new_file")
+        open_file.setObjectName("menu.open_file")
+        open_folder.setObjectName("menu.open_folder")
+        save_file.setObjectName("menu.save_file")
+        save_as.setObjectName("menu.save_as")
+        save_all_action.setObjectName("menu.save_all_action")
+        close_all_action.setObjectName("menu.close_all_action")
+        undo_action.setObjectName("menu.undo_action")
+        redo_action.setObjectName("menu.redo_action")
+        cut_action.setObjectName("menu.cut_action")
+        copy_action.setObjectName("menu.copy_action")
+        paste_action.setObjectName("menu.paste_action")
+        select_all_action.setObjectName("menu.select_all_action")
+        delete_line_action.setObjectName("menu.delete_line_action")
+        find_action.setObjectName("menu.find_action")
+        replace_action.setObjectName("menu.replace_action")
+        goto_action.setObjectName("menu.goto_action")
+        toggle_comment_action.setObjectName("menu.toggle_comment_action")
+        goto_definition_action.setObjectName("menu.goto_definition_action")
+        run_file_action.setObjectName("menu.run_file_action")
+        run_with_args_action.setObjectName("menu.run_with_args_action")
+        run_selection_action.setObjectName("menu.run_selection_action")
+        stop_action.setObjectName("menu.stop_action")
+        interpreter_action.setObjectName("menu.interpreter_action")
+        toggle_sidebar_action.setObjectName("menu.toggle_sidebar_action")
+        toggle_console_action.setObjectName("menu.toggle_console_action")
+        toggle_terminal_action.setObjectName("menu.toggle_terminal_action")
+        split_right_action.setObjectName("menu.split_right_action")
+        unsplit_action.setObjectName("menu.unsplit_action")
+        fullscreen_editor.setObjectName("menu.fullscreen_editor")
+        starting_window_size.setObjectName("menu.starting_window_size")
+        git_refresh_action.setObjectName("menu.git_refresh_action")
+        toggle_git_history_action.setObjectName("menu.toggle_git_history_action")
+        settings_action.setObjectName("menu.settings_action")
+        hacker_action.setObjectName("menu.hacker_action")
+        check_updates_action.setObjectName("menu.check_updates_action")
+
 
     def split_current_editor_right(self):
         editor = self.current_editor()
@@ -3567,7 +3614,19 @@ class MainWindow(QMainWindow):
             import webbrowser
 
             webbrowser.open(download_url)
-
+    
+    def _install_command_palette(self) -> None:
+        """Expose existing menu actions through one searchable command dialog."""
+        self.command_registry = CommandRegistry(self)
+        self.command_palette = CommandPaletteDialog(self.command_registry, self)
+        menu = self.menuBar().addMenu("Commands")
+        action = menu.addAction("Command Palette")
+        action.setObjectName("workbench.command_palette")
+        action.setShortcut("Ctrl+Shift+L")
+        action.triggered.connect(self.command_palette.open_palette)
+        # Discovery runs afain when opened, so rebuilt Recent Files entries stay valid.
+        self.command_registry.refresh_menus(self.menuBar())
+    
 def main() -> int:
     """Installed GUI entry point."""
     app = QApplication(sys.argv)

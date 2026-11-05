@@ -17,6 +17,7 @@ from PyQt5.QtWidgets import (
     QTreeView,
 )
 from markdowneditor_assets import asset_path
+
 class FileManager(QTreeView):
     def __init__(self, set_new_tab, main_window, parent=None):
         super(FileManager, self).__init__(None)

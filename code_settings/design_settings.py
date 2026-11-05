@@ -1,5 +1,8 @@
 """Shared interface colors; document syntax colors remain lexer-owned."""
+from __future__ import annotations
+from typing import Any
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class DesignTokens:
@@ -11,7 +14,7 @@ class DesignTokens:
     accent: str = '#61afef'
     border: str = '#3d424d'
 
-def theme_qss(density='comfortable', tokens=None):
+def theme_qss(density: str='comfortable', tokens: Any=None) -> Any:
     """Generate fresh QSS; callers append it to the original base exactly once."""
     if density not in {'compact', 'comfortable'}:
         raise ValueError(f'Unsupported density: {density}')
@@ -20,6 +23,8 @@ def theme_qss(density='comfortable', tokens=None):
     # Scope panel backgrounds so Scintilla and terminal surfaces keep their themes.
     return f"""
     QWidget[designPanel="true"] {{ background: {t.surface}; color: {t.foreground}; }}
+    QDialog, QDockWidget {{ background: {t.surface}; color: {t.foreground}; }}
+    QLineEdit, QListWidget, QTreeWidget, QPlainTextEdit {{ background: {t.paper}; color: {t.foreground}; selection-background-color: {t.accent}; }}
     QMenu, QToolTip {{ background: {t.surface}; color: {t.foreground}; border: 1px solid {t.border}; }}
     QMenu::item:selected {{ background: {t.border}; }}
     QDockWidget::title {{ background: {t.surface}; color: {t.foreground}; padding: {pad}px; }}
