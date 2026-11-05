@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Any
 import datetime
 import json
 import os
@@ -49,6 +50,7 @@ from markdown_python_editor import __version__
 from markdowneditor_assets import asset_path
 from markdowneditor_assets.icon_provider import themed_icon
 from code_settings.design_settings import theme_qss
+from code_settings.contrast import read_preferences, write_preferences, apply_preferences
 
 # Runtime display and update comparison use the same value that setuptools
 # writes into wheel metadata. Prefixing "v" is presentation only.
@@ -1628,7 +1630,7 @@ class MainWindow(QMainWindow):
             # Ruff mode never survived a restart.
             "ruff_save_mode": self.settings.value("ruff_save_mode", "safe_format", type=str),
             "font_family": theme_editor.get("font_family", "JetBrains Mono"),
-            "font_size": theme_editor.get("font_size", 13),
+            "font_size": theme_editor.get("font_size", 12),
             # paper: QSettings override (color picker) wins over the theme;
             # theme_paper is the theme's OWN value, so the dialog's
             # "Reset to theme" button can drop the override.
@@ -1644,6 +1646,7 @@ class MainWindow(QMainWindow):
             "theme": self.settings.value("theme", "theme.json", type=str),
             "line_numbers": self.settings.value("line_numbers", True, type=bool),
             "highlight_line": self.settings.value("highlight_line", True, type=bool),
+            **read_preferences(self.settings),
         }
 
     def _save_settings(self, new_settings: dict):
@@ -1674,6 +1677,7 @@ class MainWindow(QMainWindow):
             self.settings.remove("paper_color")
         else:
             self.settings.setValue("paper_color", new_settings["paper_color"])
+        write_preferences(self.settings, new_settings)
         self.settings.sync()
 
     def open_settings(self):
@@ -1945,6 +1949,8 @@ class MainWindow(QMainWindow):
         # the phantom string). SCI_COLOURISE (4003) with (0, -1) forces the
         # NEW lexer to restyle the entire document right now.
         editor.SendScintilla(4003, 0, -1)
+        # Apply explicit overrides after the theme has supplied its defaults.
+        apply_preferences(editor, settings)
 
     def is_binary(self, path):
         """

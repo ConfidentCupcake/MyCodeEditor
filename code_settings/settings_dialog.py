@@ -1,4 +1,6 @@
+from __future__ import annotations
 from pathlib import Path
+from typing import Any
 import sys
 
 from PyQt5.QtCore import Qt
@@ -359,6 +361,22 @@ class SettingsDialog(QDialog):
         paper_row.addWidget(self.paper_reset_btn)
         paper_row.addStretch()
         layout.addRow("Paper color:", paper_row)
+        
+        self.caret_width_spin = QSpinBox()
+        self.caret_width_spin.setRange(1, 6)
+        self.caret_width_spin.setValue(self.settings.get("caret_width", 2))
+        layout.addRow("Caret width:", self.caret_width_spin)
+        self._appearance_colors = {key: self.settings.get(key) for key in ("caret_color", "selection_foreground", "selection_background")}
+        for key, label in (("caret_color", "Caret Color:"), ("selection_foreground", "Selection Text:"), ("selection_background", "Selection Background:")):
+            row = QHBoxLayout()
+            button = QPushButton(self._appearance_colors[key] or "Use theme")
+            reset = QPushButton("Reset to theme")
+            button.clicked.connect(lambda _checked=False, k=key, b=button: self._pick_editor_color(k, b))
+            reset.clicked.connect(lambda _checked=False, k=key, b=button: self._reset_editor_color(k, b))
+            row.addWidget(button)
+            row.addWidget(reset)
+            layout.addRow(label, row)
+        
 
         self.line_numbers_cb = QCheckBox("Show Line Numbers")
         self.line_numbers_cb.setChecked(self.settings.get("line_numbers", True))
@@ -403,6 +421,7 @@ class SettingsDialog(QDialog):
         self._refresh_paper_swatch()
 
     def get_settings(self) -> dict:
+        """Return the complete edited preference dictionary without writing before Save is accepted."""
         return {
             "font_family": self.font_combo.currentFont().family(),
             "font_size": self.font_size_spin.value(),
@@ -415,5 +434,19 @@ class SettingsDialog(QDialog):
             "paper_color": self._paper_override,
             "line_numbers": self.line_numbers_cb.isChecked(),
             "highlight_line": self.highlight_line_cb.isChecked(),
+            "caret_width": self.caret_width_spin.value(),
+            **self._appearance_colors,
         }
+        
+    def _pick_editor_color(self, key: Any, button: Any) -> None:
+        """Store a valid color ovveride only when the picker is accepted."""
+        color = QColorDialog.getColor(QColor(self._appearance_colors[key] or "#ffffff"), self, "Editor color")
+        if color.isValid():
+            self._appearance_colors[key] = color.name()
+            button.setText(color.name())
+            
+    def _reset_editor_color(self, key: Any, button: Any) -> None:
+        """Remove a dialog-level override so Save restores active-theme inheritance."""
+        self._appearance_colors[key] = None
+        button.setText("Use Theme")
         
