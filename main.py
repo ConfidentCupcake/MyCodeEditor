@@ -25,6 +25,7 @@ from PyQt5.QtWidgets import *
 import resources_rc  # noqa: F401 - register resources generated from icons/resources.qrc
 from code_inteligence.find_replace import FindReplaceBar
 from code_inteligence.multi_tab_view import MultiTabView
+from code_inteligence.breadcrumb_symbols import scope_ranges
 from con_term.console_widget import ConsoleWidget
 from con_term.terminal_widget import TerminalWidget
 from cozy.cat_controller import CatController
@@ -35,11 +36,16 @@ from ruff_implementation.ruff_lsp_client import RuffLspClient
 from side_bar_widgets.code_outline import CodeOutlineTree
 from side_bar_widgets.file_manager import FileManager
 from side_bar_widgets.fuzzy_searcher import SearchItem, SearchWorker
+from side_bar_widgets.breadcrumbs import Breadcrumbs
+from side_bar_widgets.status_item import StatusItem
+from side_bar_widgets.empty_states import EmptyState
 from git_implementation.git_service import GitService
 from git_ui.commit_graph import CommitGraphPanel
 
 from markdown_python_editor import __version__
 from markdowneditor_assets import asset_path
+from markdowneditor_assets.icon_provider import themed_icon
+from code_settings.design_settings import theme_qss
 
 # Runtime display and update comparison use the same value that setuptools
 # writes into wheel metadata. Prefixing "v" is presentation only.
@@ -154,7 +160,6 @@ class MainWindow(QMainWindow):
         # retirement statement of all the Python workers
         self._retired_editors = set()
 
-
         # Detect if running as a bundled exe
         if hasattr(sys, "_MEIPASS"):
             # Running as PyInstaller exe — sys.executable is the editor itself.
@@ -219,6 +224,42 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        
+        self.outline_empty = EmptyState(self.outline_tree, 'No outline entries.\nOpen a document with headings or declarations.')
+        self.search_empty = EmptyState(self.search_list_view, 'No search result.\nEnter a query above to search this workspace.')
+
+        
+        self.encoding_status = StatusItem('UTF-8', self._choose_document_encoding, self)
+        self.eol_status = StatusItem('LF', self._choose_document_eol, self)
+        self.indent_status = StatusItem('Spaces: 4', self._choose_document_indent, self)
+        self.interpreter_status = StatusItem('Python', self.choose_interpreter, self)
+        self.document_status = QLabel(self)
+        for item in (self.encoding_status, self.eol_status, self.indent_status, self.interpreter_status, self.document_status):
+            self.statusBar().addPermanentWidget(item)
+        self._status_timer = QTimer(self)
+        self._status_timer.timeout.connect(self._refresh_document_status)
+        self._status_timer.start(250)
+        
+        self._apply_density(self.settings.value('layout_density', 'comfortable', type=str))
+
+        self.breadcrumbs = Breadcrumbs(self)
+        self.breadcrumb_bar = QToolBar('Breadcrumbs', self)
+        self.breadcrumbs.configure_toolbar(self.breadcrumb_bar)
+        self.breadcrumb_bar.addWidget(self.breadcrumbs)
+        # Give the path its own row if another top toolbar already exists.
+        self.addToolBarBreak(Qt.TopToolBarArea)
+        self.addToolBar(Qt.TopToolBarArea, self.breadcrumb_bar)
+        self.breadcrumbs.directory_requested.connect(self._reveal_breadcrumb)
+        self.breadcrumbs.line_requested.connect(self._jump_breadcrumb)
+        self._breadcrumb_timer = QTimer(self)
+        self._breadcrumb_timer.setSingleShot(True)
+        self._breadcrumb_timer.setInterval(350)
+        self._breadcrumb_timer.timeout.connect(self._refresh_breadcrumbs)
+        self.tab_view.currentEditorChanged.connect(lambda *args: self._refresh_breadcrumbs())
+        # Also catches Save As / rename without rewriting their save lifecycle.
+        self._breadcrumb_path_timer = QTimer(self)
+        self._breadcrumb_path_timer.timeout.connect(self._refresh_breadcrumbs)
+        self._breadcrumb_path_timer.start(500)
 
         if hasattr(sys, "_MEIPASS"):
             # We're running as a bundled exe
@@ -261,7 +302,10 @@ class MainWindow(QMainWindow):
                 QMenuBar { background-color: #2d2d2d; color: floralwhite; }
                 QTabWidget { background-color: #1e1f22; color: #d3d3d3; }
             """)
-
+        
+        self._base_qss = self.styleSheet()
+        self.setStyleSheet(self._base_qss + "\n" + theme_qss())
+        
         self._outline_debounce = QTimer(self)
         self._outline_debounce.setSingleShot(True)
         self._outline_debounce.setInterval(500)
@@ -640,22 +684,23 @@ class MainWindow(QMainWindow):
         t_dock.visibilityChanged.connect(lambda visible: self._set_sidebar_icon("terminal", visible))
     
     def _set_sidebar_icon(self, name: str, active: bool):
-        """Reflect a tool's actual visibility using the existing icon variants."""
-        label = self.sidebar_labels.get(name)
-        if label is not None:
-            suffix = "-active" if active else ""
-            label.setPixmap(QPixmap(resource_path(f"icons/{name}{suffix}.png")).scaled(QSize(25,25)))
-    
+            """Synchronize checked state with the tool's actual visibility."""
+            button = self.sidebar_labels.get(name)
+            if button is not None:
+                button.setChecked(bool(active))
+                
     def get_sidebar_label(self, path, name):
-        """Create a named clickable sidebar icon using the shared dispatcher."""
-        label = QLabel(self)
-        label.setPixmap(QPixmap(path).scaled(QSize(25, 25)))
-        label.setAlignment(Qt.AlignmentFlag.AlignTop)
-        label.setFont(self.window_font)
-        label.setToolTip(name.title())
-        label.setCursor(Qt.PointingHandCursor)
-        label.mousePressEvent = lambda e: self.show_hide_tab(e, name)
-        return label
+            """Keep the existing factory API while providing real keyboard activation."""
+            button = QToolButton(self)
+            button.setIcon(themed_icon(name))
+            button.setIconSize(QSize(25, 25))
+            button.setCheckable(True)
+            button.setChecked('-active' in str(path))
+            button.setFocusPolicy(Qt.StrongFocus)
+            button.setToolTip(name.title())
+            button.setAccessibleName(name.title())
+            button.clicked.connect(lambda checked=False, tool=name: self.show_hide_tab(None, tool))
+            return button
 
     def get_editor(self, path: Path = None, is_python_file=None) -> QsciScintilla:
         """Create the correct editor using the shared extension policy."""
@@ -678,6 +723,117 @@ class MainWindow(QMainWindow):
         if saved:
             self._apply_editor_settings(editor, saved)
         return editor
+    
+    def _breadcrumb_changed(self, editor):
+        """Invalidate parsed scopes immediately; coalesce reparsing after typing."""
+        editor._breadcrumb_scopes = None
+        if editor is self.current_editor():
+            self._breadcrumb_timer.start()
+
+    def _refresh_breadcrumbs(self):
+        """Use cached scope ranges on cursor moves; never parse every caret step."""
+        if not hasattr(self, 'breadcrumbs'):
+            return
+        editor = self.current_editor()
+        if editor is None:
+            self.breadcrumbs.hide()
+            return
+        self.breadcrumbs.show()
+        scopes = getattr(editor, '_breadcrumb_scopes', None)
+        if scopes is None and not self._breadcrumb_timer.isActive():
+            scopes = scope_ranges(editor.text()) if isinstance(editor, PythonEditor) and editor.length() < 2_000_000 else ()
+            editor._breadcrumb_scopes = scopes
+        row = editor.getCursorPosition()[0]
+        chain = sorted((s for s in (scopes or ()) if s[1] <= row <= s[2]), key=lambda s: s[3])
+        self.breadcrumbs.set_location(getattr(editor, 'path', None), chain)
+
+    def _jump_breadcrumb(self, line):
+        """Navigate the current document without retaining stale tab references."""
+        editor = self.current_editor()
+        if editor is not None:
+            editor.setCursorPosition(min(line, editor.lines() - 1), 0)
+            editor.ensureLineVisible(line)
+            editor.setFocus()
+
+    def _reveal_breadcrumb(self, directory):
+        """Reveal a directory without replacing the project's analysis root."""
+        index = self.file_manager.model.index(directory)
+        if index.isValid():
+            self.side_panel.setCurrentWidget(self.file_manager_frame)
+            self.side_panel.show()
+            self.file_manager.setRootIndex(self.file_manager.model.index(str(Path(directory).parent)))
+            self.file_manager.setCurrentIndex(index)
+            self.file_manager.scrollTo(index)
+            
+    def _apply_density(self, value):
+        """Apply only supported denisty values and persist the selection."""
+        value = value if value in ('compact', 'comfortable') else 'comfortable'
+        self.setStyleSheet(self._base_qss + '\n' + theme_qss(value))
+        for widget in self.sidebar_labels.values():
+            widget.setFixedSize(38 if value == 'compact' else 48, 38 if value == 'compact' else 48)
+        self.settings.setValue('layout_density', value)
+        
+    def _refresh_document_status(self):
+        """Read only metadata and the selection, not the entire document."""
+        editor = self.current_editor()
+        for widget in (self.encoding_status, self.eol_status, self.indent_status):
+            widget.setEnabled(editor is not None and not editor.isReadOnly())
+        interpreter = str(self.python_runner.interpreter)
+        self.interpreter_status.setText(Path(interpreter).name)
+        self.interpreter_status.setToolTip(interpreter)
+        if editor is None:
+            self.document_status.setText('No document')
+            return
+        self.encoding_status.setText('UTF-8 BOM' if getattr(editor, '_utf8_bom', False) else 'UTF-8')
+        self.eol_status.setText({editor.EolWindows: 'CRLF', editor.EolUnix: 'LF', editor.EolMac: 'CR'}[editor.eolMode()])
+        self.indent_status.setText(f"{'Tabs' if editor.indentationsUseTabs() else 'Spaces'}: {editor.tabWidth()}")
+        selected = len(editor.selectedText()) if editor.hasSelectedText() else 0
+        activity = 'Running Python' if self.python_runner.is_running() else 'Idle'
+        self.document_status.setText(f"Selected {selected} | {'Modified' if editor.isModified() else 'Saved'} | {activity}")
+        
+    def _choose_document_encoding(self):
+        """Change the UTF-8 seralization flag and paricipate in dirty tracking."""
+        editor = self.current_editor()
+        if editor is None or editor.isReadOnly():
+            return
+        values = ['UTF-8', 'UTF8_BOM']
+        value, ok = QInputDialog.getItem(self, 'Encoding', 'Save as:', values, int(getattr(editor, '_utf8_bom', False)), False)
+        if ok and (value == values[1]) != getattr(editor, '_utf8_bom', False):
+            editor._utf8_bom = value == values[1]
+            editor.setModified(True)
+            self._on_editor_text_changed(editor) 
+        self._refresh_document_status()
+        
+    def _choose_document_eol(self):
+        """"Convert line endings in one undo group and set the insertion mode."""
+        editor = self.current_editor()
+        if editor is None or editor.isReadOnly():
+            return
+        values = {'LF': editor.EolUnix, 'CRLF': editor.EolWindows, 'CR': editor.EolMac}
+        value, ok = QInputDialog.getItem(self, 'line endings', 'Convert to:', list(values), 0, False)
+        if ok:
+            editor.beginUndoAction()
+            try:
+                editor.convertEols(values[value])
+                editor.setEolMode(values[value])
+            finally:
+                editor.endUndoAction()
+        self._refresh_document_status()
+
+        
+    def _choose_document_indent(self):
+        """Change future indentation for this tab without rewriting existing text"""
+        editor = self.current_editor()
+        if editor is None:
+            return
+        value, ok = QInputDialog.getItem(self, 'Indentation', 'Mode:', ['Tabs: 4', 'Spaces: 2', 'Spaces: 4', 'Spaces: 8'], 2, False)
+        if ok:
+            editor.setIndentationUseTabs(value.startswith('Tabs'))
+            editor.setTabWidth(int(value[-1]))
+            editor.setIndentationWidth(int(value[-1]))
+        self._refresh_document_status()
+    
+    
 
     def current_editor(self):
         """Return the editor focused in the active tab group."""
@@ -688,6 +844,8 @@ class MainWindow(QMainWindow):
         editor.textChanged.connect(lambda ed=editor: self._on_editor_text_changed(ed))
         editor.textChanged.connect(self._debounce.start)
         editor.textChanged.connect(self._outline_debounce.start)
+        editor.textChanged.connect(lambda ed=editor: self._breadcrumb_changed(ed))
+        editor.cursorPositionChanged.connect(lambda *args: self._refresh_breadcrumbs())
         editor.textChanged.connect(self.update_word_count)
         editor.textChanged.connect(self._on_typing_xp)
         editor.textChanged.connect(lambda: self.power.attach_editor(editor))
@@ -776,6 +934,10 @@ class MainWindow(QMainWindow):
 
     def set_up_menu(self):
         menu_bar = self.menuBar()
+        
+        density_menu = menu_bar.addMenu('Layout Denisty')
+        for density in ('compact', 'comfortable'):
+            density_menu.addAction(density.title()).triggered.connect(lambda checked=False, value=density: self._apply_density(value))
 
         # File menu
         file_menu = menu_bar.addMenu("File")
@@ -2304,70 +2466,55 @@ class MainWindow(QMainWindow):
         return True
 
     def show_hide_tab(self, e, type_):
-        """Dispatch left-clicks to tool actions or the three sidebar pages."""
-        if e.button() != Qt.LeftButton:
-            return
-        
-        # Return before changing page icons: opening a dock is independen of 
-        # the currently selected Folder/Search/Outline page.
-        if type_ in ("terminal", "console"):
-            dock = self.terminal_dock if type_ == "terminal" else self.console_dock
-            dock.show()
-            dock.raise_()
-            if type_ == "terminal":
-                self.terminal.output.setFocus()
-            return
-        if type_ == "settings":
-            self._set_sidebar_icon("settings", True)
-            try:
-                self.open_settings()
-            finally:
-                self._set_sidebar_icon("settings", False)
-            return
+            """Dispatch left-clicks to tool actions or the three sidebar pages."""
+            if e is not None and e.button() != Qt.LeftButton:
+                return
             
-            
-        panels = {
-            "folder": self.file_manager_frame,
-            "search": self.search_frame,
-            "outline": self.outline_frame,
-        }
-        # Update icon states. Reset all to gray, then set active to blue
-        icon_map = {
-            "folder": (resource_path("icons/folder.png"), resource_path(
-                "icons/folder-active.png")),
-            "search": (resource_path("icons/search.png"), resource_path(
-                "icons/search-active.png")),
-            "outline": (
-                resource_path("icons/outline.png"),
-                resource_path("icons/outline-active.png")),
-        }
-        # Reset all sidebar icons to inactive gray
-        for name, (inactive, active) in icon_map.items():
-            label = self.sidebar_labels.get(name)
-            if label:
-                label.setPixmap(QPixmap(inactive).scaled(QSize(25, 25)))
+            # Return before changing page icons: opening a dock is independen of 
+            # the currently selected Folder/Search/Outline page.
+            if type_ in ("terminal", "console"):
+                dock = self.terminal_dock if type_ == "terminal" else self.console_dock
+                dock.show()
+                dock.raise_()
+                if type_ == "terminal":
+                    self.terminal.output.setFocus()
+                return
+            if type_ == "settings":
+                self._set_sidebar_icon("settings", True)
+                try:
+                    self.open_settings()
+                finally:
+                    self._set_sidebar_icon("settings", False)
+                return
+                
+                
+            panels = {
+                "folder": self.file_manager_frame,
+                "search": self.search_frame,
+                "outline": self.outline_frame,
+            }
+            for name in panels:
+                self._set_sidebar_icon(name, False)
 
-        target = panels.get(type_)
-        if target is None:
-            return
+            target = panels.get(type_)
+            if target is None:
+                return
 
-        # If the target panel is already showing, hide the side panel
-        if self.side_panel.isVisible() and self.side_panel.currentWidget() is target:
-            # Clicking the active panel hiddes is, resets to gray
-            self.side_panel.hide()
-            return
+            # If the target panel is already showing, hide the side panel
+            if self.side_panel.isVisible() and self.side_panel.currentWidget() is target:
+                # Clicking the active panel hiddes is, resets to gray
+                self.side_panel.hide()
+                return
 
-        # Otherwise, switch to the target panel and show it
-        self.side_panel.setCurrentWidget(target)
-        self.side_panel.show()
+            # Otherwise, switch to the target panel and show it
+            self.side_panel.setCurrentWidget(target)
+            self.side_panel.show()
 
-        label = self.sidebar_labels.get(type_)
-        if label:
-            label.setPixmap(QPixmap(icon_map[type_][1]).scaled(QSize(25, 25)))
-        # Restore splitter sizes if the side panel was hidden (width 0)
-        sizes = self.hs_split.sizes()
-        if sizes and sizes[0] == 0:
-            self.hs_split.setSizes([300, 550, 550])
+            self._set_sidebar_icon(type_, True)
+            # Restore splitter sizes if the side panel was hidden (width 0)
+            sizes = self.hs_split.sizes()
+            if sizes and sizes[0] == 0:
+                self.hs_split.setSizes([300, 550, 550])
 
     def tree_view_context_menu(self, pos): ...
 
@@ -3350,7 +3497,7 @@ class MainWindow(QMainWindow):
         import urllib.error
         import urllib.request
 
-        api_url = "https://api.github.com/repos/ConfidentCupcake/MarkdownEditor/releases/latest"
+        api_url = "https://api.github.com/repos/ConfidentCupcake/MyCodeEditor/releases/latest"
 
         def finish(message):
             self.update_check_finished.emit(bool(manual), message)
