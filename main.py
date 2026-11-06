@@ -52,6 +52,11 @@ from markdowneditor_assets.icon_provider import themed_icon
 from code_settings.design_settings import theme_qss
 from code_settings.contrast import read_preferences, write_preferences, apply_preferences
 
+from ruff_implementation.diagnostics_manager import DiagnosticsManager
+from ruff_implementation.ruff_diagnostics_model import RuffSeverity
+from ruff_implementation.diagnostics_model import Diagnostic, DiagnosticSeverity, Position, SourceRange
+from side_bar_widgets.problems_panel import ProblemsPanel
+
 # Runtime display and update comparison use the same value that setuptools
 # writes into wheel metadata. Prefixing "v" is presentation only.
 APP_VERSION = f"v{__version__}"
@@ -231,7 +236,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
-        
+        self._install_problems()
         self._install_command_palette()
         
         self.outline_empty = EmptyState(self.outline_tree, 'No outline entries.\nOpen a document with headings or declarations.')
@@ -886,13 +891,16 @@ class MainWindow(QMainWindow):
         print(f"Ruff LSP error {message}")
         self.statusBar().showMessage(message, 8000)
 
-    def _on_ruff_diagnostics(self, editor, diagnostics: list):
+    def _on_ruff_diagnostics(self, editor: Any, diagnostics: list):
         """React only when this editor enters or leaves an issue state.
 
         State belongs to each editor because two tabs can have independent
         diagnostics. The term ``issues`` deliberately includes Ruff warnings,
         errors, and informational diagnostics, matching the previous UI intent.
         """
+        if hasattr(self, "diagnostics_manager"):
+            self._publish_problems(editor, diagnostics)
+            
         had_issues = getattr(editor, "_had_ruff_issues", False)
         has_issues = bool(diagnostics)
 
@@ -918,7 +926,8 @@ class MainWindow(QMainWindow):
         executable = python_executable or self.python_runner.interpreter
         root = Path(workspace_root or self._workspace_root).resolve()
         self._workspace_root = root
-
+        
+        self.diagnostics_manager.clear_provider("ruff")
         old_client = self.ruff_lsp_client
         client = RuffLspClient(
             python_executable=executable,
@@ -2399,8 +2408,12 @@ class MainWindow(QMainWindow):
         self.render_preview()
         return True
     
-    def _dispose_editor(self, editor):
+    def _dispose_editor(self, editor: Any) -> None:
         """Delete now, or retain a Python editor until its workers finish."""
+        # Clear rows while the editor still belongs to this MainWindow
+        controller = getattr(editor, "ruff_lsp", None)
+        if controller is not None:
+            controller._clear_problem_rows()
         if isinstance(editor, PythonEditor):
             self._retired_editors.add(editor)
             editor.setParent(None)
@@ -3632,6 +3645,50 @@ class MainWindow(QMainWindow):
         action.triggered.connect(self.command_palette.open_palette)
         # Discovery runs afain when opened, so rebuilt Recent Files entries stay valid.
         self.command_registry.refresh_menus(self.menuBar())
+        
+    def _install_problems(self) -> None:
+        """Create the provider-neutral diagnostic store and its Problems dock."""
+        self.diagnostics_manager = DiagnosticsManager(self)
+        self.problems_panel = ProblemsPanel(self)
+        self.problems_dock = QDockWidget("Problems", self)
+        self.problems_dock.setObjectName("ProblemsDock")
+        self.problems_dock.setWidget(self.problems_panel)
+        self.addDockWidget(Qt.BottomDockWidgetArea, self.problems_dock)
+        self.problems_dock.hide()
+        self.diagnostics_manager.changed.connect(self.problems_panel.set_diagnostics)
+        self.problems_panel.diagnosticActivated.connect(self._open_problem)
+        menu = self.menuBar().addMenu("Diagnostics")
+        menu.addAction(self.problems_dock.toggleViewAction())
+        
+    def _publish_problems(self, editor: Any, rows: Any) -> None:
+        """Convert Ruff records into generic diafnostics without losing their raw payload."""
+        controller = editor.ruff_lsp 
+        if controller is None or controller._closed:
+            return
+        levels = {RuffSeverity.ERROR: DiagnosticSeverity.ERROR,
+                  RuffSeverity.WARNING: DiagnosticSeverity.WARNING,
+                  RuffSeverity.INFO: DiagnosticSeverity.INFORMATION}
+        path = Path(editor.path) if editor.path else None
+        values = [Diagnostic("ruff", controller.uri, path,
+                    SourceRange(Position(item.start.line, item.start.column),
+                                Position(item.end.line, item.end.column)),
+                    levels[item.severity], item.code, item.message, item.revision, item)
+                    for item in rows]
+        # Replace one provider/URI colleciton, retaining other providers' rows.
+        self.diagnostics_manager.replace("ruff", controller.uri, values)
+        
+    def _open_problem(self, diagnostic: Any) -> None:
+        """Navigate to a live URI owner, including an unsaved Python document."""
+        point = diagnostic.source_range.start
+        for editor in self.tab_view.all_editors():
+            controller = getattr(editor, "ruff_lsp", None)
+            if controller is not None and controller.uri == diagnostic.uri:
+                self.tab_view.focus_editor(editor)
+                editor.setCursorPosition(point.line, point.column)
+                return
+        if diagnostic.path is not None:
+            self._open_file_at_position(str(diagnostic.path), point.line, point.column)
+                
     
 def main() -> int:
     """Installed GUI entry point."""

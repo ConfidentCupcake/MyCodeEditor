@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import Any
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QLineEdit, QListWidget, QListWidgetItem, QVBoxLayout
 
@@ -47,7 +48,7 @@ class CommandPaletteDialog(QDialog):
                 item.setData(Qt.UserRole, command)
                 item.setFlags(item.flags() | Qt.ItemIsEnabled if command.action.isEnabled() else item.flags() & ~Qt.ItemIsEnabled)
                 self.results.addItem(item)
-            if self.results.cout():
+            if self.results.count():
                 self.results.setCurrentRow(0)
                 
                 
