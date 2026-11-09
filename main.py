@@ -30,6 +30,7 @@ from code_inteligence.breadcrumb_symbols import scope_ranges
 from code_inteligence.command_palette import CommandPaletteDialog
 from code_inteligence.command_registry import CommandRegistry
 from code_inteligence.find_replace import FindReplaceBar
+from code_inteligence.locations_panel import LocationsPanel
 from code_inteligence.multi_tab_view import MultiTabView
 from code_settings.contrast import apply_preferences, read_preferences, write_preferences
 from code_settings.design_settings import theme_qss
@@ -240,6 +241,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self._install_references()
         self._install_problems()
         self._install_command_palette()
         
@@ -878,6 +880,8 @@ class MainWindow(QMainWindow):
         )
         if isinstance(editor, PythonEditor):
             editor.goto_definition_requested.connect(self._open_file_at_position)
+            editor.referencesReady.connect(lambda rows, ed=editor: self._show_references(ed, rows))
+            editor.referencesFailed.connect(lambda message: self.statusBar().showMessage(message, 6000))
             if editor.ruff_lsp is not None:
                 editor.ruff_lsp.diagnostics_changed.connect(self._on_ruff_diagnostics)
 
@@ -916,12 +920,9 @@ class MainWindow(QMainWindow):
 
         editor._had_ruff_issues = has_issues
 
-    def _restart_ruff(
-            self,
-            python_executable: str | None = None,
-            workspace_root: Path | None = None,
-    ):
-        """Replace the shared Ruff server after interpreter/workspace changes.
+    def _restart_ruff(self, python_executable: str | None = None, workspace_root: Path | None = None) -> None:
+        """
+        Replace the shared Ruff server after interpreter/workspace changes.
 
         Every open Python controller is reconnected to the new shared client.
         The old client then performs its asynchronous LSP shutdown. No editor
@@ -932,6 +933,10 @@ class MainWindow(QMainWindow):
         self._workspace_root = root
         
         self.diagnostics_manager.clear_provider("ruff")
+        self.reference_panel.set_locations([])
+        for view in self.tab_view.all_editors():
+            if isinstance(view, PythonEditor):
+                view.references_finder.invalidate()
         old_client = self.ruff_lsp_client
         client = RuffLspClient(
             python_executable=executable,
@@ -3637,6 +3642,42 @@ class MainWindow(QMainWindow):
             import webbrowser
 
             webbrowser.open(download_url)
+            
+    def _install_references(self) -> None:
+        """Create the references dock and its independen menu command."""
+        self.references_panel = LocationsPanel(self)
+        self.references_dock = QDockWidget("References", self)
+        self.references_dock.setObjectName("ReferencesDock")
+        self.references_dock.setWidget(self.references_panel)
+        self.addDockWidget(Qt.BottomDockWidgetArea, self.references_dock)
+        self.references_dock.hide()
+        self.references_panel.locationActivated.connect(self._open_reference)
+        
+        menu = self.menuBar().addMenu("References")
+        action = menu.addAction("Find All References")
+        action.setObjectName("edit.references")
+        action.setShortcut("Shift+F12")
+        action.triggered.connect(self._find_references)
+        menu.addAction(self.references_dock.toggleViewAction())
+        
+    def _find_references(self) -> None:
+        """Request semantic references only from the current Python editor."""
+        editor = self.current_editor()
+        if isinstance(editor, PythonEditor):
+            self.references_panel.set_locations([])
+            editor.find_all_references()
+            
+    def _show_references(self, editor: Any, rows: Any) -> None:
+        """Show results only while their requesting view is still current."""
+        if editor is self.current_editor():
+            self.references_panel.set_locations(rows)
+            self.references_dock.show()
+            self.references_dock.raise_()
+            
+    def _open_reference(self, location: Any) -> None:
+        """Navigate to the result's zero based line and character column."""
+        self._open_file_at_position(str(location.path), location.line, location.column)
+        
     
     def _install_command_palette(self) -> None:
         """Expose existing menu actions through one searchable command dialog."""

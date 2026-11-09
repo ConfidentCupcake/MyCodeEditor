@@ -15,6 +15,8 @@ from code_inteligence.definition_finder import DefinitionFinder
 from code_inteligence.documentation_popup import DocumentationPopup
 from code_inteligence.hover_helper import HoverHelper
 from code_inteligence.indentation_helper import indentation_for_new_line
+from code_inteligence.locations_panel import SourceLocation
+from code_inteligence.references_finder import ReferencesFinder
 from code_inteligence.signature_helper import SignatureHelper
 from python_editor.custompythonlexer import PyCustomLexer
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
@@ -32,6 +34,9 @@ CALLABLE_CHAIN_RE = re.compile(
 
 class PythonEditor(QsciScintilla):
     """Edit Python source and connect analysis, navigation and view controls"""
+    referencesReady = pyqtSignal(list)
+    referencesFailed = pyqtSignal(str)
+    
     goto_definition_requested = pyqtSignal(str, int, int)
     focused = pyqtSignal(object)
     shutdown_complete = pyqtSignal(object)
@@ -179,7 +184,14 @@ class PythonEditor(QsciScintilla):
         # that used to live here are replaced by this one theme-driven call.
         if getattr(self, "py_lexer", None) is not None:
             self._apply_theme_editor_style()
-
+            
+        self.references_finder = ReferencesFinder()
+        self.references_finder.references_found.connect(self._references_found)
+        self.references_finder.references_empty.connect(lambda generation: self._references_found(generation, []))
+        self.references_finder.error.connect(self._references_error)
+        # A result computed from older buffer contents must never be displayed.
+        self.textChanged.connect(self.references_finder.invalidate)
+        
     def _apply_theme_editor_style(self):
         """
         Push the theme's editor-section styling onto this widget.
@@ -483,12 +495,10 @@ class PythonEditor(QsciScintilla):
         """Run Jedi signature lookup at the current cursor position."""
         if self._shutting_down or self._loading_text:
             return
-
         line, index = self.getCursorPosition()
         text = self.text()
         if not text.strip():
             return
-
         file_path = str(self.full_path) if self.full_path else None
         self.signature_helper.get_signatures(line + 1, index, text, file_path)
 
@@ -543,7 +553,7 @@ class PythonEditor(QsciScintilla):
         # If the user keeps moving the cursor, the timer keeps resetting
         self._pending_line = line
         self._pending_index = index
-        for helper_name in ("auto_completer", "signature_helper", "definition_finder"):
+        for helper_name in ("auto_completer", "signature_helper", "definition_finder", "references_finder"):
             helper = getattr(self, helper_name, None)
             if helper is not None:
                 helper.invalidate()
@@ -580,6 +590,7 @@ class PythonEditor(QsciScintilla):
             "definition_finder",
             "hover_helper",
             "signature_helper",
+            "references_finder",
         )
         return [getattr(self, name) for name in names if hasattr(self, name)]
 
@@ -618,3 +629,23 @@ class PythonEditor(QsciScintilla):
     def closeEvent(self, event):
         self.shutdown()
         event.accept()
+        
+    def find_all_references(self) -> None:
+        """Find semantic references usint the selected project's interpreter and root."""
+        if self._shutting_down or not self.is_python_file:
+            return
+        window = self.window()
+        self._reference_request_path = self.full_path
+        line, column = self.getCursorPosition()
+        self.references_finder.find_references(line + 1, column, self.text(), str(self.full_path) if self.full_path else None, str(window._workspace_root), window.python_runner.interpreter)
+        
+    def _references_found(self, generation: Any, rows: Any) -> None:
+        """Publish plain navigation records only for the current live request."""
+        if (generation == self.references_finder.generation and not self._shutting_down and self.full_path == getattr(self, "_reference_request_path", None)):
+            self.referencesReady.emit([SourceLocation(Path(path), line, column, name) for path, line, column, name in rows])
+            
+            
+    def _references_error(self, generation: Any, message: Any) -> None:
+        """Report a current request failure to the owning windos's visible status area."""
+        if (generation == self.references_finder.generation and not self._shutting_down and self.full_path == getattr(self, "_reference_request_path", None)):
+            self.referencesFailed.emit(message)

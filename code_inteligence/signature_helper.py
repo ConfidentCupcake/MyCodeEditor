@@ -1,3 +1,5 @@
+from __future__ import annotations
+from code_inteligence.jedi_guard import serialized_jedi
 from PyQt5.QtCore import QThread, pyqtSignal
 from jedi import Script
 
@@ -37,6 +39,7 @@ class SignatureHelper(QThread):
         self._request, self._pending = self._pending, None
         self.start()
 
+    @serialized_jedi
     def run(self):
         generation, line, column, code, file_path = self._request
         try:

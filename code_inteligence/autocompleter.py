@@ -1,8 +1,12 @@
+from __future__ import annotations
+from code_inteligence.jedi_guard import serialized_jedi
+
 from PyQt5.QtCore import QThread, pyqtSignal
 from jedi import Script
 
 
 class AutoCompleter(QThread):
+    """Request semantic completions and show suggestions for the current buffer."""
     completions_ready = pyqtSignal(int, list)
     error = pyqtSignal(str)
 
@@ -46,8 +50,9 @@ class AutoCompleter(QThread):
         if not self._shutting_down and self._pending is not None:
             request, self._pending = self._pending, None
             self._start_request(request)
-
-    def run(self):
+            
+    @serialized_jedi
+    def run(self) -> None:
         try:
             line, index, text = self._request
             names = [item.name for item in Script(

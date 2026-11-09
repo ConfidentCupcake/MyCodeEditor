@@ -1,4 +1,4 @@
-# MyCodeEditor — complete topic-by-topic implementation guide
+****# MyCodeEditor — complete topic-by-topic implementation guide
 
 **Repository:** [ConfidentCupcake/MyCodeEditor](https://github.com/ConfidentCupcake/MyCodeEditor)  
 **Source reference for the OLD blocks:** `ab36e38802c61d3b0d7de0bced032428d94a0eed`  

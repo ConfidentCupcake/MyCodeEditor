@@ -1,3 +1,6 @@
+from __future__ import annotations
+from code_inteligence.jedi_guard import serialized_jedi
+
 from PyQt5.QtCore import QThread, pyqtSignal
 from jedi import Script
 
@@ -37,8 +40,9 @@ class DefinitionFinder(QThread):
             return
         self._request, self._pending = self._pending, None
         self.start()
-
-    def run(self):
+    
+    @serialized_jedi
+    def run(self) -> None:
         generation, line, column, code, file_path = self._request
         try:
             definitions = Script(code=code, path=file_path).goto(
