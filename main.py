@@ -1,6 +1,7 @@
 from __future__ import annotations
-from typing import Any
+
 import datetime
+import hashlib
 import json
 import os
 import re
@@ -10,10 +11,10 @@ import sys
 import tempfile
 import traceback
 from pathlib import Path
-from packaging.version import InvalidVersion, Version
+from typing import Any
 
 import bleach
-import hashlib
+from packaging.version import InvalidVersion, Version
 
 os.environ.setdefault("QTWEBENGINE_CHROMIUM_FLAGS", "--disable-gpu-shader-disk-cache")
 
@@ -25,37 +26,40 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtWidgets import *
 
 import resources_rc  # noqa: F401 - register resources generated from icons/resources.qrc
+from code_inteligence.breadcrumb_symbols import scope_ranges
+from code_inteligence.command_palette import CommandPaletteDialog
+from code_inteligence.command_registry import CommandRegistry
 from code_inteligence.find_replace import FindReplaceBar
 from code_inteligence.multi_tab_view import MultiTabView
-from code_inteligence.breadcrumb_symbols import scope_ranges
-from code_inteligence.command_registry import CommandRegistry
-from code_inteligence.command_palette import CommandPaletteDialog
+from code_settings.contrast import apply_preferences, read_preferences, write_preferences
+from code_settings.design_settings import theme_qss
 from con_term.console_widget import ConsoleWidget
 from con_term.terminal_widget import TerminalWidget
 from cozy.cat_controller import CatController
-from markdown_editor.markdowneditor import MarkdownEditor
-from python_editor.python_runner import PythonRunner
-from python_editor.pythoneditor import PythonEditor
-from ruff_implementation.ruff_lsp_client import RuffLspClient
-from side_bar_widgets.code_outline import CodeOutlineTree
-from side_bar_widgets.file_manager import FileManager
-from side_bar_widgets.fuzzy_searcher import SearchItem, SearchWorker
-from side_bar_widgets.breadcrumbs import Breadcrumbs
-from side_bar_widgets.status_item import StatusItem
-from side_bar_widgets.empty_states import EmptyState
 from git_implementation.git_service import GitService
 from git_ui.commit_graph import CommitGraphPanel
-
+from markdown_editor.markdowneditor import MarkdownEditor
 from markdown_python_editor import __version__
 from markdowneditor_assets import asset_path
 from markdowneditor_assets.icon_provider import themed_icon
-from code_settings.design_settings import theme_qss
-from code_settings.contrast import read_preferences, write_preferences, apply_preferences
-
+from python_editor.python_runner import PythonRunner
+from python_editor.pythoneditor import PythonEditor
 from ruff_implementation.diagnostics_manager import DiagnosticsManager
+from ruff_implementation.diagnostics_model import (
+    Diagnostic,
+    DiagnosticSeverity,
+    Position,
+    SourceRange,
+)
 from ruff_implementation.ruff_diagnostics_model import RuffSeverity
-from ruff_implementation.diagnostics_model import Diagnostic, DiagnosticSeverity, Position, SourceRange
+from ruff_implementation.ruff_lsp_client import RuffLspClient
+from side_bar_widgets.breadcrumbs import Breadcrumbs
+from side_bar_widgets.code_outline import CodeOutlineTree
+from side_bar_widgets.empty_states import EmptyState
+from side_bar_widgets.file_manager import FileManager
+from side_bar_widgets.fuzzy_searcher import SearchItem, SearchWorker
 from side_bar_widgets.problems_panel import ProblemsPanel
+from side_bar_widgets.status_item import StatusItem
 
 # Runtime display and update comparison use the same value that setuptools
 # writes into wheel metadata. Prefixing "v" is presentation only.
@@ -1393,7 +1397,7 @@ class MainWindow(QMainWindow):
 
     def _toggle_comment_single_line(self, editor):
         """Toggle comment on the line where the cursor currently is."""
-        line, index = editor.getCursorPosition()
+        line, _ = editor.getCursorPosition()
 
         # Read the text of the current line
         # editor.text(line) returns the text of line `line`INCLUDING the newline

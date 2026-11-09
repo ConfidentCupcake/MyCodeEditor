@@ -1,16 +1,18 @@
 """Bridge one PythonEditor document to the shared Ruff languafe server."""
 
 from __future__ import annotations
-from typing import Any
+
 from pathlib import Path
+from typing import Any
 from uuid import uuid4
 
-from PyQt5.QtCore import QObject, QTimer, pyqtSignal, QPoint
-from PyQt5.QtWidgets import QToolTip, QMenu, QMessageBox
+from PyQt5.QtCore import QObject, QPoint, QTimer, pyqtSignal
+from PyQt5.QtWidgets import QMenu, QMessageBox, QToolTip
 
 from ruff_implementation.ruff_diagnostics_model import RuffDiagnostic, RuffPosition, RuffSeverity
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.workspace_edit import WorkspaceEditApplier, WorkspaceEditError
+
 
 class RuffLspController(QObject):
     """Keep one QScintilla Python document synchronized with Ruff LSP."""
@@ -267,7 +269,7 @@ class RuffLspController(QObject):
             return False
         point = QPoint(event.globalPos())
         
-        def recieve(actions: Any, error: Any, uri: Any, revision: Any) -> None:
+        def receive(actions: Any, error: Any, uri: Any, revision: Any) -> None:
             """Show returned action titles and apply only the explicitly selected item."""
             if error:
                 QMessageBox.warning(self.editor, "Quick fixes", str(error))
@@ -285,13 +287,13 @@ class RuffLspController(QObject):
                 menu.addAction("No quick fix available").setEnabled(False)
             chosen = menu.exec_(point)
             for item, action in pairs:
-                if chosen in item:
+                if chosen is item:
                     try:
                         self.apply_code_action(action, uri, revision)
                     except WorkspaceEditError as error:
                         QMessageBox.warning(self.editor, "Quick fixes", str(error))
                     break
-        self.request_quick_fixes(diagnostic, recieve)
+        self.request_quick_fixes(diagnostic, receive)
         return True
                     
 
@@ -327,7 +329,7 @@ class RuffLspController(QObject):
             callback([], {"message": "Diagnostic is stale"}, uri, revision)
             return
         
-        self.changed_timer.stop()
+        self.change_timer.stop()
         self._send_change()
         def recieve(result: Any, error: Any) -> None:
             """Discard replies after closure, relocation, editing or server replacement."""

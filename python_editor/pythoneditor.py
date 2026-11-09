@@ -1,7 +1,9 @@
-import sys
-import re
+from __future__ import annotations
 
+import re
+import sys
 from pathlib import Path
+from typing import Any
 
 from PyQt5.Qsci import QsciAPIs, QsciScintilla
 from PyQt5.QtCore import Qt, QTimer, pyqtSignal
@@ -9,13 +11,12 @@ from PyQt5.QtGui import QColor, QKeyEvent, QMouseEvent
 from PyQt5.QtWidgets import QToolTip
 
 from code_inteligence.autocompleter import AutoCompleter
-from python_editor.custompythonlexer import PyCustomLexer
 from code_inteligence.definition_finder import DefinitionFinder
 from code_inteligence.documentation_popup import DocumentationPopup
 from code_inteligence.hover_helper import HoverHelper
-from code_inteligence.signature_helper import SignatureHelper
 from code_inteligence.indentation_helper import indentation_for_new_line
-
+from code_inteligence.signature_helper import SignatureHelper
+from python_editor.custompythonlexer import PyCustomLexer
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.ruff_lsp_controller import RuffLspController
 
@@ -30,6 +31,7 @@ CALLABLE_CHAIN_RE = re.compile(
 )
 
 class PythonEditor(QsciScintilla):
+    """Edit Python source and connect analysis, navigation and view controls"""
     goto_definition_requested = pyqtSignal(str, int, int)
     focused = pyqtSignal(object)
     shutdown_complete = pyqtSignal(object)
@@ -251,7 +253,7 @@ class PythonEditor(QsciScintilla):
             self._ruff_hover_timer.start()
         super().mouseMoveEvent(e)
 
-    def contextMenuEvent(self, event):
+    def contextMenuEvent(self, event: Any) -> None:
         """
         Request documentation for a right-clicked identifier.
         
