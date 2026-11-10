@@ -6,7 +6,7 @@ import jedi
 from jedi import Project, Script, create_environment
 from PyQt5.QtCore import QThread, pyqtSignal
 
-from code_inteligence.jedi_guard import serialized_jedi
+from code_intelligence.jedi_guard import serialized_jedi
 
 # The existing helpers run concurrently; disable's Jedi's shared mutable fast parser
 jedi.settings.fast_parser = True

@@ -26,13 +26,14 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtWidgets import *
 
 import resources_rc  # noqa: F401 - register resources generated from icons/resources.qrc
-from code_inteligence.breadcrumb_symbols import scope_ranges
-from code_inteligence.command_palette import CommandPaletteDialog
-from code_inteligence.command_registry import CommandRegistry
-from code_inteligence.document_state import DirtyViews, DocumentStateStore
-from code_inteligence.find_replace import FindReplaceBar
-from code_inteligence.locations_panel import LocationsPanel
-from code_inteligence.multi_tab_view import MultiTabView
+from code_intelligence.breadcrumb_symbols import scope_ranges
+from code_intelligence.command_palette import CommandPaletteDialog
+from code_intelligence.command_registry import CommandRegistry
+from code_intelligence.document_state import DirtyViews, DocumentStateStore
+from code_intelligence.file_watch_service import FileWatchService
+from code_intelligence.find_replace import FindReplaceBar
+from code_intelligence.locations_panel import LocationsPanel
+from code_intelligence.multi_tab_view import MultiTabView
 from code_settings.contrast import apply_preferences, read_preferences, write_preferences
 from code_settings.design_settings import theme_qss
 from con_term.console_widget import ConsoleWidget
@@ -244,6 +245,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self._install_file_watching()
         self._install_document_tabs()
         self._install_references()
         self._install_problems()
@@ -2721,20 +2723,13 @@ class MainWindow(QMainWindow):
         if check_external_change and target.exists():
             expected = getattr(editor, "_disk_digest", None)
             try:
+                external_bytes = target.read_bytes()
                 actual = disk_digest(target)
             except OSError as error:
                 QMessageBox.critical(self, "Save File", str(error))
                 return False
             if expected is not None and actual != expected:
-                reply = QMessageBox.warning(
-                    self,
-                    "File changed on disk",
-                    f"'{logical_path.name}' changed outside the editor.\n"
-                    "Overwrite the newer disk version?",
-                    QMessageBox.Yes | QMessageBox.Cancel,
-                    QMessageBox.Cancel,
-                )
-                if reply != QMessageBox.Yes:
+                if not self._resolve_external(editor, external_bytes):
                     return False
 
         original = editor.text()
@@ -3292,6 +3287,9 @@ class MainWindow(QMainWindow):
         The method is polled by `_finish_pending_close()` through QTimer. It
         must only inspect state and must never block the GUI thread.
         """
+        if self.file_watcher.is_running():
+            return True
+        
         git_worker = getattr(
             getattr(self, "file_manager", None),
             "git_checker",
@@ -3363,7 +3361,8 @@ class MainWindow(QMainWindow):
         for editor in list(self.tab_view.all_editors()):
             self.tab_view.remove_editor(editor)
             self._dispose_editor(editor)
-
+        
+        self.file_watcher.shutdown()
         self.terminal.stop()
         if hasattr(self.python_runner, "shutdown"):
             self.python_runner.shutdown()
@@ -3561,6 +3560,7 @@ class MainWindow(QMainWindow):
         if document.path is not None:
             document.read_only = not os.access(document.path, os.W_OK)
             editor.setReadOnly(document.read_only)
+            self.file_watcher.watch_file(document.path)
         self._refresh_document_titles(document)
         
     def _refresh_document_titles(self, document: Any) -> None:
@@ -3599,6 +3599,7 @@ class MainWindow(QMainWindow):
             new_uri = Path(path).resolve().as_uri()
             if owner.ruff_lsp.uri != new_uri:
                 owner.ruff_lsp.relocate(path)
+        self.file_watcher.retain([doc.path for doc in self.documents.all() if doc.path])
         self._refresh_document_titles(document)
         
     def _clean_document(self, editor: Any) -> None:
@@ -3660,6 +3661,7 @@ class MainWindow(QMainWindow):
             owner.ruff_lsp.document_version = controller.document_version + 1
             owner.ruff_lsp.diagnostics_changed.connect(self._on_ruff_diagnostics)
             owner.ruff_lsp.sync_from_editor()
+        self.file_watcher.retain([doc.path for doc in self.documents.all() if doc.path])
             
     def _prepare_preview(self, path: Any, group: Any) -> None:
         """Replace only an unpinned, clean preview in the requested group."""
@@ -3793,8 +3795,108 @@ class MainWindow(QMainWindow):
                 return
         if diagnostic.path is not None:
             self._open_file_at_position(str(diagnostic.path), point.line, point.column)
-                
+            
     
+    def _install_file_watching(self) -> None:
+        """Watch saved document paths and receive immutable disk snapshot on the GUI thread."""
+        self.file_watcher = FileWatchService(self)
+        self.file_watcher.hints.connect(self._on_disk_hints)
+        self.file_watcher.result.connect(self._on_disk_result)
+        # This also covers any documents already attached before installation.
+        self.file_watcher.retain([doc.path for doc in self.documents.all() if doc.path])
+        
+    def _on_disk_hints(self, paths: Any) -> None:
+        """Read affected documents with revision token and refresh the existing Git service."""
+        for document in self.documents.all():
+            if document.path and any(p.resolve() == document.path.resolve() for p in paths):
+                self.file_watcher.probe(document.path, (document, document.revision, document.disk_digest))
+        self._refresh_git_state()
+        
+    def _on_disk_result(self, path: Any, token: Any, raw: Any, digest: Any, error: Any) -> None:
+        """Ignore obsolete snapshots; reload clean documents and flag dirty/deleted ones."""
+        document, revision, expected = token
+        if document not in self.documents.all() or document.revision != revision or document.disk_digest != expected:
+            return
+        if digest == document.disk_digest and error is None:
+            return # Delayed notification from our own successful atomic save.
+        if error or document.dirty:
+            document.externally_changed = True
+            self.documents.stateChanged.emit(document)
+            return
+        try:
+            text = raw.decode("utf-8-sig")
+        except UnicodeError:
+            document.externally_changed = True
+            self.documents.stateChanged.emit(document)
+            return
+        views = list(document.views) 
+        positions = {view: (view.getCursorPosition(), view.firstVisibleLine()) for view in views}
+        for view in views:
+            view._loading_text = True
+            if hasattr(view, "snippets"):
+                view.snippets.cancel()
+        owner = document.analysis_owner
+        try:
+            owner.setText(text)
+            for view in views:
+                view._utf8_bom = raw.startswith(b"\xef\xbb\xbf")
+                view._disk_digest = digest
+                view.setEolMode(QsciScintilla.EolWindows if b"\r\n" in raw else QsciScintilla.EolMac if b"\r" in raw else QsciScintilla.EolUnix)
+                cursor, scroll = positions[view]
+                view.setCursorPosition(*cursor)
+                view.setFirstVisibleLine(scroll)
+        finally:
+            for view in views:
+                view._loading_text = False
+        if isinstance(owner, PythonEditor) and owner.ruff_lsp:
+            owner.ruff_lsp.sync_from_editor()
+        self._clean_document()
+            
+            
+    def _resolve_external(self, editor: Any, raw: Any) -> bool:
+            """Require an explicit overwrite, reload, compare or cancel decision before saving."""
+            try:
+                text = raw.decode("utf-8-sig")
+            except UnicodeError as error:
+                QMessageBox.warning(self, "External change", str(error))
+                return False
+            box = QMessageBox(self)
+            box.setWindowTitle("File changed on disk")
+            box.setText("The file contains changes made outside the editor.")
+            reload = box.addButton("Reload disk", QMessageBox.AcceptRole)
+            keep = box.addButton("Overwrite with editor", QMessageBox.DestructiveRole)
+            compare = box.addButton("Compare", QMessageBox.ActionRole)
+            box.addButton(QMessageBox.Cancel)
+            box.exec_()
+            chosen = box.clickedButton()
+            if chosen is keep:
+                return True
+            if chosen is compare:
+                from side_bar_widgets.comparison_dialog import ComparisonDialog
+                ComparisonDialog(editor.text(), text, "Editor versus disk", self,
+                                 accept_text="Close comparison").exec_()
+            elif chosen is reload:
+                document = self.documents.document(editor)
+                views = list(document.views)
+                for view in views:
+                    view._loading_text = True
+                    if hasattr(view, "snippets"):
+                        view.snippets.cancel()
+                try:
+                    editor.setText(text)
+                    for view in views:
+                        view._utf8_bom = raw.startswith(b"\xef\xbb\xbf")
+                        view._disk_digest = hashlib.sha256(raw).digest()
+                        view.setEolMode(QsciScintilla.EolWindows if b"\r\n" in raw else QsciScintilla.EolMac if b"\r" in raw else QsciScintilla.EolUnix)
+                finally:
+                    for view in views:
+                        view._loading_text = False
+                self._clean_document(editor)
+                owner = document.analysis_owner
+                if isinstance(owner, PythonEditor) and owner.ruff_lsp:
+                    owner.ruff_lsp.sync_from_editor()
+            return False
+            
     
     
 def main() -> int:

@@ -10,14 +10,14 @@ from PyQt5.QtCore import Qt, QTimer, pyqtSignal
 from PyQt5.QtGui import QColor, QKeyEvent, QMouseEvent
 from PyQt5.QtWidgets import QToolTip
 
-from code_inteligence.autocompleter import AutoCompleter
-from code_inteligence.definition_finder import DefinitionFinder
-from code_inteligence.documentation_popup import DocumentationPopup
-from code_inteligence.hover_helper import HoverHelper
-from code_inteligence.indentation_helper import indentation_for_new_line
-from code_inteligence.locations_panel import SourceLocation
-from code_inteligence.references_finder import ReferencesFinder
-from code_inteligence.signature_helper import SignatureHelper
+from code_intelligence.autocompleter import AutoCompleter
+from code_intelligence.definition_finder import DefinitionFinder
+from code_intelligence.documentation_popup import DocumentationPopup
+from code_intelligence.hover_helper import HoverHelper
+from code_intelligence.indentation_helper import indentation_for_new_line
+from code_intelligence.locations_panel import SourceLocation
+from code_intelligence.references_finder import ReferencesFinder
+from code_intelligence.signature_helper import SignatureHelper
 from python_editor.custompythonlexer import PyCustomLexer
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.ruff_lsp_controller import RuffLspController

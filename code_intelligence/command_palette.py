@@ -4,7 +4,7 @@ from typing import Any
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QLineEdit, QListWidget, QListWidgetItem, QVBoxLayout
 
-from code_inteligence.command_registry import Command, CommandRegistry
+from code_intelligence.command_registry import Command, CommandRegistry
 
 class CommandPaletteDialog(QDialog):
     """Keyboard-first filtered view over a CommandRegistry,"""

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from code_inteligence.jedi_guard import serialized_jedi
+from code_intelligence.jedi_guard import serialized_jedi
 
 from PyQt5.QtCore import QThread, pyqtSignal
 from jedi import Script

@@ -13,17 +13,17 @@ class StatusItem(QLabel):
         self.setFocusPolicy(Qt.StrongFocus) 
         self.setCursor(Qt.PointingHandCursor)
         
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, ev):
         """Invoke the setting on a left click only."""
-        if event.button() == Qt.LeftButton:
+        if ev.button() == Qt.LeftButton:
             self.action()
-        super().mousePressEvent(event)
+        super().mousePressEvent(ev)
         
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, ev):
         """Let keyboard users activate the same control."""
-        if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter, Qt.Key.Key_Space):
+        if ev.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter, Qt.Key.Key_Space):
             self.action()
-            event.accept()
+            ev.accept()
             return
-        super().keyPressEvent(event)
+        super().keyPressEvent(ev)
         
