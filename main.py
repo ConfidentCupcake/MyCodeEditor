@@ -29,6 +29,7 @@ import resources_rc  # noqa: F401 - register resources generated from icons/reso
 from code_inteligence.breadcrumb_symbols import scope_ranges
 from code_inteligence.command_palette import CommandPaletteDialog
 from code_inteligence.command_registry import CommandRegistry
+from code_inteligence.document_state import DirtyViews, DocumentStateStore
 from code_inteligence.find_replace import FindReplaceBar
 from code_inteligence.locations_panel import LocationsPanel
 from code_inteligence.multi_tab_view import MultiTabView
@@ -54,6 +55,7 @@ from ruff_implementation.diagnostics_model import (
 )
 from ruff_implementation.ruff_diagnostics_model import RuffSeverity
 from ruff_implementation.ruff_lsp_client import RuffLspClient
+from ruff_implementation.ruff_lsp_controller import RuffLspController
 from side_bar_widgets.breadcrumbs import Breadcrumbs
 from side_bar_widgets.code_outline import CodeOutlineTree
 from side_bar_widgets.empty_states import EmptyState
@@ -165,7 +167,8 @@ class MainWindow(QMainWindow):
         """Initialize this main component."""
         super().__init__()
         self.update_check_finished.connect(self._show_update_check_result)
-        self._dirty_editors = set()
+        self.documents = DocumentStateStore(self)
+        self._dirty_editors = DirtyViews(self.documents)
         self.python_runner = PythonRunner(self)
         self.settings = QSettings("CodeEditor", "CodeEditor")
         self._hacker = self.settings.value("theme", "theme.json", type=str) == "hacker.json"
@@ -241,6 +244,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self._install_document_tabs()
         self._install_references()
         self._install_problems()
         self._install_command_palette()
@@ -646,9 +650,7 @@ class MainWindow(QMainWindow):
         if getattr(editor, "_loading_text", False):
             return
         self._dirty_editors.add(editor)
-        path = getattr(editor, "path", None)
-        base_title = path.name if path is not None else "Untitled"
-        self.tab_view.set_editor_title(editor, f"● {base_title}")
+        # DirtyViews emits stateChanged, which refreshes every view title/
         if editor is self.current_editor():
             self.update_word_count()
             if isinstance(editor, MarkdownEditor):
@@ -656,15 +658,10 @@ class MainWindow(QMainWindow):
 
     def mark_editor_clean(self, editor):
         """Remove dirty state after a sucessfull save."""
-        if editor is None:
-            return
-        self._dirty_editors.discard(editor)
-        editor.setModified(False)
-        path = getattr(editor, "path", None)
-        title = path.name if path is not None else "Untitled"
-        self.tab_view.set_editor_title(editor, title)
-        if getattr(editor, "path", None) is not None:
-            self.file_manager.check_git_status()
+        if editor is not None:
+            self._clean_document(editor)
+            if editor.path is not None:
+                self.file_manager.check_git_status()
 
     def update_cursor_position(self, line: int, index: int):
         """
@@ -859,8 +856,9 @@ class MainWindow(QMainWindow):
         """Return the editor focused in the active tab group."""
         return self.tab_view.current_editor()
 
-    def _connect_editor(self, editor):
+    def _connect_editor(self, editor: Any) -> None:
         """Connect all MainWindow signals required by an editor."""
+        self._attach_document_view(editor)
         editor.textChanged.connect(lambda ed=editor: self._on_editor_text_changed(ed))
         editor.textChanged.connect(self._debounce.start)
         editor.textChanged.connect(self._outline_debounce.start)
@@ -1985,6 +1983,7 @@ class MainWindow(QMainWindow):
             is_new_file=False,
             target_group=None,
             is_python_file=None,
+            preview: bool=False,
     ):
         """Open one UTF-8 document without corrupting or duplicating it.
 
@@ -2000,8 +1999,16 @@ class MainWindow(QMainWindow):
 
         existing = self.tab_view.find_editor_by_path(path)
         if existing is not None:
+            if not preview:
+                self.documents.tab(existing).preview = False
+                self._refresh_document_titles(self.documents.document(existing))
             self.tab_view.focus_editor(existing)
             return existing
+        if preview:
+            self._prepare_preview(path, target_group or self.tab_view.active_group())
+            if target_group not in self.tab_view.groups():
+                target_group = None
+            
 
         try:
             if self.is_binary(path):
@@ -2038,6 +2045,8 @@ class MainWindow(QMainWindow):
         editor.setTextSafely(text)
         self._connect_editor(editor)
         self.tab_view.add_editor(editor, path.name, target_group)
+        self.documents.tab(editor).preview = preview
+        self._refresh_document_titles(self.documents.document(editor))
         self.tab_view.set_editor_tooltip(editor, str(path.absolute()))
 
         self.current_file = path
@@ -2260,47 +2269,45 @@ class MainWindow(QMainWindow):
     # close_tab() was never defined at all -> AttributeError/NameError on every
     # menu action. Rewritten to work on editor objects via MultiTabView's real API.
 
-    def _show_tab_context_menu(self, group, pos: QPoint):
-        """
-        Show a context menu when the user right-clicks a tab.
-
-        `group` is the QTabWidget (tab group) the click happened in,
-        `pos` is the click position in that group's coordinates.
-        """
-        tab_bar = group.tabBar()
-        # Convert the click position from QTabWidget coords to QTabBar coords
-        bar_pos = tab_bar.mapFrom(group, pos)
-        index = tab_bar.tabAt(bar_pos)
-
+    def _show_tab_context_menu(self, group, position: QPoint):
+        """Use the clicked group for pin, close-right, path and duplicate operations."""
+        bar = group.tabBar()
+        index = bar.tabAt(bar.mapFrom(group, position))
         if index < 0:
             # User clicked somewhere that's not a tab (e.g. the empty space after tabs)
             return
-
-        editor = group.widget(index)
-        if editor is None:
-            return
-
+        
+        view = group.widget(index)
+        tab = self.documents.tab(view)
         menu = QMenu(self)
-        close_action = menu.addAction("Close")
-        close_others_action = menu.addAction("Close Others")
-        close_all_action = menu.addAction("Close All")
-        menu.addSeparator()
-        copy_path_action = menu.addAction("Copy Path")
-        reveal_action = menu.addAction("Reveal in File Manager")
-
-        action = menu.exec_(group.mapToGlobal(pos))
-
-        if action == close_action:
-            self.close_editor(editor)
-        elif action == close_others_action:
-            self._close_other_tabs(editor)
-        elif action == close_all_action:
-            self._close_all_tabs()
-        elif action == copy_path_action:
-            self._copy_tab_path(editor)
-        elif action == reveal_action:
-            self._reveal_tab_in_file_manager(editor)
-
+        pin = menu.addAction("Unpin" if tab.pinned else "Pin")
+        close = menu.addAction("Close")
+        close.setEnabled(not tab.pinned)
+        others = menu.addAction("Close Others")
+        right = menu.addAction("Close to the Right")
+        duplicate = menu.addAction("Duplicate View Right")
+        copy = menu.addAction("Copy Path")
+        reveal = menu.addAction("Reveal in File Manager")
+        selected = menu.exec_(group.mapToGlobal(position))
+        if selected is pin:
+            tab.pinned, tab.preview = not tab.pinned, False
+            self._refresh_document_titles(self.documents.document(view))
+        elif selected is close:
+            self.close_editor(view)
+        elif selected in (others, right):
+            targets = self.tab_view.all_editors() if selected is others else [group.widget(i) for i in range(index + 1, group.count())]
+            for target in list(targets):
+                if target is not view and not self.documents.tab(target).pinned:
+                    if self.close_editor(target) is False:
+                        break
+        elif selected is duplicate:
+            self._duplicate_view(view)
+        elif selected is copy:
+            self.copy_tab_path(view)
+        elif selected is reveal:
+            self._reveal_tab_in_file_manager(view)
+                    
+                    
     def _close_other_tabs(self, keep_editor):
         """Close all tabs except the one holding `keep_editor` (across all split groups)."""
         for editor in list(self.tab_view.all_editors()):
@@ -2386,36 +2393,33 @@ class MainWindow(QMainWindow):
         editor.setFocus()
 
     def close_editor(self, editor):
-        if editor is None:
-            return
-
-        if editor in self._dirty_editors:
-            path = getattr(editor, "path", None)
-            name = path.name if path is not None else "Untitled"
-
-            reply = QMessageBox.question(
-                self,
-                "Unsaved Changes",
-                f"Save Changes to '{name}'?",
-                QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel,
-                QMessageBox.Save,
-            )
-
-            if reply == QMessageBox.Cancel:
+        """Close unpinned views; prompt once only when the final view is dirty."""
+        if editor is None or editor not in self.documents.documents:
+            return True
+        if self.documents.tab(editor).pinned:
+            return True
+        
+        document = self.documents.document(editor)
+        if document.dirty and len(document.views) == 1:
+            self.tab_view.focus_editor(editor)
+            name = document.path.name if document.path else "Untitled"
+            answer = QMessageBox.question(self, "Unsaved Changes", f"Save changes to '{name}'?",
+                     QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel, QMessageBox.Save)
+                     
+            if answer == QMessageBox.Cancel:
                 return False
-
-            if reply == QMessageBox.Save:
-                self.tab_view.focus_editor(editor)
+            if answer == QMessageBox.Save:
                 if not self.save_file():
                     return False
-
-        self._dirty_editors.discard(editor)
+                # Save As may replace all views with another editor class
+                editor = self.current_editor()
+        self._detach_document_view(editor, remember=True)
         self.tab_view.remove_editor(editor)
-        
         self._dispose_editor(editor)
-
         self.render_preview()
         return True
+            
+            
     
     def _dispose_editor(self, editor: Any) -> None:
         """Delete now, or retain a Python editor until its workers finish."""
@@ -2423,6 +2427,7 @@ class MainWindow(QMainWindow):
         controller = getattr(editor, "ruff_lsp", None)
         if controller is not None:
             controller._clear_problem_rows()
+        self._detach_document_view(editor, transfer=not getattr(self, "_close_prompts_complete", False))
         if isinstance(editor, PythonEditor):
             self._retired_editors.add(editor)
             editor.setParent(None)
@@ -2443,55 +2448,26 @@ class MainWindow(QMainWindow):
     
     def on_file_rename(self, old_path: Path, new_path: Path, is_directory=False):
         """Relocate every affected tab while preserving one-path ownership."""
-        old_path = Path(old_path)
-        new_path = Path(new_path)
-
-        for editor in list(self.tab_view.all_editors()):
-            editor_path = getattr(editor, "path", None)
-            if editor_path is None:
+        old_path, new_path = Path(old_path).absolute(), Path(new_path).absolute()
+        for document in list(self.documents.all()):
+            if document.path is None:
                 continue
-            editor_path = Path(editor_path)
-
-            if is_directory:
-                if editor_path == old_path:
-                    updated_path = new_path
-                elif old_path in editor_path.parents:
-                    updated_path = new_path / editor_path.relative_to(old_path)
-                else:
-                    continue
-            elif editor_path == old_path:
-                updated_path = new_path
+            current = document.path.absolute()
+            if current == old_path:
+                destination = new_path
+            elif is_directory and current.is_relative_to(old_path):
+                destination = new_path / current.relative_to(old_path)
             else:
                 continue
-
-            editor.path = updated_path
-            editor.full_path = updated_path.absolute()
-            try:
-                target = save_target(updated_path)
-                editor._save_target = target
-                editor._disk_digest = disk_digest(target)
-            except OSError:
-                editor._disk_digest = None
-
-            desired_class = PythonEditor if is_python_path(updated_path) else MarkdownEditor
-            converted = not isinstance(editor, desired_class)
-            if converted:
-                editor = self._convert_editor(editor, desired_class)
-
-            if isinstance(editor, PythonEditor):
-                # A newly converted controller was constructed with the new path;
-                # an existing Python controller must migrate from its old URI.
-                if not converted and editor.ruff_lsp is not None:
-                    editor.ruff_lsp.relocate(updated_path)
-                editor.auto_completer.file_path = str(editor.full_path)
-
-            title = updated_path.name
-            if editor in self._dirty_editors:
-                title = f"● {title}"
-            self.tab_view.set_editor_title(editor, title)
-            self.tab_view.set_editor_tooltip(editor, str(editor.full_path))
+            
+            editor = document.analysis_owner
+            editor._save_target = save_target(destination)
+            self._retarget_document(editor, destination)
+            wanted = PythonEditor if is_python_path(destination) else MarkdownEditor
+            editor = self._convert_editor(editor, wanted)
             if editor is self.current_editor():
-                self.current_file = updated_path
+                self.current_file = destination
+            
 
     def editors_for_path(self, target_path: Path, is_directory=False):
         target = Path(target_path).resolve()
@@ -2511,22 +2487,18 @@ class MainWindow(QMainWindow):
         return result
 
     def can_close_editors_for_path(self, target_path, is_directory=False):
-        """Collect save/discard decisions without removing tabs."""
+        """Gather one save/discard decision per document before a file-manager operation."""
+        seen = set()
         for editor in self.editors_for_path(target_path, is_directory):
-            if editor not in self._dirty_editors:
+            document = self.documents.document(editor)
+            if document in seen or not document.dirty:
                 continue
+            seen.add(document)
             self.tab_view.focus_editor(editor)
-            name = Path(editor.path).name
-            reply = QMessageBox.question(
-                self,
-                "Unsaved Changes",
-                f"Save changes to '{name}'?",
-                QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel,
-                QMessageBox.Save,
-            )
-            if reply == QMessageBox.Cancel:
-                return False
-            if reply == QMessageBox.Save and not self.save_file():
+            name = document.path.name if document.path else "Untitled"
+            answer = QMessageBox.question(self, "Unsaved Changes", f"Save changes to '{name}'?",
+                     QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel, QMessageBox.Save)
+            if answer == QMessageBox.Cancel or (answer == QMessageBox.Save and not self.save_file()):
                 return False
         return True
 
@@ -2534,8 +2506,10 @@ class MainWindow(QMainWindow):
         editors = self.editors_for_path(target_path, is_directory)
         if prompt and not self.can_close_editors_for_path(target_path, is_directory):
             return False
+        # A save prompt can convert a view or move it to another path.
+        editors = self.editors_for_path(target_path, is_directory)
         for editor in editors:
-            self._dirty_editors.discard(editor)
+            self._detach_document_view(editor, transfer=False)
             self.tab_view.remove_editor(editor)
             self._dispose_editor(editor)
         return True
@@ -2807,6 +2781,7 @@ class MainWindow(QMainWindow):
             self._apply_formatted_text(editor, formatted)
         editor._save_target = target
         editor._disk_digest = hashlib.sha256(data).digest()
+        self._retarget_document(editor, logical_path)
         self.mark_editor_clean(editor)
         return True
 
@@ -2860,10 +2835,11 @@ class MainWindow(QMainWindow):
 
         path = Path(file_path)
         owner = self.tab_view.find_editor_by_path(path)
-        if owner is not None and owner is not editor:
+        if owner is not None and self.documents.document(owner) is not self.documents.document(editor):
             QMessageBox.warning(self, "Save As", "That file is already open in another tab.")
             self.tab_view.focus_editor(owner)
             return False
+        
 
         # The dialog confirmed replacement. Do not compare the destination to
         # the digest of the tab's previous path.
@@ -2884,7 +2860,7 @@ class MainWindow(QMainWindow):
             # A newly converted PythonEditor was constructed with ``path`` and
             # already owns the correct URI. Only an existing Python editor must
             # migrate its old Ruff URI after Python-to-Python Save As.
-            if not converted and editor.ruff_lsp is not None:
+            if not converted and editor.ruff_lsp is not None and editor.ruff_lsp.uri != path.resolve().as_uri():
                 editor.ruff_lsp.relocate(path)
             editor.auto_completer.file_path = str(editor.full_path)
 
@@ -3055,71 +3031,57 @@ class MainWindow(QMainWindow):
     def _convert_current_tab(self, EditorClass):
         return self._convert_editor(self.current_editor(), EditorClass)
 
-    def _convert_editor(self, old, EditorClass):
-        """Replace one tab's editor class without leaking the old instance.
-
-        Document/path/display state is copied to the new editor. Dirty-set
-        migration is conditional, but retirement of the old widget is always
-        required because clean Python editors also own workers and LSP signals.
-        """
-        if old is None or isinstance(old, EditorClass):
-            return old
-        group = self.tab_view.group_for_editor(old)
-        if group is None:
-            return None
-
-        index = group.indexOf(old)
-        was_current = old is self.current_editor()
-        previous_current = group.currentWidget()
-        title = group.tabText(index)
-        tooltip = group.tabToolTip(index)
-        icon = group.tabIcon(index)
-        text = old.text()
-        path = getattr(old, "path", None)
-        was_dirty = old in self._dirty_editors
-        line, column = old.getCursorPosition()
-        selection = old.getSelection()
-        first_visible = old.firstVisibleLine()
-
-        new_editor = self.get_editor(path=path, is_python_file=(EditorClass is PythonEditor))
-        new_editor.setTextSafely(text)
-        new_editor._utf8_bom = getattr(old, "_utf8_bom", False)
-        new_editor._disk_digest = getattr(old, "_disk_digest", None)
-        new_editor._save_target = getattr(old, "_save_target", path)
-        new_editor.setEolMode(old.eolMode())
-        self._connect_editor(new_editor)
-
-        # Direct insertion must reproduce MultiTabView.add_editor's focus
-        # wiring because this operation replaces an existing tab in-place.
-        new_editor.installEventFilter(self.tab_view)
-        if hasattr(new_editor, "focused"):
-            new_editor.focused.connect(self.tab_view._on_editor_focused)
-
-        group.blockSignals(True)
-        group.removeTab(index)
-        group.insertTab(index, new_editor, icon, title)
-        group.setTabToolTip(index, tooltip)
-        if was_current:
-            group.setCurrentIndex(index)
-        elif previous_current is not None and previous_current is not old:
-            group.setCurrentWidget(previous_current)
-        group.blockSignals(False)
-
-        if was_dirty:
-            self._dirty_editors.discard(old)
-            self._dirty_editors.add(new_editor)
-
-        # Always shut down and retire the removed editor. Keeping this outside
-        # the dirty branch fixes the clean-conversion worker/widget leak.
-        self._dispose_editor(old)
-
-        new_editor.setCursorPosition(line, column)
-        if selection[0] >= 0:
-            new_editor.setSelection(*selection)
-        new_editor.setFirstVisibleLine(first_visible)
-        if was_current:
-            self.tab_view.focus_editor(new_editor)
-        return new_editor
+    def _convert_editor(self, old: Any, EditorClass: Any) -> Any:
+            """Convert every view of a document while preserving shared text and undo state."""
+            if old is None or isinstance(old, EditorClass):
+                return old
+            document = self.documents.document(old)
+            previous_views = list(document.views)
+            source_document = old.document()
+            owner = document.analysis_owner
+            if isinstance(owner, PythonEditor) and owner.ruff_lsp is not None:
+                owner.ruff_lsp.shutdown()
+                owner.ruff_lsp = None
+            current = self.current_editor()
+            replacements = {}
+            for index, view in enumerate(previous_views):
+                group = self.tab_view.group_for_editor(view)
+                position = group.indexOf(view)
+                tab = self.documents.tab(view)
+                if EditorClass is PythonEditor:
+                    new = PythonEditor(path=document.path, is_python_file=True,
+                                       ruff_lsp_client=self.ruff_lsp_client if index == 0 else None)
+                else:
+                    new = MarkdownEditor(path=document.path, is_python_file=False)
+                new.setDocument(source_document)
+                for name in ("_utf8_bom", "_disk_digest", "_save_target", "_disk_text", "_recovery_id"):
+                    setattr(new, name, getattr(view, name, None))
+                new.setEolMode(view.eolMode())
+                new.setReadOnly(document.read_only)
+                self.documents.attach(new, document=document)
+                self.documents.tabs[new] = tab
+                if index == 0:
+                    document.analysis_owner = new
+                self._apply_editor_settings(new, self._current_settings)
+                self._connect_editor(new)
+                self.tab_view.add_editor(new, "", group)
+                group.tabBar().moveTab(group.indexOf(new), position)
+                new.setCursorPosition(*view.getCursorPosition())
+                if view.hasSelectedText():
+                    new.setSelection(*view.getSelection())
+                new.setFirstVisibleLine(view.firstVisibleLine())
+                replacements[view] = new
+            for view in previous_views:
+                self.documents.detach(view)
+                self.tab_view.remove_editor(view)
+                self._dispose_editor(view)
+            primary = document.analysis_owner
+            if isinstance(primary, PythonEditor) and primary.ruff_lsp:
+                primary.ruff_lsp.sync_from_editor()
+            self._refresh_document_titles(document)
+            if current in replacements:
+                self.tab_view.focus_editor(replacements[current])
+            return replacements[old]
 
     def _swap_editor(self, EditorClass):
         return self._convert_current_tab(EditorClass)
@@ -3378,9 +3340,7 @@ class MainWindow(QMainWindow):
             return super().closeEvent(event)
 
         if not getattr(self, "_close_prompts_complete", False):
-            for editor in list(self.tab_view.all_editors()):
-                if editor not in self._dirty_editors:
-                    continue
+            for editor in list(self._dirty_editors):
                 self.tab_view.focus_editor(editor)
                 path = getattr(editor, "path", None)
                 name = Path(path).name if path is not None else "Untitled"
@@ -3428,143 +3388,76 @@ class MainWindow(QMainWindow):
         super().closeEvent(event)
 
     def save_session(self):
-        """
-        Persist the open-tab layout so the next launch can restore it.
-
-        The session is stored as One JSON string under QSettings key "session"
-        (QSettings cannot reliably round-trip nested Python dicts, but strings are always safe.
-
-        Saved per tab:
-            path -> absolute file path; untitled editors (path=None) are skipped,
-                    they cannot be reopened from disk.
-            python -> True if the tab is a PythonEditor. Needed because set_new_tab() picks the editor class
-                      from the self.python_editor_active flag, so the flag must be flipped per file during restore.
-            group -> index of the split group (0 = left/first group)
-                     so a split layout survives a restart.
-
-        Also saved:
-            active  -> path of the focused tab (re-focused on restore)
-            python_mode -> the global mode flag, so NEW files open after a restart behave as before.
-
-        Silently does nothing when the user disabled session restore in the Settings dialog
-        (QSettings key "restore_tabs").
-        """
-        import json
-
+        """Persist one file identity with multiple independently positioned view records."""
         if not self.settings.value("restore_tabs", True, type=bool):
             return
-
-        # group() returns the life QTabWidgets in left-to-right order;
-        # its index for an editor's group is exactly the number we save.
         groups = list(self.tab_view.groups())
-        tabs = []
-
-        for editor in self.tab_view.all_editors():
-            path = getattr(editor, "path", None)
-            if path is None:
+        views = self.tab_view.all_editors()
+        records = []
+        active = None
+        for view in views:
+            document = self.documents.document(view)
+            if document.path is None:
                 continue
-            group = self.tab_view.group_for_editor(editor)
-            tabs.append(
-                {
-                    "path": str(path),
-                    # isinstance() is the ground truth: the class IS the mode.
-                    "python": isinstance(editor, PythonEditor),
-                    "group": groups.index(group) if group in groups else 0,
-                }
-            )
-
-        active = self.current_editor()
-        active_path = getattr(active, "path", None)
-        session = {
-            "tabs": tabs,
-            "active": str(active_path) if active_path is not None else None,
-            "python_mode": bool(self.python_editor_active),
-        }
-        self.settings.setValue("session", json.dumps(session))
+            if view is self.current_editor():
+                active = len(records)
+            line, column = view.getCursorPosition()
+            records.append({"path": str(document.path.absolute()), "python": isinstance(view, PythonEditor),
+                           "group": groups.index(self.tab_view.group_for_editor(view)),
+                           "line": line, "column": column, "scroll": view.firstVisibleLine(),
+                           "pinned": self.documents.tab(view).pinned})
+        self.settings.setValue("sesssion", json.dumps({"tabs": records, "active_view": active, "python_mode": self.python_editor_active}))
 
     def _restore_session(self):
-        """
-        Reopen the tabs saved by _save_session().
-
-        Strategy:
-        1.  Parse the stored JSON (any error -> give up silently; a fresh session is always
-            a valid state).
-        2.  Create enough tab groups to reproduce the split layout.
-        3.  Reopen each file with set_new_tab(), flipping self.python_editor_active
-            per file so each tab gets the right editor class.
-        4.  Re-focus the tab that was active at close time.
-
-        set_new_tab() already handles the hard parts for us: binary-file rejection,
-        duplicate detection (find_editor_by_path), recent-file bookkeeping and dirty-state signal wiring.
-        """
-        import json
-
+        """Restore saved files and duplicate views while retaining one Ruff owner per file."""
         if not self.settings.value("restore_tabs", True, type=bool):
             return
-
-        raw = self.settings.value("session", "", type=str)
-        if not raw:
-            return
-
         try:
-            session = json.loads(raw)
-        except (json.JSONDecodeError, TypeError):
+            session = json.loads(self.settings.value("session", "{}", type=str))
+            if not isinstance(session, dict):
+                return
+            records = session.get("tabs", [])
+            if not isinstance(records, list) or len(records) > 100:
+                return
+        except (ValueError, TypeError):
             return
-
-        tabs = session.get("tabs", [])
-        if not isinstance(tabs, list) or len(tabs) > 100:
-            return
-        tabs = [
-            entry
-            for entry in tabs
-            if (
-                isinstance(entry, dict)
-                and isinstance(entry.get("path"), str)
-                and isinstance(entry.get("python", False), bool)
-                and isinstance(entry.get("group", 0), int)
-                and 0 <= entry.get("group", 0) < 20
-            )
-        ]
-        if not tabs:
-            return
-
-        # --- 2. Recreate the split layout --- #
-        # Tab gourps are created lazily by MultiTabView; to place tab into group 2 we must make sure
-        # groups 0..2 exist first. _create_group() is techincally private - optionally rename it to
-        # create_group() in multi_tab_view.py and update this call
-        # (plus its two internal callers) to keep things clean.
-        max_group = max(entry["group"] for entry in tabs)
-        while len(self.tab_view.groups()) <= max_group:
-            self.tab_view._create_group()
-        groups = list(self.tab_view.groups())
-
-        # --- 2. Reopen every tab --- #
-        active_editor = None
-        for entry in tabs:
-            path = Path(entry["path"])
+        
+        opened = {}
+        active = None
+        for index, item in enumerate(records): 
+            if not isinstance(item, dict) or not isinstance(item.get("path"), str):
+                continue
+            group_number = item.get("group", 0)
+            if type(group_number) is not int or not 0 <= group_number < 20:
+                continue
+            path = Path(item["path"])
             if not path.is_file():
-                continue  # delete/move since last session - skip it
-
-            # set_new_tab() branches on self.python_editor_active to choose PythonEditor vs MarkdownEditor.
-            # Setting it per file restores each tab in the mode it was last edited with.
-            editor = self.set_new_tab(
-                path,
-                target_group=groups[entry["group"]],
-                is_python_file=entry["python"],
-            )
-            if editor is not None and session.get("active") == str(path):
-                active_editor = editor
-
-        # --- 3. Restore the global mode + focus --- #
-        # The global flag governs NEW tabs opened after startup, so it refelcts
-        # the mode the app was in at close time.
-        self.python_editor_active = session.get("python_mode", False)
-
-        if active_editor is not None:
-            self.tab_view.focus_editor(active_editor)
-
-        self.statusBar().showMessage(f"Restore {len(tabs)} tabs from last session", 5000)
-
+                continue
+            while len(self.tab_view.groups()) <= group_number:
+                self.tab_view._create_group()
+            group = self.tab_view.groups()[group_number]
+            key = path.resolve()
+            if key in opened:
+                view = self._duplicate_view(opened[key], group)
+            else:
+                view = self.set_new_tab(path, target_group=group, is_python_file=bool(item.get("python", is_python_path(path))))
+                if view is not None:
+                    opened[key] = view
+            if view is None:
+                continue
+            self.documents.tab(view).pinned = item.get("pinned") is True
+            line, column, scroll = (item.get(name, 0) for name in ("line", "column", "scroll"))
+            if all(type(value) is int and value >= 0 for value in (line, column, scroll)):
+                view.setCursorPosition(min(line, view.lines() - 1), column)
+                view.setFirstVisibleLine(scroll)
+            self._refresh_document_titles(self.documents.document(view))
+            if session.get("active_view") == index or session.get("active") == str(path):
+                active = view
+        self.python_editor_active = session.get("python_mode") is True
+        if active is not None:
+            self.tab_view.focus_editor(active)
+            
+        
     def check_for_updates(self, manual=False):
         """Check releases off-thread and report every manual outcome."""
         import json
@@ -3643,6 +3536,173 @@ class MainWindow(QMainWindow):
 
             webbrowser.open(download_url)
             
+    def _install_document_tabs(self) -> None:
+        """Connect document state to tab titles and expose tab-management commands."""
+        self.documents.stateChanged.connect(self._refresh_document_titles)
+        menu = self.menuBar().addMenu("Tabs")
+        reopen = menu.addAction("Reopen Closed Tab")
+        reopen.setObjectName("tabs.reopen")
+        reopen.setShortcut("Ctrl+Shift+T")
+        reopen.triggered.connect(self._reopen_tab)
+        search = menu.addAction("Search Open Tabs")
+        search.setObjectName("tabs.search")
+        search.triggered.connect(self._search_tabs)
+        sort = menu.addAction("Sort Active Group")
+        sort.setObjectName("tabs.sort")
+        sort.triggered.connect(self._sort_tabs)
+        duplicate = menu.addAction("Duplicate View Right")
+        duplicate.setObjectName("tabs.duplicate")
+        duplicate.triggered.connect(lambda: self._duplicate_view(self.current_editor()))
+        
+    def _attach_document_view(self, editor: Any) -> None:
+        """Attach an editor to share metadata before connecting its editing signals."""
+        document = self.documents.attach(editor, getattr(editor, "path", None))
+        document.disk_digest = getattr(editor, '_disk_digest', document.disk_digest)
+        if document.path is not None:
+            document.read_only = not os.access(document.path, os.W_OK)
+            editor.setReadOnly(document.read_only)
+        self._refresh_document_titles(document)
+        
+    def _refresh_document_titles(self, document: Any) -> None:
+        """Derive every view's tab title from shared state and per-view pin/preview flags."""
+        for view in list(document.views):
+            tab = self.documents.tab(view)
+            name = document.path.name if document.path else "Untitled"
+            title = ("● " if document.dirty else "") + name
+            title += " [pinned]" if tab.pinned else " [preview]" if tab.preview else ""
+            title += " [RO]" if document.read_only else ""
+            title += " [external]" if document.externally_changed else ""
+            self.tab_view.set_editor_title(view, title)
+            self.tab_view.set_editor_tooltip(view, str(document.path or "Untitled"))
+            
+    def _retarget_document(self, editor: Any, path: Any) -> None:
+        """Update every view's path and bytes metadata after a successful save or rename."""
+        document = self.documents.document(editor)
+        document.path = Path(path)
+        document.disk_digest = getattr(editor, "_disk_digest", None)
+        document.revision += 1
+        document.read_only = not os.access(path, os.W_OK)
+        for view in list(document.views):
+            view.path = Path(path)
+            view.full_path = Path(path).absolute()
+            for name in ("_disk_digest", "_save_target", "_utf8_bom"):
+                setattr(view, name, getattr(editor, name, None))
+            view.setEolMode(editor.eolMode())
+            view.setReadOnly(document.read_only)
+            if isinstance(view, PythonEditor):
+                view.auto_completer.file_path = str(view.full_path)
+                if hasattr(view, "references_finder"):
+                    view.references_finder.invalidate()
+                    
+        owner = document.analysis_owner
+        if isinstance(owner, PythonEditor) and owner.ruff_lsp:
+            new_uri = Path(path).resolve().as_uri()
+            if owner.ruff_lsp.uri != new_uri:
+                owner.ruff_lsp.relocate(path)
+        self._refresh_document_titles(document)
+        
+    def _clean_document(self, editor: Any) -> None:
+        """Commit share clean metadata after sace and update very view title."""
+        document = self.documents.document(editor)
+        document.dirty = False
+        document.externally_changed = False
+        document.disk_digest = getattr(editor, "_disk_digest", None)
+        document.revision += 1
+        for view in document.view:
+            view._disk_digest = document.disk_digest
+            view.setModified(False)
+        self.documents.stateChanged.emit(document)
+        
+    def _duplicate_view(self, source: Any, group: Any=None) -> Any:
+        """Create an independent view over the same Scintilla document and state."""
+        if source is None:
+            return None
+        document = self.documents.document(source)
+        if isinstance(source, PythonEditor):
+            view = PythonEditor(path=source.path, is_python_file=True, ruff_lsp_client=None)
+        else:
+            view = MarkdownEditor(path=source.path, is_python_file=False)
+
+        # Share text and undo history; keep cursor/scroll state on each view.
+        view.setDocument(source.document())
+        for name in ("_utf8_bom", "_disk_digest", "_save_target", "_disk_text", "_recovery_id"):
+            setattr(view, name, getattr(source, name, None))
+        view.setEolMode(source.eolMode())
+        view.setReadOnly(document.read_only)
+        self.documents.attach(view, document=document)
+        self._apply_editor_settings(view, self._current_settings)
+        self._connect_editor(view)
+        if group is None:
+            group = self.tab_view._create_group(after=self.tab_view.group_for_editor(source))
+        self.tab_view.add_editor(view, "", group)
+        view.setCursorPosition(*source.getCursorPosition())
+        self._refresh_document_titles(document)
+        return view
+    
+    def _detach_document_view(self, view: Any, remember: bool=False, transfer: bool=True) -> None:
+        """Detach a tab and transfer the sole Ruff synchronizer before retiring its owner."""
+        if view not in self.documents.documents:
+            return
+        document = self.documents.document(view)
+        if remember:
+            self.documents.remember_closed(view, isinstance(view, PythonEditor))
+        others = [item for item in document.views if item is not view]
+        controller = getattr(view, "ruff_lsp", None)
+        if controller is not None:
+            controller.shutdown()
+            view.ruff_lsp = None
+        self.documents.detach(view)
+        # Only one view owns Ruff synchronization for a shared document.
+        if transfer and others and controller is not None:
+            owner = others[0]
+            document.analysis_owner = owner
+            owner.ruff_lsp = RuffLspController(owner, self.ruff_lsp_client)
+            owner.ruff_lsp.document_version = controller.document_version + 1
+            owner.ruff_lsp.diagnostics_changed.connect(self._on_ruff_diagnostics)
+            owner.ruff_lsp.sync_from_editor()
+            
+    def _prepare_preview(self, path: Any, group: Any) -> None:
+        """Replace only an unpinned, clean preview in the requested group."""
+        existing = self.tab_view.find_editor_by_path(path)
+        if existing is not None:
+            return
+        for index in range(group.count()):
+            view = group.widget(index)
+            tab = self.documents.tab(view)
+            if tab.preview and not tab.pinned and not self.documents.document(view).dirty:
+                self.close_editor(view)
+                break
+    
+    def _reopen_tab(self) -> None:
+        """Reopen the latest available disk-backed location without restoring stale widgets."""
+        while self.documents.recently_closed:
+            item = self.documents.recently_closed.pop(0)
+            if item.path.is_file():
+                view = self.set_new_tab(item.path, is_python_file=item.python_mode)
+                if view:
+                    view.setCursorPosition(item.line, item.column)
+                break
+    
+    def _search_tabs(self) -> None:
+        """Select from distinct numbered entries even when filenames are duplicated."""
+        views = self.tab_view.all_editors()
+        labels = [f"{index + 1}: {view.path or 'Untitled'}" for index, view in enumerate(views)]
+        if labels:
+            selected, accepted = QInputDialog.getItem(self, "Open tabs", "Tab", labels, 0, True)
+            if accepted and selected in labels:
+                self.tab_view.focus_editor(views[labels.index(selected)])
+                
+    def _sort_tabs(self) -> None:
+        """Reorder the active group's existing tabs, with pinned tabs first."""
+        group = self.tab_view.active_group()
+        desired = sorted([group.widget(i) for i in range(group.count())], key=lambda view: (not self.documents.tab(view).pinned, str(view.path or '').casefold()))
+        for index, view in enumerate(desired):
+            group.tabBar().moveTab(group.indexOf(view), index)
+    
+            
+        
+    
+
     def _install_references(self) -> None:
         """Create the references dock and its independen menu command."""
         self.references_panel = LocationsPanel(self)
@@ -3734,6 +3794,8 @@ class MainWindow(QMainWindow):
         if diagnostic.path is not None:
             self._open_file_at_position(str(diagnostic.path), point.line, point.column)
                 
+    
+    
     
 def main() -> int:
     """Installed GUI entry point."""

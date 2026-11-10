@@ -1,11 +1,14 @@
+from __future__ import annotations
+
 import os
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 from uuid import uuid4
 
-from PyQt5.QtCore import QDir, QModelIndex, QPoint, Qt, QItemSelectionModel
+from PyQt5.QtCore import QDir, QItemSelectionModel, QModelIndex, QPoint, Qt
 from PyQt5.QtGui import QColor, QDragEnterEvent, QDropEvent, QFont, QIcon
 from PyQt5.QtWidgets import (
     QAbstractItemView,
@@ -16,9 +19,12 @@ from PyQt5.QtWidgets import (
     QSizePolicy,
     QTreeView,
 )
+
 from markdowneditor_assets import asset_path
 
+
 class FileManager(QTreeView):
+    """Display workspace files and coordinate file operations with open documents."""
     def __init__(self, set_new_tab, main_window, parent=None):
         super(FileManager, self).__init__(None)
 
@@ -52,6 +58,7 @@ class FileManager(QTreeView):
 
         # hank
         self.clicked.connect(self.tree_view_clicked)
+        self.doubleClicked.connect(self._open_permanent)
         self.setIndentation(10)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
@@ -114,7 +121,7 @@ class FileManager(QTreeView):
         path = self.model.filePath(index)
         p = Path(path)
         if p.is_file():
-            self.set_new_tab(p)
+            self.set_new_tab(p, preview=True)
 
         # drag & drop functionality
     def dragEnterEvent(self, e: QDragEnterEvent) -> None:
@@ -445,12 +452,17 @@ class FileManager(QTreeView):
         path = Path(raw_path).resolve()
         return path if path.is_dir() else None
         
+    def _open_permanent(self, index: Any) -> None:
+        """Prompts a double-clicked file to a permantent tab using the existing open workflow."""
+        path = Path(self.model.filePath(index))
+        if path.is_file():
+            self.set_new_tab(path, preview=False)
         
 class GitAwareFileSystemModel(QFileSystemModel):
     """QFileSystemModel that colors filenames by git status."""
 
     # Colors tuned to the editor's CustomDark palette
-    GIT_COLORS = {
+    GIT_COLORS = {  # noqa: RUF012
         " M": "#e5c07b",   # modified (not staged) — yellow
         "M ": "#98c379",   # modified (staged)     — green
         "A ": "#98c379",   # added (staged)        — green
