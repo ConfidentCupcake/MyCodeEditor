@@ -18,6 +18,7 @@ from code_intelligence.indentation_helper import indentation_for_new_line
 from code_intelligence.locations_panel import SourceLocation
 from code_intelligence.references_finder import ReferencesFinder
 from code_intelligence.signature_helper import SignatureHelper
+from code_intelligence.snippet_controller import SnippetController
 from python_editor.custompythonlexer import PyCustomLexer
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.ruff_lsp_controller import RuffLspController
@@ -184,6 +185,8 @@ class PythonEditor(QsciScintilla):
         # that used to live here are replaced by this one theme-driven call.
         if getattr(self, "py_lexer", None) is not None:
             self._apply_theme_editor_style()
+            
+        self.snippets = SnippetController(self)
             
         self.references_finder = ReferencesFinder()
         self.references_finder.references_found.connect(self._references_found)
@@ -422,6 +425,13 @@ class PythonEditor(QsciScintilla):
     def keyPressEvent(self, event: QKeyEvent) -> None:
             """Handle editor shortcuts, indentation, and signature scheduling."""
             # Do this before early returns for completion acceptance/indentation.
+            if event.key() == Qt.Key.Key_Tab and self.snippets.handle_tab(False):
+                return
+            if event.key() == Qt.Key.Key_Backtab and self.snippets.handle_tab(True):
+                return
+            if event.key() == Qt.Key.Key_Escape and self.snippets.active:
+                self.snippets.cancel()
+                return
             if self.is_python_file and event.key() in (
                     Qt.Key_Space, Qt.Key_Return, Qt.Key_Enter, Qt.Key_Escape):
                 self._dismiss_signature()
@@ -596,6 +606,7 @@ class PythonEditor(QsciScintilla):
 
     def shutdown(self):
         """Stop producing results annd emit when all workers naturally finish."""
+        self.snippets.cancel()
         if self._shutting_down:
             return
         self._shutting_down = True

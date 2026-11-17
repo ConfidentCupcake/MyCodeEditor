@@ -5,6 +5,7 @@ from PyQt5.Qsci import QsciScintilla
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QKeyEvent
 
+from code_intelligence.snippet_controller import SnippetController
 from markdown_editor.markdowncustomlexer import MarkdownCustomLexer
  
 
@@ -59,6 +60,7 @@ class MarkdownEditor(QsciScintilla):
         self.setMarginWidth(0, "000")
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.setWrapMode(QsciScintilla.WrapNone)
+        self.snippets = SnippetController(self)
 
     def _apply_theme_editor_style(self):
         """
@@ -87,11 +89,19 @@ class MarkdownEditor(QsciScintilla):
             lexer.editor_color("margin-background", "#1e1f22"))
 
     # No need to assign any function to handle key press, this overloads the function from base class
-    def keyPressEvent(self, e: QKeyEvent) -> None:
-        if e.modifiers() == Qt.KeyboardModifier.ControlModifier and e.key() == Qt.Key.Key_Space:
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        """Consume active snippet navigation keys, then preserve existing completion and editing behavior."""
+        if event.key() == Qt.Key.Key_Tab and self.snippet.handle_tab(False):
+            return
+        if event.key() == Qt.Key.Key_Backtab and self.snippet.handle_tab(True):
+            return
+        if event.key() == Qt.Key.Key_Escape and self.snippet.active:
+            self.snippets.cancel()
+            return
+        if event.modifiers() == Qt.KeyboardModifier.ControlModifier and event.key() == Qt.Key.Key_Space:
             self.autoCompleteFromAll()
         else:
-            return super().keyPressEvent(e)
+            return super().keyPressEvent(event)
             
     def setTextSafely(self, text:str):
         self._loading_text = True
@@ -108,4 +118,5 @@ class MarkdownEditor(QsciScintilla):
         self.focused.emit(self)
         
     def shutdown(self):
+        self.snippets.cancel()
         self._shutting_down = True

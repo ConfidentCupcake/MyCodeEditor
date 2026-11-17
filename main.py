@@ -30,6 +30,7 @@ from code_intelligence.breadcrumb_symbols import scope_ranges
 from code_intelligence.command_palette import CommandPaletteDialog
 from code_intelligence.command_registry import CommandRegistry
 from code_intelligence.document_state import DirtyViews, DocumentStateStore
+from code_intelligence.snippet_catalog import SnippetCatalog
 from code_intelligence.file_watch_service import FileWatchService
 from code_intelligence.find_replace import FindReplaceBar
 from code_intelligence.locations_panel import LocationsPanel
@@ -245,6 +246,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self._install_snippets()
         self._install_file_watching()
         self._install_document_tabs()
         self._install_references()
@@ -2932,6 +2934,8 @@ class MainWindow(QMainWindow):
 
     def _on_current_editor_changed(self, editor):
         """Refresh MainWindow state when focus moved between editors."""
+        if hasattr(self, "snippet_actions"):
+            self._update_snippet_actions(editor)
         if editor is None:
             self.current_file = None
             self.cursor_pos_label.setText("")
@@ -3609,7 +3613,7 @@ class MainWindow(QMainWindow):
         document.externally_changed = False
         document.disk_digest = getattr(editor, "_disk_digest", None)
         document.revision += 1
-        for view in document.view:
+        for view in document.views:
             view._disk_digest = document.disk_digest
             view.setModified(False)
         self.documents.stateChanged.emit(document)
@@ -3897,7 +3901,46 @@ class MainWindow(QMainWindow):
                     owner.ruff_lsp.sync_from_editor()
             return False
             
-    
+
+    def _install_snippets(self) -> None:
+        """Expose language-aware snippet insertion and new-document templates."""
+        self.snippet_catalog = SnippetCatalog()
+        self.snippet_actions = []
+        menu = self.menuBar().addMenu("Snippets")
+        insert_menu = menu.addMenu("Insert Snippet")
+        template_menu = menu.addMenu("New From Template")
+        for snippet in self.snippet_catalog.all():
+            action = insert_menu.addAction(snippet.title)
+            action.setObjectName("snippet." + snippet.identifier)
+            # Bind the current item now; a bare loop variable would use the last item.
+            action.triggered.connect(lambda checked=False, item=snippet: self._insert_snippet(item))
+            self.snippet_actions.append((action, snippet))
+            template = template_menu.addAction(snippet.title)
+            template.setObjectName("template." + snippet.identifier)
+            template.triggered.connect(lambda checked=False, item=snippet: self._insert_snippet(item, new=True))
+        self._update_snippet_actions(self.current_editor())
+
+    def _insert_snippet(self, snippet: Any, new: bool=False) -> None:
+        """Insert into the active editor or create an unsaved template of the right type."""
+        if new:
+            previous = self.python_editor_active
+            self.python_editor_active = "python" in snippet.languages
+            try:
+                editor = self.new_file()
+            finally:
+                self.python_editor_active = previous
+        else:
+            editor = self.current_editor()
+        language = "python" if isinstance(editor, PythonEditor) else "markdown"
+        if editor is not None and language in snippet.languages:
+            editor.snippets.insert(snippet.body)
+
+    def _update_snippet_actions(self, editor: Any) -> None:
+        """Update language-specific command enablement for the selected view."""
+        language = "python" if isinstance(editor, PythonEditor) else "markdown"
+        for action, snippet in self.snippet_actions:
+            action.setEnabled(editor is not None and not editor.isReadOnly() and language in snippet.languages)
+  
     
 def main() -> int:
     """Installed GUI entry point."""

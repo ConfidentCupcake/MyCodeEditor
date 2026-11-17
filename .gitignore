@@ -45,4 +45,6 @@ htmlcov/
 # Wheel output
 *.whl
 
-Implementations and Updates
+# Folders
+Implementation_Topics
+ImplementationGuides
