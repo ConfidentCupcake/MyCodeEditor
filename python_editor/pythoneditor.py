@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QToolTip
 from code_intelligence.autocompleter import AutoCompleter
 from code_intelligence.definition_finder import DefinitionFinder
 from code_intelligence.documentation_popup import DocumentationPopup
+from code_intelligence.folding_controller import FoldingController
 from code_intelligence.hover_helper import HoverHelper
 from code_intelligence.indentation_helper import indentation_for_new_line
 from code_intelligence.locations_panel import SourceLocation
@@ -72,9 +73,18 @@ class PythonEditor(QsciScintilla):
         # owns family, size, colors and paper — one source of truth.
         # The lexer is created below; helpers on it (editor_font(),
         # editor_color()) supply the margins/popup/caret values.
-
+        
+        # Bracket matching behavior
         self.setBraceMatching(QsciScintilla.SloppyBraceMatch)
+        # Correctly matched brackets
+        self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
+        self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
+        # Unmatched brackets
+        self.setUnmatchedBraceForegroundColor(QColor("FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
+        # Indentations
         self.setIndentationGuides(True)
+        
         self.setTabWidth(4)
         self.setIndentationsUseTabs(False)
         self.setAutoIndent(True)
@@ -185,7 +195,8 @@ class PythonEditor(QsciScintilla):
         # that used to live here are replaced by this one theme-driven call.
         if getattr(self, "py_lexer", None) is not None:
             self._apply_theme_editor_style()
-            
+        
+        self.folding_controller = FoldingController(self, "python")
         self.snippets = SnippetController(self)
             
         self.references_finder = ReferencesFinder()
@@ -547,6 +558,8 @@ class PythonEditor(QsciScintilla):
             self.blockSignals(False)
             self._loading_text = False
             
+        self.folding_controller.schedule()
+            
         # Because textChanged was blocked, manually synchronize the real loaded file text with Ruff.
         # Without this, Ruff keeps the empty didOpen buffer.
         if self.is_python_file and self.ruff_lsp is not None:
@@ -612,6 +625,7 @@ class PythonEditor(QsciScintilla):
         self._shutting_down = True
         self._loading_text = True
         self._autocomplete_timer.stop()
+        self.folding_controller._timer.stop()
         if self.is_python_file:
             self.documentation_popup.dismiss()
             self._dismiss_signature()

@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QKeyEvent
 
 from code_intelligence.snippet_controller import SnippetController
+from code_intelligence.folding_controller import FoldingController
 from markdown_editor.markdowncustomlexer import MarkdownCustomLexer
  
 
@@ -27,7 +28,12 @@ class MarkdownEditor(QsciScintilla):
 
         # brace matching
         self.setBraceMatching(QsciScintilla.SloppyBraceMatch)
-
+        # Correctly matched brackets
+        self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
+        self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
+        # Unmatched brackets
+        self.setUnmatchedBraceForegroundColor(QColor("FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
         # indentation
         self.setIndentationGuides(True)
         self.setTabWidth(2)
@@ -60,6 +66,7 @@ class MarkdownEditor(QsciScintilla):
         self.setMarginWidth(0, "000")
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.setWrapMode(QsciScintilla.WrapNone)
+        self.folding_controller = FoldingController(self, "markdown")
         self.snippets = SnippetController(self)
 
     def _apply_theme_editor_style(self):
@@ -113,10 +120,13 @@ class MarkdownEditor(QsciScintilla):
             self.blockSignals(False)
             self._loading_text = False
             
+        self.folding_controller.schedule()
+            
     def focusInEvent(self, event):
         super().focusInEvent(event)
         self.focused.emit(self)
         
     def shutdown(self):
+        self.folding_controller._timer.stop()
         self.snippets.cancel()
         self._shutting_down = True

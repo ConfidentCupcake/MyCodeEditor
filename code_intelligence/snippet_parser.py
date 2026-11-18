@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass 
 import re
-
-
+from dataclasses import dataclass
 
 _PLACEHOLDER = re.compile(r"\$\{([0-9]+):([^}]*)\}")
 

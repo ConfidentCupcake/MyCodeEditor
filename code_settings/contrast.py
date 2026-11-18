@@ -26,7 +26,7 @@ COLOR_KEYS = ("caret_color", "selection_foreground", "selection_background")
 
 def read_preferences(settings: Any) -> dict[Any, Any]:
     """Read optional overrides; missing colors inherit the active lexer theme."""
-    return {"caret_color": settings.value("caret_width", 2, type=int), **{key: settings.value(key, type=str) if settings.contains(key) else None for key in COLOR_KEYS}}
+    return {"caret_width": settings.value("caret_width", 2, type=int), **{key: settings.value(key, type=str) if settings.contains(key) else None for key in COLOR_KEYS}}
 
 def write_preferences(settings: Any, values: Any) -> None:
     """Persist width and remove reset color keys instead of saving invalid colors."""

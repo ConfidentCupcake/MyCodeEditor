@@ -30,11 +30,11 @@ from code_intelligence.breadcrumb_symbols import scope_ranges
 from code_intelligence.command_palette import CommandPaletteDialog
 from code_intelligence.command_registry import CommandRegistry
 from code_intelligence.document_state import DirtyViews, DocumentStateStore
-from code_intelligence.snippet_catalog import SnippetCatalog
 from code_intelligence.file_watch_service import FileWatchService
 from code_intelligence.find_replace import FindReplaceBar
 from code_intelligence.locations_panel import LocationsPanel
 from code_intelligence.multi_tab_view import MultiTabView
+from code_intelligence.snippet_catalog import SnippetCatalog
 from code_settings.contrast import apply_preferences, read_preferences, write_preferences
 from code_settings.design_settings import theme_qss
 from con_term.console_widget import ConsoleWidget
@@ -246,6 +246,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self._install_folding()
         self._install_snippets()
         self._install_file_watching()
         self._install_document_tabs()
@@ -1926,12 +1927,13 @@ class MainWindow(QMainWindow):
 
         editor.setTabWidth(settings["tab_width"])
         editor.setWrapMode(wrap)
+        
         editor.setCaretLineVisible(settings["highlight_line"])
 
         # Margin 0 is the line-number gutter. Width "0000" fits a
         # 4-digit line count; width 0 collapses it entirely.
         if settings["line_numbers"]:
-            editor.setMarginWidth(0, "0000")
+            editor.setMarginWidth(0, " 0000")
         else:
             editor.setMarginWidth(0, 0)
 
@@ -1971,6 +1973,9 @@ class MainWindow(QMainWindow):
         editor.SendScintilla(4003, 0, -1)
         # Apply explicit overrides after the theme has supplied its defaults.
         apply_preferences(editor, settings)
+        
+        editor.folding_controller._last_digest = b""
+        editor.folding_controller.schedule()
 
     def is_binary(self, path):
         """
@@ -3940,7 +3945,38 @@ class MainWindow(QMainWindow):
         language = "python" if isinstance(editor, PythonEditor) else "markdown"
         for action, snippet in self.snippet_actions:
             action.setEnabled(editor is not None and not editor.isReadOnly() and language in snippet.languages)
-  
+    
+    
+    def _install_folding(self) -> None:
+        """Add eplicit fold commands without requiring a command palette."""
+        menu = self.menuBar().addMenu("Folding")
+        toggle = menu.addAction("Toggle Folding")
+        toggle.setObjectName("view.fold.toggle")
+        toggle.setShortcut("Ctrl+Shift+[")
+        toggle.triggered.connect(self._toggle_fold)
+        collapse = menu.addAction("Fold all")
+        collapse.setObjectName("view.fold.all")
+        collapse.triggered.connect(lambda: self._fold_all(False))
+        expand = menu.addAction("Unfold all")
+        expand.setObjectName("view.fold.none")
+        expand.triggered.connect(lambda: self._fold_all(True))
+        
+    def _toggle_fold(self) -> None:
+        """Toggle active line using QScintilla's foldLine slot."""
+        editor = self.current_editor()
+        if editor is not None:
+            editor.folding_controller.recalculate()
+            editor.foldLine(editor.getCursorPosition()[0])
+            
+    def _fold_all(self, expanded: Any) -> None:
+        """Set every fold header to a specific expanded/collapsed state."""
+        editor = self.current_editor()
+        if editor is not None:
+            editor.folding_controller.set_all(expanded)
+        
+        
+        
+        
     
 def main() -> int:
     """Installed GUI entry point."""
