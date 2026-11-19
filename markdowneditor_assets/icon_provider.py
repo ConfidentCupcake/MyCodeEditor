@@ -1,10 +1,12 @@
-"""State-aware SVG icons from the existing application asset package."""
+#State-aware SVG icons from the existing application asset package.
 from functools import lru_cache
 from pathlib import Path
+
 from PyQt5.QtGui import QIcon
+
 from markdowneditor_assets import asset_path
 
-ALLOWED = frozenset({'folder', 'search', 'outline', 'terminal', 'console', 'settings'})
+ALLOWED = frozenset({'folder', 'search', 'outline', 'terminal', 'console', 'settings', 'minimap'})
 
 @lru_cache(maxsize=6)
 @lru_cache(maxsize=64)

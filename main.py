@@ -246,6 +246,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self._install_minimap()
         self._install_folding()
         self._install_snippets()
         self._install_file_watching()
@@ -864,6 +865,7 @@ class MainWindow(QMainWindow):
     def _connect_editor(self, editor: Any) -> None:
         """Connect all MainWindow signals required by an editor."""
         self._attach_document_view(editor)
+        self._apply_minimap(editor)
         editor.textChanged.connect(lambda ed=editor: self._on_editor_text_changed(ed))
         editor.textChanged.connect(self._debounce.start)
         editor.textChanged.connect(self._outline_debounce.start)
@@ -1976,6 +1978,7 @@ class MainWindow(QMainWindow):
         
         editor.folding_controller._last_digest = b""
         editor.folding_controller.schedule()
+        self._apply_minimap(editor)
 
     def is_binary(self, path):
         """
@@ -3973,7 +3976,55 @@ class MainWindow(QMainWindow):
         editor = self.current_editor()
         if editor is not None:
             editor.folding_controller.set_all(expanded)
+            
+            
+    def _apply_minimap(self, editor):
+        """Apply the actual lexer colors and sace visibility prefernce to one view."""
+        lexer = editor.lexer()
+        background = lexer.paper(0) if lexer is not None else QColor("#1e1f22")
+        foreground = lexer.color(0) if lexer is not None else QColor("#858585")
+        editor.minimap.set_colors(background, foreground)
+        editor.minimap.set_map_visible(self.settings.value("editor/show_minimap", False, type=bool))
         
+    
+    def _toggle_minimap(self, visible):
+        """Persist the menu choice and applu it to every currently open editor view."""
+        self.settings.setValue("editor/show_minimap", bool(visible))
+        for editor in self.tab_view.all_editors():
+            self._apply_minimap(editor)
+            
+            
+    def _install_minimap(self):
+        """Create the minimap menu action once during MainWindow initialization."""
+        menu = self.menuBar().addMenu("Minimap")
+        self.minimap_action = menu.addAction("Show Minimap")
+        self.minimap_action.setObjectName("view.minimap")
+        self.minimap_action.setCheckable(True)
+        self.minimap_action.setChecked(
+            self.settings.value("editor/show_minimap", False, type=bool)
+        )
+        self.minimap_action.toggled.connect(self._toggle_minimap)
+        self._install_minimap_button()
+        
+    def _install_minimap_button(self):
+        """Add a sidebar button that uses the existing minimap action."""
+                
+        if "minimap" in self.sidebar_labels:
+            return
+        self.minimap_action.setIcon(themed_icon("minimap"))
+        self.minimap_action.setToolTip("Show or hide the document minimap")
+        
+        button = QToolButton(self.side_bar)
+        button.setDefaultAction(self.minimap_action)
+        button.setIconSize(QSize(25, 25))
+        button.setFocusPolicy(Qt.StrongFocus)
+        button.setAccessibleName("Toggle document minimap")
+        
+        layout = self.side_bar.layout()
+        position = layout.indexOf(self.sidebar_labels["terminal"])
+        layout.insertWidget(position, button)
+        self.sidebar_labels["minimap"] = button
+
 
 def main() -> int:
     """Installed GUI entry point."""

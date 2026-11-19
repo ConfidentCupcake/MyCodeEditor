@@ -8,6 +8,7 @@ from PyQt5.QtGui import QColor, QKeyEvent
 from code_intelligence.snippet_controller import SnippetController
 from code_intelligence.folding_controller import FoldingController
 from markdown_editor.markdowncustomlexer import MarkdownCustomLexer
+from side_bar_widgets.editor_minimap import EditorMinimap
  
 
 class MarkdownEditor(QsciScintilla):
@@ -66,6 +67,7 @@ class MarkdownEditor(QsciScintilla):
         self.setMarginWidth(0, "000")
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.setWrapMode(QsciScintilla.WrapNone)
+        self.minimap = EditorMinimap(self)
         self.folding_controller = FoldingController(self, "markdown")
         self.snippets = SnippetController(self)
 
@@ -125,12 +127,14 @@ class MarkdownEditor(QsciScintilla):
             self._loading_text = False
             
         self.folding_controller.schedule()
+        self.minimap.schedule_refresh()
             
     def focusInEvent(self, event):
         super().focusInEvent(event)
         self.focused.emit(self)
         
     def shutdown(self):
+        self.minimap.shutdown()
         self.folding_controller._timer.stop()
         self.snippets.cancel()
         self._shutting_down = True

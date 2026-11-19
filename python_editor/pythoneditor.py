@@ -23,6 +23,7 @@ from code_intelligence.snippet_controller import SnippetController
 from python_editor.custompythonlexer import PyCustomLexer
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.ruff_lsp_controller import RuffLspController
+from side_bar_widgets.editor_minimap import EditorMinimap
 
 SCI_AUTOCACTIVE = 2102
 
@@ -196,6 +197,7 @@ class PythonEditor(QsciScintilla):
         if getattr(self, "py_lexer", None) is not None:
             self._apply_theme_editor_style()
         
+        self.minimap = EditorMinimap(self)
         self.folding_controller = FoldingController(self, "python")
         self.snippets = SnippetController(self)
             
@@ -563,6 +565,7 @@ class PythonEditor(QsciScintilla):
             self._loading_text = False
             
         self.folding_controller.schedule()
+        self.minimap.schedule_refresh()
             
         # Because textChanged was blocked, manually synchronize the real loaded file text with Ruff.
         # Without this, Ruff keeps the empty didOpen buffer.
@@ -627,6 +630,7 @@ class PythonEditor(QsciScintilla):
         if self._shutting_down:
             return
         self._shutting_down = True
+        self.minimap.shutdown()
         self._loading_text = True
         self._autocomplete_timer.stop()
         self.folding_controller._timer.stop()
