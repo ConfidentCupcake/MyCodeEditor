@@ -80,7 +80,7 @@ class PythonEditor(QsciScintilla):
         self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
         self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
         # Unmatched brackets
-        self.setUnmatchedBraceForegroundColor(QColor("FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#FFFFFF"))
         self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
         # Indentations
         self.setIndentationGuides(True)
@@ -232,6 +232,10 @@ class PythonEditor(QsciScintilla):
             lexer.editor_color("margin-foreground", "#ff888888"))
         self.setMarginsBackgroundColor(
             lexer.editor_color("margin-background", "#1e1f22"))
+        self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
+        self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
+        self.setUnmatchedBraceBackgroundColor(QColor("#FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
         if hasattr(self, "documentation_popup") and self.documentation_popup:
             self.documentation_popup.set_documentation_font(f)
 
@@ -274,7 +278,7 @@ class PythonEditor(QsciScintilla):
 
     def mouseMoveEvent(self, e: QMouseEvent) -> None:
         """Update diagnostic hover without requesting or hiding documentation."""
-        if not self.is_python_file or self._shutting_down:
+        if not self.is_python_file and not self._shutting_down:
             self._last_mouse_pos = e.pos()
             self._ruff_hover_timer.start()
         super().mouseMoveEvent(e)

@@ -9,7 +9,6 @@ from zipfile import ZipFile
 
 from markdown_python_editor import __version__
 
-
 REQUIRED_ASSETS = {
     "markdowneditor_assets/css/style.qss",
     "markdowneditor_assets/icons/app-icon.png",
@@ -18,6 +17,10 @@ REQUIRED_ASSETS = {
     "markdowneditor_assets/themes/theme.json",
 }
 REQUIRED_RUNTIME_MODULES = {
+    "code_intelligence/fold_model.py",
+    "code_intelligence/folding_controller.py",
+    "code_intelligence/multi_tab_view.py",
+    "code_intelligence/snippet_parser.py"
     "git_implementation/git_service.py",
     "git_implementation/history.py",
     "git_ui/commit_graph.py",

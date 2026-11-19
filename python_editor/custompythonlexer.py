@@ -1,19 +1,19 @@
-import re
-import json
-from PyQt5.QtGui import QFont, QColor
-from PyQt5.Qsci import QsciLexerCustom
-
-import keyword
-import types
 import builtins
+import json
+import keyword
 import os
+import re
 import sys
+import types
 from pathlib import Path
+
+from PyQt5.Qsci import QsciLexerCustom
+from PyQt5.QtGui import QColor, QFont
+
 from markdowneditor_assets import asset_path
 
 try:
-    from lexer_fast import style_chunk as _cython_style
-    from lexer_fast import compute_state_before as _cython_state
+    from lexer_fast import compute_state_before as _cython_state, style_chunk as _cython_style
     _HAS_CYTHON = True
 except ImportError:
     _HAS_CYTHON = False
@@ -865,6 +865,7 @@ class NeutronLexer(QsciLexerCustom):
         self.paper_override = paper          # QColor or None
 
         self.token_list = []
+        self._token_index = 0
         self.keyword_list = []
         self.builtin_names = []
 
@@ -983,7 +984,7 @@ class NeutronLexer(QsciLexerCustom):
             if "color" in body:
                 self.setColor(QColor(body["color"]), getattr(self, name.upper()))
 
-            paper_hex = body.get("paper-color", default_paper)
+            paper_hex = (default_paper if self.paper_override is not None else body.get("paper-color", default_paper))
             self.setPaper(QColor(paper_hex), getattr(self, name.upper()))
 
             f = body.get("font", {})
@@ -1068,19 +1069,23 @@ class NeutronLexer(QsciLexerCustom):
     #  its styling runs through lexer_fast / the pure-Python fallback.
     # ------------------------------------------------------------------ #
     def generate_token(self, text):
-        p = re.compile(r"\s+|\w+|\W")
-        self.token_list = [(token, len(bytearray(token, "utf-8"))) for token in p.findall(text)]
+        pattern = re.compile(r"\s+|\w+|\W")
+        self.token_list = [(token, len(token.encode("utf-8"))) for token in pattern.findall(text)]
+        self._token_index = 0
 
     def next_tok(self):
-        if self.token_list:
-            return self.token_list.pop(0)
+        if self._token_index < len(self.token_list):
+            token = self.token_list[self._token_index]
+            self._token_index += 1
+            return token
         return None
 
     def peek_tok(self, n=0):
-        try:
-            return self.token_list[n]
-        except IndexError:
-            return ("", 0)
+        index = self._token_index + n
+        if 0 <= index < len(self.token_list):
+            return self.token_list[index]
+        return ("", 0)
+        
 
     def skip_space_peek(self):
         i = 0

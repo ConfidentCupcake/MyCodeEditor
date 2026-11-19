@@ -32,7 +32,7 @@ class MarkdownEditor(QsciScintilla):
         self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
         self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
         # Unmatched brackets
-        self.setUnmatchedBraceForegroundColor(QColor("FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#FFFFFF"))
         self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
         # indentation
         self.setIndentationGuides(True)
@@ -94,15 +94,19 @@ class MarkdownEditor(QsciScintilla):
             lexer.editor_color("margin-foreground", "#ff888888"))
         self.setMarginsBackgroundColor(
             lexer.editor_color("margin-background", "#1e1f22"))
+        self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
+        self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
+        self.setUnmatchedBraceBackgroundColor(QColor("#FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
 
     # No need to assign any function to handle key press, this overloads the function from base class
     def keyPressEvent(self, event: QKeyEvent) -> None:
         """Consume active snippet navigation keys, then preserve existing completion and editing behavior."""
-        if event.key() == Qt.Key.Key_Tab and self.snippet.handle_tab(False):
+        if event.key() == Qt.Key.Key_Tab and self.snippets.handle_tab(False):
             return
-        if event.key() == Qt.Key.Key_Backtab and self.snippet.handle_tab(True):
+        if event.key() == Qt.Key.Key_Backtab and self.snippets.handle_tab(True):
             return
-        if event.key() == Qt.Key.Key_Escape and self.snippet.active:
+        if event.key() == Qt.Key.Key_Escape and self.snippets.active:
             self.snippets.cancel()
             return
         if event.modifiers() == Qt.KeyboardModifier.ControlModifier and event.key() == Qt.Key.Key_Space:

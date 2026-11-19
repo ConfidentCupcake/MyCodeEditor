@@ -52,7 +52,7 @@ class FileWatchService(QObject):
         for raw in self.watcher.files():
             if Path(raw) not in wanted:
                 self.watcher.removePath(raw)
-        parents = {str(p.parents) for p in wanted}
+        parents = {str(p.parent) for p in wanted}
         
         for raw in self.watcher.directories():
             if raw not in parents:

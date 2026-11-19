@@ -38,14 +38,14 @@ class ComparisonDialog(QDialog):
         if accept_text:
             accept = buttons.addButton(accept_text, QDialogButtonBox.AcceptRole)
             accept.clicked.connect(self.accept)
-        buttons.rejected.connect(self.rejext)
+        buttons.rejected.connect(self.reject)
         layout.addWidget(buttons)
         
     def _scroll(self, source: Any, target: Any, value: Any) -> None:
         """Map proportional scroll positions without feedback recursion."""
         bar = target.verticalScrollBar()
         bar.blockSignals(True)
-        bar.setValue(round(value / max(1, source.verticalScrollBar().maximum() * bar.maximum())))
+        bar.setValue(round(value / max(1, source.verticalScrollBar().maximum()) * bar.maximum()))
         bar.blockSignals(False)
         
     def _highlight(self, before: Any, after: Any) -> None:
@@ -57,7 +57,7 @@ class ComparisonDialog(QDialog):
             for side, view, start, end in ((0, self.left, a, b), (1, self.right, c, d)):
                 for line in range(start, end):
                     selection = QTextEdit.ExtraSelection()
-                    selection.cursor = QTextCursor(view.document().findBlckByNumber(line))
+                    selection.cursor = QTextCursor(view.document().findBlockByNumber(line))
                     selection.format.setBackground(QColor("#593b40" if side == 0 else "#304d3f"))
                     selection.format.setProperty(QTextFormat.FullWidthSelection, True)
                     selections[side].append(selection)

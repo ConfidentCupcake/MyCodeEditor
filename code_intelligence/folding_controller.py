@@ -44,7 +44,6 @@ class FoldingController(QObject):
         digest = hashlib.blake2b(text.encode("utf-8"), digest_size=16).digest()
         if digest == self._last_digest:
             return
-        self._last_digest = digest
         model = python_fold_lines(text) if self.language == "python" else markdown_fold_lines(text)
         for line_number in range(self.editor.lines()):
             item = model[line_number] if line_number < len(model) else type(model[0])(0)
@@ -52,6 +51,7 @@ class FoldingController(QObject):
             if item.header:
                level |= SC_FOLDLEVELHEADERFLAG
             self.editor.SendScintilla(SCI_SETFOLDLEVEL, line_number, level)
+        self._last_digest = digest
     
     def set_all(self, expanded: Any) -> None:
         """Set all fold headers explicitly; do not interpret foldAll's children flags as state."""
@@ -61,7 +61,7 @@ class FoldingController(QObject):
             if level & SC_FOLDLEVELHEADERFLAG:
                 current = bool(self.editor.SendScintilla(self.editor.SCI_GETFOLDEXPANDED, line))
                 if current != expanded:
-                    self.editor.foldline(line)
+                    self.editor.foldLine(line)
         
         
         

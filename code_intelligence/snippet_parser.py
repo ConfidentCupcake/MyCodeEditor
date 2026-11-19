@@ -38,6 +38,7 @@ def parse_snippet(source: str) -> ParsedSnippet:
         chunks.extend((literal, default))
         rendered_length += len(literal)
         start = rendered_length
+        rendered_length += len(default)
         placeholders.append(Placeholder(int(match.group(1)), start, rendered_length))
         source_end = match.end()
         

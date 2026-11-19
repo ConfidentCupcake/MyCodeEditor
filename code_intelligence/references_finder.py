@@ -81,7 +81,7 @@ class ReferencesFinder(QThread):
     def invalidate(self) -> None:
         """Reject in-flight results without forcibly terminating a running thread."""
         self._generation += 1
-        self._pending = False
+        self._pending = None
         
     @property
     def generation(self) -> Any:

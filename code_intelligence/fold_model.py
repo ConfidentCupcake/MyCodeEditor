@@ -9,7 +9,7 @@ import tokenize
 
 
 _PYTHON_HEADER = re.compile(
-    r"^(?:anync\s+def|def|class|if|elif|else|for|while|try|except|fianlly|with|match|case)\b.*:\s*(?:#.*)?$"
+    r"^(?:async\s+(?:def|for|with)|def|class|if|elif|else|for|while|try|except|finally|with|match|case)\b.*:\s*(?:#.*)?$"
 )
 _ATX_HEADING = re.compile(r"^(#{1,6})\s+")
 _FENCE = re.compile(r"^\s*(`{3,}|~{3,})")
@@ -29,7 +29,7 @@ def _indent_columns(line: str) -> int:
     """Expand leading tabs to Python-compatible eight-column boundaries."""
     width: int = 0
     for character in line:
-        if character == "":
+        if character == " ":
             width += 1
         elif character == "\t":
             width += 8 - width % 8
@@ -41,9 +41,7 @@ def python_fold_lines(text: str) -> list[FoldLine]:
     """Infer resilient indentation folds without requiring valid Python syntax."""
     lines = text.splitlines() or [""]
     significant = [index for index, line in enumerate(lines) if line.strip()]
-    next_significant = {
-        current: following for current, following in zip(significant, significant[1:])
-    }
+    next_significant = dict(zip(significant, significant[1:]))
     indents = [_indent_columns(line) for line in lines]
     indentation_stack = [0]
     result: list[FoldLine] = []
@@ -60,35 +58,34 @@ def python_fold_lines(text: str) -> list[FoldLine]:
             depth = result[-1].depth if result else 0
         
         following = next_significant.get(index)
-        stripped = line.strip()
-        header = (
-            following is not None and indents[following] > indents[index] and _PYTHON_HEADER.match(stripped)
+        header = bool(
+            following is not None and indents[following] > indents[index] and _PYTHON_HEADER.match(line.strip())
         )
         result.append(FoldLine(depth, header))
         # A complete multiline string is a usefull fold when indentation does
         # not change. Tokenization may fail for temporarily incomplete source, so 
         # preserve the resilient indentation result when it does.
-        try:
-            for token in tokenize.generate_tokens(StringIO(text).readline):
-                start = token.start[0] - 1
-                end = token.end[0] - 1
-                if token.type != tokenize.STRING or start >= end:
-                    continue
-                base_depth = result[start].depth
-                result[start] = FoldLine(base_depth, True)
-                for line_number in range(start + 1, min(end + 1, len(result))):
-                    current = result[line_number]
-                    result[line_number] = FoldLine(
-                        max(current.depth, base_depth + 1), current.header
-                    )
-        except (tokenize.TokenError, IndentationError):
-            pass
-        return result
+    try:
+        for token in tokenize.generate_tokens(StringIO(text).readline):
+            start = token.start[0] - 1
+            end = token.end[0] - 1
+            if token.type != tokenize.STRING or start >= end:
+                continue
+            base_depth = result[start].depth
+            result[start] = FoldLine(base_depth, True)
+            for line_number in range(start + 1, min(end + 1, len(result))):
+                current = result[line_number]
+                result[line_number] = FoldLine(
+                    max(current.depth, base_depth + 1), current.header
+                )
+    except (tokenize.TokenError, IndentationError):
+        pass
+    return result
     
 def markdown_fold_lines(text: str) -> list[FoldLine]:
     """Calculate heading hierarchy and fence-block folds for Markdown."""
     lines = text.splitlines() or [""]
-    heading_stack: list[int] = int
+    heading_stack: list[int] = []
     active_fence: str | None = None
     fence_depth: int = 0
     previous_list_level: int = 0

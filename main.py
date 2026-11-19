@@ -936,7 +936,7 @@ class MainWindow(QMainWindow):
         self._workspace_root = root
         
         self.diagnostics_manager.clear_provider("ruff")
-        self.reference_panel.set_locations([])
+        self.references_panel.set_locations([])
         for view in self.tab_view.all_editors():
             if isinstance(view, PythonEditor):
                 view.references_finder.invalidate()
@@ -2312,7 +2312,7 @@ class MainWindow(QMainWindow):
         elif selected is duplicate:
             self._duplicate_view(view)
         elif selected is copy:
-            self.copy_tab_path(view)
+            self._copy_tab_path(view)
         elif selected is reveal:
             self._reveal_tab_in_file_manager(view)
                     
@@ -2731,7 +2731,7 @@ class MainWindow(QMainWindow):
             expected = getattr(editor, "_disk_digest", None)
             try:
                 external_bytes = target.read_bytes()
-                actual = disk_digest(target)
+                actual = hashlib.sha256(external_bytes).digest() 
             except OSError as error:
                 QMessageBox.critical(self, "Save File", str(error))
                 return False
@@ -3414,7 +3414,7 @@ class MainWindow(QMainWindow):
                            "group": groups.index(self.tab_view.group_for_editor(view)),
                            "line": line, "column": column, "scroll": view.firstVisibleLine(),
                            "pinned": self.documents.tab(view).pinned})
-        self.settings.setValue("sesssion", json.dumps({"tabs": records, "active_view": active, "python_mode": self.python_editor_active}))
+        self.settings.setValue("session", json.dumps({"tabs": records, "active_view": active, "python_mode": self.python_editor_active}))
 
     def _restore_session(self):
         """Restore saved files and duplicate views while retaining one Ruff owner per file."""
@@ -3859,7 +3859,7 @@ class MainWindow(QMainWindow):
                 view._loading_text = False
         if isinstance(owner, PythonEditor) and owner.ruff_lsp:
             owner.ruff_lsp.sync_from_editor()
-        self._clean_document()
+        self._clean_document(owner)
             
             
     def _resolve_external(self, editor: Any, raw: Any) -> bool:
@@ -3952,7 +3952,7 @@ class MainWindow(QMainWindow):
         menu = self.menuBar().addMenu("Folding")
         toggle = menu.addAction("Toggle Folding")
         toggle.setObjectName("view.fold.toggle")
-        toggle.setShortcut("Ctrl+Shift+[")
+        toggle.setShortcut("Ctrl+Shift+F")
         toggle.triggered.connect(self._toggle_fold)
         collapse = menu.addAction("Fold all")
         collapse.setObjectName("view.fold.all")
@@ -3974,10 +3974,7 @@ class MainWindow(QMainWindow):
         if editor is not None:
             editor.folding_controller.set_all(expanded)
         
-        
-        
-        
-    
+
 def main() -> int:
     """Installed GUI entry point."""
     app = QApplication(sys.argv)

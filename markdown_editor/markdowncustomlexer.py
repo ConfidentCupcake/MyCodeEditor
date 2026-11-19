@@ -69,11 +69,11 @@ class MarkdownCustomLexer(NeutronLexer):
         self.FOOTNOTE_TEXT = 30
 
         self.ALERT = 31
-        self.MENTION = 32
-        self.ISSUE_REF = 33
-        self.EMOJI = 34
+        self.MENTION = 40
+        self.ISSUE_REF = 41
+        self.EMOJI = 42
 
-        self.COMMENTS = 35  # HTML comments <!-- ... -->
+        self.COMMENTS = 43  # HTML comments <!-- ... -->
 
         self.default_names = [
             "default",
