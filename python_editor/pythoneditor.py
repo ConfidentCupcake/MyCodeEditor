@@ -77,10 +77,10 @@ class PythonEditor(QsciScintilla):
         # Bracket matching behavior
         self.setBraceMatching(QsciScintilla.SloppyBraceMatch)
         # Correctly matched brackets
-        self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
-        self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
+        self.setMatchedBraceForegroundColor(QColor("#ffff00"))
+        self.setMatchedBraceBackgroundColor(QColor("#0A0A0A"))
         # Unmatched brackets
-        self.setUnmatchedBraceForegroundColor(QColor("#FFFFFF"))
+        self.setUnmatchedBraceForegroundColor(QColor("#ffff00"))
         self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
         # Indentations
         self.setIndentationGuides(True)
@@ -232,10 +232,10 @@ class PythonEditor(QsciScintilla):
             lexer.editor_color("margin-foreground", "#ff888888"))
         self.setMarginsBackgroundColor(
             lexer.editor_color("margin-background", "#1e1f22"))
-        self.setMatchedBraceForegroundColor(QColor("#FFFFFF"))
-        self.setMatchedBraceBackgroundColor(QColor("#6040A0"))
-        self.setUnmatchedBraceBackgroundColor(QColor("#FFFFFF"))
-        self.setUnmatchedBraceForegroundColor(QColor("#8B2028"))
+        self.setMatchedBraceForegroundColor(QColor("#ffff00"))
+        self.setMatchedBraceBackgroundColor(QColor("#2a2c30"))
+        self.setUnmatchedBraceForegroundColor(QColor("#ffffff"))
+        self.setUnmatchedBraceBackgroundColor(QColor("#8b2028"))
         if hasattr(self, "documentation_popup") and self.documentation_popup:
             self.documentation_popup.set_documentation_font(f)
 

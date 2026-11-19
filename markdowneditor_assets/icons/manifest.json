@@ -1,0 +1,170 @@
+[
+  {
+    "name": "folding",
+    "label": "Folding",
+    "topic": "09",
+    "normal": "folding.svg",
+    "active": "folding-active.svg"
+  },
+  {
+    "name": "snippets",
+    "label": "Snippets",
+    "topic": "08",
+    "normal": "snippets.svg",
+    "active": "snippets-active.svg"
+  },
+  {
+    "name": "tabs",
+    "label": "Tabs",
+    "topic": "06",
+    "normal": "tabs.svg",
+    "active": "tabs-active.svg"
+  },
+  {
+    "name": "references",
+    "label": "References",
+    "topic": "05",
+    "normal": "references.svg",
+    "active": "references-active.svg"
+  },
+  {
+    "name": "diagnostics",
+    "label": "Diagnostics",
+    "topic": "03",
+    "normal": "diagnostics.svg",
+    "active": "diagnostics-active.svg"
+  },
+  {
+    "name": "commands",
+    "label": "Commands",
+    "topic": "01",
+    "normal": "commands.svg",
+    "active": "commands-active.svg"
+  },
+  {
+    "name": "git-history",
+    "label": "Git History",
+    "topic": "11",
+    "normal": "git-history.svg",
+    "active": "git-history-active.svg"
+  },
+  {
+    "name": "minimap",
+    "label": "Minimap",
+    "topic": "10",
+    "normal": "minimap.svg",
+    "active": "minimap-active.svg"
+  },
+  {
+    "name": "welcome",
+    "label": "Welcome",
+    "topic": "19",
+    "normal": "welcome.svg",
+    "active": "welcome-active.svg"
+  },
+  {
+    "name": "focus-mode",
+    "label": "Focus Mode",
+    "topic": "20",
+    "normal": "focus-mode.svg",
+    "active": "focus-mode-active.svg"
+  },
+  {
+    "name": "workspace-layouts",
+    "label": "Workspace Layouts",
+    "topic": "21",
+    "normal": "workspace-layouts.svg",
+    "active": "workspace-layouts-active.svg"
+  },
+  {
+    "name": "keyboard-shortcuts",
+    "label": "Keyboard Shortcuts",
+    "topic": "22",
+    "normal": "keyboard-shortcuts.svg",
+    "active": "keyboard-shortcuts-active.svg"
+  },
+  {
+    "name": "workspace-symbols",
+    "label": "Workspace Symbols",
+    "topic": "24",
+    "normal": "workspace-symbols.svg",
+    "active": "workspace-symbols-active.svg"
+  },
+  {
+    "name": "recovery",
+    "label": "Recovery",
+    "topic": "25",
+    "normal": "recovery.svg",
+    "active": "recovery-active.svg"
+  },
+  {
+    "name": "local-history",
+    "label": "Local History",
+    "topic": "26",
+    "normal": "local-history.svg",
+    "active": "local-history-active.svg"
+  },
+  {
+    "name": "compare-diff",
+    "label": "Compare / Diff",
+    "topic": "28",
+    "normal": "compare-diff.svg",
+    "active": "compare-diff-active.svg"
+  },
+  {
+    "name": "merge-draft",
+    "label": "Merge Draft",
+    "topic": "27",
+    "normal": "merge-draft.svg",
+    "active": "merge-draft-active.svg"
+  },
+  {
+    "name": "rename-symbol",
+    "label": "Rename Symbol",
+    "topic": "29",
+    "normal": "rename-symbol.svg",
+    "active": "rename-symbol-active.svg"
+  },
+  {
+    "name": "tests",
+    "label": "Tests",
+    "topic": "30",
+    "normal": "tests.svg",
+    "active": "tests-active.svg"
+  },
+  {
+    "name": "run-configurations",
+    "label": "Run Configurations",
+    "topic": "31",
+    "normal": "run-configurations.svg",
+    "active": "run-configurations-active.svg"
+  },
+  {
+    "name": "run-output",
+    "label": "Run Output",
+    "topic": "31",
+    "normal": "run-output.svg",
+    "active": "run-output-active.svg"
+  },
+  {
+    "name": "markdown-tools",
+    "label": "Markdown Tools",
+    "topic": "33",
+    "normal": "markdown-tools.svg",
+    "active": "markdown-tools-active.svg"
+  },
+  {
+    "name": "performance",
+    "label": "Performance",
+    "topic": "34",
+    "normal": "performance.svg",
+    "active": "performance-active.svg"
+  },
+  {
+    "name": "quick-fixes",
+    "label": "Quick Fixes",
+    "topic": "04",
+    "normal": "quick-fixes.svg",
+    "active": "quick-fixes-active.svg"
+  }
+]

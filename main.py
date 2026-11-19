@@ -3488,7 +3488,7 @@ class MainWindow(QMainWindow):
                 latest = Version(latest_tag.removeprefix("v"))
                 current = Version(APP_VERSION.removeprefix("v"))
                 if latest <= current:
-                    finish(f"MarkdownEditor {APP_VERSION} is up to date.")
+                    finish(f"MyCodeEditor {APP_VERSION} is up to date.")
                     return
 
                 assets = data.get("assets") or []
