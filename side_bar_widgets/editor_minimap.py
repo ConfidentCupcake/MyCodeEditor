@@ -140,7 +140,7 @@ class EditorMinimap(QWidget):
             return
         total = max(1, self.editor.lines())
         count = min(total, max(1, self.height()), self.SAMPLE_LIMIT)
-        self._sampled = []
+        self._samples = []
         for row in range(count):
             line = row * (total - 1) // max(1, count - 1)
             length = self.editor.SendScintilla(self.editor.SCI_LINELENGTH, line)
@@ -187,7 +187,7 @@ class EditorMinimap(QWidget):
         
     def mousePressEvent(self, event):
         """Begin pointer navigation from a left-button press."""
-        if event.button == Qt.LeftButton:
+        if event.button() == Qt.LeftButton:
             self._navigate(event.pos().y())
             event.accept()
         else:

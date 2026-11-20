@@ -6,6 +6,7 @@ import hashlib
 
 from PyQt5.Qsci import QsciScintilla
 from PyQt5.QtCore import QObject, QTimer
+from PyQt5.QtGui import QColor
 
 from code_intelligence.fold_model import markdown_fold_lines, python_fold_lines
 
@@ -31,8 +32,24 @@ class FoldingController(QObject):
         self._timer.setInterval(180)
         self._timer.timeout.connect(self.recalculate)
         self.editor.setFolding(QsciScintilla.BoxedTreeFoldStyle, margin)
+        self.editor.setMarginWidth(margin, 16)
+        self.apply_theme()
         self.editor.textChanged.connect(self.schedule)
         self.schedule()
+        
+    def apply_theme(self) -> None:
+        """Match the folding gutter and markers to the current editor theme."""
+        lexer = self.editor.lexer()
+        background = (lexer.paper(0) if lexer is not None else QColor("#1e1f22"))
+        foreground = (lexer.color(0) if lexer is not None else QColor("#abb2bf"))
+        
+        self.editor.setFoldMarginColors(background, foreground)
+        
+        for marker in range(25,32): 
+            self.editor.setMarkerForegroundColor(foreground, marker)
+            self.editor.setMarkerBackgroundColor(background, marker)
+            
+        
     
     def schedule(self) -> None:
         """Restart the short quiet-period timer after an edit."""

@@ -1,14 +1,21 @@
 # Side-by-side immutable comparisons used by history, disk and rename previews.
 
-from __future import annotations
+from __future__ import annotations
 
-from typing import Any
 from difflib import SequenceMatcher
+from typing import Any
 
 from PyQt5.QtGui import QColor, QTextCursor, QTextFormat
-from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QHBoxLayout, QLabel,
-                             QPlainTextEdit, QTextEdit, QVBoxLayout)
-                             
+from PyQt5.QtWidgets import (
+    QDialog,
+    QDialogButtonBox,
+    QHBoxLayout,
+    QLabel,
+    QPlainTextEdit,
+    QTextEdit,
+    QVBoxLayout,
+)
+
 
 class ComparisonDialog(QDialog):
     """Show two snapshots with line highlights and synchronized scrolling."""

@@ -65,6 +65,7 @@ from side_bar_widgets.file_manager import FileManager
 from side_bar_widgets.fuzzy_searcher import SearchItem, SearchWorker
 from side_bar_widgets.problems_panel import ProblemsPanel
 from side_bar_widgets.status_item import StatusItem
+from side_bar_widgets.welcome_screen import TEMPLATES, WelcomeScreen
 
 # Runtime display and update comparison use the same value that setuptools
 # writes into wheel metadata. Prefixing "v" is presentation only.
@@ -304,6 +305,7 @@ class MainWindow(QMainWindow):
         if self._hacker:
             self._set_scanlines_visible(True)
         self._restore_session()
+        self._install_welcome()
 
     def init_ui(self):
         self._debounce = QTimer(self)
@@ -725,7 +727,7 @@ class MainWindow(QMainWindow):
             button.clicked.connect(lambda checked=False, tool=name: self.show_hide_tab(None, tool))
             return button
 
-    def get_editor(self, path: Path = None, is_python_file=None) -> QsciScintilla:
+    def get_editor(self, path: Path | None = None, is_python_file=None) -> QsciScintilla:
         """Create the correct editor using the shared extension policy."""
         if path is not None and is_python_file is None:
             path = Path(path)
@@ -1381,6 +1383,7 @@ class MainWindow(QMainWindow):
     def _save_recent_files(self):
         """Persist the recent files list to QSettings."""
         self.settings.setValue("recent_files", self.recent_files)
+        self._refresh_welcome()
 
     def _show_full_screen(self):
         self.setWindowState(Qt.WindowState.WindowMaximized)
@@ -1977,6 +1980,7 @@ class MainWindow(QMainWindow):
         apply_preferences(editor, settings)
         
         editor.folding_controller._last_digest = b""
+        editor.folding_controller.apply_theme()
         editor.folding_controller.schedule()
         self._apply_minimap(editor)
 
@@ -1989,14 +1993,7 @@ class MainWindow(QMainWindow):
         with open(path, "rb") as f:
             return b"\0" in f.read(1024)
 
-    def set_new_tab(
-            self,
-            path: Path,
-            is_new_file=False,
-            target_group=None,
-            is_python_file=None,
-            preview: bool=False,
-    ):
+    def set_new_tab(self, path: Path, is_new_file=False, target_group=None, is_python_file=None, preview: bool=False):
         """Open one UTF-8 document without corrupting or duplicating it.
 
         Binary probing, symlink resolution, byte reading, and strict decoding
@@ -2259,7 +2256,14 @@ class MainWindow(QMainWindow):
 
         body.addWidget(self.side_bar)
         self.hs_split.addWidget(self.side_panel)
-        self.hs_split.addWidget(self.tab_view)
+        
+        self.editor_stack = QStackedWidget(self)
+        self.editor_stack.addWidget(self.tab_view)
+        self.welcome_page = WelcomeScreen(self.editor_stack)
+        self.editor_stack.addWidget(self.welcome_page)
+        self.editor_stack.setCurrentWidget(self.welcome_page)
+        
+        self.hs_split.addWidget(self.editor_stack)
         self.hs_split.addWidget(self.preview)
         self.hs_split.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.hs_split.setSizes([300, 550, 550])
@@ -2610,20 +2614,28 @@ class MainWindow(QMainWindow):
         self.set_new_tab(f)
         self._add_to_recent_files(str(f))
 
-    def open_folder(self):
+    def open_folder(self, folder=None):
         """Select a project folder and retarget project-scoped services."""
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        new_folder = QFileDialog.getExistingDirectory(
-            self,
-            "Pick A Folder",
-            "",
-            options=options,
-        )
-        if not new_folder:
+        if isinstance(folder, bool):
+            folder = None
+        if folder is None:      
+            options = QFileDialog.Options()
+            options |= QFileDialog.DontUseNativeDialog
+            folder = QFileDialog.getExistingDirectory(self, "Pick A Folder", "", options=options)
+ 
+        if not folder:
             return
-
-        selected = Path(new_folder).resolve()
+        try:
+            selected = Path(folder).resolve()
+            if not selected.is_dir():
+                raise OSError("This folder no longer exists or is not a directory.")
+        except (OSError, RuntimeError, ValueError) as error:
+            recent = self.settings.value("recent_projects", [], type=list)
+            self.settings.setValue("recent_projects", [p for p in recent if p != str(folder)])
+            self._refresh_welcome()
+            QMessageBox.warning(self, "Open Folder", str(error))
+            return
+            
         self.file_manager.model.setRootPath(str(selected))
         self.file_manager.setRootIndex(self.file_manager.model.index(str(selected)))
         self.terminal.set_working_directory(selected, restart=True)
@@ -2635,7 +2647,12 @@ class MainWindow(QMainWindow):
                 python_executable=self.python_runner.interpreter,
                 workspace_root=new_workspace,
             )
-
+        
+        recent = self.settings.value("recent_projects", [], type=list)
+        chosen = str(selected)
+        recent = [p for p in recent if isinstance(p, str) and p and p != chosen]
+        self.settings.setvalue("recent_projects", [chosen, *recent][:10])
+        self._refresh_welcome()
         self.statusBar().showMessage(f"Opened {selected}", 2_000)
 
     def _run_ruff_before_save(self, path: Path, text: str) -> str:
@@ -2715,13 +2732,7 @@ class MainWindow(QMainWindow):
         editor.setCursorPosition(target_line, min(max(column, 0), len(line_text)))
         editor.setFirstVisibleLine(min(first_visible, target_line))
 
-    def _save_editor_to_path(
-        self,
-        editor,
-        path: Path,
-        *,
-        check_external_change: bool = True,
-    ) -> bool:
+    def _save_editor_to_path(self, editor, path: Path, *, check_external_change: bool = True) -> bool:
         """Format and atomically save without losing links or newer disk data."""
         logical_path = Path(path)
         try:
@@ -3712,11 +3723,8 @@ class MainWindow(QMainWindow):
         desired = sorted([group.widget(i) for i in range(group.count())], key=lambda view: (not self.documents.tab(view).pinned, str(view.path or '').casefold()))
         for index, view in enumerate(desired):
             group.tabBar().moveTab(group.indexOf(view), index)
-    
-            
-        
-    
 
+    
     def _install_references(self) -> None:
         """Create the references dock and its independen menu command."""
         self.references_panel = LocationsPanel(self)
@@ -3964,12 +3972,14 @@ class MainWindow(QMainWindow):
         expand.setObjectName("view.fold.none")
         expand.triggered.connect(lambda: self._fold_all(True))
         
+        
     def _toggle_fold(self) -> None:
         """Toggle active line using QScintilla's foldLine slot."""
         editor = self.current_editor()
         if editor is not None:
             editor.folding_controller.recalculate()
             editor.foldLine(editor.getCursorPosition()[0])
+            
             
     def _fold_all(self, expanded: Any) -> None:
         """Set every fold header to a specific expanded/collapsed state."""
@@ -4006,6 +4016,7 @@ class MainWindow(QMainWindow):
         self.minimap_action.toggled.connect(self._toggle_minimap)
         self._install_minimap_button()
         
+        
     def _install_minimap_button(self):
         """Add a sidebar button that uses the existing minimap action."""
                 
@@ -4024,7 +4035,57 @@ class MainWindow(QMainWindow):
         position = layout.indexOf(self.sidebar_labels["terminal"])
         layout.insertWidget(position, button)
         self.sidebar_labels["minimap"] = button
-
+        
+    def _refresh_welcome(self, *args):
+        """Choose a page using every group, after tab operations settle."""
+        if not hasattr(self, "editor_stack"):
+            return
+        
+        empty = not self.tab_view.all_editors()
+        self.editor_stack.setCurrentWidget(self.welcome_page if empty else self.tab_view)
+        if empty:
+            self.welcome_page.refresh(self.recent_files, self.settings.value("recent_projects", [], type=list))
+            self.preview.hide()
+    
+    
+    def _welcome_open_file(self, path):
+        """Use the existing recent-file handling, including stale-path messages."""
+        self.open_recent_file(path)
+        self._refresh_welcome()
+        
+    
+    def _welcome_template(self, name):
+        """Create a language-correct, dirty, unsaved document."""
+        
+        template = TEMPLATES.get(name)
+        if template is None:
+            return
+        python_mode, text = template
+        previous = self.python_editor_active
+        self.python_editor_active = python_mode
+        try:
+            editor = self.new_file()
+        finally:
+            self.python_editor_active = previous
+        editor.setText(text)
+        editor.setModified(True)
+        self._on_editor_text_changed(editor)
+        self._refresh_welcome()
+        
+        
+    def _install_welcome(self):
+        """Connect page intentions and queued tab synchronization exactly once."""
+        page = self.welcome_page
+        page.openFileRequested.connect(self.open_file)
+        page.openFolderRequested.connect(self.open_folder)
+        page.recentFileRequested.connect(self._welcome_open_file)
+        page.recentProjectRequested.connect(self.open_folder)
+        page.templateRequested.connect(self._welcome_template)
+        self.tab_view.currentEditorChanged.connect(
+            self._refresh_welcome, Qt.QueuedConnection
+        )
+        self._refresh_welcome()
+    
 
 def main() -> int:
     """Installed GUI entry point."""
