@@ -4,6 +4,7 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QToolTip
 from PyQt5.Qsci import QsciScintilla
 from ruff_implementation.ruff_diagnostics_model import RuffDiagnostic, RuffSeverity
+from code_intelligence.performance import timed
 
 class RuffDiagnosticView:
     """
@@ -73,6 +74,7 @@ class RuffDiagnosticView:
             self.editor.markerDeleteAll(marker)
         self.by_line = {}
     
+    @timed("gui.ruff_paint") 
     def render(self, diagnostics: list[RuffDiagnostic]):
         """Paint exact source ranges and cache diagnostics for hover/context menus."""
         self.clear()

@@ -7,7 +7,7 @@ import time
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 
 from git_implementation.history import GitSnapshot, parse_log
-
+from code_intelligence.performance import timed
 
 class GitHistoryWorker(QThread):
     """Fetch one immutable Git snapshot outside the GUI thread."""
@@ -20,7 +20,8 @@ class GitHistoryWorker(QThread):
         super().__init__(parent)
         self.folder = Path(folder)
         self.limit = max(1, min(int(limit), 5000))
-
+    
+    @timed("worker.git_history")
     def run(self) -> None:
         """Resolve repository root, identity, and bounded commit history."""
         try:

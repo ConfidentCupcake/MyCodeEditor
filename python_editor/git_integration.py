@@ -3,6 +3,8 @@ from pathlib import Path
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
+from code_intelligence.performance import timed
+
 class GitStatusChecker(QThread):
     """
     Background thread running 'git status --porcelain'.
@@ -51,6 +53,7 @@ class GitStatusChecker(QThread):
             return None
         return result.stdout
     
+    @timed("worker.git_status")
     def run(self):
         if self._shutting_down:
             return

@@ -11,6 +11,7 @@ from PyQt5.Qsci import QsciLexerCustom
 from PyQt5.QtGui import QColor, QFont
 
 from markdowneditor_assets import asset_path
+from code_intelligence.performance import timed
 
 try:
     from lexer_fast import compute_state_before as _cython_state, style_chunk as _cython_style
@@ -1132,7 +1133,8 @@ class PyCustomLexer(NeutronLexer):
             "__name__", "__doc__", "__dict__", "__module__",
         }
         self._prev_state = 0
-
+    
+    @timed("lexer.total")
     def styleText(self, start: int, end: int) -> None:
         full_text = self.editor.text()
         text_bytes = full_text.encode('utf-8')

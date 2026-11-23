@@ -9,6 +9,7 @@ from uuid import uuid4
 from PyQt5.QtCore import QObject, QPoint, QTimer, pyqtSignal
 from PyQt5.QtWidgets import QMenu, QMessageBox, QToolTip
 
+from code_intelligence.performance import timed
 from ruff_implementation.ruff_diagnostics_model import RuffDiagnostic, RuffPosition, RuffSeverity
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.workspace_edit import WorkspaceEditApplier, WorkspaceEditError
@@ -132,6 +133,7 @@ class RuffLspController(QObject):
         # PythonEditor construction. Replace it immediately with the actual source read from disk.
         self.client.change_document(self.uri, self.editor.text(), self.document_version)
     
+    @timed("gui.ruff_edit")
     def _on_text_changed(self):
         """Advance document version and schedule one debounced didChange."""
         self._clear_problem_rows()
@@ -150,7 +152,8 @@ class RuffLspController(QObject):
             # Calling start() again on s single-shot timer resets its countdown.
             # One change is sent only after typing has been idle for 180 ms.
             self.change_timer.start()
-
+    
+    @timed("gui.ruff_send")
     def _send_change(self):
         """Transmit the current complete QScintilla text buffer to Ruff."""
         if self._closed or not self._opened or not self.client.is_ready:
@@ -176,7 +179,8 @@ class RuffLspController(QObject):
             raw = value.encode("utf-16-le")[: column * 2]
             return len(raw.decode("utf-16-le", errors="ignore"))
         return min(column, len(value))
-
+    
+    @timed("gui.ruff_publish")
     def _on_diagnostics_published(self, uri: str, raw_diagnostics, version):
         """Render only current diagnostics belonging to this document."""
         if self._closed or uri != self.uri:

@@ -9,7 +9,7 @@ from PyQt5.QtCore import QObject, QTimer
 from PyQt5.QtGui import QColor
 
 from code_intelligence.fold_model import markdown_fold_lines, python_fold_lines
-
+from code_intelligence.performance import timed
 
 
 SCI_SETFOLDLEVEL: int = 2222
@@ -54,7 +54,8 @@ class FoldingController(QObject):
     def schedule(self) -> None:
         """Restart the short quiet-period timer after an edit."""
         self._timer.start()
-        
+    
+    @timed("gui.folding")
     def recalculate(self) -> None:
         """Compute and publish fold metadata when document text changed."""
         text = self.editor.text()

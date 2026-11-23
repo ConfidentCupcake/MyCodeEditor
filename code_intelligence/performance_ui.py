@@ -54,7 +54,7 @@ class PerformanceTools(QObject):
         PERFORMANCE.clear()
         self._last_tick = perf_counter() if PERFORMANCE.enabled else None
         
-    def tick(self):
+    def _tick(self):
         """Record excess time beyond the nominal 50 ms GUI timer interval.
         
         This is an event-lpp[ lateness proxy, not keystroke-to-pixel latency.
@@ -62,7 +62,7 @@ class PerformanceTools(QObject):
         """
         now = perf_counter()
         if self._last_tick is not None:
-            PERFORMANCE.record("gui.timer_lateness", max(0.0, (now - self._last_tick) * 1000 - 50))
+            PERFORMANCE.records("gui.timer_lateness", max(0.0, (now - self._last_tick) * 1000 - 50))
         self._last_tick = now
         
     
@@ -80,7 +80,7 @@ class PerformanceTools(QObject):
             "qt": QT_VERSION_STR, "pyqt": PYQT_VERSION_STR,
             "cython_lexer_loaded": bool(custompythonlexer._HAS_CYTHON),
         }
-        path = QFileDialog.getSaveFileName(
+        path, _ = QFileDialog.getSaveFileName(
             self.window, "Export performance timings", "editor-timings.json", "JSON files (*.json)"
         )
         if not path:

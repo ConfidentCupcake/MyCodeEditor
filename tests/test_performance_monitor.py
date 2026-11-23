@@ -16,7 +16,7 @@ class MonitorTests(unittest.TestCase):
         monitor = PerformanceMonitor(3)
         monitor.set_enabled(True)
         for value in (1, 2, 3, 4):
-            monitor.record("work", value)
+            monitor.records("work", value)
         report = monitor.snapshot()
         self.assertEqual(report["overwritten"], 1)
         self.assertEqual(report["operations"][0]["mean_ms"], 3)

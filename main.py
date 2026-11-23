@@ -35,6 +35,8 @@ from code_intelligence.find_replace import FindReplaceBar
 from code_intelligence.locations_panel import LocationsPanel
 from code_intelligence.multi_tab_view import MultiTabView
 from code_intelligence.snippet_catalog import SnippetCatalog
+from code_intelligence.performance import timed
+from code_intelligence.performance_ui import PerformanceTools
 from code_settings.contrast import apply_preferences, read_preferences, write_preferences
 from code_settings.design_settings import theme_qss
 from con_term.console_widget import ConsoleWidget
@@ -247,6 +249,7 @@ class MainWindow(QMainWindow):
            pre { background:#1e1f22; padding:1em; border-radius:6px; overflow-x:auto; }
            """
         self.init_ui()
+        self.performance_tools = PerformanceTools(self)
         self._install_minimap()
         self._install_folding()
         self._install_snippets()
@@ -526,7 +529,8 @@ class MainWindow(QMainWindow):
         self.cat.set_state("box", 5_000)
         self._cat_boxed = True
         QTimer.singleShot(5_000, lambda: self.cat.set_state("box_idle", 120_000))
-
+    
+    @timed("gui.outline")
     def _update_outline(self):
         editor = self.current_editor()
         if isinstance(editor, PythonEditor):
@@ -650,7 +654,8 @@ class MainWindow(QMainWindow):
         if self._xp_key_counter >= XP_RULES["keys_per_xp"]:
             self._xp_key_counter = 0
             self.cat.add_xp(1)
-
+    
+    @timed("gui.dirty")
     def _on_editor_text_changed(self, editor):
         """Mark the specific editor that emitted textChanged as dirty."""
         if editor is None:
@@ -754,7 +759,8 @@ class MainWindow(QMainWindow):
         editor._breadcrumb_scopes = None
         if editor is self.current_editor():
             self._breadcrumb_timer.start()
-
+    
+    @timed("gui.breadcrumbs")
     def _refresh_breadcrumbs(self):
         """Use cached scope ranges on cursor moves; never parse every caret step."""
         if not hasattr(self, 'breadcrumbs'):
@@ -798,6 +804,7 @@ class MainWindow(QMainWindow):
             widget.setFixedSize(38 if value == 'compact' else 48, 38 if value == 'compact' else 48)
         self.settings.setValue('layout_density', value)
         
+    @timed("gui.status")
     def _refresh_document_status(self):
         """Read only metadata and the selection, not the entire document."""
         editor = self.current_editor()
@@ -3009,7 +3016,8 @@ class MainWindow(QMainWindow):
             strip=True,
             strip_comments=True,
         )
-
+    
+    @timed("gui.markdown_render")
     def render_preview(self):
         """Render only sanitized Markdown into the already loaded shell."""
         editor = self.current_editor()
@@ -3031,7 +3039,8 @@ class MainWindow(QMainWindow):
             self.render_preview()
         else:
             self.statusBar().showMessage("Markdown preview failed to load.", 4000)
-
+    
+    @timed("gui.preview_scroll")
     def sync_scroll(self, editor):
         if not self._preview_ready or editor is not self.current_editor():
             return

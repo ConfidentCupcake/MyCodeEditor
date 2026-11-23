@@ -40,7 +40,7 @@ class PerformanceMonitor:
     def clear(self):
         """Remove retained samples and reject measuremtns started before clearing."""
         with self._lock:
-            self._sampled.clear()
+            self._samples.clear()
             self._dropped = 0
             self._generation += 1
             
@@ -80,7 +80,7 @@ class PerformanceMonitor:
             yield
             failed = False
         finally:
-            self.record(name, (perf_counter() - started) * 1000, failed, generation)
+            self.records(name, (perf_counter() - started) * 1000, failed, generation)
         
     
     def snapshot(self):
