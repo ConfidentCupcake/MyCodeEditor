@@ -168,7 +168,19 @@ cdef void _skip_string(bytes text, int limit, int *i, int delim, int triple):
 # Reconstructs ALL state that affects styling at target_pos, including whether
 # we are inside a docstring or inside an f-string {expr}.
 
-def compute_state_before(bytes text, int target_pos):
+CHECKPOINT_API_VERSION = 1
+
+def compute_state_before(bytes text, int target_pos, snapshot=None, checkpoints=None):
+    """Scan a byte prefix from a complete backend-local snapshot.
+    
+    The optional tuple restores all fifteen prefix-scanner locals. The caller 
+    invalidates tuples after edits and never mixes Python/Cython snapshots.
+    checkpoints recieves sparse safe LF-boundary states; the returned packed
+    style flags and style_chunk contract are unchanged. Two-argument calls 
+    remain the uncached reference implementation for regression comparisions.
+    """
+    
+    cdef int next_checkpoint
     cdef int length = len(text)
     if target_pos > length:
         target_pos = length
@@ -193,8 +205,16 @@ def compute_state_before(bytes text, int target_pos):
     cdef int pending_class = 0
     cdef int expect_docstring = 0
     cdef int at_class_body = 0
-
+    
+    if snapshot is not None:
+        (i, in_string, in_comment, triple_string, string_delim, in_fstring, escape_next, in_fexpr, fexpr_depth, is_docstring, bracket_depth, pending_def, pending_class, expect_docstring, at_class_body) = snapshot
+    next_checkpoint = i + 4096
+    
     while i < target_pos:
+        if (checkpoints is not None and i >= next_checkpoint and not in_fexpr and text[i - 1] == 10):
+            checkpoints[i] = (i, in_string, in_comment, triple_string, string_delim, in_fstring, escape_next, in_fexpr, fexpr_depth, is_docstring, bracket_depth, pending_def, pending_class, expect_docstring, at_class_body)
+            next_checkpoint = i + 4096
+        
         c = text[i]
 
         # ---- inside f-string expression { ... } ----

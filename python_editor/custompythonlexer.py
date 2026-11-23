@@ -12,12 +12,17 @@ from PyQt5.QtGui import QColor, QFont
 
 from markdowneditor_assets import asset_path
 from code_intelligence.performance import timed
+from code_intelligence.lexer_cache import PythonCheckpointCache
 
 try:
-    from lexer_fast import compute_state_before as _cython_state, style_chunk as _cython_style
+    import lexer_fast as _fast
+    _cython_state = _fast.compute_state_before
+    _cython_style = _fast.style_chunk
     _HAS_CYTHON = True
+    _CYTHON_CHECKPOINTS = getattr(_fast, "CHECKPOINT_API_VERSION", 0) == 1
 except ImportError:
     _HAS_CYTHON = False
+    _CYTHON_CHECKPOINTS = False
 
 def _resource_path(relative_path: str) -> str:
     """Compatibility wrapper around the shared packaged-asset resolver."""
@@ -111,9 +116,17 @@ def _py_skip_string(text, i, limit, delim, triple):
     return i
 
 
-def _py_compute_state(text, target_pos):
-    """Scan from byte 0 to target_pos and return the packed lexer state.
-    `text` must be a bytes object; all positions/lengths are byte-based."""
+def _py_compute_state(text, target_pos, snapshot=None, checkpoints=None):
+    """Retun legacy packed flags after scanning a UTF-8 byte prefix.
+    
+    Snapshot is an internal 15-field tuple captured by this same backend at a safe LF
+    boundary. It restores every live prefix-scanner local, including pending definitions
+    and bracket depth wich packed style flags omit. 
+    Checkpoints optionally receives sparse resumable tuples keyed by byte offset.
+    Passing neither argument preserves the original full-prefix reference scan.
+    Nested f-expressions skip routines are never checkpointed midway through.
+    The style_chunk PAI and its existing palette remain unchanged.
+    """
     target_pos = min(target_pos, len(text))
     length = len(text)
     i = 0
@@ -122,8 +135,16 @@ def _py_compute_state(text, target_pos):
     in_fstring = escape_next = in_fexpr = fexpr_depth = is_docstring = 0
     bracket_depth = pending_def = pending_class = 0
     expect_docstring = at_class_body = 0
+    
+    if snapshot is not None:
+        (i, in_string, in_comment, triple_string, string_delim, in_fstring, escape_next, in_fexpr, fexpr_depth, is_docstring, bracket_depth, pending_def, pending_class, expect_docstring, at_class_body) = snapshot
+    next_checkpoint = i + 4096
+
 
     while i < target_pos:
+        if (checkpoints is not None and i >= next_checkpoint and not in_fexpr and text[i - 1] == 10):
+            checkpoints[i] = (i, in_string, in_comment, triple_string, string_delim, in_fstring, escape_next, in_fexpr, fexpr_depth, is_docstring, bracket_depth, pending_def, pending_class, expect_docstring, at_class_body)
+            next_checkpoint = i + 4096
         c = text[i:i + 1].decode("latin-1")
 
         if in_fexpr:
@@ -1133,47 +1154,51 @@ class PyCustomLexer(NeutronLexer):
             "__name__", "__doc__", "__dict__", "__module__",
         }
         self._prev_state = 0
+        self._checkpoints = PythonCheckpointCache()
+        self._source_dirty = True
+        self.editor.textChanged.connect(self._invalidate_source)
+        
+    def _invalidate_source(self) -> None:
+        """Mark the source snapshot stale after an actual text modification.
+        
+        This slot does no scanning or editor.text() copy. The next style request 
+        reads one fresh snapshot and conservatively invalidates change states.
+        Cursor movement and styling changes do not emit textChanged.
+        """
+        self.source_dirty = True
     
     @timed("lexer.total")
     def styleText(self, start: int, end: int) -> None:
-        full_text = self.editor.text()
-        text_bytes = full_text.encode('utf-8')
-
-        start_char = self._byte_pos_to_char_index(full_text, start)
-        end_char = self._byte_pos_to_char_index(full_text, end)
-
-        start_byte = len(full_text[:start_char].encode('utf-8'))
-        end_byte = len(full_text[:end_char].encode('utf-8'))
-
-        # Compute the correct lexer state at start_byte by scanning from byte 0.
-        # This is necessary because QScintilla may call styleText for
-        # non-contiguous regions (e.g. when the user scrolls).
-        if _HAS_CYTHON:
-            prev_state = _cython_state(text_bytes, start_byte)
-            final_state, styled_tokens = _cython_style(
-                text_bytes,
-                start_byte,
-                end_byte,
-                prev_state,
-                self._keyword_set,
-                self._builtin_set,
-                self._magic_set,
-            )
-        else:
-            # Pure-Python fallback - identical logic to lexer_fast.pyx
-            prev_state = _py_compute_state(text_bytes, start_byte)
-            final_state, styled_tokens = _py_style_chunk(
-                text_bytes,
-                start_byte,
-                end_byte,
-                prev_state,
-                self._keyword_set,
-                self._builtin_set,
-                self._magic_set,
-            )
-
+        """Style the requested UTF-8 byte range using cached prefix state.
+        
+        QScintilla already supplies byte positions; converting them through
+        character indicies is unnecessary. A document snapshot is copied once
+        per text revision, not once per scrolling/style callback. Cold scans
+        and edits near the top may still require a long forward scan.
+        Keep all the token styles and the existing compiled/fallback choice.
+        """
+        if self._source_dirty:
+            self._checkpoints.replace(self.editor.text().encode("utf-8"))
+            self._source_dirty = False
+        
+        source = self._checkpoints.source
+        start = min(max(0, start), len(source))
+        end = min(max(start, end), len(source))
+        if start == end:
+            return
+        
+        scanner = _cython_state if _HAS_CYTHON else _py_compute_state
+        styler = _cython_style if _HAS_CYTHON else _py_style_chunk
+        resumable = not _HAS_CYTHON or _CYTHON_CHECKPOINTS
+        previous = self._checkpoints.state_before(start, scanner, resumable=resumable)
+        final_state, tokens = styler(source, start, end, previous, self._keyword_set, self._builtin_set, self._magic_set)
+        
         self.startStyling(start)
-        for byte_len, style_id in styled_tokens:
-            self.setStyling(byte_len, style_id)
-
+        for byte_length, style_id in tokens:
+            self.setStyling(byte_length, style_id)
         self._prev_state = final_state
+        if resumable:
+            # Seed checkpoints through the painted region for later scrolling.
+            # This is a prefix-state scan, not a second style/paint operation.
+            self._checkpoints.state_before(end, scanner)
+        

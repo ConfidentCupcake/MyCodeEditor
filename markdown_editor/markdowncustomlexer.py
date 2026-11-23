@@ -1,5 +1,8 @@
 import re
+
 from PyQt5.QtGui import QColor, QFont
+
+from code_intelligence.lexer_cache import MarkdownLineCache
 from python_editor.custompythonlexer import NeutronLexer
 
 
@@ -24,6 +27,14 @@ class MarkdownCustomLexer(NeutronLexer):
 
         self.editor.setColor(self.defaultColor())
         self.editor.setPaper(self.defaultPaper())
+        self._line_cache = MarkdownLineCache()
+        self._source_dirty = True
+        self.editor.textChanged.connect(self._invalidate_source)
+        
+    
+    def _invalidate_source(self) -> None:
+        """Defer snapshot copying until styling needs the revised Markdown,"""
+        self._source_dirty = True
 
     # ------------------------------------------------------------------ #
     #  Style IDs + theme mapping
@@ -338,25 +349,31 @@ class MarkdownCustomLexer(NeutronLexer):
         return len(encoded[:byte_pos].decode("utf-8", errors="ignore"))
 
     def styleText(self, start: int, end: int) -> None:
-        full_text = self.editor.text()
-        start_char = self._byte_pos_to_char_index(full_text, start)
-        end_char = self._byte_pos_to_char_index(full_text, end)
-        in_fence, fence_char, fence_len, in_comment = self._state_before(full_text, start_char)
-        partial_first = start_char > 0 and full_text[start_char - 1] != "\n"
-
-        self.startStyling(start)
-        lines = full_text[start_char:end_char].split("\n")
-        for index, line in enumerate(lines):
-            in_fence, fence_char, fence_len, in_comment = self._style_line_with_comments(
-                line,
-                in_fence,
-                fence_char,
-                fence_len,
-                in_comment,
-                force_inline=partial_first and index == 0,
-            )
-            if index != len(lines) - 1:
+        """Resume at a valid line state and style through the requested end.
+        
+        Complete line bodies retain inline parser context even for partial requests.
+        Fence.comment state is cached BEFORE the following line.
+        Changed suffixes are rescanned on demand; no stale suffix is trusted.
+        This preserves existing style IDs and uses the current comment parser.
+        """
+        if self._source_dirty:
+            self._line_cache.replace(self.editor.text().encode("utf-8"))
+            self._source_dirty = False
+            
+        cache = self._line_cache
+        start = min(max(0, start), len(cache.source))
+        end = min(max(start, end), len(cache.source))
+        if start == end:
+            return
+        line_start = cache.starts[cache.line_at(start)]
+        position, state = cache.nearest(line_start)
+        self.startStyling(position)
+        for begin, next_begin, body, has_lf in cache.lines_to(position, end):
+            state = self._style_line_with_comments(body, *state, force_inline=False)
+            if has_lf:
                 self.setStyling(1, self.DEFAULT)
+                cache.states[next_begin] = state
+        cache.trim()
 
     # ------------------------------------------------------------------ #
     #  Per-line styling
