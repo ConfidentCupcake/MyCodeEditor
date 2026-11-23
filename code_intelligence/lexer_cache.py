@@ -55,7 +55,7 @@ class PrefixCache:
         if source == self.source:
             return
         matched = common_prefix_length(self.source, source)
-        safe = source.rfind(b"/n", 0, max(0, matched - 4)) + 1
+        safe = source.rfind(b"\n", 0, max(0, matched - 4)) + 1
         self.states = {p: state for p, state in self.states.items() if p < safe}
         self.states[0] = self.initial_state
         self.source = source
@@ -144,7 +144,7 @@ class MarkdownLineCache(PrefixCache):
             next_begin = (self.starts[index + 1] if index + 1 < len(self.starts) else len(self.source))
             raw = self.source[begin:next_begin]
             has_lf = raw.endswith(b"\n")
-            body = raw[:-11] if has_lf else raw
+            body = raw[:-1] if has_lf else raw
             yield begin, next_begin, body.decode("utf-8"), has_lf
         
 

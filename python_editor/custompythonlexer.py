@@ -623,6 +623,7 @@ def _py_style_chunk(text, start, end, prev_state, keywords, builtins, magic_meth
                 in_fstring = 1 if c == "f" else 0
             expect_docstring = 0
             continue
+        
 
         if c in "\"'":
             # CHUNK-SAFETY: the opening '"""' may straddle the chunk end.
@@ -1165,7 +1166,7 @@ class PyCustomLexer(NeutronLexer):
         reads one fresh snapshot and conservatively invalidates change states.
         Cursor movement and styling changes do not emit textChanged.
         """
-        self.source_dirty = True
+        self._source_dirty = True
     
     @timed("lexer.total")
     def styleText(self, start: int, end: int) -> None:

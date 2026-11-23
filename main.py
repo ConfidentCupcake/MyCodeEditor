@@ -34,9 +34,9 @@ from code_intelligence.file_watch_service import FileWatchService
 from code_intelligence.find_replace import FindReplaceBar
 from code_intelligence.locations_panel import LocationsPanel
 from code_intelligence.multi_tab_view import MultiTabView
-from code_intelligence.snippet_catalog import SnippetCatalog
 from code_intelligence.performance import timed
 from code_intelligence.performance_ui import PerformanceTools
+from code_intelligence.snippet_catalog import SnippetCatalog
 from code_settings.contrast import apply_preferences, read_preferences, write_preferences
 from code_settings.design_settings import theme_qss
 from con_term.console_widget import ConsoleWidget
