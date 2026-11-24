@@ -91,6 +91,20 @@ class RuffLspClient(QObject):
         self.position_encoding = "utf-16"
         self._restart_attempts = 0
         self._max_restart_attempts = 3
+        self._request_timers = {}
+        self.launch_arguments = ["-m", "ruff", "server"]
+        self.process.started.connect(self._initialize)
+        self._initialize_timer = QTimer(self)
+        self._initialize_timer.setSingleShot(True)
+        self._initialize_timer.setInterval(10000)
+        self._initialize_timer.timeout.connect(self._initialization_expired)
+        self._restart_timer = QTimer(self)
+        self._restart_timer.setSingleShot(True)
+        self._restart_timer.timeout.connect(self.start)
+        self._stable_timer = QTimer(self)
+        self._stable_timer.setSingleShot(True)
+        self._stable_timer.setInterval(60000)
+        self._stable_timer.timeout.connect(self._reset_retries_if_stable)
 
     @property
     def is_ready(self) -> bool:
@@ -98,38 +112,30 @@ class RuffLspClient(QObject):
         return self._initialized and self.process.state() == QProcess.Running
 
     def start(self):
-        """
-        Start exactly one native Ruff server process.
-
-        A shared workspace server is important. Do not start one server for every tab:
-        a server-per-tab design wastes processes and defeats LSP workspace configuration/state handling.
+        """Start Ruff asynchronously; process.started begins the LSP handshake.
+        
+        Never wait for process creation on the GUI thread. A ten-second timer 
+        covers both launch and initialize; retries remain bounded separately.
+        Repeated calls while starting/running or shutting down are harmless.
         """
         if self._started or self._shutting_down:
-            # MainWindow can sefely call start more then once without spamming.
-            # dublicate Ruff server process
             return
-
+        self._restart_timer.stop()
         self._started = True
-
-        # The working directory helps Ruff discover project configuration and
-        # makes workspace-relative behavior consistent with 'python main.py'.
         self.process.setWorkingDirectory(str(self.workspace_root))
-
-        # This launches:
-        #   C:\...\.venv\Scripts\python.exe -m ruff server
-        self.process.start(self.python_executable, ["-m", "ruff", "server"])
-
-        # waitForStarted only waits for process creation. It does not wait for
-        # linting, diagnostics, or any normal ongoing server work.
-        if not self.process.waitForStarted(5_000):
-            self.server_error.emit(
-                "Could not start Ruff Language Server: " + self.process.errorString()
-            )
-            self._started = False
+        self._initialize_timer.start()
+        self.process.start(self.python_executable, self.launch_arguments)
+        
+    def _initialization_expired(self):
+        """Abort a hung launch/handshake without blocking or claiming success."""
+        if self._shutting_down or self.is_ready:
             return
+        self.server_error.emit("Ruff launch/initialize timed out after 10 seconds.")
+        if self.process.state() == QProcess.NotRunning:
+            self._on_finished(-1, QProcess.CrashExit)
+        else:
+            self.process.kill()
 
-        # An LSP client must initialize before sending didOpen/didChange.
-        self._initialize()
 
     def _initialize(self):
         """
@@ -203,7 +209,7 @@ class RuffLspClient(QObject):
                     "showSyntaxErrors": True,
                     # Use debug only while integrating.
                     # Change to "warn" after success to reduce stderr logging noise.
-                    "logLevel": "debug",
+                    "logLevel": "warn",
                 }
             },
         }
@@ -213,21 +219,29 @@ class RuffLspClient(QObject):
         self.request("initialize", params, self._on_initialized)
 
     def _on_initialized(self, result, error):
-        """Complete initialization and retain negotiated position encoding."""
-        if error is not None:
-            self.server_error.emit(f"Ruff initialize failed: {error}")
+        """Publish readiness only after a valid capability response and encoding.
+        
+        Failure is infrastructure failure, never a successful empty diagnostic snapshot.
+        Invalid capabilities stop retries until the client is replaced.
+        Owned timers are stopped on termination so an older run cannot reset a later 
+        run's retry counter.
+        """
+        self._initialize_timer.stop()
+        if self._shutting_down or not self._started:
+            return
+        capabilities = result.get("capabilities") if isinstance(result, dict) else None
+        encoding = capabilities.get("positionEncodings", "utf-16") if isinstance(capabilities, dict) else None
+        if error is not None or encoding not in {"utf-8", "utf-16"}:
+            self.server_error.emit(f"Ruff initialization failed: {error or 'invalid capabilities/encoding'}")
             self._suppress_restart_once = True
             self.process.kill()
             return
-        
-        capabilities = (result or {}).get("capabilities", {})
-        self.position_encoding = capabilities.get("positionEncoding", "utf-16")
-        # Do not reset retries immediately: a server that initializes and then
-        # crashes would otherwise retry forever. Reset only after a stable run.
-        QTimer.singleShot(60_000, self._reset_retries_if_stable)
+        self.position_encoding = encoding
         self.notify("initialized", {})
         self._initialized = True
+        self._stable_timer.start()
         self.server_ready.emit()
+        
         
     def _reset_retries_if_stable(self):
         if self.is_ready and not self._shutting_down:
@@ -282,22 +296,51 @@ class RuffLspClient(QObject):
                 {"textDocument": {"uri": uri}},
             )
 
-    def request(self, method: str, params, callback):
-        """Send one request; omit params when the method requires no value."""
+    def request(self, method: str, params, callback, timeout_ms: int = 10000):
+        """Send one request with a bounded lifetime and invoke callback once.
+        
+        callback(result, error) runs on the GUI thread. A timeout or transport
+        failure is an error, not a successful empty result. At most 128 requests
+        reamin pending. The returned integer identifies a sent request; None
+        means it was rejected before sending. params=None omits the field.
+        """
+        if len(self._pending_requests) >= 128:
+            callback(None, {"code": -32000, "message": "Too many pending LSP requests"})
+            return None
         request_id = self._next_request_id
         self._next_request_id += 1
-        payload = {
-            "jsonrpc": "2.0",
-            "id": request_id,
-            "method": method,
-        }
+        payload = {"jsonrpc": "2.0", "id": request_id, "method": method}
         if params is not None:
             payload["params"] = params
-
         self._pending_requests[request_id] = callback
+        timer = QTimer(self)
+        timer.setSingleShot(True)
+        timer.timeout.connect(lambda: self._request_expired(request_id))
+        self._request_timers[request_id] = timer
+        timer.start(max(1, timeout_ms))
         if not self._send(payload):
-            self._pending_requests.pop(request_id, None)
-            callback(None, {"message": "Ruff server is not running"})
+            self._finish_request(request_id, None, {"code": -32000, "message": "Ruff server is not running"})
+        return request_id
+        
+    
+    def _finish_request(self, request_id, result, error):
+        """Detach pending state before invoking application code; ignore late replies."""
+        callback = self._pending_requests.pop(request_id, None)
+        timer = self._request_timers.pop(request_id, None)
+        if timer is not None:
+            timer.stop()
+            timer.deleteLater()
+        if callback is not None:
+            callback(result, error)
+            
+    
+    def _request_expired(self, request_id):
+        """Cancel outstanding work best-effort and complete locally with an error."""
+        if request_id not in self._pending_requests:
+            return
+        if self.is_ready:
+            self.notify("$/cancelRequest", {"id": request_id})
+        self._finish_request(request_id, None, {"code": -32800, "message": "LSP request timed out"})
 
     def notify(self, method: str, params: dict):
         """Send one JSON-RPC notification with no request id."""
@@ -331,6 +374,7 @@ class RuffLspClient(QObject):
         if len(self._read_buffer) > 16 * 1024 * 1024:
             self._read_buffer.clear()
             self.server_error.emit("Ruff LSP input exceeded the 16 MiB safety limit.")
+            self.process.kill()
             return
 
         while True:
@@ -359,6 +403,7 @@ class RuffLspClient(QObject):
                     "Ruff server sent an invalid or missing Content-Length header."
                 )
                 self._read_buffer.clear()
+                self.process.kill()
                 return
 
             message_start = header_end + 4
@@ -381,24 +426,43 @@ class RuffLspClient(QObject):
                 continue
             self._handle_message(message)
 
-    def _handle_message(self, message: dict):
-        """Route JSON-RPC responses and Ruff server notifications."""
-        is_response = "id" in message and ("result" in message or "error" in message)
-        if is_response:
-            callback = self._pending_requests.pop(message["id"], None)
-            if callback is not None:
-                callback(message.get("result"), message.get("error"))
-            return
+    def _handle_message(self, message):
+            """Validate JSON-RPC envelopes before routing replies or diagnostics.
 
-        # Diagnostics are server-pushed notifications, not responses to a
-        # specific request. Route them through a Qt signal by a document URI.
-        if message.get("method") == "textDocument/publishDiagnostics":
-            params = message.get("params") or {}
-            self.diagnostics_published.emit(
-                params.get("uri", ""),
-                params.get("diagnostics", []),
-                params.get("version"),
-            )
+            JSON arrays/scalars are not valid individual LSP messages. Unknown
+            server requests receive MethodNotFound so the peer is not left waiting.
+            A valid empty diagnostics list is forwarded; malformed data is not
+            substituted with an empty list because that would erase real problems.
+            """
+            if not isinstance(message, dict) or message.get("jsonrpc") != "2.0":
+                self.server_error.emit("Invalid JSON-RPC message envelope from Ruff.")
+                return
+            if "id" in message:
+                request_id = message["id"]
+                if type(request_id) not in (int, str):
+                    self.server_error.emit("Invalid JSON-RPC request identifier.")
+                    return
+                if "method" in message:
+                    self._send({"jsonrpc": "2.0", "id": request_id,
+                                "error": {"code": -32601, "message": "Unsupported server request"}})
+                    return
+                if ("result" in message) == ("error" in message):
+                    self.server_error.emit("Invalid JSON-RPC response shape.")
+                    return
+                self._finish_request(request_id, message.get("result"), message.get("error"))
+                return
+            if message.get("method") == "textDocument/publishDiagnostics":
+                params = message.get("params")
+                if not isinstance(params, dict):
+                    self.server_error.emit("Invalid Ruff diagnostic parameters.")
+                    return
+                uri, diagnostics, version = params.get("uri"), params.get("diagnostics"), params.get("version")
+                if (not isinstance(uri, str) or not isinstance(diagnostics, list)
+                        or any(not isinstance(item, dict) for item in diagnostics)
+                        or (version is not None and type(version) is not int)):
+                    self.server_error.emit("Invalid Ruff diagnostic publication.")
+                    return
+                self.diagnostics_published.emit(uri, diagnostics, version)
 
     def _read_stderr(self):
         """Print Ruff LSP logs without confusing them with protocol stdout."""
@@ -406,18 +470,25 @@ class RuffLspClient(QObject):
         if text.strip():
             print(f"[Ruff LSP] {text.rstrip()}")
 
-    def _on_process_error(self, _error):
+    def _on_process_error(self, error):
         """Convert QProcess startup/runtime failure into a visible Qt signal."""
         if not self._shutting_down:
             self.server_error.emit("Ruff server process error: " + self.process.errorString())
+        if error == QProcess.FailedToStart:
+            self._on_finished(-1, QProcess.CrashExit)
 
     def _on_finished(self, exit_code, _exit_status):
         """Clear state and retry failed startup only a bounded number of times."""
+        if not self._started:
+            return
         self._initialized = False
         self._started = False
-        self._pending_requests.clear()
+        self._initialize_timer.stop()
+        self._stable_timer.stop()
         self._read_buffer.clear()
         self.server_stopped.emit()
+        for request_id in list(self._pending_requests):
+            self._finish_request(request_id, None, {"code": -32000, "message": "Ruff server stopped"})
 
         if self._suppress_restart_once:
             self._suppress_restart_once = False
@@ -438,11 +509,14 @@ class RuffLspClient(QObject):
             f"Ruff stopped with exit code {exit_code}; "
             f"retry {self._restart_attempts}/{self._max_restart_attempts}."
         )
-        QTimer.singleShot(delay_ms, self.start)
+        self._restart_timer.start(delay_ms)
 
     def shutdown(self):
         """Perform the LSP shutdown → exit sequence, then enforce a timeout."""
         self._shutting_down = True
+        self._restart_timer.stop()
+        self._initialize_timer.stop()
+        self._stable_timer.stop()
         if self.process.state() == QProcess.NotRunning:
             return
 

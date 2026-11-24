@@ -197,7 +197,7 @@ def _py_compute_state(text, target_pos, snapshot=None, checkpoints=None):
                 i += 1
                 continue
             if triple_string:
-                if c in "\"'":
+                if c == string_delim:
                     if i + 2 < length and text[i + 1:i + 2].decode("latin-1") == c and text[i + 2:i + 3].decode("latin-1") == c:
                         in_string = triple_string = string_delim = 0
                         in_fstring = is_docstring = 0
@@ -491,7 +491,7 @@ def _py_style_chunk(text, start, end, prev_state, keywords, builtins, magic_meth
                 results.append((1, string_style))
                 continue
             if triple_string:
-                if c in "\"'":
+                if c == string_delim:
                     # CHUNK-SAFETY: the closing '"""' may straddle the chunk
                     # end. Only consume 3 quote bytes when ALL of them are
                     # inside THIS chunk (i + 2 < end, NOT < length). Styling
@@ -525,7 +525,7 @@ def _py_style_chunk(text, start, end, prev_state, keywords, builtins, magic_meth
                 token_start = i
                 while i < end:
                     c2 = text[i:i + 1].decode("latin-1")
-                    if c2 in "\"'\\":
+                    if c2 == string_delim or c2 == "\\":
                         break
                     if in_fstring and c2 == "{":
                         break
@@ -1172,11 +1172,10 @@ class PyCustomLexer(NeutronLexer):
     def styleText(self, start: int, end: int) -> None:
         """Style the requested UTF-8 byte range using cached prefix state.
         
-        QScintilla already supplies byte positions; converting them through
-        character indicies is unnecessary. A document snapshot is copied once
-        per text revision, not once per scrolling/style callback. Cold scans
-        and edits near the top may still require a long forward scan.
-        Keep all the token styles and the existing compiled/fallback choice.
+        QScintilla already supplies byte positions; converting them through character indicies is unnecessary. 
+        The range expands to whole physical lines so delimiters cannot straddle its boundaries. Repainting a 
+        small prefix/suffix is intentional; no style run exceeds the expanded range. A document snapshot is
+        copied once per text revision, not once per scrolling/style callback.
         """
         if self._source_dirty:
             self._checkpoints.replace(self.editor.text().encode("utf-8"))
@@ -1187,7 +1186,12 @@ class PyCustomLexer(NeutronLexer):
         end = min(max(start, end), len(source))
         if start == end:
             return
-        
+        # Restart/finish at physical line boundaries so quote delimiters and
+        # identifier tokens are not split across arbitrary requested chunks.
+        start = source.rfind(b"\n", 0, start) + 1
+        if source[end - 1:end] != b"\n":
+            newline = source.find(b"\n", end)
+            end = len(source) if newline < 0 else newline + 1
         scanner = _cython_state if _HAS_CYTHON else _py_compute_state
         styler = _cython_style if _HAS_CYTHON else _py_style_chunk
         resumable = not _HAS_CYTHON or _CYTHON_CHECKPOINTS

@@ -5776,7 +5776,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
  *             if triple_string:
- *                 if c == 34 or c == 39:
+ * 
 */
         goto __pyx_L7_continue;
 
@@ -5793,28 +5793,29 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
  *                 i += 1
  *                 continue
  *             if triple_string:             # <<<<<<<<<<<<<<
- *                 if c == 34 or c == 39:
- *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
+ * 
+ *                 if c == string_delim:
 */
       __pyx_t_2 = (__pyx_v_triple_string != 0);
 
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":275
- *                 continue
+        /* "lexer_fast.pyx":276
  *             if triple_string:
- *                 if c == 34 or c == 39:             # <<<<<<<<<<<<<<
+ * 
+ *                 if c == string_delim:             # <<<<<<<<<<<<<<
  *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
  *                         in_string = 0
 */
-        switch (__pyx_v_c) {
-          case 34:
-          case 39:
+        __pyx_t_2 = (__pyx_v_c == __pyx_v_string_delim);
 
-          /* "lexer_fast.pyx":276
- *             if triple_string:
- *                 if c == 34 or c == 39:
+        if (__pyx_t_2) {
+
+
+          /* "lexer_fast.pyx":277
+ * 
+ *                 if c == string_delim:
  *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
  *                         in_string = 0
  *                         triple_string = 0
@@ -5827,11 +5828,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
             __pyx_t_2 = __pyx_t_35;
 
-            goto __pyx_L35_bool_binop_done;
+            goto __pyx_L36_bool_binop_done;
           }
           __pyx_t_36 = (__pyx_v_i + 1);
 
-          __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 276, __pyx_L1_error)
+          __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 277, __pyx_L1_error)
 
           __pyx_t_35 = (__pyx_t_34 == __pyx_v_c);
 
@@ -5842,11 +5843,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
             __pyx_t_2 = __pyx_t_35;
 
-            goto __pyx_L35_bool_binop_done;
+            goto __pyx_L36_bool_binop_done;
           }
           __pyx_t_36 = (__pyx_v_i + 2);
 
-          __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 276, __pyx_L1_error)
+          __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 277, __pyx_L1_error)
 
           __pyx_t_35 = (__pyx_t_34 == __pyx_v_c);
 
@@ -5854,12 +5855,12 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          __pyx_L35_bool_binop_done:;
+          __pyx_L36_bool_binop_done:;
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":277
- *                 if c == 34 or c == 39:
+            /* "lexer_fast.pyx":278
+ *                 if c == string_delim:
  *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
  *                         in_string = 0             # <<<<<<<<<<<<<<
  *                         triple_string = 0
@@ -5867,7 +5868,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_in_string = 0;
 
-            /* "lexer_fast.pyx":278
+            /* "lexer_fast.pyx":279
  *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
  *                         in_string = 0
  *                         triple_string = 0             # <<<<<<<<<<<<<<
@@ -5876,7 +5877,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_triple_string = 0;
 
-            /* "lexer_fast.pyx":279
+            /* "lexer_fast.pyx":280
  *                         in_string = 0
  *                         triple_string = 0
  *                         string_delim = 0             # <<<<<<<<<<<<<<
@@ -5885,7 +5886,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_string_delim = 0;
 
-            /* "lexer_fast.pyx":280
+            /* "lexer_fast.pyx":281
  *                         triple_string = 0
  *                         string_delim = 0
  *                         in_fstring = 0             # <<<<<<<<<<<<<<
@@ -5894,7 +5895,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_in_fstring = 0;
 
-            /* "lexer_fast.pyx":281
+            /* "lexer_fast.pyx":282
  *                         string_delim = 0
  *                         in_fstring = 0
  *                         is_docstring = 0             # <<<<<<<<<<<<<<
@@ -5903,7 +5904,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_is_docstring = 0;
 
-            /* "lexer_fast.pyx":282
+            /* "lexer_fast.pyx":283
  *                         in_fstring = 0
  *                         is_docstring = 0
  *                         i += 3             # <<<<<<<<<<<<<<
@@ -5912,7 +5913,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_i = (__pyx_v_i + 3);
 
-            /* "lexer_fast.pyx":283
+            /* "lexer_fast.pyx":284
  *                         is_docstring = 0
  *                         i += 3
  *                         continue             # <<<<<<<<<<<<<<
@@ -5921,16 +5922,16 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             goto __pyx_L7_continue;
 
-            /* "lexer_fast.pyx":276
- *             if triple_string:
- *                 if c == 34 or c == 39:
+            /* "lexer_fast.pyx":277
+ * 
+ *                 if c == string_delim:
  *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
  *                         in_string = 0
  *                         triple_string = 0
 */
           }
 
-          /* "lexer_fast.pyx":284
+          /* "lexer_fast.pyx":285
  *                         i += 3
  *                         continue
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -5939,7 +5940,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":285
+          /* "lexer_fast.pyx":286
  *                         continue
  *                     i += 1
  *                     continue             # <<<<<<<<<<<<<<
@@ -5948,18 +5949,16 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           goto __pyx_L7_continue;
 
-          /* "lexer_fast.pyx":275
- *                 continue
+          /* "lexer_fast.pyx":276
  *             if triple_string:
- *                 if c == 34 or c == 39:             # <<<<<<<<<<<<<<
+ * 
+ *                 if c == string_delim:             # <<<<<<<<<<<<<<
  *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
  *                         in_string = 0
 */
-          break;
-          default: break;
         }
 
-        /* "lexer_fast.pyx":286
+        /* "lexer_fast.pyx":287
  *                     i += 1
  *                     continue
  *                 if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -5974,18 +5973,18 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          goto __pyx_L39_bool_binop_done;
+          goto __pyx_L40_bool_binop_done;
         }
         __pyx_t_35 = (__pyx_v_c == 0x7B);
 
 
         __pyx_t_2 = __pyx_t_35;
 
-        __pyx_L39_bool_binop_done:;
+        __pyx_L40_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":287
+          /* "lexer_fast.pyx":288
  *                     continue
  *                 if in_fstring and c == 123:
  *                     if i + 1 < length and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -6000,11 +5999,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
             __pyx_t_2 = __pyx_t_35;
 
-            goto __pyx_L42_bool_binop_done;
+            goto __pyx_L43_bool_binop_done;
           }
           __pyx_t_36 = (__pyx_v_i + 1);
 
-          __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 287, __pyx_L1_error)
+          __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 288, __pyx_L1_error)
 
           __pyx_t_35 = (__pyx_t_34 == 0x7B);
 
@@ -6012,11 +6011,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          __pyx_L42_bool_binop_done:;
+          __pyx_L43_bool_binop_done:;
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":288
+            /* "lexer_fast.pyx":289
  *                 if in_fstring and c == 123:
  *                     if i + 1 < length and text[i+1] == 123:
  *                         i += 2             # <<<<<<<<<<<<<<
@@ -6025,7 +6024,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_i = (__pyx_v_i + 2);
 
-            /* "lexer_fast.pyx":289
+            /* "lexer_fast.pyx":290
  *                     if i + 1 < length and text[i+1] == 123:
  *                         i += 2
  *                         continue             # <<<<<<<<<<<<<<
@@ -6034,7 +6033,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             goto __pyx_L7_continue;
 
-            /* "lexer_fast.pyx":287
+            /* "lexer_fast.pyx":288
  *                     continue
  *                 if in_fstring and c == 123:
  *                     if i + 1 < length and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -6043,7 +6042,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           }
 
-          /* "lexer_fast.pyx":290
+          /* "lexer_fast.pyx":291
  *                         i += 2
  *                         continue
  *                     in_fexpr = 1             # <<<<<<<<<<<<<<
@@ -6052,7 +6051,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_in_fexpr = 1;
 
-          /* "lexer_fast.pyx":291
+          /* "lexer_fast.pyx":292
  *                         continue
  *                     in_fexpr = 1
  *                     fexpr_depth = 1             # <<<<<<<<<<<<<<
@@ -6061,7 +6060,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_fexpr_depth = 1;
 
-          /* "lexer_fast.pyx":292
+          /* "lexer_fast.pyx":293
  *                     in_fexpr = 1
  *                     fexpr_depth = 1
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -6070,7 +6069,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":293
+          /* "lexer_fast.pyx":294
  *                     fexpr_depth = 1
  *                     i += 1
  *                     continue             # <<<<<<<<<<<<<<
@@ -6079,7 +6078,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           goto __pyx_L7_continue;
 
-          /* "lexer_fast.pyx":286
+          /* "lexer_fast.pyx":287
  *                     i += 1
  *                     continue
  *                 if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -6088,7 +6087,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         }
 
-        /* "lexer_fast.pyx":294
+        /* "lexer_fast.pyx":295
  *                     i += 1
  *                     continue
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -6097,7 +6096,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":295
+        /* "lexer_fast.pyx":296
  *                     continue
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -6110,12 +6109,12 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
  *                 i += 1
  *                 continue
  *             if triple_string:             # <<<<<<<<<<<<<<
- *                 if c == 34 or c == 39:
- *                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
+ * 
+ *                 if c == string_delim:
 */
       }
 
-      /* "lexer_fast.pyx":297
+      /* "lexer_fast.pyx":298
  *                 continue
  *             # single-line string
  *             if c == string_delim:             # <<<<<<<<<<<<<<
@@ -6127,7 +6126,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":298
+        /* "lexer_fast.pyx":299
  *             # single-line string
  *             if c == string_delim:
  *                 in_string = 0             # <<<<<<<<<<<<<<
@@ -6136,7 +6135,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_in_string = 0;
 
-        /* "lexer_fast.pyx":299
+        /* "lexer_fast.pyx":300
  *             if c == string_delim:
  *                 in_string = 0
  *                 string_delim = 0             # <<<<<<<<<<<<<<
@@ -6145,7 +6144,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_string_delim = 0;
 
-        /* "lexer_fast.pyx":300
+        /* "lexer_fast.pyx":301
  *                 in_string = 0
  *                 string_delim = 0
  *                 in_fstring = 0             # <<<<<<<<<<<<<<
@@ -6154,7 +6153,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_in_fstring = 0;
 
-        /* "lexer_fast.pyx":301
+        /* "lexer_fast.pyx":302
  *                 string_delim = 0
  *                 in_fstring = 0
  *                 is_docstring = 0             # <<<<<<<<<<<<<<
@@ -6163,7 +6162,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_is_docstring = 0;
 
-        /* "lexer_fast.pyx":302
+        /* "lexer_fast.pyx":303
  *                 in_fstring = 0
  *                 is_docstring = 0
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -6172,7 +6171,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":303
+        /* "lexer_fast.pyx":304
  *                 is_docstring = 0
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -6181,7 +6180,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         goto __pyx_L7_continue;
 
-        /* "lexer_fast.pyx":297
+        /* "lexer_fast.pyx":298
  *                 continue
  *             # single-line string
  *             if c == string_delim:             # <<<<<<<<<<<<<<
@@ -6190,7 +6189,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       }
 
-      /* "lexer_fast.pyx":304
+      /* "lexer_fast.pyx":305
  *                 i += 1
  *                 continue
  *             if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -6205,18 +6204,18 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        goto __pyx_L46_bool_binop_done;
+        goto __pyx_L47_bool_binop_done;
       }
       __pyx_t_35 = (__pyx_v_c == 0x7B);
 
 
       __pyx_t_2 = __pyx_t_35;
 
-      __pyx_L46_bool_binop_done:;
+      __pyx_L47_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":305
+        /* "lexer_fast.pyx":306
  *                 continue
  *             if in_fstring and c == 123:
  *                 if i + 1 < length and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -6231,11 +6230,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          goto __pyx_L49_bool_binop_done;
+          goto __pyx_L50_bool_binop_done;
         }
         __pyx_t_36 = (__pyx_v_i + 1);
 
-        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 305, __pyx_L1_error)
+        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 306, __pyx_L1_error)
 
         __pyx_t_35 = (__pyx_t_34 == 0x7B);
 
@@ -6243,11 +6242,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        __pyx_L49_bool_binop_done:;
+        __pyx_L50_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":306
+          /* "lexer_fast.pyx":307
  *             if in_fstring and c == 123:
  *                 if i + 1 < length and text[i+1] == 123:
  *                     i += 2             # <<<<<<<<<<<<<<
@@ -6256,7 +6255,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_i = (__pyx_v_i + 2);
 
-          /* "lexer_fast.pyx":307
+          /* "lexer_fast.pyx":308
  *                 if i + 1 < length and text[i+1] == 123:
  *                     i += 2
  *                     continue             # <<<<<<<<<<<<<<
@@ -6265,7 +6264,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           goto __pyx_L7_continue;
 
-          /* "lexer_fast.pyx":305
+          /* "lexer_fast.pyx":306
  *                 continue
  *             if in_fstring and c == 123:
  *                 if i + 1 < length and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -6274,7 +6273,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         }
 
-        /* "lexer_fast.pyx":308
+        /* "lexer_fast.pyx":309
  *                     i += 2
  *                     continue
  *                 in_fexpr = 1             # <<<<<<<<<<<<<<
@@ -6283,7 +6282,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_in_fexpr = 1;
 
-        /* "lexer_fast.pyx":309
+        /* "lexer_fast.pyx":310
  *                     continue
  *                 in_fexpr = 1
  *                 fexpr_depth = 1             # <<<<<<<<<<<<<<
@@ -6292,7 +6291,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_fexpr_depth = 1;
 
-        /* "lexer_fast.pyx":310
+        /* "lexer_fast.pyx":311
  *                 in_fexpr = 1
  *                 fexpr_depth = 1
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -6301,7 +6300,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":311
+        /* "lexer_fast.pyx":312
  *                 fexpr_depth = 1
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -6310,7 +6309,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         goto __pyx_L7_continue;
 
-        /* "lexer_fast.pyx":304
+        /* "lexer_fast.pyx":305
  *                 i += 1
  *                 continue
  *             if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -6319,7 +6318,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       }
 
-      /* "lexer_fast.pyx":312
+      /* "lexer_fast.pyx":313
  *                 i += 1
  *                 continue
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6328,7 +6327,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":313
+      /* "lexer_fast.pyx":314
  *                 continue
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -6346,7 +6345,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
     }
 
-    /* "lexer_fast.pyx":318
+    /* "lexer_fast.pyx":319
  * 
  *         # string prefix f/r/b
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < target_pos:             # <<<<<<<<<<<<<<
@@ -6369,18 +6368,18 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
       __pyx_t_2 = __pyx_t_35;
 
-      goto __pyx_L52_bool_binop_done;
+      goto __pyx_L53_bool_binop_done;
     }
     __pyx_t_35 = ((__pyx_v_i + 1) < __pyx_v_target_pos);
 
 
     __pyx_t_2 = __pyx_t_35;
 
-    __pyx_L52_bool_binop_done:;
+    __pyx_L53_bool_binop_done:;
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":319
+      /* "lexer_fast.pyx":320
  *         # string prefix f/r/b
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < target_pos:
  *             next_c = text[i + 1]             # <<<<<<<<<<<<<<
@@ -6389,11 +6388,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_t_36 = (__pyx_v_i + 1);
 
-      __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 319, __pyx_L1_error)
+      __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 320, __pyx_L1_error)
 
       __pyx_v_next_c = __pyx_t_34;
 
-      /* "lexer_fast.pyx":320
+      /* "lexer_fast.pyx":321
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < target_pos:
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:             # <<<<<<<<<<<<<<
@@ -6404,7 +6403,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
         case 34:
         case 39:
 
-        /* "lexer_fast.pyx":321
+        /* "lexer_fast.pyx":322
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:
  *                 if i + 3 < length and text[i+2] == next_c and text[i+3] == next_c:             # <<<<<<<<<<<<<<
@@ -6419,11 +6418,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          goto __pyx_L55_bool_binop_done;
+          goto __pyx_L56_bool_binop_done;
         }
         __pyx_t_36 = (__pyx_v_i + 2);
 
-        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 321, __pyx_L1_error)
+        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 322, __pyx_L1_error)
 
         __pyx_t_35 = (__pyx_t_34 == __pyx_v_next_c);
 
@@ -6434,11 +6433,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          goto __pyx_L55_bool_binop_done;
+          goto __pyx_L56_bool_binop_done;
         }
         __pyx_t_36 = (__pyx_v_i + 3);
 
-        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 321, __pyx_L1_error)
+        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 322, __pyx_L1_error)
 
         __pyx_t_35 = (__pyx_t_34 == __pyx_v_next_c);
 
@@ -6446,11 +6445,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        __pyx_L55_bool_binop_done:;
+        __pyx_L56_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":322
+          /* "lexer_fast.pyx":323
  *             if next_c == 34 or next_c == 39:
  *                 if i + 3 < length and text[i+2] == next_c and text[i+3] == next_c:
  *                     in_string = 1             # <<<<<<<<<<<<<<
@@ -6459,7 +6458,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_in_string = 1;
 
-          /* "lexer_fast.pyx":323
+          /* "lexer_fast.pyx":324
  *                 if i + 3 < length and text[i+2] == next_c and text[i+3] == next_c:
  *                     in_string = 1
  *                     triple_string = 1             # <<<<<<<<<<<<<<
@@ -6468,7 +6467,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_triple_string = 1;
 
-          /* "lexer_fast.pyx":324
+          /* "lexer_fast.pyx":325
  *                     in_string = 1
  *                     triple_string = 1
  *                     string_delim = next_c             # <<<<<<<<<<<<<<
@@ -6477,7 +6476,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_string_delim = __pyx_v_next_c;
 
-          /* "lexer_fast.pyx":325
+          /* "lexer_fast.pyx":326
  *                     triple_string = 1
  *                     string_delim = next_c
  *                     in_fstring = 1 if (c == 102) else 0             # <<<<<<<<<<<<<<
@@ -6496,7 +6495,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_v_in_fstring = __pyx_t_34;
 
-          /* "lexer_fast.pyx":326
+          /* "lexer_fast.pyx":327
  *                     string_delim = next_c
  *                     in_fstring = 1 if (c == 102) else 0
  *                     if expect_docstring:             # <<<<<<<<<<<<<<
@@ -6508,7 +6507,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":327
+            /* "lexer_fast.pyx":328
  *                     in_fstring = 1 if (c == 102) else 0
  *                     if expect_docstring:
  *                         is_docstring = 1             # <<<<<<<<<<<<<<
@@ -6517,7 +6516,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
             __pyx_v_is_docstring = 1;
 
-            /* "lexer_fast.pyx":326
+            /* "lexer_fast.pyx":327
  *                     string_delim = next_c
  *                     in_fstring = 1 if (c == 102) else 0
  *                     if expect_docstring:             # <<<<<<<<<<<<<<
@@ -6526,7 +6525,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           }
 
-          /* "lexer_fast.pyx":328
+          /* "lexer_fast.pyx":329
  *                     if expect_docstring:
  *                         is_docstring = 1
  *                     expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -6535,7 +6534,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_expect_docstring = 0;
 
-          /* "lexer_fast.pyx":329
+          /* "lexer_fast.pyx":330
  *                         is_docstring = 1
  *                     expect_docstring = 0
  *                     i += 4             # <<<<<<<<<<<<<<
@@ -6544,7 +6543,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_i = (__pyx_v_i + 4);
 
-          /* "lexer_fast.pyx":330
+          /* "lexer_fast.pyx":331
  *                     expect_docstring = 0
  *                     i += 4
  *                     continue             # <<<<<<<<<<<<<<
@@ -6553,7 +6552,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           goto __pyx_L7_continue;
 
-          /* "lexer_fast.pyx":321
+          /* "lexer_fast.pyx":322
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:
  *                 if i + 3 < length and text[i+2] == next_c and text[i+3] == next_c:             # <<<<<<<<<<<<<<
@@ -6562,7 +6561,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         }
 
-        /* "lexer_fast.pyx":331
+        /* "lexer_fast.pyx":332
  *                     i += 4
  *                     continue
  *                 in_string = 1             # <<<<<<<<<<<<<<
@@ -6571,7 +6570,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_in_string = 1;
 
-        /* "lexer_fast.pyx":332
+        /* "lexer_fast.pyx":333
  *                     continue
  *                 in_string = 1
  *                 triple_string = 0             # <<<<<<<<<<<<<<
@@ -6580,7 +6579,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_triple_string = 0;
 
-        /* "lexer_fast.pyx":333
+        /* "lexer_fast.pyx":334
  *                 in_string = 1
  *                 triple_string = 0
  *                 string_delim = next_c             # <<<<<<<<<<<<<<
@@ -6589,7 +6588,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_string_delim = __pyx_v_next_c;
 
-        /* "lexer_fast.pyx":334
+        /* "lexer_fast.pyx":335
  *                 triple_string = 0
  *                 string_delim = next_c
  *                 in_fstring = 1 if (c == 102) else 0             # <<<<<<<<<<<<<<
@@ -6608,7 +6607,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_v_in_fstring = __pyx_t_34;
 
-        /* "lexer_fast.pyx":335
+        /* "lexer_fast.pyx":336
  *                 string_delim = next_c
  *                 in_fstring = 1 if (c == 102) else 0
  *                 expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -6617,7 +6616,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_expect_docstring = 0;
 
-        /* "lexer_fast.pyx":336
+        /* "lexer_fast.pyx":337
  *                 in_fstring = 1 if (c == 102) else 0
  *                 expect_docstring = 0
  *                 i += 2             # <<<<<<<<<<<<<<
@@ -6626,7 +6625,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_i = (__pyx_v_i + 2);
 
-        /* "lexer_fast.pyx":337
+        /* "lexer_fast.pyx":338
  *                 expect_docstring = 0
  *                 i += 2
  *                 continue             # <<<<<<<<<<<<<<
@@ -6635,7 +6634,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         goto __pyx_L7_continue;
 
-        /* "lexer_fast.pyx":320
+        /* "lexer_fast.pyx":321
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < target_pos:
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:             # <<<<<<<<<<<<<<
@@ -6646,7 +6645,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
         default: break;
       }
 
-      /* "lexer_fast.pyx":318
+      /* "lexer_fast.pyx":319
  * 
  *         # string prefix f/r/b
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < target_pos:             # <<<<<<<<<<<<<<
@@ -6655,7 +6654,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
     }
 
-    /* "lexer_fast.pyx":340
+    /* "lexer_fast.pyx":341
  * 
  *         # regular string
  *         if c == 34 or c == 39:             # <<<<<<<<<<<<<<
@@ -6666,7 +6665,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       case 34:
       case 39:
 
-      /* "lexer_fast.pyx":341
+      /* "lexer_fast.pyx":342
  *         # regular string
  *         if c == 34 or c == 39:
  *             if i + 2 < length and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
@@ -6681,11 +6680,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        goto __pyx_L60_bool_binop_done;
+        goto __pyx_L61_bool_binop_done;
       }
       __pyx_t_36 = (__pyx_v_i + 1);
 
-      __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 342, __pyx_L1_error)
 
       __pyx_t_35 = (__pyx_t_34 == __pyx_v_c);
 
@@ -6696,11 +6695,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        goto __pyx_L60_bool_binop_done;
+        goto __pyx_L61_bool_binop_done;
       }
       __pyx_t_36 = (__pyx_v_i + 2);
 
-      __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 342, __pyx_L1_error)
 
       __pyx_t_35 = (__pyx_t_34 == __pyx_v_c);
 
@@ -6708,11 +6707,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
       __pyx_t_2 = __pyx_t_35;
 
-      __pyx_L60_bool_binop_done:;
+      __pyx_L61_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":342
+        /* "lexer_fast.pyx":343
  *         if c == 34 or c == 39:
  *             if i + 2 < length and text[i+1] == c and text[i+2] == c:
  *                 in_string = 1             # <<<<<<<<<<<<<<
@@ -6721,7 +6720,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_in_string = 1;
 
-        /* "lexer_fast.pyx":343
+        /* "lexer_fast.pyx":344
  *             if i + 2 < length and text[i+1] == c and text[i+2] == c:
  *                 in_string = 1
  *                 triple_string = 1             # <<<<<<<<<<<<<<
@@ -6730,7 +6729,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_triple_string = 1;
 
-        /* "lexer_fast.pyx":344
+        /* "lexer_fast.pyx":345
  *                 in_string = 1
  *                 triple_string = 1
  *                 string_delim = c             # <<<<<<<<<<<<<<
@@ -6739,7 +6738,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_string_delim = __pyx_v_c;
 
-        /* "lexer_fast.pyx":345
+        /* "lexer_fast.pyx":346
  *                 triple_string = 1
  *                 string_delim = c
  *                 in_fstring = 0             # <<<<<<<<<<<<<<
@@ -6748,7 +6747,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_in_fstring = 0;
 
-        /* "lexer_fast.pyx":346
+        /* "lexer_fast.pyx":347
  *                 string_delim = c
  *                 in_fstring = 0
  *                 if expect_docstring:             # <<<<<<<<<<<<<<
@@ -6760,7 +6759,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":347
+          /* "lexer_fast.pyx":348
  *                 in_fstring = 0
  *                 if expect_docstring:
  *                     is_docstring = 1             # <<<<<<<<<<<<<<
@@ -6769,7 +6768,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_is_docstring = 1;
 
-          /* "lexer_fast.pyx":346
+          /* "lexer_fast.pyx":347
  *                 string_delim = c
  *                 in_fstring = 0
  *                 if expect_docstring:             # <<<<<<<<<<<<<<
@@ -6778,7 +6777,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         }
 
-        /* "lexer_fast.pyx":348
+        /* "lexer_fast.pyx":349
  *                 if expect_docstring:
  *                     is_docstring = 1
  *                 expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -6787,7 +6786,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_expect_docstring = 0;
 
-        /* "lexer_fast.pyx":349
+        /* "lexer_fast.pyx":350
  *                     is_docstring = 1
  *                 expect_docstring = 0
  *                 i += 3             # <<<<<<<<<<<<<<
@@ -6796,7 +6795,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_i = (__pyx_v_i + 3);
 
-        /* "lexer_fast.pyx":350
+        /* "lexer_fast.pyx":351
  *                 expect_docstring = 0
  *                 i += 3
  *                 continue             # <<<<<<<<<<<<<<
@@ -6805,7 +6804,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         goto __pyx_L7_continue;
 
-        /* "lexer_fast.pyx":341
+        /* "lexer_fast.pyx":342
  *         # regular string
  *         if c == 34 or c == 39:
  *             if i + 2 < length and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
@@ -6814,7 +6813,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       }
 
-      /* "lexer_fast.pyx":351
+      /* "lexer_fast.pyx":352
  *                 i += 3
  *                 continue
  *             in_string = 1             # <<<<<<<<<<<<<<
@@ -6823,7 +6822,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_in_string = 1;
 
-      /* "lexer_fast.pyx":352
+      /* "lexer_fast.pyx":353
  *                 continue
  *             in_string = 1
  *             triple_string = 0             # <<<<<<<<<<<<<<
@@ -6832,7 +6831,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_triple_string = 0;
 
-      /* "lexer_fast.pyx":353
+      /* "lexer_fast.pyx":354
  *             in_string = 1
  *             triple_string = 0
  *             string_delim = c             # <<<<<<<<<<<<<<
@@ -6841,7 +6840,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_string_delim = __pyx_v_c;
 
-      /* "lexer_fast.pyx":354
+      /* "lexer_fast.pyx":355
  *             triple_string = 0
  *             string_delim = c
  *             in_fstring = 0             # <<<<<<<<<<<<<<
@@ -6850,7 +6849,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_in_fstring = 0;
 
-      /* "lexer_fast.pyx":355
+      /* "lexer_fast.pyx":356
  *             string_delim = c
  *             in_fstring = 0
  *             expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -6859,7 +6858,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_expect_docstring = 0;
 
-      /* "lexer_fast.pyx":356
+      /* "lexer_fast.pyx":357
  *             in_fstring = 0
  *             expect_docstring = 0
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6868,7 +6867,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":357
+      /* "lexer_fast.pyx":358
  *             expect_docstring = 0
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -6877,7 +6876,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":340
+      /* "lexer_fast.pyx":341
  * 
  *         # regular string
  *         if c == 34 or c == 39:             # <<<<<<<<<<<<<<
@@ -6888,7 +6887,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       default: break;
     }
 
-    /* "lexer_fast.pyx":360
+    /* "lexer_fast.pyx":361
  * 
  *         # comment
  *         if c == 35:             # <<<<<<<<<<<<<<
@@ -6900,7 +6899,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":361
+      /* "lexer_fast.pyx":362
  *         # comment
  *         if c == 35:
  *             in_comment = 1             # <<<<<<<<<<<<<<
@@ -6909,7 +6908,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_in_comment = 1;
 
-      /* "lexer_fast.pyx":362
+      /* "lexer_fast.pyx":363
  *         if c == 35:
  *             in_comment = 1
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6918,7 +6917,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":363
+      /* "lexer_fast.pyx":364
  *             in_comment = 1
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -6927,7 +6926,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":360
+      /* "lexer_fast.pyx":361
  * 
  *         # comment
  *         if c == 35:             # <<<<<<<<<<<<<<
@@ -6936,7 +6935,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
     }
 
-    /* "lexer_fast.pyx":366
+    /* "lexer_fast.pyx":367
  * 
  *         # brackets
  *         if c == 40 or c == 91 or c == 123:             # <<<<<<<<<<<<<<
@@ -6948,7 +6947,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       case 91:
       case 0x7B:
 
-      /* "lexer_fast.pyx":367
+      /* "lexer_fast.pyx":368
  *         # brackets
  *         if c == 40 or c == 91 or c == 123:
  *             bracket_depth += 1             # <<<<<<<<<<<<<<
@@ -6957,7 +6956,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_bracket_depth = (__pyx_v_bracket_depth + 1);
 
-      /* "lexer_fast.pyx":368
+      /* "lexer_fast.pyx":369
  *         if c == 40 or c == 91 or c == 123:
  *             bracket_depth += 1
  *             i += 1             # <<<<<<<<<<<<<<
@@ -6966,7 +6965,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":369
+      /* "lexer_fast.pyx":370
  *             bracket_depth += 1
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -6975,7 +6974,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":366
+      /* "lexer_fast.pyx":367
  * 
  *         # brackets
  *         if c == 40 or c == 91 or c == 123:             # <<<<<<<<<<<<<<
@@ -6986,7 +6985,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       default: break;
     }
 
-    /* "lexer_fast.pyx":370
+    /* "lexer_fast.pyx":371
  *             i += 1
  *             continue
  *         if c == 41 or c == 93 or c == 125:             # <<<<<<<<<<<<<<
@@ -6998,7 +6997,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       case 93:
       case 0x7D:
 
-      /* "lexer_fast.pyx":371
+      /* "lexer_fast.pyx":372
  *             continue
  *         if c == 41 or c == 93 or c == 125:
  *             if bracket_depth > 0:             # <<<<<<<<<<<<<<
@@ -7010,7 +7009,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":372
+        /* "lexer_fast.pyx":373
  *         if c == 41 or c == 93 or c == 125:
  *             if bracket_depth > 0:
  *                 bracket_depth -= 1             # <<<<<<<<<<<<<<
@@ -7019,7 +7018,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_bracket_depth = (__pyx_v_bracket_depth - 1);
 
-        /* "lexer_fast.pyx":371
+        /* "lexer_fast.pyx":372
  *             continue
  *         if c == 41 or c == 93 or c == 125:
  *             if bracket_depth > 0:             # <<<<<<<<<<<<<<
@@ -7028,7 +7027,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       }
 
-      /* "lexer_fast.pyx":373
+      /* "lexer_fast.pyx":374
  *             if bracket_depth > 0:
  *                 bracket_depth -= 1
  *             i += 1             # <<<<<<<<<<<<<<
@@ -7037,7 +7036,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":374
+      /* "lexer_fast.pyx":375
  *                 bracket_depth -= 1
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -7046,7 +7045,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":370
+      /* "lexer_fast.pyx":371
  *             i += 1
  *             continue
  *         if c == 41 or c == 93 or c == 125:             # <<<<<<<<<<<<<<
@@ -7057,7 +7056,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       default: break;
     }
 
-    /* "lexer_fast.pyx":377
+    /* "lexer_fast.pyx":378
  * 
  *         # colon
  *         if c == 58:             # <<<<<<<<<<<<<<
@@ -7069,7 +7068,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":378
+      /* "lexer_fast.pyx":379
  *         # colon
  *         if c == 58:
  *             if bracket_depth == 0 and (pending_def or pending_class):             # <<<<<<<<<<<<<<
@@ -7084,7 +7083,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        goto __pyx_L68_bool_binop_done;
+        goto __pyx_L69_bool_binop_done;
       }
       __pyx_t_35 = (__pyx_v_pending_def != 0);
 
@@ -7094,18 +7093,18 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
         __pyx_t_2 = __pyx_t_35;
 
-        goto __pyx_L68_bool_binop_done;
+        goto __pyx_L69_bool_binop_done;
       }
       __pyx_t_35 = (__pyx_v_pending_class != 0);
 
 
       __pyx_t_2 = __pyx_t_35;
 
-      __pyx_L68_bool_binop_done:;
+      __pyx_L69_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":379
+        /* "lexer_fast.pyx":380
  *         if c == 58:
  *             if bracket_depth == 0 and (pending_def or pending_class):
  *                 expect_docstring = 1             # <<<<<<<<<<<<<<
@@ -7114,7 +7113,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_expect_docstring = 1;
 
-        /* "lexer_fast.pyx":380
+        /* "lexer_fast.pyx":381
  *             if bracket_depth == 0 and (pending_def or pending_class):
  *                 expect_docstring = 1
  *                 if pending_class:             # <<<<<<<<<<<<<<
@@ -7126,7 +7125,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":381
+          /* "lexer_fast.pyx":382
  *                 expect_docstring = 1
  *                 if pending_class:
  *                     at_class_body = 1             # <<<<<<<<<<<<<<
@@ -7135,7 +7134,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
           __pyx_v_at_class_body = 1;
 
-          /* "lexer_fast.pyx":380
+          /* "lexer_fast.pyx":381
  *             if bracket_depth == 0 and (pending_def or pending_class):
  *                 expect_docstring = 1
  *                 if pending_class:             # <<<<<<<<<<<<<<
@@ -7144,7 +7143,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         }
 
-        /* "lexer_fast.pyx":382
+        /* "lexer_fast.pyx":383
  *                 if pending_class:
  *                     at_class_body = 1
  *                 pending_def = 0             # <<<<<<<<<<<<<<
@@ -7153,7 +7152,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_pending_def = 0;
 
-        /* "lexer_fast.pyx":383
+        /* "lexer_fast.pyx":384
  *                     at_class_body = 1
  *                 pending_def = 0
  *                 pending_class = 0             # <<<<<<<<<<<<<<
@@ -7162,7 +7161,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_pending_class = 0;
 
-        /* "lexer_fast.pyx":378
+        /* "lexer_fast.pyx":379
  *         # colon
  *         if c == 58:
  *             if bracket_depth == 0 and (pending_def or pending_class):             # <<<<<<<<<<<<<<
@@ -7171,7 +7170,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       }
 
-      /* "lexer_fast.pyx":384
+      /* "lexer_fast.pyx":385
  *                 pending_def = 0
  *                 pending_class = 0
  *             i += 1             # <<<<<<<<<<<<<<
@@ -7180,7 +7179,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":385
+      /* "lexer_fast.pyx":386
  *                 pending_class = 0
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -7189,7 +7188,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":377
+      /* "lexer_fast.pyx":378
  * 
  *         # colon
  *         if c == 58:             # <<<<<<<<<<<<<<
@@ -7198,7 +7197,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
     }
 
-    /* "lexer_fast.pyx":388
+    /* "lexer_fast.pyx":389
  * 
  *         # arrow ->
  *         if c == 45 and i + 1 < target_pos and text[i+1] == 62:             # <<<<<<<<<<<<<<
@@ -7213,7 +7212,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
       __pyx_t_2 = __pyx_t_35;
 
-      goto __pyx_L73_bool_binop_done;
+      goto __pyx_L74_bool_binop_done;
     }
     __pyx_t_35 = ((__pyx_v_i + 1) < __pyx_v_target_pos);
 
@@ -7223,11 +7222,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
       __pyx_t_2 = __pyx_t_35;
 
-      goto __pyx_L73_bool_binop_done;
+      goto __pyx_L74_bool_binop_done;
     }
     __pyx_t_36 = (__pyx_v_i + 1);
 
-    __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 388, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_36, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 389, __pyx_L1_error)
 
     __pyx_t_35 = (__pyx_t_34 == 62);
 
@@ -7235,11 +7234,11 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
     __pyx_t_2 = __pyx_t_35;
 
-    __pyx_L73_bool_binop_done:;
+    __pyx_L74_bool_binop_done:;
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":389
+      /* "lexer_fast.pyx":390
  *         # arrow ->
  *         if c == 45 and i + 1 < target_pos and text[i+1] == 62:
  *             i += 2             # <<<<<<<<<<<<<<
@@ -7248,7 +7247,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 2);
 
-      /* "lexer_fast.pyx":390
+      /* "lexer_fast.pyx":391
  *         if c == 45 and i + 1 < target_pos and text[i+1] == 62:
  *             i += 2
  *             continue             # <<<<<<<<<<<<<<
@@ -7257,7 +7256,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":388
+      /* "lexer_fast.pyx":389
  * 
  *         # arrow ->
  *         if c == 45 and i + 1 < target_pos and text[i+1] == 62:             # <<<<<<<<<<<<<<
@@ -7266,18 +7265,18 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
     }
 
-    /* "lexer_fast.pyx":393
+    /* "lexer_fast.pyx":394
  * 
  *         # identifier
  *         if is_alpha(c):             # <<<<<<<<<<<<<<
  *             start = i
  *             i += 1
 */
-    __pyx_t_2 = __pyx_f_10lexer_fast_is_alpha(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 393, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_10lexer_fast_is_alpha(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 394, __pyx_L1_error)
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":394
+      /* "lexer_fast.pyx":395
  *         # identifier
  *         if is_alpha(c):
  *             start = i             # <<<<<<<<<<<<<<
@@ -7286,7 +7285,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":395
+      /* "lexer_fast.pyx":396
  *         if is_alpha(c):
  *             start = i
  *             i += 1             # <<<<<<<<<<<<<<
@@ -7295,7 +7294,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":396
+      /* "lexer_fast.pyx":397
  *             start = i
  *             i += 1
  *             while i < target_pos and is_alnum(text[i]):             # <<<<<<<<<<<<<<
@@ -7311,19 +7310,19 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 
           __pyx_t_2 = __pyx_t_35;
 
-          goto __pyx_L79_bool_binop_done;
+          goto __pyx_L80_bool_binop_done;
         }
-        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 396, __pyx_L1_error)
-        __pyx_t_35 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_34); if (unlikely(__pyx_t_35 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 396, __pyx_L1_error)
+        __pyx_t_34 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_34 == -1)) __PYX_ERR(0, 397, __pyx_L1_error)
+        __pyx_t_35 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_34); if (unlikely(__pyx_t_35 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 397, __pyx_L1_error)
 
 
         __pyx_t_2 = __pyx_t_35;
 
-        __pyx_L79_bool_binop_done:;
+        __pyx_L80_bool_binop_done:;
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":397
+        /* "lexer_fast.pyx":398
  *             i += 1
  *             while i < target_pos and is_alnum(text[i]):
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -7333,7 +7332,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
         __pyx_v_i = (__pyx_v_i + 1);
       }
 
-      /* "lexer_fast.pyx":398
+      /* "lexer_fast.pyx":399
  *             while i < target_pos and is_alnum(text[i]):
  *                 i += 1
  *             if text[start:i] == b"def":             # <<<<<<<<<<<<<<
@@ -7342,16 +7341,16 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       if (unlikely(__pyx_v_text == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not subscriptable");
-        __PYX_ERR(0, 398, __pyx_L1_error)
+        __PYX_ERR(0, 399, __pyx_L1_error)
       }
-      __pyx_t_18 = PySequence_GetSlice(__pyx_v_text, __pyx_v_start, __pyx_v_i); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 398, __pyx_L1_error)
+      __pyx_t_18 = PySequence_GetSlice(__pyx_v_text, __pyx_v_start, __pyx_v_i); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 399, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
-      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_bytes_bytes(__pyx_t_18, __pyx_mstate_global->__pyx_n_b_def, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 398, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_bytes_bytes(__pyx_t_18, __pyx_mstate_global->__pyx_n_b_def, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 399, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":399
+        /* "lexer_fast.pyx":400
  *                 i += 1
  *             if text[start:i] == b"def":
  *                 pending_def = 1             # <<<<<<<<<<<<<<
@@ -7360,7 +7359,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_pending_def = 1;
 
-        /* "lexer_fast.pyx":400
+        /* "lexer_fast.pyx":401
  *             if text[start:i] == b"def":
  *                 pending_def = 1
  *                 pending_class = 0             # <<<<<<<<<<<<<<
@@ -7369,7 +7368,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_pending_class = 0;
 
-        /* "lexer_fast.pyx":401
+        /* "lexer_fast.pyx":402
  *                 pending_def = 1
  *                 pending_class = 0
  *                 at_class_body = 0             # <<<<<<<<<<<<<<
@@ -7378,17 +7377,17 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_at_class_body = 0;
 
-        /* "lexer_fast.pyx":398
+        /* "lexer_fast.pyx":399
  *             while i < target_pos and is_alnum(text[i]):
  *                 i += 1
  *             if text[start:i] == b"def":             # <<<<<<<<<<<<<<
  *                 pending_def = 1
  *                 pending_class = 0
 */
-        goto __pyx_L81;
+        goto __pyx_L82;
       }
 
-      /* "lexer_fast.pyx":402
+      /* "lexer_fast.pyx":403
  *                 pending_class = 0
  *                 at_class_body = 0
  *             elif text[start:i] == b"class":             # <<<<<<<<<<<<<<
@@ -7397,16 +7396,16 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       if (unlikely(__pyx_v_text == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not subscriptable");
-        __PYX_ERR(0, 402, __pyx_L1_error)
+        __PYX_ERR(0, 403, __pyx_L1_error)
       }
-      __pyx_t_18 = PySequence_GetSlice(__pyx_v_text, __pyx_v_start, __pyx_v_i); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 402, __pyx_L1_error)
+      __pyx_t_18 = PySequence_GetSlice(__pyx_v_text, __pyx_v_start, __pyx_v_i); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 403, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
-      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_bytes_bytes(__pyx_t_18, __pyx_mstate_global->__pyx_n_b_class, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 402, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_bytes_bytes(__pyx_t_18, __pyx_mstate_global->__pyx_n_b_class, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 403, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":403
+        /* "lexer_fast.pyx":404
  *                 at_class_body = 0
  *             elif text[start:i] == b"class":
  *                 pending_class = 1             # <<<<<<<<<<<<<<
@@ -7415,7 +7414,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_pending_class = 1;
 
-        /* "lexer_fast.pyx":404
+        /* "lexer_fast.pyx":405
  *             elif text[start:i] == b"class":
  *                 pending_class = 1
  *                 pending_def = 0             # <<<<<<<<<<<<<<
@@ -7424,7 +7423,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_pending_def = 0;
 
-        /* "lexer_fast.pyx":405
+        /* "lexer_fast.pyx":406
  *                 pending_class = 1
  *                 pending_def = 0
  *                 at_class_body = 0             # <<<<<<<<<<<<<<
@@ -7433,17 +7432,17 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
         __pyx_v_at_class_body = 0;
 
-        /* "lexer_fast.pyx":402
+        /* "lexer_fast.pyx":403
  *                 pending_class = 0
  *                 at_class_body = 0
  *             elif text[start:i] == b"class":             # <<<<<<<<<<<<<<
  *                 pending_class = 1
  *                 pending_def = 0
 */
-        goto __pyx_L81;
+        goto __pyx_L82;
       }
 
-      /* "lexer_fast.pyx":407
+      /* "lexer_fast.pyx":408
  *                 at_class_body = 0
  *             else:
  *                 expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -7453,9 +7452,9 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       /*else*/ {
         __pyx_v_expect_docstring = 0;
       }
-      __pyx_L81:;
+      __pyx_L82:;
 
-      /* "lexer_fast.pyx":408
+      /* "lexer_fast.pyx":409
  *             else:
  *                 expect_docstring = 0
  *             continue             # <<<<<<<<<<<<<<
@@ -7464,7 +7463,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":393
+      /* "lexer_fast.pyx":394
  * 
  *         # identifier
  *         if is_alpha(c):             # <<<<<<<<<<<<<<
@@ -7473,7 +7472,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
     }
 
-    /* "lexer_fast.pyx":412
+    /* "lexer_fast.pyx":413
  *         # newline (do NOT reset expect_docstring/pending_def here -
  *         # docstrings live on the line after the def/class header)
  *         if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -7484,7 +7483,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       case 10:
       case 13:
 
-      /* "lexer_fast.pyx":413
+      /* "lexer_fast.pyx":414
  *         # docstrings live on the line after the def/class header)
  *         if c == 10 or c == 13:
  *             i += 1             # <<<<<<<<<<<<<<
@@ -7493,7 +7492,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":414
+      /* "lexer_fast.pyx":415
  *         if c == 10 or c == 13:
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -7502,7 +7501,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
 */
       goto __pyx_L7_continue;
 
-      /* "lexer_fast.pyx":412
+      /* "lexer_fast.pyx":413
  *         # newline (do NOT reset expect_docstring/pending_def here -
  *         # docstrings live on the line after the def/class header)
  *         if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -7513,7 +7512,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
       default: break;
     }
 
-    /* "lexer_fast.pyx":416
+    /* "lexer_fast.pyx":417
  *             continue
  * 
  *         i += 1             # <<<<<<<<<<<<<<
@@ -7524,15 +7523,15 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
     __pyx_L7_continue:;
   }
 
-  /* "lexer_fast.pyx":418
+  /* "lexer_fast.pyx":419
  *         i += 1
  * 
  *     return pack_state(in_string, in_comment, triple_string,             # <<<<<<<<<<<<<<
  *                       string_delim, in_fstring, escape_next,
  *                       in_fexpr, fexpr_depth, is_docstring,
 */
-  __pyx_t_34 = __pyx_f_10lexer_fast_pack_state(__pyx_v_in_string, __pyx_v_in_comment, __pyx_v_triple_string, __pyx_v_string_delim, __pyx_v_in_fstring, __pyx_v_escape_next, __pyx_v_in_fexpr, __pyx_v_fexpr_depth, __pyx_v_is_docstring, __pyx_v_expect_docstring, __pyx_v_at_class_body); if (unlikely(__pyx_t_34 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 418, __pyx_L1_error)
-  __pyx_t_18 = __Pyx_PyLong_From_int(__pyx_t_34); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 418, __pyx_L1_error)
+  __pyx_t_34 = __pyx_f_10lexer_fast_pack_state(__pyx_v_in_string, __pyx_v_in_comment, __pyx_v_triple_string, __pyx_v_string_delim, __pyx_v_in_fstring, __pyx_v_escape_next, __pyx_v_in_fexpr, __pyx_v_fexpr_depth, __pyx_v_is_docstring, __pyx_v_expect_docstring, __pyx_v_at_class_body); if (unlikely(__pyx_t_34 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 419, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyLong_From_int(__pyx_t_34); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 419, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
 
   {
@@ -7602,7 +7601,7 @@ static PyObject *__pyx_pf_10lexer_fast_compute_state_before(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "lexer_fast.pyx":426
+/* "lexer_fast.pyx":427
  * # --- The full styler ---
  * 
  * def style_chunk(bytes text, int start, int end, int prev_state,             # <<<<<<<<<<<<<<
@@ -7655,74 +7654,74 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_text,&__pyx_mstate_global->__pyx_n_u_start,&__pyx_mstate_global->__pyx_n_u_end,&__pyx_mstate_global->__pyx_n_u_prev_state,&__pyx_mstate_global->__pyx_n_u_keywords,&__pyx_mstate_global->__pyx_n_u_builtins,&__pyx_mstate_global->__pyx_n_u_magic_methods,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 426, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 427, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 426, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 427, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "style_chunk", 0) < (0)) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "style_chunk", 0) < (0)) __PYX_ERR(0, 427, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 7; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("style_chunk", 1, 7, 7, i); __PYX_ERR(0, 426, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("style_chunk", 1, 7, 7, i); __PYX_ERR(0, 427, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 7)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 427, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 427, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 427, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 427, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 427, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 427, __pyx_L3_error)
       values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 426, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 427, __pyx_L3_error)
     }
     __pyx_v_text = ((PyObject*)values[0]);
-    __pyx_v_start = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_start == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 426, __pyx_L3_error)
-    __pyx_v_end = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_end == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 426, __pyx_L3_error)
-    __pyx_v_prev_state = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_prev_state == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 426, __pyx_L3_error)
+    __pyx_v_start = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_start == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 427, __pyx_L3_error)
+    __pyx_v_end = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_end == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 427, __pyx_L3_error)
+    __pyx_v_prev_state = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_prev_state == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 427, __pyx_L3_error)
     __pyx_v_keywords = ((PyObject*)values[4]);
     __pyx_v_builtins = ((PyObject*)values[5]);
     __pyx_v_magic_methods = ((PyObject*)values[6]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("style_chunk", 1, 7, 7, __pyx_nargs); __PYX_ERR(0, 426, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("style_chunk", 1, 7, 7, __pyx_nargs); __PYX_ERR(0, 427, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7733,10 +7732,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_text), (&PyBytes_Type), 1, "text", 1))) __PYX_ERR(0, 426, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_keywords), (&PySet_Type), 1, "keywords", 1))) __PYX_ERR(0, 427, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_builtins), (&PySet_Type), 1, "builtins", 1))) __PYX_ERR(0, 427, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_magic_methods), (&PySet_Type), 1, "magic_methods", 1))) __PYX_ERR(0, 427, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_text), (&PyBytes_Type), 1, "text", 1))) __PYX_ERR(0, 427, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_keywords), (&PySet_Type), 1, "keywords", 1))) __PYX_ERR(0, 428, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_builtins), (&PySet_Type), 1, "builtins", 1))) __PYX_ERR(0, 428, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_magic_methods), (&PySet_Type), 1, "magic_methods", 1))) __PYX_ERR(0, 428, __pyx_L1_error)
   __pyx_r = __pyx_pf_10lexer_fast_2style_chunk(__pyx_self, __pyx_v_text, __pyx_v_start, __pyx_v_end, __pyx_v_prev_state, __pyx_v_keywords, __pyx_v_builtins, __pyx_v_magic_methods);
 
   /* function exit code */
@@ -7842,7 +7841,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
 
 
-  /* "lexer_fast.pyx":428
+  /* "lexer_fast.pyx":429
  * def style_chunk(bytes text, int start, int end, int prev_state,
  *                 set keywords, set builtins, set magic_methods):
  *     cdef int length = len(text)             # <<<<<<<<<<<<<<
@@ -7851,12 +7850,12 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type \047NoneType\047 has no len()");
-    __PYX_ERR(0, 428, __pyx_L1_error)
+    __PYX_ERR(0, 429, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 428, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 429, __pyx_L1_error)
   __pyx_v_length = __pyx_t_1;
 
-  /* "lexer_fast.pyx":429
+  /* "lexer_fast.pyx":430
  *                 set keywords, set builtins, set magic_methods):
  *     cdef int length = len(text)
  *     if end > length:             # <<<<<<<<<<<<<<
@@ -7868,7 +7867,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
   if (__pyx_t_2) {
 
 
-    /* "lexer_fast.pyx":430
+    /* "lexer_fast.pyx":431
  *     cdef int length = len(text)
  *     if end > length:
  *         end = length             # <<<<<<<<<<<<<<
@@ -7877,7 +7876,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     __pyx_v_end = __pyx_v_length;
 
-    /* "lexer_fast.pyx":429
+    /* "lexer_fast.pyx":430
  *                 set keywords, set builtins, set magic_methods):
  *     cdef int length = len(text)
  *     if end > length:             # <<<<<<<<<<<<<<
@@ -7886,7 +7885,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   }
 
-  /* "lexer_fast.pyx":431
+  /* "lexer_fast.pyx":432
  *     if end > length:
  *         end = length
  *     if start < 0:             # <<<<<<<<<<<<<<
@@ -7898,7 +7897,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
   if (__pyx_t_2) {
 
 
-    /* "lexer_fast.pyx":432
+    /* "lexer_fast.pyx":433
  *         end = length
  *     if start < 0:
  *         start = 0             # <<<<<<<<<<<<<<
@@ -7907,7 +7906,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     __pyx_v_start = 0;
 
-    /* "lexer_fast.pyx":431
+    /* "lexer_fast.pyx":432
  *     if end > length:
  *         end = length
  *     if start < 0:             # <<<<<<<<<<<<<<
@@ -7916,14 +7915,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   }
 
-  /* "lexer_fast.pyx":440
+  /* "lexer_fast.pyx":441
  *     (in_string, in_comment, triple_string, string_delim,
  *      in_fstring, escape_next, in_fexpr, fexpr_depth, is_docstring,
  *      expect_docstring, at_class_body) = unpack_state(prev_state)             # <<<<<<<<<<<<<<
  * 
  *     cdef list results = []
 */
-  __pyx_t_3 = __pyx_f_10lexer_fast_unpack_state(__pyx_v_prev_state); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 440, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_10lexer_fast_unpack_state(__pyx_v_prev_state); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 441, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (likely(__pyx_t_3 != Py_None)) {
     PyObject* sequence = __pyx_t_3;
@@ -7931,7 +7930,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (unlikely(size != 11)) {
       if (size > 11) __Pyx_RaiseTooManyValuesError(11);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 438, __pyx_L1_error)
+      __PYX_ERR(0, 439, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     __pyx_t_4 = PyTuple_GET_ITEM(sequence, 0);
@@ -7961,7 +7960,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       Py_ssize_t i;
       PyObject** temps[11] = {&__pyx_t_4,&__pyx_t_5,&__pyx_t_6,&__pyx_t_7,&__pyx_t_8,&__pyx_t_9,&__pyx_t_10,&__pyx_t_11,&__pyx_t_12,&__pyx_t_13,&__pyx_t_14};
       for (i=0; i < 11; i++) {
-        PyObject* item = __Pyx_PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 438, __pyx_L1_error)
+        PyObject* item = __Pyx_PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 439, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -7969,37 +7968,37 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     #endif
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __Pyx_RaiseNoneNotIterableError(); __PYX_ERR(0, 438, __pyx_L1_error)
+    __Pyx_RaiseNoneNotIterableError(); __PYX_ERR(0, 439, __pyx_L1_error)
   }
 
-  /* "lexer_fast.pyx":438
+  /* "lexer_fast.pyx":439
  *     cdef int expect_docstring
  *     cdef int at_class_body
  *     (in_string, in_comment, triple_string, string_delim,             # <<<<<<<<<<<<<<
  *      in_fstring, escape_next, in_fexpr, fexpr_depth, is_docstring,
  *      expect_docstring, at_class_body) = unpack_state(prev_state)
 */
-  __pyx_t_15 = __Pyx_PyLong_As_int(__pyx_t_4); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_15 = __Pyx_PyLong_As_int(__pyx_t_4); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_16 = __Pyx_PyLong_As_int(__pyx_t_5); if (unlikely((__pyx_t_16 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_16 = __Pyx_PyLong_As_int(__pyx_t_5); if (unlikely((__pyx_t_16 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_17 = __Pyx_PyLong_As_int(__pyx_t_6); if (unlikely((__pyx_t_17 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_17 = __Pyx_PyLong_As_int(__pyx_t_6); if (unlikely((__pyx_t_17 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_18 = __Pyx_PyLong_As_int(__pyx_t_7); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyLong_As_int(__pyx_t_7); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_19 = __Pyx_PyLong_As_int(__pyx_t_8); if (unlikely((__pyx_t_19 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyLong_As_int(__pyx_t_8); if (unlikely((__pyx_t_19 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_20 = __Pyx_PyLong_As_int(__pyx_t_9); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyLong_As_int(__pyx_t_9); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_21 = __Pyx_PyLong_As_int(__pyx_t_10); if (unlikely((__pyx_t_21 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyLong_As_int(__pyx_t_10); if (unlikely((__pyx_t_21 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_22 = __Pyx_PyLong_As_int(__pyx_t_11); if (unlikely((__pyx_t_22 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_22 = __Pyx_PyLong_As_int(__pyx_t_11); if (unlikely((__pyx_t_22 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_23 = __Pyx_PyLong_As_int(__pyx_t_12); if (unlikely((__pyx_t_23 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_23 = __Pyx_PyLong_As_int(__pyx_t_12); if (unlikely((__pyx_t_23 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_24 = __Pyx_PyLong_As_int(__pyx_t_13); if (unlikely((__pyx_t_24 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_24 = __Pyx_PyLong_As_int(__pyx_t_13); if (unlikely((__pyx_t_24 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_25 = __Pyx_PyLong_As_int(__pyx_t_14); if (unlikely((__pyx_t_25 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 438, __pyx_L1_error)
+  __pyx_t_25 = __Pyx_PyLong_As_int(__pyx_t_14); if (unlikely((__pyx_t_25 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __pyx_v_in_string = __pyx_t_15;
   __pyx_v_in_comment = __pyx_t_16;
@@ -8013,19 +8012,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
   __pyx_v_expect_docstring = __pyx_t_24;
   __pyx_v_at_class_body = __pyx_t_25;
 
-  /* "lexer_fast.pyx":442
+  /* "lexer_fast.pyx":443
  *      expect_docstring, at_class_body) = unpack_state(prev_state)
  * 
  *     cdef list results = []             # <<<<<<<<<<<<<<
  *     cdef int i = start
  *     cdef int token_start
 */
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 442, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 443, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_results = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "lexer_fast.pyx":443
+  /* "lexer_fast.pyx":444
  * 
  *     cdef list results = []
  *     cdef int i = start             # <<<<<<<<<<<<<<
@@ -8034,7 +8033,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_i = __pyx_v_start;
 
-  /* "lexer_fast.pyx":452
+  /* "lexer_fast.pyx":453
  * 
  *     # Context tracking
  *     cdef int after_def = 0             # <<<<<<<<<<<<<<
@@ -8043,7 +8042,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_def = 0;
 
-  /* "lexer_fast.pyx":453
+  /* "lexer_fast.pyx":454
  *     # Context tracking
  *     cdef int after_def = 0
  *     cdef int after_class = 0             # <<<<<<<<<<<<<<
@@ -8052,7 +8051,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_class = 0;
 
-  /* "lexer_fast.pyx":454
+  /* "lexer_fast.pyx":455
  *     cdef int after_def = 0
  *     cdef int after_class = 0
  *     cdef int after_dot = 0             # <<<<<<<<<<<<<<
@@ -8061,7 +8060,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_dot = 0;
 
-  /* "lexer_fast.pyx":455
+  /* "lexer_fast.pyx":456
  *     cdef int after_class = 0
  *     cdef int after_dot = 0
  *     cdef int after_at = 0             # <<<<<<<<<<<<<<
@@ -8070,7 +8069,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_at = 0;
 
-  /* "lexer_fast.pyx":456
+  /* "lexer_fast.pyx":457
  *     cdef int after_dot = 0
  *     cdef int after_at = 0
  *     cdef int in_def_params = 0             # <<<<<<<<<<<<<<
@@ -8079,7 +8078,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_in_def_params = 0;
 
-  /* "lexer_fast.pyx":457
+  /* "lexer_fast.pyx":458
  *     cdef int after_at = 0
  *     cdef int in_def_params = 0
  *     cdef int param_depth = 0             # <<<<<<<<<<<<<<
@@ -8088,7 +8087,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_param_depth = 0;
 
-  /* "lexer_fast.pyx":458
+  /* "lexer_fast.pyx":459
  *     cdef int in_def_params = 0
  *     cdef int param_depth = 0
  *     cdef int at_type_pos = 0             # <<<<<<<<<<<<<<
@@ -8097,7 +8096,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_at_type_pos = 0;
 
-  /* "lexer_fast.pyx":459
+  /* "lexer_fast.pyx":460
  *     cdef int param_depth = 0
  *     cdef int at_type_pos = 0
  *     cdef int after_arrow = 0             # <<<<<<<<<<<<<<
@@ -8106,7 +8105,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_arrow = 0;
 
-  /* "lexer_fast.pyx":460
+  /* "lexer_fast.pyx":461
  *     cdef int at_type_pos = 0
  *     cdef int after_arrow = 0
  *     cdef int bracket_depth = 0             # <<<<<<<<<<<<<<
@@ -8115,7 +8114,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_bracket_depth = 0;
 
-  /* "lexer_fast.pyx":461
+  /* "lexer_fast.pyx":462
  *     cdef int after_arrow = 0
  *     cdef int bracket_depth = 0
  *     cdef int pending_def = 0             # <<<<<<<<<<<<<<
@@ -8124,7 +8123,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_pending_def = 0;
 
-  /* "lexer_fast.pyx":462
+  /* "lexer_fast.pyx":463
  *     cdef int bracket_depth = 0
  *     cdef int pending_def = 0
  *     cdef int pending_class = 0             # <<<<<<<<<<<<<<
@@ -8133,7 +8132,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_pending_class = 0;
 
-  /* "lexer_fast.pyx":464
+  /* "lexer_fast.pyx":465
  *     cdef int pending_class = 0
  * 
  *     cdef int prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -8142,7 +8141,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_prev_id_type = 0;
 
-  /* "lexer_fast.pyx":465
+  /* "lexer_fast.pyx":466
  * 
  *     cdef int prev_id_type = 0
  *     cdef int dot_owner_type = 0             # <<<<<<<<<<<<<<
@@ -8151,7 +8150,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_dot_owner_type = 0;
 
-  /* "lexer_fast.pyx":467
+  /* "lexer_fast.pyx":468
  *     cdef int dot_owner_type = 0
  * 
  *     cdef int after_from = 0             # <<<<<<<<<<<<<<
@@ -8160,7 +8159,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_from = 0;
 
-  /* "lexer_fast.pyx":468
+  /* "lexer_fast.pyx":469
  * 
  *     cdef int after_from = 0
  *     cdef int after_import = 0             # <<<<<<<<<<<<<<
@@ -8169,7 +8168,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_after_import = 0;
 
-  /* "lexer_fast.pyx":469
+  /* "lexer_fast.pyx":470
  *     cdef int after_from = 0
  *     cdef int after_import = 0
  *     cdef int in_from_import = 0             # <<<<<<<<<<<<<<
@@ -8178,7 +8177,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_in_from_import = 0;
 
-  /* "lexer_fast.pyx":472
+  /* "lexer_fast.pyx":473
  *     cdef bint followed_by_paren
  *     cdef bint followed_by_eq
  *     cdef bint at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -8187,7 +8186,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
   __pyx_v_at_arg_pos = 0;
 
-  /* "lexer_fast.pyx":476
+  /* "lexer_fast.pyx":477
  *     cdef int _j
  * 
  *     if in_string and is_docstring:             # <<<<<<<<<<<<<<
@@ -8213,7 +8212,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
   if (__pyx_t_2) {
 
 
-    /* "lexer_fast.pyx":477
+    /* "lexer_fast.pyx":478
  * 
  *     if in_string and is_docstring:
  *         string_style = STYLE_DOCSTRING             # <<<<<<<<<<<<<<
@@ -8222,7 +8221,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_DOCSTRING;
 
-    /* "lexer_fast.pyx":476
+    /* "lexer_fast.pyx":477
  *     cdef int _j
  * 
  *     if in_string and is_docstring:             # <<<<<<<<<<<<<<
@@ -8232,7 +8231,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     goto __pyx_L5;
   }
 
-  /* "lexer_fast.pyx":479
+  /* "lexer_fast.pyx":480
  *         string_style = STYLE_DOCSTRING
  *     else:
  *         string_style = STYLE_STRING             # <<<<<<<<<<<<<<
@@ -8244,7 +8243,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
   }
   __pyx_L5:;
 
-  /* "lexer_fast.pyx":481
+  /* "lexer_fast.pyx":482
  *         string_style = STYLE_STRING
  * 
  *     while i < end:             # <<<<<<<<<<<<<<
@@ -8257,17 +8256,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
     if (!__pyx_t_2) break;
 
-    /* "lexer_fast.pyx":482
+    /* "lexer_fast.pyx":483
  * 
  *     while i < end:
  *         c = text[i]             # <<<<<<<<<<<<<<
  * 
  *         # ============ COMMENT ============
 */
-    __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 482, __pyx_L1_error)
+    __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 483, __pyx_L1_error)
     __pyx_v_c = __pyx_t_25;
 
-    /* "lexer_fast.pyx":485
+    /* "lexer_fast.pyx":486
  * 
  *         # ============ COMMENT ============
  *         if in_comment:             # <<<<<<<<<<<<<<
@@ -8279,7 +8278,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":486
+      /* "lexer_fast.pyx":487
  *         # ============ COMMENT ============
  *         if in_comment:
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -8288,7 +8287,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":487
+      /* "lexer_fast.pyx":488
  *         if in_comment:
  *             token_start = i
  *             while i < end and text[i] != 10 and text[i] != 13:             # <<<<<<<<<<<<<<
@@ -8306,7 +8305,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L13_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 487, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 488, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 != 10);
 
 
@@ -8318,7 +8317,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L13_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 487, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 488, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 != 13);
 
 
@@ -8329,7 +8328,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":488
+        /* "lexer_fast.pyx":489
  *             token_start = i
  *             while i < end and text[i] != 10 and text[i] != 13:
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -8339,7 +8338,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_v_i = (__pyx_v_i + 1);
       }
 
-      /* "lexer_fast.pyx":489
+      /* "lexer_fast.pyx":490
  *             while i < end and text[i] != 10 and text[i] != 13:
  *                 i += 1
  *             if i > token_start:             # <<<<<<<<<<<<<<
@@ -8351,30 +8350,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":490
+        /* "lexer_fast.pyx":491
  *                 i += 1
  *             if i > token_start:
  *                 results.append((i - token_start, STYLE_COMMENTS))             # <<<<<<<<<<<<<<
  *             if i < end and (text[i] == 10 or text[i] == 13):
  *                 in_comment = 0
 */
-        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 490, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 491, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMENTS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 490, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMENTS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 491, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 490, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 491, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 490, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 491, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 490, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 491, __pyx_L1_error);
         __pyx_t_3 = 0;
         __pyx_t_14 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 490, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 491, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":489
+        /* "lexer_fast.pyx":490
  *             while i < end and text[i] != 10 and text[i] != 13:
  *                 i += 1
  *             if i > token_start:             # <<<<<<<<<<<<<<
@@ -8383,7 +8382,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":491
+      /* "lexer_fast.pyx":492
  *             if i > token_start:
  *                 results.append((i - token_start, STYLE_COMMENTS))
  *             if i < end and (text[i] == 10 or text[i] == 13):             # <<<<<<<<<<<<<<
@@ -8400,7 +8399,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         goto __pyx_L18_bool_binop_done;
       }
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 491, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 492, __pyx_L1_error)
       __pyx_t_26 = (__pyx_t_25 == 10);
 
 
@@ -8412,7 +8411,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         goto __pyx_L18_bool_binop_done;
       }
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 491, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 492, __pyx_L1_error)
       __pyx_t_26 = (__pyx_t_25 == 13);
 
 
@@ -8423,7 +8422,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":492
+        /* "lexer_fast.pyx":493
  *                 results.append((i - token_start, STYLE_COMMENTS))
  *             if i < end and (text[i] == 10 or text[i] == 13):
  *                 in_comment = 0             # <<<<<<<<<<<<<<
@@ -8432,14 +8431,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_comment = 0;
 
-        /* "lexer_fast.pyx":493
+        /* "lexer_fast.pyx":494
  *             if i < end and (text[i] == 10 or text[i] == 13):
  *                 in_comment = 0
  *                 if text[i] == 13 and i + 1 < end and text[i+1] == 10:             # <<<<<<<<<<<<<<
  *                     results.append((2, STYLE_DEFAULT))
  *                     i += 2
 */
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 493, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 494, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 == 13);
 
 
@@ -8463,7 +8462,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         }
         __pyx_t_28 = (__pyx_v_i + 1);
 
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 493, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 494, __pyx_L1_error)
 
         __pyx_t_26 = (__pyx_t_25 == 10);
 
@@ -8475,28 +8474,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":494
+          /* "lexer_fast.pyx":495
  *                 in_comment = 0
  *                 if text[i] == 13 and i + 1 < end and text[i+1] == 10:
  *                     results.append((2, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *                     i += 2
  *                 else:
 */
-          __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 494, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 495, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 494, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 495, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_2);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_2);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 494, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 495, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 494, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 495, __pyx_L1_error);
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 494, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 495, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":495
+          /* "lexer_fast.pyx":496
  *                 if text[i] == 13 and i + 1 < end and text[i+1] == 10:
  *                     results.append((2, STYLE_DEFAULT))
  *                     i += 2             # <<<<<<<<<<<<<<
@@ -8505,7 +8504,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 2);
 
-          /* "lexer_fast.pyx":493
+          /* "lexer_fast.pyx":494
  *             if i < end and (text[i] == 10 or text[i] == 13):
  *                 in_comment = 0
  *                 if text[i] == 13 and i + 1 < end and text[i+1] == 10:             # <<<<<<<<<<<<<<
@@ -8515,7 +8514,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L21;
         }
 
-        /* "lexer_fast.pyx":497
+        /* "lexer_fast.pyx":498
  *                     i += 2
  *                 else:
  *                     results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
@@ -8523,21 +8522,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *             continue
 */
         /*else*/ {
-          __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 497, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 498, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 497, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 498, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 497, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 498, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 497, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 498, __pyx_L1_error);
           __pyx_t_14 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 497, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 498, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":498
+          /* "lexer_fast.pyx":499
  *                 else:
  *                     results.append((1, STYLE_DEFAULT))
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -8548,7 +8547,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         }
         __pyx_L21:;
 
-        /* "lexer_fast.pyx":491
+        /* "lexer_fast.pyx":492
  *             if i > token_start:
  *                 results.append((i - token_start, STYLE_COMMENTS))
  *             if i < end and (text[i] == 10 or text[i] == 13):             # <<<<<<<<<<<<<<
@@ -8557,7 +8556,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":499
+      /* "lexer_fast.pyx":500
  *                     results.append((1, STYLE_DEFAULT))
  *                     i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -8566,7 +8565,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":485
+      /* "lexer_fast.pyx":486
  * 
  *         # ============ COMMENT ============
  *         if in_comment:             # <<<<<<<<<<<<<<
@@ -8575,7 +8574,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":502
+    /* "lexer_fast.pyx":503
  * 
  *         # ============ F-STRING EXPRESSION { ... } ============
  *         if in_fexpr:             # <<<<<<<<<<<<<<
@@ -8587,7 +8586,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":503
+      /* "lexer_fast.pyx":504
  *         # ============ F-STRING EXPRESSION { ... } ============
  *         if in_fexpr:
  *             if c == 125:  # }             # <<<<<<<<<<<<<<
@@ -8599,7 +8598,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":504
+        /* "lexer_fast.pyx":505
  *         if in_fexpr:
  *             if c == 125:  # }
  *                 fexpr_depth -= 1             # <<<<<<<<<<<<<<
@@ -8608,7 +8607,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_fexpr_depth = (__pyx_v_fexpr_depth - 1);
 
-        /* "lexer_fast.pyx":505
+        /* "lexer_fast.pyx":506
  *             if c == 125:  # }
  *                 fexpr_depth -= 1
  *                 if fexpr_depth <= 0:             # <<<<<<<<<<<<<<
@@ -8620,7 +8619,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":506
+          /* "lexer_fast.pyx":507
  *                 fexpr_depth -= 1
  *                 if fexpr_depth <= 0:
  *                     fexpr_depth = 0             # <<<<<<<<<<<<<<
@@ -8629,7 +8628,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_fexpr_depth = 0;
 
-          /* "lexer_fast.pyx":507
+          /* "lexer_fast.pyx":508
  *                 if fexpr_depth <= 0:
  *                     fexpr_depth = 0
  *                     in_fexpr = 0             # <<<<<<<<<<<<<<
@@ -8638,28 +8637,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_fexpr = 0;
 
-          /* "lexer_fast.pyx":508
+          /* "lexer_fast.pyx":509
  *                     fexpr_depth = 0
  *                     in_fexpr = 0
  *                     results.append((1, string_style))             # <<<<<<<<<<<<<<
  *                 else:
  *                     results.append((1, STYLE_BRACKETS))
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 508, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 509, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 508, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 509, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 508, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 509, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 508, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 509, __pyx_L1_error);
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 508, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 509, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":505
+          /* "lexer_fast.pyx":506
  *             if c == 125:  # }
  *                 fexpr_depth -= 1
  *                 if fexpr_depth <= 0:             # <<<<<<<<<<<<<<
@@ -8669,7 +8668,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L27;
         }
 
-        /* "lexer_fast.pyx":510
+        /* "lexer_fast.pyx":511
  *                     results.append((1, string_style))
  *                 else:
  *                     results.append((1, STYLE_BRACKETS))             # <<<<<<<<<<<<<<
@@ -8677,23 +8676,23 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                 continue
 */
         /*else*/ {
-          __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 510, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 511, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 510, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 511, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 510, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 511, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 510, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 511, __pyx_L1_error);
           __pyx_t_14 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 510, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 511, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
         }
         __pyx_L27:;
 
-        /* "lexer_fast.pyx":511
+        /* "lexer_fast.pyx":512
  *                 else:
  *                     results.append((1, STYLE_BRACKETS))
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -8702,7 +8701,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":512
+        /* "lexer_fast.pyx":513
  *                     results.append((1, STYLE_BRACKETS))
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -8711,7 +8710,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":503
+        /* "lexer_fast.pyx":504
  *         # ============ F-STRING EXPRESSION { ... } ============
  *         if in_fexpr:
  *             if c == 125:  # }             # <<<<<<<<<<<<<<
@@ -8720,7 +8719,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":513
+      /* "lexer_fast.pyx":514
  *                 i += 1
  *                 continue
  *             if c == 123:  # {             # <<<<<<<<<<<<<<
@@ -8732,7 +8731,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":514
+        /* "lexer_fast.pyx":515
  *                 continue
  *             if c == 123:  # {
  *                 fexpr_depth += 1             # <<<<<<<<<<<<<<
@@ -8741,28 +8740,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_fexpr_depth = (__pyx_v_fexpr_depth + 1);
 
-        /* "lexer_fast.pyx":515
+        /* "lexer_fast.pyx":516
  *             if c == 123:  # {
  *                 fexpr_depth += 1
  *                 results.append((1, STYLE_BRACKETS))             # <<<<<<<<<<<<<<
  *                 i += 1
  *                 continue
 */
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 515, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 516, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 515, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 516, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 515, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 516, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 515, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 516, __pyx_L1_error);
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 515, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 516, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":516
+        /* "lexer_fast.pyx":517
  *                 fexpr_depth += 1
  *                 results.append((1, STYLE_BRACKETS))
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -8771,7 +8770,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":517
+        /* "lexer_fast.pyx":518
  *                 results.append((1, STYLE_BRACKETS))
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -8780,7 +8779,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":513
+        /* "lexer_fast.pyx":514
  *                 i += 1
  *                 continue
  *             if c == 123:  # {             # <<<<<<<<<<<<<<
@@ -8789,7 +8788,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":518
+      /* "lexer_fast.pyx":519
  *                 i += 1
  *                 continue
  *             if (c == 102 or c == 114 or c == 98) and i + 1 < end:             # <<<<<<<<<<<<<<
@@ -8823,7 +8822,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":519
+        /* "lexer_fast.pyx":520
  *                 continue
  *             if (c == 102 or c == 114 or c == 98) and i + 1 < end:
  *                 next_c = text[i + 1]             # <<<<<<<<<<<<<<
@@ -8832,11 +8831,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_t_28 = (__pyx_v_i + 1);
 
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 519, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 520, __pyx_L1_error)
 
         __pyx_v_next_c = __pyx_t_25;
 
-        /* "lexer_fast.pyx":520
+        /* "lexer_fast.pyx":521
  *             if (c == 102 or c == 114 or c == 98) and i + 1 < end:
  *                 next_c = text[i + 1]
  *                 if next_c == 34 or next_c == 39:             # <<<<<<<<<<<<<<
@@ -8847,7 +8846,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           case 34:
           case 39:
 
-          /* "lexer_fast.pyx":521
+          /* "lexer_fast.pyx":522
  *                 next_c = text[i + 1]
  *                 if next_c == 34 or next_c == 39:
  *                     token_start = i             # <<<<<<<<<<<<<<
@@ -8856,7 +8855,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_token_start = __pyx_v_i;
 
-          /* "lexer_fast.pyx":524
+          /* "lexer_fast.pyx":525
  *                     # CHUNK-SAFETY: only consume 4 bytes when all 4 are
  *                     # inside THIS chunk (not `length` = full document).
  *                     if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:             # <<<<<<<<<<<<<<
@@ -8875,7 +8874,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           }
           __pyx_t_28 = (__pyx_v_i + 2);
 
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 524, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 525, __pyx_L1_error)
 
           __pyx_t_26 = (__pyx_t_25 == __pyx_v_next_c);
 
@@ -8890,7 +8889,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           }
           __pyx_t_28 = (__pyx_v_i + 3);
 
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 524, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 525, __pyx_L1_error)
 
           __pyx_t_26 = (__pyx_t_25 == __pyx_v_next_c);
 
@@ -8902,28 +8901,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":525
+            /* "lexer_fast.pyx":526
  *                     # inside THIS chunk (not `length` = full document).
  *                     if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:
  *                         results.append((4, STYLE_STRING))             # <<<<<<<<<<<<<<
  *                         i += 4
  *                     else:
 */
-            __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 525, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 526, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
-            __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 525, __pyx_L1_error)
+            __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 526, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_INCREF(__pyx_mstate_global->__pyx_int_4);
             __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_4);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_4) != (0)) __PYX_ERR(0, 525, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_4) != (0)) __PYX_ERR(0, 526, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_14);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 525, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 526, __pyx_L1_error);
             __pyx_t_14 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 525, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 526, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-            /* "lexer_fast.pyx":526
+            /* "lexer_fast.pyx":527
  *                     if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:
  *                         results.append((4, STYLE_STRING))
  *                         i += 4             # <<<<<<<<<<<<<<
@@ -8932,7 +8931,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_i = (__pyx_v_i + 4);
 
-            /* "lexer_fast.pyx":524
+            /* "lexer_fast.pyx":525
  *                     # CHUNK-SAFETY: only consume 4 bytes when all 4 are
  *                     # inside THIS chunk (not `length` = full document).
  *                     if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:             # <<<<<<<<<<<<<<
@@ -8942,7 +8941,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
             goto __pyx_L32;
           }
 
-          /* "lexer_fast.pyx":528
+          /* "lexer_fast.pyx":529
  *                         i += 4
  *                     else:
  *                         results.append((2, STYLE_STRING))             # <<<<<<<<<<<<<<
@@ -8950,21 +8949,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                     continue
 */
           /*else*/ {
-            __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 528, __pyx_L1_error)
+            __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 529, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
-            __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 528, __pyx_L1_error)
+            __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 529, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
             __Pyx_INCREF(__pyx_mstate_global->__pyx_int_2);
             __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_2);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 528, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 529, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_13);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 528, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 529, __pyx_L1_error);
             __pyx_t_13 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 528, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 529, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-            /* "lexer_fast.pyx":529
+            /* "lexer_fast.pyx":530
  *                     else:
  *                         results.append((2, STYLE_STRING))
  *                         i += 2             # <<<<<<<<<<<<<<
@@ -8975,7 +8974,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           }
           __pyx_L32:;
 
-          /* "lexer_fast.pyx":530
+          /* "lexer_fast.pyx":531
  *                         results.append((2, STYLE_STRING))
  *                         i += 2
  *                     continue             # <<<<<<<<<<<<<<
@@ -8984,7 +8983,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           goto __pyx_L8_continue;
 
-          /* "lexer_fast.pyx":520
+          /* "lexer_fast.pyx":521
  *             if (c == 102 or c == 114 or c == 98) and i + 1 < end:
  *                 next_c = text[i + 1]
  *                 if next_c == 34 or next_c == 39:             # <<<<<<<<<<<<<<
@@ -8995,7 +8994,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           default: break;
         }
 
-        /* "lexer_fast.pyx":518
+        /* "lexer_fast.pyx":519
  *                 i += 1
  *                 continue
  *             if (c == 102 or c == 114 or c == 98) and i + 1 < end:             # <<<<<<<<<<<<<<
@@ -9004,7 +9003,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":531
+      /* "lexer_fast.pyx":532
  *                         i += 2
  *                     continue
  *             if c == 34 or c == 39:             # <<<<<<<<<<<<<<
@@ -9015,7 +9014,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         case 34:
         case 39:
 
-        /* "lexer_fast.pyx":532
+        /* "lexer_fast.pyx":533
  *                     continue
  *             if c == 34 or c == 39:
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -9024,7 +9023,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":533
+        /* "lexer_fast.pyx":534
  *             if c == 34 or c == 39:
  *                 token_start = i
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -9033,7 +9032,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":534
+        /* "lexer_fast.pyx":535
  *                 token_start = i
  *                 i += 1
  *                 while i < end:             # <<<<<<<<<<<<<<
@@ -9046,21 +9045,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           if (!__pyx_t_2) break;
 
-          /* "lexer_fast.pyx":535
+          /* "lexer_fast.pyx":536
  *                 i += 1
  *                 while i < end:
  *                     if text[i] == 92:             # <<<<<<<<<<<<<<
  *                         # CHUNK-SAFETY: a backslash as the LAST byte of the
  *                         # chunk must not skip past `end` (would style one
 */
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 535, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 536, __pyx_L1_error)
           __pyx_t_2 = (__pyx_t_25 == 92);
 
 
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":539
+            /* "lexer_fast.pyx":540
  *                         # chunk must not skip past `end` (would style one
  *                         # byte too many).
  *                         if i + 1 < end:             # <<<<<<<<<<<<<<
@@ -9072,7 +9071,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
             if (__pyx_t_2) {
 
 
-              /* "lexer_fast.pyx":540
+              /* "lexer_fast.pyx":541
  *                         # byte too many).
  *                         if i + 1 < end:
  *                             i += 2             # <<<<<<<<<<<<<<
@@ -9081,7 +9080,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
               __pyx_v_i = (__pyx_v_i + 2);
 
-              /* "lexer_fast.pyx":539
+              /* "lexer_fast.pyx":540
  *                         # chunk must not skip past `end` (would style one
  *                         # byte too many).
  *                         if i + 1 < end:             # <<<<<<<<<<<<<<
@@ -9091,7 +9090,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
               goto __pyx_L39;
             }
 
-            /* "lexer_fast.pyx":542
+            /* "lexer_fast.pyx":543
  *                             i += 2
  *                         else:
  *                             i += 1             # <<<<<<<<<<<<<<
@@ -9103,7 +9102,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
             }
             __pyx_L39:;
 
-            /* "lexer_fast.pyx":543
+            /* "lexer_fast.pyx":544
  *                         else:
  *                             i += 1
  *                         continue             # <<<<<<<<<<<<<<
@@ -9112,7 +9111,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             goto __pyx_L36_continue;
 
-            /* "lexer_fast.pyx":535
+            /* "lexer_fast.pyx":536
  *                 i += 1
  *                 while i < end:
  *                     if text[i] == 92:             # <<<<<<<<<<<<<<
@@ -9121,21 +9120,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":544
+          /* "lexer_fast.pyx":545
  *                             i += 1
  *                         continue
  *                     if text[i] == c:             # <<<<<<<<<<<<<<
  *                         i += 1
  *                         break
 */
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 544, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 545, __pyx_L1_error)
           __pyx_t_2 = (__pyx_t_25 == __pyx_v_c);
 
 
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":545
+            /* "lexer_fast.pyx":546
  *                         continue
  *                     if text[i] == c:
  *                         i += 1             # <<<<<<<<<<<<<<
@@ -9144,7 +9143,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_i = (__pyx_v_i + 1);
 
-            /* "lexer_fast.pyx":546
+            /* "lexer_fast.pyx":547
  *                     if text[i] == c:
  *                         i += 1
  *                         break             # <<<<<<<<<<<<<<
@@ -9153,7 +9152,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             goto __pyx_L37_break;
 
-            /* "lexer_fast.pyx":544
+            /* "lexer_fast.pyx":545
  *                             i += 1
  *                         continue
  *                     if text[i] == c:             # <<<<<<<<<<<<<<
@@ -9162,14 +9161,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":547
+          /* "lexer_fast.pyx":548
  *                         i += 1
  *                         break
  *                     if text[i] == 10 or text[i] == 13:             # <<<<<<<<<<<<<<
  *                         break
  *                     i += 1
 */
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 547, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 548, __pyx_L1_error)
           __pyx_t_26 = (__pyx_t_25 == 10);
 
 
@@ -9181,7 +9180,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L42_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 547, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 548, __pyx_L1_error)
           __pyx_t_26 = (__pyx_t_25 == 13);
 
 
@@ -9192,7 +9191,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":548
+            /* "lexer_fast.pyx":549
  *                         break
  *                     if text[i] == 10 or text[i] == 13:
  *                         break             # <<<<<<<<<<<<<<
@@ -9201,7 +9200,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             goto __pyx_L37_break;
 
-            /* "lexer_fast.pyx":547
+            /* "lexer_fast.pyx":548
  *                         i += 1
  *                         break
  *                     if text[i] == 10 or text[i] == 13:             # <<<<<<<<<<<<<<
@@ -9210,7 +9209,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":549
+          /* "lexer_fast.pyx":550
  *                     if text[i] == 10 or text[i] == 13:
  *                         break
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -9222,30 +9221,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         }
         __pyx_L37_break:;
 
-        /* "lexer_fast.pyx":550
+        /* "lexer_fast.pyx":551
  *                         break
  *                     i += 1
  *                 results.append((i - token_start, STYLE_STRING))             # <<<<<<<<<<<<<<
  *                 continue
  *             if c == 35:
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 550, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 551, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 550, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 551, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 550, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 551, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 550, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 551, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 550, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 551, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 550, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 551, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-        /* "lexer_fast.pyx":551
+        /* "lexer_fast.pyx":552
  *                     i += 1
  *                 results.append((i - token_start, STYLE_STRING))
  *                 continue             # <<<<<<<<<<<<<<
@@ -9254,7 +9253,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":531
+        /* "lexer_fast.pyx":532
  *                         i += 2
  *                     continue
  *             if c == 34 or c == 39:             # <<<<<<<<<<<<<<
@@ -9265,7 +9264,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         default: break;
       }
 
-      /* "lexer_fast.pyx":552
+      /* "lexer_fast.pyx":553
  *                 results.append((i - token_start, STYLE_STRING))
  *                 continue
  *             if c == 35:             # <<<<<<<<<<<<<<
@@ -9277,7 +9276,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":553
+        /* "lexer_fast.pyx":554
  *                 continue
  *             if c == 35:
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -9286,7 +9285,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":554
+        /* "lexer_fast.pyx":555
  *             if c == 35:
  *                 token_start = i
  *                 while i < end and text[i] != 10 and text[i] != 13:             # <<<<<<<<<<<<<<
@@ -9304,7 +9303,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L47_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 554, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 555, __pyx_L1_error)
           __pyx_t_26 = (__pyx_t_25 != 10);
 
 
@@ -9316,7 +9315,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L47_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 554, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 555, __pyx_L1_error)
           __pyx_t_26 = (__pyx_t_25 != 13);
 
 
@@ -9327,7 +9326,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           if (!__pyx_t_2) break;
 
-          /* "lexer_fast.pyx":555
+          /* "lexer_fast.pyx":556
  *                 token_start = i
  *                 while i < end and text[i] != 10 and text[i] != 13:
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -9337,30 +9336,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           __pyx_v_i = (__pyx_v_i + 1);
         }
 
-        /* "lexer_fast.pyx":556
+        /* "lexer_fast.pyx":557
  *                 while i < end and text[i] != 10 and text[i] != 13:
  *                     i += 1
  *                 results.append((i - token_start, STYLE_COMMENTS))             # <<<<<<<<<<<<<<
  *                 continue
  *             if is_alpha(c):
 */
-        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 557, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMENTS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMENTS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 557, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 557, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 556, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 557, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 556, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 557, __pyx_L1_error);
         __pyx_t_3 = 0;
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 556, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 557, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":557
+        /* "lexer_fast.pyx":558
  *                     i += 1
  *                 results.append((i - token_start, STYLE_COMMENTS))
  *                 continue             # <<<<<<<<<<<<<<
@@ -9369,7 +9368,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":552
+        /* "lexer_fast.pyx":553
  *                 results.append((i - token_start, STYLE_STRING))
  *                 continue
  *             if c == 35:             # <<<<<<<<<<<<<<
@@ -9378,18 +9377,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":558
+      /* "lexer_fast.pyx":559
  *                 results.append((i - token_start, STYLE_COMMENTS))
  *                 continue
  *             if is_alpha(c):             # <<<<<<<<<<<<<<
  *                 token_start = i
  *                 while i < end and is_alnum(text[i]):
 */
-      __pyx_t_2 = __pyx_f_10lexer_fast_is_alpha(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 558, __pyx_L1_error)
+      __pyx_t_2 = __pyx_f_10lexer_fast_is_alpha(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 559, __pyx_L1_error)
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":559
+        /* "lexer_fast.pyx":560
  *                 continue
  *             if is_alpha(c):
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -9398,7 +9397,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":560
+        /* "lexer_fast.pyx":561
  *             if is_alpha(c):
  *                 token_start = i
  *                 while i < end and is_alnum(text[i]):             # <<<<<<<<<<<<<<
@@ -9416,8 +9415,8 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L53_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 560, __pyx_L1_error)
-          __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 560, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 561, __pyx_L1_error)
+          __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 561, __pyx_L1_error)
 
 
           __pyx_t_2 = __pyx_t_26;
@@ -9426,7 +9425,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           if (!__pyx_t_2) break;
 
-          /* "lexer_fast.pyx":561
+          /* "lexer_fast.pyx":562
  *                 token_start = i
  *                 while i < end and is_alnum(text[i]):
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -9436,7 +9435,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           __pyx_v_i = (__pyx_v_i + 1);
         }
 
-        /* "lexer_fast.pyx":562
+        /* "lexer_fast.pyx":563
  *                 while i < end and is_alnum(text[i]):
  *                     i += 1
  *                 token_bytes = text[token_start:i]             # <<<<<<<<<<<<<<
@@ -9445,14 +9444,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         if (unlikely(__pyx_v_text == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not subscriptable");
-          __PYX_ERR(0, 562, __pyx_L1_error)
+          __PYX_ERR(0, 563, __pyx_L1_error)
         }
-        __pyx_t_14 = PySequence_GetSlice(__pyx_v_text, __pyx_v_token_start, __pyx_v_i); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 562, __pyx_L1_error)
+        __pyx_t_14 = PySequence_GetSlice(__pyx_v_text, __pyx_v_token_start, __pyx_v_i); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 563, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_XDECREF_SET(__pyx_v_token_bytes, ((PyObject*)__pyx_t_14));
         __pyx_t_14 = 0;
 
-        /* "lexer_fast.pyx":563
+        /* "lexer_fast.pyx":564
  *                     i += 1
  *                 token_bytes = text[token_start:i]
  *                 token_str = token_bytes.decode('utf-8', errors='replace')             # <<<<<<<<<<<<<<
@@ -9468,13 +9467,13 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           PyObject *__pyx_callargs[3] = {__pyx_t_13, __pyx_mstate_global->__pyx_kp_u_utf_8, __pyx_mstate_global->__pyx_n_u_replace};
           #if CYTHON_VECTORCALL
           __pyx_t_3 = __pyx_mstate_global->__pyx_tuple[0];
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 563, __pyx_L1_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 564, __pyx_L1_error)
           __Pyx_INCREF(__pyx_t_3);
           #else
           {
             PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_errors};
             __pyx_t_3 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 563, __pyx_L1_error)
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 564, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
           }
           #endif
@@ -9483,14 +9482,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           #if CYTHON_VECTORCALL
           #endif
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 563, __pyx_L1_error)
+          if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 564, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
         }
-        if (!(likely(PyUnicode_CheckExact(__pyx_t_14))||((__pyx_t_14) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_14))) __PYX_ERR(0, 563, __pyx_L1_error)
+        if (!(likely(PyUnicode_CheckExact(__pyx_t_14))||((__pyx_t_14) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_14))) __PYX_ERR(0, 564, __pyx_L1_error)
         __Pyx_XDECREF_SET(__pyx_v_token_str, ((PyObject*)__pyx_t_14));
         __pyx_t_14 = 0;
 
-        /* "lexer_fast.pyx":564
+        /* "lexer_fast.pyx":565
  *                 token_bytes = text[token_start:i]
  *                 token_str = token_bytes.decode('utf-8', errors='replace')
  *                 followed_by_paren = (i < end and text[i] == 40)             # <<<<<<<<<<<<<<
@@ -9507,7 +9506,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L55_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 564, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 565, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 == 40);
 
 
@@ -9517,7 +9516,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_L55_bool_binop_done:;
         __pyx_v_followed_by_paren = __pyx_t_2;
 
-        /* "lexer_fast.pyx":565
+        /* "lexer_fast.pyx":566
  *                 token_str = token_bytes.decode('utf-8', errors='replace')
  *                 followed_by_paren = (i < end and text[i] == 40)
  *                 if token_str in ("True", "False", "None"):             # <<<<<<<<<<<<<<
@@ -9526,7 +9525,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __Pyx_INCREF(__pyx_v_token_str);
         __pyx_t_30 = __pyx_v_token_str;
-        __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_True, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 565, __pyx_L1_error)
+        __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_True, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 566, __pyx_L1_error)
         if (!__pyx_t_26) {
 
         } else {
@@ -9535,7 +9534,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L58_bool_binop_done;
         }
-        __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_False, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 565, __pyx_L1_error)
+        __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_False, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 566, __pyx_L1_error)
         if (!__pyx_t_26) {
 
         } else {
@@ -9544,7 +9543,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L58_bool_binop_done;
         }
-        __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_None, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 565, __pyx_L1_error)
+        __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_None, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 566, __pyx_L1_error)
 
         __pyx_t_2 = __pyx_t_26;
 
@@ -9556,30 +9555,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_26) {
 
 
-          /* "lexer_fast.pyx":566
+          /* "lexer_fast.pyx":567
  *                 followed_by_paren = (i < end and text[i] == 40)
  *                 if token_str in ("True", "False", "None"):
  *                     results.append((i - token_start, STYLE_CONSTANTS))             # <<<<<<<<<<<<<<
  *                 elif token_str in ("self", "cls"):
  *                     results.append((i - token_start, STYLE_SELF_CLS))
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 566, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 567, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CONSTANTS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 566, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CONSTANTS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 567, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 566, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 567, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 566, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 567, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 566, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 567, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 566, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 567, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":565
+          /* "lexer_fast.pyx":566
  *                 token_str = token_bytes.decode('utf-8', errors='replace')
  *                 followed_by_paren = (i < end and text[i] == 40)
  *                 if token_str in ("True", "False", "None"):             # <<<<<<<<<<<<<<
@@ -9589,7 +9588,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L57;
         }
 
-        /* "lexer_fast.pyx":567
+        /* "lexer_fast.pyx":568
  *                 if token_str in ("True", "False", "None"):
  *                     results.append((i - token_start, STYLE_CONSTANTS))
  *                 elif token_str in ("self", "cls"):             # <<<<<<<<<<<<<<
@@ -9598,7 +9597,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __Pyx_INCREF(__pyx_v_token_str);
         __pyx_t_30 = __pyx_v_token_str;
-        __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_self, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 567, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_self, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 568, __pyx_L1_error)
         if (!__pyx_t_2) {
 
         } else {
@@ -9607,7 +9606,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L61_bool_binop_done;
         }
-        __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_cls, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 567, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_cls, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 568, __pyx_L1_error)
 
         __pyx_t_26 = __pyx_t_2;
 
@@ -9619,30 +9618,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":568
+          /* "lexer_fast.pyx":569
  *                     results.append((i - token_start, STYLE_CONSTANTS))
  *                 elif token_str in ("self", "cls"):
  *                     results.append((i - token_start, STYLE_SELF_CLS))             # <<<<<<<<<<<<<<
  *                 elif token_str in keywords:
  *                     results.append((i - token_start, STYLE_KEYWORD))
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 568, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 569, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_SELF_CLS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 568, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_SELF_CLS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 568, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 569, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 568, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 569, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 568, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 569, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 568, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 569, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":567
+          /* "lexer_fast.pyx":568
  *                 if token_str in ("True", "False", "None"):
  *                     results.append((i - token_start, STYLE_CONSTANTS))
  *                 elif token_str in ("self", "cls"):             # <<<<<<<<<<<<<<
@@ -9652,7 +9651,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L57;
         }
 
-        /* "lexer_fast.pyx":569
+        /* "lexer_fast.pyx":570
  *                 elif token_str in ("self", "cls"):
  *                     results.append((i - token_start, STYLE_SELF_CLS))
  *                 elif token_str in keywords:             # <<<<<<<<<<<<<<
@@ -9661,36 +9660,36 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         if (unlikely(__pyx_v_keywords == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not iterable");
-          __PYX_ERR(0, 569, __pyx_L1_error)
+          __PYX_ERR(0, 570, __pyx_L1_error)
         }
-        __pyx_t_2 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_keywords, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 569, __pyx_L1_error)
+        __pyx_t_2 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_keywords, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 570, __pyx_L1_error)
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":570
+          /* "lexer_fast.pyx":571
  *                     results.append((i - token_start, STYLE_SELF_CLS))
  *                 elif token_str in keywords:
  *                     results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 elif token_str in builtins:
  *                     results.append((i - token_start, STYLE_BUILTINS))
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 570, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 571, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 570, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 571, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 570, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 571, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 570, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 571, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 570, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 571, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 570, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 571, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":569
+          /* "lexer_fast.pyx":570
  *                 elif token_str in ("self", "cls"):
  *                     results.append((i - token_start, STYLE_SELF_CLS))
  *                 elif token_str in keywords:             # <<<<<<<<<<<<<<
@@ -9700,7 +9699,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L57;
         }
 
-        /* "lexer_fast.pyx":571
+        /* "lexer_fast.pyx":572
  *                 elif token_str in keywords:
  *                     results.append((i - token_start, STYLE_KEYWORD))
  *                 elif token_str in builtins:             # <<<<<<<<<<<<<<
@@ -9709,36 +9708,36 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         if (unlikely(__pyx_v_builtins == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not iterable");
-          __PYX_ERR(0, 571, __pyx_L1_error)
+          __PYX_ERR(0, 572, __pyx_L1_error)
         }
-        __pyx_t_2 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_builtins, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 571, __pyx_L1_error)
+        __pyx_t_2 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_builtins, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 572, __pyx_L1_error)
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":572
+          /* "lexer_fast.pyx":573
  *                     results.append((i - token_start, STYLE_KEYWORD))
  *                 elif token_str in builtins:
  *                     results.append((i - token_start, STYLE_BUILTINS))             # <<<<<<<<<<<<<<
  *                 elif followed_by_paren:
  *                     results.append((i - token_start, STYLE_FUNCTION_CALL))
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 572, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 573, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BUILTINS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 572, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BUILTINS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 573, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 572, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 573, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 572, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 573, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 572, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 573, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 572, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 573, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":571
+          /* "lexer_fast.pyx":572
  *                 elif token_str in keywords:
  *                     results.append((i - token_start, STYLE_KEYWORD))
  *                 elif token_str in builtins:             # <<<<<<<<<<<<<<
@@ -9748,7 +9747,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L57;
         }
 
-        /* "lexer_fast.pyx":573
+        /* "lexer_fast.pyx":574
  *                 elif token_str in builtins:
  *                     results.append((i - token_start, STYLE_BUILTINS))
  *                 elif followed_by_paren:             # <<<<<<<<<<<<<<
@@ -9757,30 +9756,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         if (__pyx_v_followed_by_paren) {
 
-          /* "lexer_fast.pyx":574
+          /* "lexer_fast.pyx":575
  *                     results.append((i - token_start, STYLE_BUILTINS))
  *                 elif followed_by_paren:
  *                     results.append((i - token_start, STYLE_FUNCTION_CALL))             # <<<<<<<<<<<<<<
  *                 elif len(token_str) > 0 and token_str[0].isupper():
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 574, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 575, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_FUNCTION_CALL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 574, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_FUNCTION_CALL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 575, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 574, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 575, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 574, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 575, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 574, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 575, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 574, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 575, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":573
+          /* "lexer_fast.pyx":574
  *                 elif token_str in builtins:
  *                     results.append((i - token_start, STYLE_BUILTINS))
  *                 elif followed_by_paren:             # <<<<<<<<<<<<<<
@@ -9790,14 +9789,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L57;
         }
 
-        /* "lexer_fast.pyx":575
+        /* "lexer_fast.pyx":576
  *                 elif followed_by_paren:
  *                     results.append((i - token_start, STYLE_FUNCTION_CALL))
  *                 elif len(token_str) > 0 and token_str[0].isupper():             # <<<<<<<<<<<<<<
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
  *                 else:
 */
-        __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 575, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 576, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_1 > 0);
 
 
@@ -9809,8 +9808,8 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L63_bool_binop_done;
         }
-        __pyx_t_31 = __Pyx_GetItemInt_Unicode(__pyx_v_token_str, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(__pyx_t_31 == (Py_UCS4)-1)) __PYX_ERR(0, 575, __pyx_L1_error)
-        __pyx_t_26 = __Pyx_Py_UNICODE_ISUPPER(__pyx_t_31); if (unlikely(__pyx_t_26 == ((int)-1))) __PYX_ERR(0, 575, __pyx_L1_error)
+        __pyx_t_31 = __Pyx_GetItemInt_Unicode(__pyx_v_token_str, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(__pyx_t_31 == (Py_UCS4)-1)) __PYX_ERR(0, 576, __pyx_L1_error)
+        __pyx_t_26 = __Pyx_Py_UNICODE_ISUPPER(__pyx_t_31); if (unlikely(__pyx_t_26 == ((int)-1))) __PYX_ERR(0, 576, __pyx_L1_error)
 
 
         __pyx_t_2 = __pyx_t_26;
@@ -9819,30 +9818,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":576
+          /* "lexer_fast.pyx":577
  *                     results.append((i - token_start, STYLE_FUNCTION_CALL))
  *                 elif len(token_str) > 0 and token_str[0].isupper():
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))             # <<<<<<<<<<<<<<
  *                 else:
  *                     results.append((i - token_start, STYLE_LOCAL_VARIABLE))
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 576, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 577, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASS_REFERENCE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 576, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASS_REFERENCE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 577, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 576, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 577, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 576, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 577, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 576, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 577, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 576, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 577, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":575
+          /* "lexer_fast.pyx":576
  *                 elif followed_by_paren:
  *                     results.append((i - token_start, STYLE_FUNCTION_CALL))
  *                 elif len(token_str) > 0 and token_str[0].isupper():             # <<<<<<<<<<<<<<
@@ -9852,7 +9851,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           goto __pyx_L57;
         }
 
-        /* "lexer_fast.pyx":578
+        /* "lexer_fast.pyx":579
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
  *                 else:
  *                     results.append((i - token_start, STYLE_LOCAL_VARIABLE))             # <<<<<<<<<<<<<<
@@ -9860,25 +9859,25 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *             if is_digit(c):
 */
         /*else*/ {
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 578, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 579, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_LOCAL_VARIABLE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 578, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_LOCAL_VARIABLE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 579, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 578, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 579, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 578, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 579, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 578, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 579, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 578, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 579, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
         }
         __pyx_L57:;
 
-        /* "lexer_fast.pyx":579
+        /* "lexer_fast.pyx":580
  *                 else:
  *                     results.append((i - token_start, STYLE_LOCAL_VARIABLE))
  *                 continue             # <<<<<<<<<<<<<<
@@ -9887,7 +9886,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":558
+        /* "lexer_fast.pyx":559
  *                 results.append((i - token_start, STYLE_COMMENTS))
  *                 continue
  *             if is_alpha(c):             # <<<<<<<<<<<<<<
@@ -9896,18 +9895,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":580
+      /* "lexer_fast.pyx":581
  *                     results.append((i - token_start, STYLE_LOCAL_VARIABLE))
  *                 continue
  *             if is_digit(c):             # <<<<<<<<<<<<<<
  *                 token_start = i
  *                 while i < end and (is_alnum(text[i]) or text[i] == 46):
 */
-      __pyx_t_2 = __pyx_f_10lexer_fast_is_digit(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 580, __pyx_L1_error)
+      __pyx_t_2 = __pyx_f_10lexer_fast_is_digit(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 581, __pyx_L1_error)
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":581
+        /* "lexer_fast.pyx":582
  *                 continue
  *             if is_digit(c):
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -9916,7 +9915,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":582
+        /* "lexer_fast.pyx":583
  *             if is_digit(c):
  *                 token_start = i
  *                 while i < end and (is_alnum(text[i]) or text[i] == 46):             # <<<<<<<<<<<<<<
@@ -9934,8 +9933,8 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L68_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 582, __pyx_L1_error)
-          __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 582, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 583, __pyx_L1_error)
+          __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 583, __pyx_L1_error)
 
           if (!__pyx_t_26) {
 
@@ -9945,7 +9944,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L68_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 582, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 583, __pyx_L1_error)
           __pyx_t_26 = (__pyx_t_25 == 46);
 
 
@@ -9956,7 +9955,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           if (!__pyx_t_2) break;
 
-          /* "lexer_fast.pyx":583
+          /* "lexer_fast.pyx":584
  *                 token_start = i
  *                 while i < end and (is_alnum(text[i]) or text[i] == 46):
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -9966,30 +9965,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           __pyx_v_i = (__pyx_v_i + 1);
         }
 
-        /* "lexer_fast.pyx":584
+        /* "lexer_fast.pyx":585
  *                 while i < end and (is_alnum(text[i]) or text[i] == 46):
  *                     i += 1
  *                 results.append((i - token_start, STYLE_NUMBERS))             # <<<<<<<<<<<<<<
  *                 continue
  *             if is_operator(c):
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 584, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 585, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_NUMBERS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 584, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_NUMBERS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 585, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 584, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 585, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 584, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 585, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 584, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 585, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 584, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 585, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":585
+        /* "lexer_fast.pyx":586
  *                     i += 1
  *                 results.append((i - token_start, STYLE_NUMBERS))
  *                 continue             # <<<<<<<<<<<<<<
@@ -9998,7 +9997,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":580
+        /* "lexer_fast.pyx":581
  *                     results.append((i - token_start, STYLE_LOCAL_VARIABLE))
  *                 continue
  *             if is_digit(c):             # <<<<<<<<<<<<<<
@@ -10007,18 +10006,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":586
+      /* "lexer_fast.pyx":587
  *                 results.append((i - token_start, STYLE_NUMBERS))
  *                 continue
  *             if is_operator(c):             # <<<<<<<<<<<<<<
  *                 token_start = i
  *                 i += 1
 */
-      __pyx_t_2 = __pyx_f_10lexer_fast_is_operator(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 586, __pyx_L1_error)
+      __pyx_t_2 = __pyx_f_10lexer_fast_is_operator(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 587, __pyx_L1_error)
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":587
+        /* "lexer_fast.pyx":588
  *                 continue
  *             if is_operator(c):
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -10027,7 +10026,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":588
+        /* "lexer_fast.pyx":589
  *             if is_operator(c):
  *                 token_start = i
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -10036,7 +10035,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":589
+        /* "lexer_fast.pyx":590
  *                 token_start = i
  *                 i += 1
  *                 if i < end and is_operator(text[i]):             # <<<<<<<<<<<<<<
@@ -10053,8 +10052,8 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           goto __pyx_L73_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 589, __pyx_L1_error)
-        __pyx_t_26 = __pyx_f_10lexer_fast_is_operator(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 589, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 590, __pyx_L1_error)
+        __pyx_t_26 = __pyx_f_10lexer_fast_is_operator(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 590, __pyx_L1_error)
 
 
         __pyx_t_2 = __pyx_t_26;
@@ -10063,7 +10062,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":590
+          /* "lexer_fast.pyx":591
  *                 i += 1
  *                 if i < end and is_operator(text[i]):
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -10072,7 +10071,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":589
+          /* "lexer_fast.pyx":590
  *                 token_start = i
  *                 i += 1
  *                 if i < end and is_operator(text[i]):             # <<<<<<<<<<<<<<
@@ -10081,30 +10080,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":591
+        /* "lexer_fast.pyx":592
  *                 if i < end and is_operator(text[i]):
  *                     i += 1
  *                 results.append((i - token_start, STYLE_OPERATORS))             # <<<<<<<<<<<<<<
  *                 continue
  *             if is_bracket(c):
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 591, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 592, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_OPERATORS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 591, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_OPERATORS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 592, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 591, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 592, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 591, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 592, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 591, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 592, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 591, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 592, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":592
+        /* "lexer_fast.pyx":593
  *                     i += 1
  *                 results.append((i - token_start, STYLE_OPERATORS))
  *                 continue             # <<<<<<<<<<<<<<
@@ -10113,7 +10112,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":586
+        /* "lexer_fast.pyx":587
  *                 results.append((i - token_start, STYLE_NUMBERS))
  *                 continue
  *             if is_operator(c):             # <<<<<<<<<<<<<<
@@ -10122,39 +10121,39 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":593
+      /* "lexer_fast.pyx":594
  *                 results.append((i - token_start, STYLE_OPERATORS))
  *                 continue
  *             if is_bracket(c):             # <<<<<<<<<<<<<<
  *                 results.append((1, STYLE_BRACKETS))
  *                 i += 1
 */
-      __pyx_t_2 = __pyx_f_10lexer_fast_is_bracket(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 593, __pyx_L1_error)
+      __pyx_t_2 = __pyx_f_10lexer_fast_is_bracket(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 594, __pyx_L1_error)
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":594
+        /* "lexer_fast.pyx":595
  *                 continue
  *             if is_bracket(c):
  *                 results.append((1, STYLE_BRACKETS))             # <<<<<<<<<<<<<<
  *                 i += 1
  *                 continue
 */
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 595, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 595, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 594, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 595, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 594, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 595, __pyx_L1_error);
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 594, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 595, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-        /* "lexer_fast.pyx":595
+        /* "lexer_fast.pyx":596
  *             if is_bracket(c):
  *                 results.append((1, STYLE_BRACKETS))
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -10163,7 +10162,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":596
+        /* "lexer_fast.pyx":597
  *                 results.append((1, STYLE_BRACKETS))
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -10172,7 +10171,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":593
+        /* "lexer_fast.pyx":594
  *                 results.append((i - token_start, STYLE_OPERATORS))
  *                 continue
  *             if is_bracket(c):             # <<<<<<<<<<<<<<
@@ -10181,18 +10180,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":597
+      /* "lexer_fast.pyx":598
  *                 i += 1
  *                 continue
  *             if is_space(c):             # <<<<<<<<<<<<<<
  *                 token_start = i
  *                 while i < end and is_space(text[i]):
 */
-      __pyx_t_2 = __pyx_f_10lexer_fast_is_space(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 597, __pyx_L1_error)
+      __pyx_t_2 = __pyx_f_10lexer_fast_is_space(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 598, __pyx_L1_error)
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":598
+        /* "lexer_fast.pyx":599
  *                 continue
  *             if is_space(c):
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -10201,7 +10200,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":599
+        /* "lexer_fast.pyx":600
  *             if is_space(c):
  *                 token_start = i
  *                 while i < end and is_space(text[i]):             # <<<<<<<<<<<<<<
@@ -10219,8 +10218,8 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             goto __pyx_L79_bool_binop_done;
           }
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 599, __pyx_L1_error)
-          __pyx_t_26 = __pyx_f_10lexer_fast_is_space(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 599, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 600, __pyx_L1_error)
+          __pyx_t_26 = __pyx_f_10lexer_fast_is_space(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 600, __pyx_L1_error)
 
 
           __pyx_t_2 = __pyx_t_26;
@@ -10229,7 +10228,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           if (!__pyx_t_2) break;
 
-          /* "lexer_fast.pyx":600
+          /* "lexer_fast.pyx":601
  *                 token_start = i
  *                 while i < end and is_space(text[i]):
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -10239,30 +10238,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           __pyx_v_i = (__pyx_v_i + 1);
         }
 
-        /* "lexer_fast.pyx":601
+        /* "lexer_fast.pyx":602
  *                 while i < end and is_space(text[i]):
  *                     i += 1
  *                 results.append((i - token_start, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *                 continue
  *             if c == 10 or c == 13:
 */
-        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 601, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 602, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 601, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 602, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 601, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 602, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 601, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 602, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 601, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 602, __pyx_L1_error);
         __pyx_t_3 = 0;
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 601, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 602, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":602
+        /* "lexer_fast.pyx":603
  *                     i += 1
  *                 results.append((i - token_start, STYLE_DEFAULT))
  *                 continue             # <<<<<<<<<<<<<<
@@ -10271,7 +10270,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":597
+        /* "lexer_fast.pyx":598
  *                 i += 1
  *                 continue
  *             if is_space(c):             # <<<<<<<<<<<<<<
@@ -10280,7 +10279,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":603
+      /* "lexer_fast.pyx":604
  *                 results.append((i - token_start, STYLE_DEFAULT))
  *                 continue
  *             if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -10291,28 +10290,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         case 10:
         case 13:
 
-        /* "lexer_fast.pyx":604
+        /* "lexer_fast.pyx":605
  *                 continue
  *             if c == 10 or c == 13:
  *                 results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *                 i += 1
  *                 continue
 */
-        __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 604, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 605, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 604, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 605, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 604, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 605, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 604, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 605, __pyx_L1_error);
         __pyx_t_14 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 604, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 605, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":605
+        /* "lexer_fast.pyx":606
  *             if c == 10 or c == 13:
  *                 results.append((1, STYLE_DEFAULT))
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -10321,7 +10320,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":606
+        /* "lexer_fast.pyx":607
  *                 results.append((1, STYLE_DEFAULT))
  *                 i += 1
  *                 continue             # <<<<<<<<<<<<<<
@@ -10330,7 +10329,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":603
+        /* "lexer_fast.pyx":604
  *                 results.append((i - token_start, STYLE_DEFAULT))
  *                 continue
  *             if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -10341,28 +10340,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         default: break;
       }
 
-      /* "lexer_fast.pyx":607
+      /* "lexer_fast.pyx":608
  *                 i += 1
  *                 continue
  *             results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *             i += 1
  *             continue
 */
-      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 607, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 608, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 607, __pyx_L1_error)
+      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 608, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 607, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 608, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_13);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 607, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 608, __pyx_L1_error);
       __pyx_t_13 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 607, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 608, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-      /* "lexer_fast.pyx":608
+      /* "lexer_fast.pyx":609
  *                 continue
  *             results.append((1, STYLE_DEFAULT))
  *             i += 1             # <<<<<<<<<<<<<<
@@ -10371,7 +10370,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":609
+      /* "lexer_fast.pyx":610
  *             results.append((1, STYLE_DEFAULT))
  *             i += 1
  *             continue             # <<<<<<<<<<<<<<
@@ -10380,7 +10379,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":502
+      /* "lexer_fast.pyx":503
  * 
  *         # ============ F-STRING EXPRESSION { ... } ============
  *         if in_fexpr:             # <<<<<<<<<<<<<<
@@ -10389,7 +10388,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":612
+    /* "lexer_fast.pyx":613
  * 
  *         # ============ STRING ============
  *         if in_string:             # <<<<<<<<<<<<<<
@@ -10401,7 +10400,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":613
+      /* "lexer_fast.pyx":614
  *         # ============ STRING ============
  *         if in_string:
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -10410,7 +10409,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":615
+      /* "lexer_fast.pyx":616
  *             token_start = i
  * 
  *             if escape_next:             # <<<<<<<<<<<<<<
@@ -10422,7 +10421,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":616
+        /* "lexer_fast.pyx":617
  * 
  *             if escape_next:
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -10431,7 +10430,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":617
+        /* "lexer_fast.pyx":618
  *             if escape_next:
  *                 i += 1
  *                 escape_next = 0             # <<<<<<<<<<<<<<
@@ -10440,30 +10439,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_escape_next = 0;
 
-        /* "lexer_fast.pyx":618
+        /* "lexer_fast.pyx":619
  *                 i += 1
  *                 escape_next = 0
  *                 results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                 continue
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 618, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 619, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 618, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 619, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 618, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 619, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 618, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 619, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 618, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 619, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 618, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 619, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-        /* "lexer_fast.pyx":619
+        /* "lexer_fast.pyx":620
  *                 escape_next = 0
  *                 results.append((i - token_start, string_style))
  *                 continue             # <<<<<<<<<<<<<<
@@ -10472,7 +10471,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":615
+        /* "lexer_fast.pyx":616
  *             token_start = i
  * 
  *             if escape_next:             # <<<<<<<<<<<<<<
@@ -10481,7 +10480,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":621
+      /* "lexer_fast.pyx":622
  *                 continue
  * 
  *             if c == 92:             # <<<<<<<<<<<<<<
@@ -10493,7 +10492,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":622
+        /* "lexer_fast.pyx":623
  * 
  *             if c == 92:
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -10502,7 +10501,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":623
+        /* "lexer_fast.pyx":624
  *             if c == 92:
  *                 i += 1
  *                 escape_next = 1             # <<<<<<<<<<<<<<
@@ -10511,28 +10510,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_escape_next = 1;
 
-        /* "lexer_fast.pyx":624
+        /* "lexer_fast.pyx":625
  *                 i += 1
  *                 escape_next = 1
  *                 results.append((1, string_style))             # <<<<<<<<<<<<<<
  *                 continue
  * 
 */
-        __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 624, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 625, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 624, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 625, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 624, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 625, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 624, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 625, __pyx_L1_error);
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 624, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 625, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":625
+        /* "lexer_fast.pyx":626
  *                 escape_next = 1
  *                 results.append((1, string_style))
  *                 continue             # <<<<<<<<<<<<<<
@@ -10541,7 +10540,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":621
+        /* "lexer_fast.pyx":622
  *                 continue
  * 
  *             if c == 92:             # <<<<<<<<<<<<<<
@@ -10550,11 +10549,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":627
+      /* "lexer_fast.pyx":628
  *                 continue
  * 
  *             if triple_string:             # <<<<<<<<<<<<<<
- *                 if c == 34 or c == 39:
+ *                 if c == string_delim:
  *                     # CHUNK-SAFETY: the closing '"""' may straddle the chunk
 */
       __pyx_t_2 = (__pyx_v_triple_string != 0);
@@ -10562,18 +10561,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":628
+        /* "lexer_fast.pyx":629
  * 
  *             if triple_string:
- *                 if c == 34 or c == 39:             # <<<<<<<<<<<<<<
+ *                 if c == string_delim:             # <<<<<<<<<<<<<<
  *                     # CHUNK-SAFETY: the closing '"""' may straddle the chunk
  *                     # end. Only consume 3 quote bytes when ALL of them are
 */
-        switch (__pyx_v_c) {
-          case 34:
-          case 39:
+        __pyx_t_2 = (__pyx_v_c == __pyx_v_string_delim);
 
-          /* "lexer_fast.pyx":634
+        if (__pyx_t_2) {
+
+
+          /* "lexer_fast.pyx":635
  *                     # more bytes than the chunk contains corrupts
  *                     # Scintilla's style buffer and crashes the editor.
  *                     if i + 2 < end and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
@@ -10588,11 +10588,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             __pyx_t_2 = __pyx_t_26;
 
-            goto __pyx_L86_bool_binop_done;
+            goto __pyx_L87_bool_binop_done;
           }
           __pyx_t_28 = (__pyx_v_i + 1);
 
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 634, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 635, __pyx_L1_error)
 
           __pyx_t_26 = (__pyx_t_25 == __pyx_v_c);
 
@@ -10603,11 +10603,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             __pyx_t_2 = __pyx_t_26;
 
-            goto __pyx_L86_bool_binop_done;
+            goto __pyx_L87_bool_binop_done;
           }
           __pyx_t_28 = (__pyx_v_i + 2);
 
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 634, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 635, __pyx_L1_error)
 
           __pyx_t_26 = (__pyx_t_25 == __pyx_v_c);
 
@@ -10615,32 +10615,32 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          __pyx_L86_bool_binop_done:;
+          __pyx_L87_bool_binop_done:;
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":635
+            /* "lexer_fast.pyx":636
  *                     # Scintilla's style buffer and crashes the editor.
  *                     if i + 2 < end and text[i+1] == c and text[i+2] == c:
  *                         results.append((3, string_style))             # <<<<<<<<<<<<<<
  *                         i += 3
  *                         in_string = 0
 */
-            __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 635, __pyx_L1_error)
+            __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 636, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
-            __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 635, __pyx_L1_error)
+            __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 636, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_INCREF(__pyx_mstate_global->__pyx_int_3);
             __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_3);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_3) != (0)) __PYX_ERR(0, 635, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_3) != (0)) __PYX_ERR(0, 636, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_13);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 635, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 636, __pyx_L1_error);
             __pyx_t_13 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 635, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 636, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-            /* "lexer_fast.pyx":636
+            /* "lexer_fast.pyx":637
  *                     if i + 2 < end and text[i+1] == c and text[i+2] == c:
  *                         results.append((3, string_style))
  *                         i += 3             # <<<<<<<<<<<<<<
@@ -10649,7 +10649,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_i = (__pyx_v_i + 3);
 
-            /* "lexer_fast.pyx":637
+            /* "lexer_fast.pyx":638
  *                         results.append((3, string_style))
  *                         i += 3
  *                         in_string = 0             # <<<<<<<<<<<<<<
@@ -10658,7 +10658,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_in_string = 0;
 
-            /* "lexer_fast.pyx":638
+            /* "lexer_fast.pyx":639
  *                         i += 3
  *                         in_string = 0
  *                         triple_string = 0             # <<<<<<<<<<<<<<
@@ -10667,7 +10667,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_triple_string = 0;
 
-            /* "lexer_fast.pyx":639
+            /* "lexer_fast.pyx":640
  *                         in_string = 0
  *                         triple_string = 0
  *                         string_delim = 0             # <<<<<<<<<<<<<<
@@ -10676,7 +10676,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_string_delim = 0;
 
-            /* "lexer_fast.pyx":640
+            /* "lexer_fast.pyx":641
  *                         triple_string = 0
  *                         string_delim = 0
  *                         in_fstring = 0             # <<<<<<<<<<<<<<
@@ -10685,7 +10685,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_in_fstring = 0;
 
-            /* "lexer_fast.pyx":641
+            /* "lexer_fast.pyx":642
  *                         string_delim = 0
  *                         in_fstring = 0
  *                         is_docstring = 0             # <<<<<<<<<<<<<<
@@ -10694,7 +10694,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_is_docstring = 0;
 
-            /* "lexer_fast.pyx":642
+            /* "lexer_fast.pyx":643
  *                         in_fstring = 0
  *                         is_docstring = 0
  *                         string_style = STYLE_STRING             # <<<<<<<<<<<<<<
@@ -10703,7 +10703,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_STRING;
 
-            /* "lexer_fast.pyx":643
+            /* "lexer_fast.pyx":644
  *                         is_docstring = 0
  *                         string_style = STYLE_STRING
  *                         continue             # <<<<<<<<<<<<<<
@@ -10712,7 +10712,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             goto __pyx_L8_continue;
 
-            /* "lexer_fast.pyx":634
+            /* "lexer_fast.pyx":635
  *                     # more bytes than the chunk contains corrupts
  *                     # Scintilla's style buffer and crashes the editor.
  *                     if i + 2 < end and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
@@ -10721,28 +10721,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":644
+          /* "lexer_fast.pyx":645
  *                         string_style = STYLE_STRING
  *                         continue
  *                     results.append((1, string_style))             # <<<<<<<<<<<<<<
  *                     i += 1
  *                     continue
 */
-          __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 644, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 645, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 644, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 645, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 644, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 645, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 644, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 645, __pyx_L1_error);
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 644, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 645, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":645
+          /* "lexer_fast.pyx":646
  *                         continue
  *                     results.append((1, string_style))
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -10751,7 +10751,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":646
+          /* "lexer_fast.pyx":647
  *                     results.append((1, string_style))
  *                     i += 1
  *                     continue             # <<<<<<<<<<<<<<
@@ -10760,18 +10760,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           goto __pyx_L8_continue;
 
-          /* "lexer_fast.pyx":628
+          /* "lexer_fast.pyx":629
  * 
  *             if triple_string:
- *                 if c == 34 or c == 39:             # <<<<<<<<<<<<<<
+ *                 if c == string_delim:             # <<<<<<<<<<<<<<
  *                     # CHUNK-SAFETY: the closing '"""' may straddle the chunk
  *                     # end. Only consume 3 quote bytes when ALL of them are
 */
-          break;
-          default: break;
         }
 
-        /* "lexer_fast.pyx":647
+        /* "lexer_fast.pyx":648
  *                     i += 1
  *                     continue
  *                 if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -10786,18 +10784,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L90_bool_binop_done;
+          goto __pyx_L91_bool_binop_done;
         }
         __pyx_t_26 = (__pyx_v_c == 0x7B);
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L90_bool_binop_done:;
+        __pyx_L91_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":649
+          /* "lexer_fast.pyx":650
  *                 if in_fstring and c == 123:
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -10812,11 +10810,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             __pyx_t_2 = __pyx_t_26;
 
-            goto __pyx_L93_bool_binop_done;
+            goto __pyx_L94_bool_binop_done;
           }
           __pyx_t_28 = (__pyx_v_i + 1);
 
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 649, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 650, __pyx_L1_error)
 
           __pyx_t_26 = (__pyx_t_25 == 0x7B);
 
@@ -10824,11 +10822,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          __pyx_L93_bool_binop_done:;
+          __pyx_L94_bool_binop_done:;
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":650
+            /* "lexer_fast.pyx":651
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:
  *                         if i > token_start:             # <<<<<<<<<<<<<<
@@ -10840,30 +10838,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
             if (__pyx_t_2) {
 
 
-              /* "lexer_fast.pyx":651
+              /* "lexer_fast.pyx":652
  *                     if i + 1 < end and text[i+1] == 123:
  *                         if i > token_start:
  *                             results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                         results.append((2, string_style))
  *                         i += 2
 */
-              __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 651, __pyx_L1_error)
+              __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 652, __pyx_L1_error)
               __Pyx_GOTREF(__pyx_t_13);
-              __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 651, __pyx_L1_error)
+              __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 652, __pyx_L1_error)
               __Pyx_GOTREF(__pyx_t_3);
-              __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 651, __pyx_L1_error)
+              __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 652, __pyx_L1_error)
               __Pyx_GOTREF(__pyx_t_14);
               __Pyx_GIVEREF(__pyx_t_13);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 651, __pyx_L1_error);
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 652, __pyx_L1_error);
               __Pyx_GIVEREF(__pyx_t_3);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 651, __pyx_L1_error);
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 652, __pyx_L1_error);
               __pyx_t_13 = 0;
               __pyx_t_3 = 0;
-              __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 651, __pyx_L1_error)
+              __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 652, __pyx_L1_error)
               __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-              /* "lexer_fast.pyx":650
+              /* "lexer_fast.pyx":651
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:
  *                         if i > token_start:             # <<<<<<<<<<<<<<
@@ -10872,28 +10870,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             }
 
-            /* "lexer_fast.pyx":652
+            /* "lexer_fast.pyx":653
  *                         if i > token_start:
  *                             results.append((i - token_start, string_style))
  *                         results.append((2, string_style))             # <<<<<<<<<<<<<<
  *                         i += 2
  *                         continue
 */
-            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 652, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 653, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
-            __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 652, __pyx_L1_error)
+            __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 653, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_INCREF(__pyx_mstate_global->__pyx_int_2);
             __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_2);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 652, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 653, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_14);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 652, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 653, __pyx_L1_error);
             __pyx_t_14 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 652, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 653, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-            /* "lexer_fast.pyx":653
+            /* "lexer_fast.pyx":654
  *                             results.append((i - token_start, string_style))
  *                         results.append((2, string_style))
  *                         i += 2             # <<<<<<<<<<<<<<
@@ -10902,7 +10900,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_i = (__pyx_v_i + 2);
 
-            /* "lexer_fast.pyx":654
+            /* "lexer_fast.pyx":655
  *                         results.append((2, string_style))
  *                         i += 2
  *                         continue             # <<<<<<<<<<<<<<
@@ -10911,7 +10909,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             goto __pyx_L8_continue;
 
-            /* "lexer_fast.pyx":649
+            /* "lexer_fast.pyx":650
  *                 if in_fstring and c == 123:
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -10920,7 +10918,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":655
+          /* "lexer_fast.pyx":656
  *                         i += 2
  *                         continue
  *                     if i > token_start:             # <<<<<<<<<<<<<<
@@ -10932,30 +10930,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":656
+            /* "lexer_fast.pyx":657
  *                         continue
  *                     if i > token_start:
  *                         results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                     results.append((1, string_style))
  *                     i += 1
 */
-            __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 656, __pyx_L1_error)
+            __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 657, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 656, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 657, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
-            __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 656, __pyx_L1_error)
+            __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 657, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_GIVEREF(__pyx_t_3);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 656, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 657, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_14);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 656, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 657, __pyx_L1_error);
             __pyx_t_3 = 0;
             __pyx_t_14 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 656, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 657, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-            /* "lexer_fast.pyx":655
+            /* "lexer_fast.pyx":656
  *                         i += 2
  *                         continue
  *                     if i > token_start:             # <<<<<<<<<<<<<<
@@ -10964,28 +10962,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":657
+          /* "lexer_fast.pyx":658
  *                     if i > token_start:
  *                         results.append((i - token_start, string_style))
  *                     results.append((1, string_style))             # <<<<<<<<<<<<<<
  *                     i += 1
  *                     in_fexpr = 1
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 657, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 658, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 657, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 658, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 657, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 658, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 657, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 658, __pyx_L1_error);
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 657, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 658, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":658
+          /* "lexer_fast.pyx":659
  *                         results.append((i - token_start, string_style))
  *                     results.append((1, string_style))
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -10994,7 +10992,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":659
+          /* "lexer_fast.pyx":660
  *                     results.append((1, string_style))
  *                     i += 1
  *                     in_fexpr = 1             # <<<<<<<<<<<<<<
@@ -11003,7 +11001,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_fexpr = 1;
 
-          /* "lexer_fast.pyx":660
+          /* "lexer_fast.pyx":661
  *                     i += 1
  *                     in_fexpr = 1
  *                     fexpr_depth = 1             # <<<<<<<<<<<<<<
@@ -11012,7 +11010,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_fexpr_depth = 1;
 
-          /* "lexer_fast.pyx":661
+          /* "lexer_fast.pyx":662
  *                     in_fexpr = 1
  *                     fexpr_depth = 1
  *                     continue             # <<<<<<<<<<<<<<
@@ -11021,7 +11019,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           goto __pyx_L8_continue;
 
-          /* "lexer_fast.pyx":647
+          /* "lexer_fast.pyx":648
  *                     i += 1
  *                     continue
  *                 if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -11030,7 +11028,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":662
+        /* "lexer_fast.pyx":663
  *                     fexpr_depth = 1
  *                     continue
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -11039,12 +11037,12 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":663
+        /* "lexer_fast.pyx":664
  *                     continue
  *                 token_start = i
  *                 while i < end:             # <<<<<<<<<<<<<<
  *                     c = text[i]
- *                     if c == 34 or c == 39 or c == 92:
+ *                     if c == string_delim or c == 92:
 */
         while (1) {
           __pyx_t_2 = (__pyx_v_i < __pyx_v_end);
@@ -11052,50 +11050,62 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           if (!__pyx_t_2) break;
 
-          /* "lexer_fast.pyx":664
+          /* "lexer_fast.pyx":665
  *                 token_start = i
  *                 while i < end:
  *                     c = text[i]             # <<<<<<<<<<<<<<
- *                     if c == 34 or c == 39 or c == 92:
+ *                     if c == string_delim or c == 92:
  *                         break
 */
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 664, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 665, __pyx_L1_error)
           __pyx_v_c = __pyx_t_25;
 
-          /* "lexer_fast.pyx":665
+          /* "lexer_fast.pyx":666
  *                 while i < end:
  *                     c = text[i]
- *                     if c == 34 or c == 39 or c == 92:             # <<<<<<<<<<<<<<
+ *                     if c == string_delim or c == 92:             # <<<<<<<<<<<<<<
  *                         break
  *                     if in_fstring and c == 123:
 */
-          switch (__pyx_v_c) {
-            case 34:
-            case 39:
-            case 92:
+          __pyx_t_26 = (__pyx_v_c == __pyx_v_string_delim);
 
-            /* "lexer_fast.pyx":666
+          if (!__pyx_t_26) {
+
+          } else {
+
+            __pyx_t_2 = __pyx_t_26;
+
+            goto __pyx_L101_bool_binop_done;
+          }
+          __pyx_t_26 = (__pyx_v_c == 92);
+
+
+          __pyx_t_2 = __pyx_t_26;
+
+          __pyx_L101_bool_binop_done:;
+          if (__pyx_t_2) {
+
+
+            /* "lexer_fast.pyx":667
  *                     c = text[i]
- *                     if c == 34 or c == 39 or c == 92:
+ *                     if c == string_delim or c == 92:
  *                         break             # <<<<<<<<<<<<<<
  *                     if in_fstring and c == 123:
  *                         break
 */
-            goto __pyx_L98_break;
+            goto __pyx_L99_break;
 
-            /* "lexer_fast.pyx":665
+            /* "lexer_fast.pyx":666
  *                 while i < end:
  *                     c = text[i]
- *                     if c == 34 or c == 39 or c == 92:             # <<<<<<<<<<<<<<
+ *                     if c == string_delim or c == 92:             # <<<<<<<<<<<<<<
  *                         break
  *                     if in_fstring and c == 123:
 */
-            break;
-            default: break;
           }
 
-          /* "lexer_fast.pyx":667
- *                     if c == 34 or c == 39 or c == 92:
+          /* "lexer_fast.pyx":668
+ *                     if c == string_delim or c == 92:
  *                         break
  *                     if in_fstring and c == 123:             # <<<<<<<<<<<<<<
  *                         break
@@ -11109,28 +11119,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             __pyx_t_2 = __pyx_t_26;
 
-            goto __pyx_L100_bool_binop_done;
+            goto __pyx_L104_bool_binop_done;
           }
           __pyx_t_26 = (__pyx_v_c == 0x7B);
 
 
           __pyx_t_2 = __pyx_t_26;
 
-          __pyx_L100_bool_binop_done:;
+          __pyx_L104_bool_binop_done:;
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":668
+            /* "lexer_fast.pyx":669
  *                         break
  *                     if in_fstring and c == 123:
  *                         break             # <<<<<<<<<<<<<<
  *                     i += 1
  *                 if i > token_start:
 */
-            goto __pyx_L98_break;
+            goto __pyx_L99_break;
 
-            /* "lexer_fast.pyx":667
- *                     if c == 34 or c == 39 or c == 92:
+            /* "lexer_fast.pyx":668
+ *                     if c == string_delim or c == 92:
  *                         break
  *                     if in_fstring and c == 123:             # <<<<<<<<<<<<<<
  *                         break
@@ -11138,7 +11148,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":669
+          /* "lexer_fast.pyx":670
  *                     if in_fstring and c == 123:
  *                         break
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -11147,9 +11157,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
         }
-        __pyx_L98_break:;
+        __pyx_L99_break:;
 
-        /* "lexer_fast.pyx":670
+        /* "lexer_fast.pyx":671
  *                         break
  *                     i += 1
  *                 if i > token_start:             # <<<<<<<<<<<<<<
@@ -11161,30 +11171,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":671
+          /* "lexer_fast.pyx":672
  *                     i += 1
  *                 if i > token_start:
  *                     results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                 continue
  * 
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 671, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 672, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 671, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 672, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 671, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 672, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 671, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 672, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 671, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 672, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 671, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 672, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-          /* "lexer_fast.pyx":670
+          /* "lexer_fast.pyx":671
  *                         break
  *                     i += 1
  *                 if i > token_start:             # <<<<<<<<<<<<<<
@@ -11193,7 +11203,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":672
+        /* "lexer_fast.pyx":673
  *                 if i > token_start:
  *                     results.append((i - token_start, string_style))
  *                 continue             # <<<<<<<<<<<<<<
@@ -11202,16 +11212,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":627
+        /* "lexer_fast.pyx":628
  *                 continue
  * 
  *             if triple_string:             # <<<<<<<<<<<<<<
- *                 if c == 34 or c == 39:
+ *                 if c == string_delim:
  *                     # CHUNK-SAFETY: the closing '"""' may straddle the chunk
 */
       }
 
-      /* "lexer_fast.pyx":675
+      /* "lexer_fast.pyx":676
  * 
  *             # single-line string
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -11220,7 +11230,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":676
+      /* "lexer_fast.pyx":677
  *             # single-line string
  *             token_start = i
  *             while i < end:             # <<<<<<<<<<<<<<
@@ -11233,17 +11243,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":677
+        /* "lexer_fast.pyx":678
  *             token_start = i
  *             while i < end:
  *                 c = text[i]             # <<<<<<<<<<<<<<
  *                 if c == string_delim:
  *                     results.append((i - token_start + 1, string_style))
 */
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 677, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 678, __pyx_L1_error)
         __pyx_v_c = __pyx_t_25;
 
-        /* "lexer_fast.pyx":678
+        /* "lexer_fast.pyx":679
  *             while i < end:
  *                 c = text[i]
  *                 if c == string_delim:             # <<<<<<<<<<<<<<
@@ -11255,30 +11265,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":679
+          /* "lexer_fast.pyx":680
  *                 c = text[i]
  *                 if c == string_delim:
  *                     results.append((i - token_start + 1, string_style))             # <<<<<<<<<<<<<<
  *                     i += 1
  *                     in_string = 0
 */
-          __pyx_t_3 = __Pyx_PyLong_From_long(((__pyx_v_i - __pyx_v_token_start) + 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 679, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From_long(((__pyx_v_i - __pyx_v_token_start) + 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 680, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 679, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 680, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 679, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 680, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 679, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 680, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 679, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 680, __pyx_L1_error);
           __pyx_t_3 = 0;
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 679, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 680, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":680
+          /* "lexer_fast.pyx":681
  *                 if c == string_delim:
  *                     results.append((i - token_start + 1, string_style))
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -11287,7 +11297,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":681
+          /* "lexer_fast.pyx":682
  *                     results.append((i - token_start + 1, string_style))
  *                     i += 1
  *                     in_string = 0             # <<<<<<<<<<<<<<
@@ -11296,7 +11306,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_string = 0;
 
-          /* "lexer_fast.pyx":682
+          /* "lexer_fast.pyx":683
  *                     i += 1
  *                     in_string = 0
  *                     string_delim = 0             # <<<<<<<<<<<<<<
@@ -11305,7 +11315,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_delim = 0;
 
-          /* "lexer_fast.pyx":683
+          /* "lexer_fast.pyx":684
  *                     in_string = 0
  *                     string_delim = 0
  *                     in_fstring = 0             # <<<<<<<<<<<<<<
@@ -11314,7 +11324,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_fstring = 0;
 
-          /* "lexer_fast.pyx":684
+          /* "lexer_fast.pyx":685
  *                     string_delim = 0
  *                     in_fstring = 0
  *                     is_docstring = 0             # <<<<<<<<<<<<<<
@@ -11323,7 +11333,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_is_docstring = 0;
 
-          /* "lexer_fast.pyx":685
+          /* "lexer_fast.pyx":686
  *                     in_fstring = 0
  *                     is_docstring = 0
  *                     string_style = STYLE_STRING             # <<<<<<<<<<<<<<
@@ -11332,16 +11342,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_STRING;
 
-          /* "lexer_fast.pyx":686
+          /* "lexer_fast.pyx":687
  *                     is_docstring = 0
  *                     string_style = STYLE_STRING
  *                     break             # <<<<<<<<<<<<<<
  *                 if c == 92:
  *                     results.append((i - token_start, string_style))
 */
-          goto __pyx_L104_break;
+          goto __pyx_L108_break;
 
-          /* "lexer_fast.pyx":678
+          /* "lexer_fast.pyx":679
  *             while i < end:
  *                 c = text[i]
  *                 if c == string_delim:             # <<<<<<<<<<<<<<
@@ -11350,7 +11360,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":687
+        /* "lexer_fast.pyx":688
  *                     string_style = STYLE_STRING
  *                     break
  *                 if c == 92:             # <<<<<<<<<<<<<<
@@ -11362,51 +11372,51 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":688
+          /* "lexer_fast.pyx":689
  *                     break
  *                 if c == 92:
  *                     results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                     results.append((1, string_style))
  *                     i += 1
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 688, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 689, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 688, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 689, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 688, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 689, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 688, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 689, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 688, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 689, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 688, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 689, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-          /* "lexer_fast.pyx":689
+          /* "lexer_fast.pyx":690
  *                 if c == 92:
  *                     results.append((i - token_start, string_style))
  *                     results.append((1, string_style))             # <<<<<<<<<<<<<<
  *                     i += 1
  *                     escape_next = 1
 */
-          __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 689, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 690, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 689, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 690, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 689, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 690, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 689, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 690, __pyx_L1_error);
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 689, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 690, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":690
+          /* "lexer_fast.pyx":691
  *                     results.append((i - token_start, string_style))
  *                     results.append((1, string_style))
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -11415,7 +11425,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":691
+          /* "lexer_fast.pyx":692
  *                     results.append((1, string_style))
  *                     i += 1
  *                     escape_next = 1             # <<<<<<<<<<<<<<
@@ -11424,16 +11434,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_escape_next = 1;
 
-          /* "lexer_fast.pyx":692
+          /* "lexer_fast.pyx":693
  *                     i += 1
  *                     escape_next = 1
  *                     break             # <<<<<<<<<<<<<<
  *                 if in_fstring and c == 123:
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
 */
-          goto __pyx_L104_break;
+          goto __pyx_L108_break;
 
-          /* "lexer_fast.pyx":687
+          /* "lexer_fast.pyx":688
  *                     string_style = STYLE_STRING
  *                     break
  *                 if c == 92:             # <<<<<<<<<<<<<<
@@ -11442,7 +11452,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":693
+        /* "lexer_fast.pyx":694
  *                     escape_next = 1
  *                     break
  *                 if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -11457,18 +11467,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L108_bool_binop_done;
+          goto __pyx_L112_bool_binop_done;
         }
         __pyx_t_26 = (__pyx_v_c == 0x7B);
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L108_bool_binop_done:;
+        __pyx_L112_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":695
+          /* "lexer_fast.pyx":696
  *                 if in_fstring and c == 123:
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -11483,11 +11493,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
             __pyx_t_2 = __pyx_t_26;
 
-            goto __pyx_L111_bool_binop_done;
+            goto __pyx_L115_bool_binop_done;
           }
           __pyx_t_28 = (__pyx_v_i + 1);
 
-          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 695, __pyx_L1_error)
+          __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 696, __pyx_L1_error)
 
           __pyx_t_26 = (__pyx_t_25 == 0x7B);
 
@@ -11495,11 +11505,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          __pyx_L111_bool_binop_done:;
+          __pyx_L115_bool_binop_done:;
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":696
+            /* "lexer_fast.pyx":697
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:
  *                         if i > token_start:             # <<<<<<<<<<<<<<
@@ -11511,30 +11521,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
             if (__pyx_t_2) {
 
 
-              /* "lexer_fast.pyx":697
+              /* "lexer_fast.pyx":698
  *                     if i + 1 < end and text[i+1] == 123:
  *                         if i > token_start:
  *                             results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                         results.append((2, string_style))
  *                         i += 2
 */
-              __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 697, __pyx_L1_error)
+              __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 698, __pyx_L1_error)
               __Pyx_GOTREF(__pyx_t_13);
-              __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 697, __pyx_L1_error)
+              __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 698, __pyx_L1_error)
               __Pyx_GOTREF(__pyx_t_3);
-              __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 697, __pyx_L1_error)
+              __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 698, __pyx_L1_error)
               __Pyx_GOTREF(__pyx_t_14);
               __Pyx_GIVEREF(__pyx_t_13);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 697, __pyx_L1_error);
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 698, __pyx_L1_error);
               __Pyx_GIVEREF(__pyx_t_3);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 697, __pyx_L1_error);
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 698, __pyx_L1_error);
               __pyx_t_13 = 0;
               __pyx_t_3 = 0;
-              __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 697, __pyx_L1_error)
+              __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 698, __pyx_L1_error)
               __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-              /* "lexer_fast.pyx":696
+              /* "lexer_fast.pyx":697
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:
  *                         if i > token_start:             # <<<<<<<<<<<<<<
@@ -11543,28 +11553,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             }
 
-            /* "lexer_fast.pyx":698
+            /* "lexer_fast.pyx":699
  *                         if i > token_start:
  *                             results.append((i - token_start, string_style))
  *                         results.append((2, string_style))             # <<<<<<<<<<<<<<
  *                         i += 2
  *                         token_start = i
 */
-            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 698, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 699, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
-            __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 698, __pyx_L1_error)
+            __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 699, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_INCREF(__pyx_mstate_global->__pyx_int_2);
             __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_2);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 698, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 699, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_14);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 698, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 699, __pyx_L1_error);
             __pyx_t_14 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 698, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 699, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-            /* "lexer_fast.pyx":699
+            /* "lexer_fast.pyx":700
  *                             results.append((i - token_start, string_style))
  *                         results.append((2, string_style))
  *                         i += 2             # <<<<<<<<<<<<<<
@@ -11573,7 +11583,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_i = (__pyx_v_i + 2);
 
-            /* "lexer_fast.pyx":700
+            /* "lexer_fast.pyx":701
  *                         results.append((2, string_style))
  *                         i += 2
  *                         token_start = i             # <<<<<<<<<<<<<<
@@ -11582,16 +11592,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_token_start = __pyx_v_i;
 
-            /* "lexer_fast.pyx":701
+            /* "lexer_fast.pyx":702
  *                         i += 2
  *                         token_start = i
  *                         continue             # <<<<<<<<<<<<<<
  *                     if i > token_start:
  *                         results.append((i - token_start, string_style))
 */
-            goto __pyx_L103_continue;
+            goto __pyx_L107_continue;
 
-            /* "lexer_fast.pyx":695
+            /* "lexer_fast.pyx":696
  *                 if in_fstring and c == 123:
  *                     # CHUNK-SAFETY: '{{' needs both braces inside the chunk.
  *                     if i + 1 < end and text[i+1] == 123:             # <<<<<<<<<<<<<<
@@ -11600,7 +11610,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":702
+          /* "lexer_fast.pyx":703
  *                         token_start = i
  *                         continue
  *                     if i > token_start:             # <<<<<<<<<<<<<<
@@ -11612,30 +11622,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":703
+            /* "lexer_fast.pyx":704
  *                         continue
  *                     if i > token_start:
  *                         results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                     results.append((1, string_style))
  *                     i += 1
 */
-            __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 703, __pyx_L1_error)
+            __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 704, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 703, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 704, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
-            __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 703, __pyx_L1_error)
+            __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 704, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_GIVEREF(__pyx_t_3);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 703, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 704, __pyx_L1_error);
             __Pyx_GIVEREF(__pyx_t_14);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 703, __pyx_L1_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 704, __pyx_L1_error);
             __pyx_t_3 = 0;
             __pyx_t_14 = 0;
-            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 703, __pyx_L1_error)
+            __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 704, __pyx_L1_error)
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-            /* "lexer_fast.pyx":702
+            /* "lexer_fast.pyx":703
  *                         token_start = i
  *                         continue
  *                     if i > token_start:             # <<<<<<<<<<<<<<
@@ -11644,28 +11654,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":704
+          /* "lexer_fast.pyx":705
  *                     if i > token_start:
  *                         results.append((i - token_start, string_style))
  *                     results.append((1, string_style))             # <<<<<<<<<<<<<<
  *                     i += 1
  *                     in_fexpr = 1
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 704, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 705, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 704, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 705, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 704, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 705, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 704, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 705, __pyx_L1_error);
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 704, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 705, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":705
+          /* "lexer_fast.pyx":706
  *                         results.append((i - token_start, string_style))
  *                     results.append((1, string_style))
  *                     i += 1             # <<<<<<<<<<<<<<
@@ -11674,7 +11684,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 1);
 
-          /* "lexer_fast.pyx":706
+          /* "lexer_fast.pyx":707
  *                     results.append((1, string_style))
  *                     i += 1
  *                     in_fexpr = 1             # <<<<<<<<<<<<<<
@@ -11683,7 +11693,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_fexpr = 1;
 
-          /* "lexer_fast.pyx":707
+          /* "lexer_fast.pyx":708
  *                     i += 1
  *                     in_fexpr = 1
  *                     fexpr_depth = 1             # <<<<<<<<<<<<<<
@@ -11692,16 +11702,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_fexpr_depth = 1;
 
-          /* "lexer_fast.pyx":708
+          /* "lexer_fast.pyx":709
  *                     in_fexpr = 1
  *                     fexpr_depth = 1
  *                     break             # <<<<<<<<<<<<<<
  *                 if c == 10 or c == 13:
  *                     results.append((i - token_start, string_style))
 */
-          goto __pyx_L104_break;
+          goto __pyx_L108_break;
 
-          /* "lexer_fast.pyx":693
+          /* "lexer_fast.pyx":694
  *                     escape_next = 1
  *                     break
  *                 if in_fstring and c == 123:             # <<<<<<<<<<<<<<
@@ -11710,7 +11720,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":709
+        /* "lexer_fast.pyx":710
  *                     fexpr_depth = 1
  *                     break
  *                 if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -11721,30 +11731,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           case 10:
           case 13:
 
-          /* "lexer_fast.pyx":710
+          /* "lexer_fast.pyx":711
  *                     break
  *                 if c == 10 or c == 13:
  *                     results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
  *                     in_string = 0
  *                     string_delim = 0
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 710, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 711, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 710, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 711, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 710, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 711, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 710, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 711, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 710, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 711, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 710, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 711, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-          /* "lexer_fast.pyx":711
+          /* "lexer_fast.pyx":712
  *                 if c == 10 or c == 13:
  *                     results.append((i - token_start, string_style))
  *                     in_string = 0             # <<<<<<<<<<<<<<
@@ -11753,7 +11763,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_string = 0;
 
-          /* "lexer_fast.pyx":712
+          /* "lexer_fast.pyx":713
  *                     results.append((i - token_start, string_style))
  *                     in_string = 0
  *                     string_delim = 0             # <<<<<<<<<<<<<<
@@ -11762,7 +11772,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_delim = 0;
 
-          /* "lexer_fast.pyx":713
+          /* "lexer_fast.pyx":714
  *                     in_string = 0
  *                     string_delim = 0
  *                     in_fstring = 0             # <<<<<<<<<<<<<<
@@ -11771,7 +11781,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_fstring = 0;
 
-          /* "lexer_fast.pyx":714
+          /* "lexer_fast.pyx":715
  *                     string_delim = 0
  *                     in_fstring = 0
  *                     is_docstring = 0             # <<<<<<<<<<<<<<
@@ -11780,7 +11790,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_is_docstring = 0;
 
-          /* "lexer_fast.pyx":715
+          /* "lexer_fast.pyx":716
  *                     in_fstring = 0
  *                     is_docstring = 0
  *                     string_style = STYLE_STRING             # <<<<<<<<<<<<<<
@@ -11789,16 +11799,16 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_STRING;
 
-          /* "lexer_fast.pyx":716
+          /* "lexer_fast.pyx":717
  *                     is_docstring = 0
  *                     string_style = STYLE_STRING
  *                     break             # <<<<<<<<<<<<<<
  *                 i += 1
  *             else:
 */
-          goto __pyx_L104_break;
+          goto __pyx_L108_break;
 
-          /* "lexer_fast.pyx":709
+          /* "lexer_fast.pyx":710
  *                     fexpr_depth = 1
  *                     break
  *                 if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -11809,7 +11819,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           default: break;
         }
 
-        /* "lexer_fast.pyx":717
+        /* "lexer_fast.pyx":718
  *                     string_style = STYLE_STRING
  *                     break
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -11817,10 +11827,10 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                 results.append((i - token_start, string_style))
 */
         __pyx_v_i = (__pyx_v_i + 1);
-        __pyx_L103_continue:;
+        __pyx_L107_continue:;
       }
 
-      /* "lexer_fast.pyx":719
+      /* "lexer_fast.pyx":720
  *                 i += 1
  *             else:
  *                 results.append((i - token_start, string_style))             # <<<<<<<<<<<<<<
@@ -11828,25 +11838,25 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  * 
 */
       /*else*/ {
-        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 719, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 720, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 719, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 720, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 719, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 720, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 719, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 720, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 719, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 720, __pyx_L1_error);
         __pyx_t_3 = 0;
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 719, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 720, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
       }
-      __pyx_L104_break:;
+      __pyx_L108_break:;
 
-      /* "lexer_fast.pyx":720
+      /* "lexer_fast.pyx":721
  *             else:
  *                 results.append((i - token_start, string_style))
  *             continue             # <<<<<<<<<<<<<<
@@ -11855,7 +11865,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":612
+      /* "lexer_fast.pyx":613
  * 
  *         # ============ STRING ============
  *         if in_string:             # <<<<<<<<<<<<<<
@@ -11864,18 +11874,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":725
+    /* "lexer_fast.pyx":726
  * 
  *         # Whitespace (preserves at_arg_pos / at_type_pos)
  *         if is_space(c):             # <<<<<<<<<<<<<<
  *             token_start = i
  *             while i < end and is_space(text[i]):
 */
-    __pyx_t_2 = __pyx_f_10lexer_fast_is_space(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 725, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_10lexer_fast_is_space(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 726, __pyx_L1_error)
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":726
+      /* "lexer_fast.pyx":727
  *         # Whitespace (preserves at_arg_pos / at_type_pos)
  *         if is_space(c):
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -11884,7 +11894,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":727
+      /* "lexer_fast.pyx":728
  *         if is_space(c):
  *             token_start = i
  *             while i < end and is_space(text[i]):             # <<<<<<<<<<<<<<
@@ -11900,19 +11910,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L118_bool_binop_done;
+          goto __pyx_L122_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 727, __pyx_L1_error)
-        __pyx_t_26 = __pyx_f_10lexer_fast_is_space(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 727, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 728, __pyx_L1_error)
+        __pyx_t_26 = __pyx_f_10lexer_fast_is_space(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 728, __pyx_L1_error)
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L118_bool_binop_done:;
+        __pyx_L122_bool_binop_done:;
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":728
+        /* "lexer_fast.pyx":729
  *             token_start = i
  *             while i < end and is_space(text[i]):
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -11922,30 +11932,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_v_i = (__pyx_v_i + 1);
       }
 
-      /* "lexer_fast.pyx":729
+      /* "lexer_fast.pyx":730
  *             while i < end and is_space(text[i]):
  *                 i += 1
  *             results.append((i - token_start, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *             continue
  * 
 */
-      __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 729, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 730, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 729, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 730, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 729, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 730, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_14);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 729, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 730, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_13);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 729, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 730, __pyx_L1_error);
       __pyx_t_14 = 0;
       __pyx_t_13 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 729, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 730, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-      /* "lexer_fast.pyx":730
+      /* "lexer_fast.pyx":731
  *                 i += 1
  *             results.append((i - token_start, STYLE_DEFAULT))
  *             continue             # <<<<<<<<<<<<<<
@@ -11954,7 +11964,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":725
+      /* "lexer_fast.pyx":726
  * 
  *         # Whitespace (preserves at_arg_pos / at_type_pos)
  *         if is_space(c):             # <<<<<<<<<<<<<<
@@ -11963,7 +11973,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":733
+    /* "lexer_fast.pyx":734
  * 
  *         # Newline
  *         if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -11974,7 +11984,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       case 10:
       case 13:
 
-      /* "lexer_fast.pyx":734
+      /* "lexer_fast.pyx":735
  *         # Newline
  *         if c == 10 or c == 13:
  *             if c == 13 and i + 1 < end and text[i+1] == 10:             # <<<<<<<<<<<<<<
@@ -11989,7 +11999,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L121_bool_binop_done;
+        goto __pyx_L125_bool_binop_done;
       }
       __pyx_t_26 = ((__pyx_v_i + 1) < __pyx_v_end);
 
@@ -11999,11 +12009,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L121_bool_binop_done;
+        goto __pyx_L125_bool_binop_done;
       }
       __pyx_t_28 = (__pyx_v_i + 1);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 734, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 735, __pyx_L1_error)
 
       __pyx_t_26 = (__pyx_t_25 == 10);
 
@@ -12011,32 +12021,32 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L121_bool_binop_done:;
+      __pyx_L125_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":735
+        /* "lexer_fast.pyx":736
  *         if c == 10 or c == 13:
  *             if c == 13 and i + 1 < end and text[i+1] == 10:
  *                 results.append((2, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *                 i += 2
  *             else:
 */
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 735, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 736, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 735, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 736, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_2);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_2);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 735, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 736, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 735, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 736, __pyx_L1_error);
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 735, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 736, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":736
+        /* "lexer_fast.pyx":737
  *             if c == 13 and i + 1 < end and text[i+1] == 10:
  *                 results.append((2, STYLE_DEFAULT))
  *                 i += 2             # <<<<<<<<<<<<<<
@@ -12045,17 +12055,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 2);
 
-        /* "lexer_fast.pyx":734
+        /* "lexer_fast.pyx":735
  *         # Newline
  *         if c == 10 or c == 13:
  *             if c == 13 and i + 1 < end and text[i+1] == 10:             # <<<<<<<<<<<<<<
  *                 results.append((2, STYLE_DEFAULT))
  *                 i += 2
 */
-        goto __pyx_L120;
+        goto __pyx_L124;
       }
 
-      /* "lexer_fast.pyx":738
+      /* "lexer_fast.pyx":739
  *                 i += 2
  *             else:
  *                 results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
@@ -12063,21 +12073,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *             if bracket_depth == 0:
 */
       /*else*/ {
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 739, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 739, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 738, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 739, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 738, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 739, __pyx_L1_error);
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 738, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 739, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-        /* "lexer_fast.pyx":739
+        /* "lexer_fast.pyx":740
  *             else:
  *                 results.append((1, STYLE_DEFAULT))
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -12086,9 +12096,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
       }
-      __pyx_L120:;
+      __pyx_L124:;
 
-      /* "lexer_fast.pyx":740
+      /* "lexer_fast.pyx":741
  *                 results.append((1, STYLE_DEFAULT))
  *                 i += 1
  *             if bracket_depth == 0:             # <<<<<<<<<<<<<<
@@ -12100,7 +12110,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":741
+        /* "lexer_fast.pyx":742
  *                 i += 1
  *             if bracket_depth == 0:
  *                 after_def = 0             # <<<<<<<<<<<<<<
@@ -12109,7 +12119,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_def = 0;
 
-        /* "lexer_fast.pyx":742
+        /* "lexer_fast.pyx":743
  *             if bracket_depth == 0:
  *                 after_def = 0
  *                 after_class = 0             # <<<<<<<<<<<<<<
@@ -12118,7 +12128,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_class = 0;
 
-        /* "lexer_fast.pyx":743
+        /* "lexer_fast.pyx":744
  *                 after_def = 0
  *                 after_class = 0
  *                 after_at = 0             # <<<<<<<<<<<<<<
@@ -12127,7 +12137,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_at = 0;
 
-        /* "lexer_fast.pyx":744
+        /* "lexer_fast.pyx":745
  *                 after_class = 0
  *                 after_at = 0
  *                 after_dot = 0             # <<<<<<<<<<<<<<
@@ -12136,7 +12146,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_dot = 0;
 
-        /* "lexer_fast.pyx":745
+        /* "lexer_fast.pyx":746
  *                 after_at = 0
  *                 after_dot = 0
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -12145,7 +12155,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":746
+        /* "lexer_fast.pyx":747
  *                 after_dot = 0
  *                 prev_id_type = 0
  *                 dot_owner_type = 0             # <<<<<<<<<<<<<<
@@ -12154,7 +12164,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_dot_owner_type = 0;
 
-        /* "lexer_fast.pyx":747
+        /* "lexer_fast.pyx":748
  *                 prev_id_type = 0
  *                 dot_owner_type = 0
  *                 after_from = 0             # <<<<<<<<<<<<<<
@@ -12163,7 +12173,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_from = 0;
 
-        /* "lexer_fast.pyx":748
+        /* "lexer_fast.pyx":749
  *                 dot_owner_type = 0
  *                 after_from = 0
  *                 after_import = 0             # <<<<<<<<<<<<<<
@@ -12172,7 +12182,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_import = 0;
 
-        /* "lexer_fast.pyx":749
+        /* "lexer_fast.pyx":750
  *                 after_from = 0
  *                 after_import = 0
  *                 in_from_import = 0             # <<<<<<<<<<<<<<
@@ -12181,7 +12191,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_from_import = 0;
 
-        /* "lexer_fast.pyx":750
+        /* "lexer_fast.pyx":751
  *                 after_import = 0
  *                 in_from_import = 0
  *                 at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -12190,7 +12200,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_arg_pos = 0;
 
-        /* "lexer_fast.pyx":751
+        /* "lexer_fast.pyx":752
  *                 in_from_import = 0
  *                 at_arg_pos = False
  *                 at_type_pos = 0             # <<<<<<<<<<<<<<
@@ -12199,7 +12209,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_type_pos = 0;
 
-        /* "lexer_fast.pyx":752
+        /* "lexer_fast.pyx":753
  *                 at_arg_pos = False
  *                 at_type_pos = 0
  *                 after_arrow = 0             # <<<<<<<<<<<<<<
@@ -12208,7 +12218,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_arrow = 0;
 
-        /* "lexer_fast.pyx":740
+        /* "lexer_fast.pyx":741
  *                 results.append((1, STYLE_DEFAULT))
  *                 i += 1
  *             if bracket_depth == 0:             # <<<<<<<<<<<<<<
@@ -12217,7 +12227,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":753
+      /* "lexer_fast.pyx":754
  *                 at_type_pos = 0
  *                 after_arrow = 0
  *             continue             # <<<<<<<<<<<<<<
@@ -12226,7 +12236,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":733
+      /* "lexer_fast.pyx":734
  * 
  *         # Newline
  *         if c == 10 or c == 13:             # <<<<<<<<<<<<<<
@@ -12237,7 +12247,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       default: break;
     }
 
-    /* "lexer_fast.pyx":756
+    /* "lexer_fast.pyx":757
  * 
  *         # String with prefix: f"...", r'...', b"..."
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < end:             # <<<<<<<<<<<<<<
@@ -12260,18 +12270,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
       __pyx_t_2 = __pyx_t_26;
 
-      goto __pyx_L126_bool_binop_done;
+      goto __pyx_L130_bool_binop_done;
     }
     __pyx_t_26 = ((__pyx_v_i + 1) < __pyx_v_end);
 
 
     __pyx_t_2 = __pyx_t_26;
 
-    __pyx_L126_bool_binop_done:;
+    __pyx_L130_bool_binop_done:;
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":757
+      /* "lexer_fast.pyx":758
  *         # String with prefix: f"...", r'...', b"..."
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < end:
  *             next_c = text[i + 1]             # <<<<<<<<<<<<<<
@@ -12280,11 +12290,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_t_28 = (__pyx_v_i + 1);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 757, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 758, __pyx_L1_error)
 
       __pyx_v_next_c = __pyx_t_25;
 
-      /* "lexer_fast.pyx":758
+      /* "lexer_fast.pyx":759
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < end:
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:             # <<<<<<<<<<<<<<
@@ -12295,7 +12305,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         case 34:
         case 39:
 
-        /* "lexer_fast.pyx":759
+        /* "lexer_fast.pyx":760
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:
  *                 token_start = i             # <<<<<<<<<<<<<<
@@ -12304,7 +12314,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_token_start = __pyx_v_i;
 
-        /* "lexer_fast.pyx":762
+        /* "lexer_fast.pyx":763
  *                 # CHUNK-SAFETY: prefixed triple strings need all 4 bytes
  *                 # inside THIS chunk, not just inside the document.
  *                 if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:             # <<<<<<<<<<<<<<
@@ -12319,11 +12329,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L129_bool_binop_done;
+          goto __pyx_L133_bool_binop_done;
         }
         __pyx_t_28 = (__pyx_v_i + 2);
 
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 762, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 763, __pyx_L1_error)
 
         __pyx_t_26 = (__pyx_t_25 == __pyx_v_next_c);
 
@@ -12334,11 +12344,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L129_bool_binop_done;
+          goto __pyx_L133_bool_binop_done;
         }
         __pyx_t_28 = (__pyx_v_i + 3);
 
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 762, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 763, __pyx_L1_error)
 
         __pyx_t_26 = (__pyx_t_25 == __pyx_v_next_c);
 
@@ -12346,11 +12356,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L129_bool_binop_done:;
+        __pyx_L133_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":763
+          /* "lexer_fast.pyx":764
  *                 # inside THIS chunk, not just inside the document.
  *                 if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:
  *                     if expect_docstring:             # <<<<<<<<<<<<<<
@@ -12362,7 +12372,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":764
+            /* "lexer_fast.pyx":765
  *                 if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:
  *                     if expect_docstring:
  *                         string_style = STYLE_DOCSTRING             # <<<<<<<<<<<<<<
@@ -12371,7 +12381,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_DOCSTRING;
 
-            /* "lexer_fast.pyx":765
+            /* "lexer_fast.pyx":766
  *                     if expect_docstring:
  *                         string_style = STYLE_DOCSTRING
  *                         is_docstring = 1             # <<<<<<<<<<<<<<
@@ -12380,17 +12390,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_is_docstring = 1;
 
-            /* "lexer_fast.pyx":763
+            /* "lexer_fast.pyx":764
  *                 # inside THIS chunk, not just inside the document.
  *                 if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:
  *                     if expect_docstring:             # <<<<<<<<<<<<<<
  *                         string_style = STYLE_DOCSTRING
  *                         is_docstring = 1
 */
-            goto __pyx_L132;
+            goto __pyx_L136;
           }
 
-          /* "lexer_fast.pyx":767
+          /* "lexer_fast.pyx":768
  *                         is_docstring = 1
  *                     else:
  *                         string_style = STYLE_STRING             # <<<<<<<<<<<<<<
@@ -12400,30 +12410,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           /*else*/ {
             __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_STRING;
           }
-          __pyx_L132:;
+          __pyx_L136:;
 
-          /* "lexer_fast.pyx":768
+          /* "lexer_fast.pyx":769
  *                     else:
  *                         string_style = STYLE_STRING
  *                     results.append((4, string_style))             # <<<<<<<<<<<<<<
  *                     i += 4
  *                     in_string = 1
 */
-          __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 768, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 769, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 768, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 769, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_4);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_4);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_4) != (0)) __PYX_ERR(0, 768, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_4) != (0)) __PYX_ERR(0, 769, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 768, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 769, __pyx_L1_error);
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 768, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 769, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":769
+          /* "lexer_fast.pyx":770
  *                         string_style = STYLE_STRING
  *                     results.append((4, string_style))
  *                     i += 4             # <<<<<<<<<<<<<<
@@ -12432,7 +12442,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 4);
 
-          /* "lexer_fast.pyx":770
+          /* "lexer_fast.pyx":771
  *                     results.append((4, string_style))
  *                     i += 4
  *                     in_string = 1             # <<<<<<<<<<<<<<
@@ -12441,7 +12451,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_string = 1;
 
-          /* "lexer_fast.pyx":771
+          /* "lexer_fast.pyx":772
  *                     i += 4
  *                     in_string = 1
  *                     triple_string = 1             # <<<<<<<<<<<<<<
@@ -12450,7 +12460,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_triple_string = 1;
 
-          /* "lexer_fast.pyx":772
+          /* "lexer_fast.pyx":773
  *                     in_string = 1
  *                     triple_string = 1
  *                     string_delim = next_c             # <<<<<<<<<<<<<<
@@ -12459,7 +12469,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_delim = __pyx_v_next_c;
 
-          /* "lexer_fast.pyx":773
+          /* "lexer_fast.pyx":774
  *                     triple_string = 1
  *                     string_delim = next_c
  *                     in_fstring = 1 if (c == 102) else 0             # <<<<<<<<<<<<<<
@@ -12478,17 +12488,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_v_in_fstring = __pyx_t_25;
 
-          /* "lexer_fast.pyx":762
+          /* "lexer_fast.pyx":763
  *                 # CHUNK-SAFETY: prefixed triple strings need all 4 bytes
  *                 # inside THIS chunk, not just inside the document.
  *                 if i + 3 < end and text[i+2] == next_c and text[i+3] == next_c:             # <<<<<<<<<<<<<<
  *                     if expect_docstring:
  *                         string_style = STYLE_DOCSTRING
 */
-          goto __pyx_L128;
+          goto __pyx_L132;
         }
 
-        /* "lexer_fast.pyx":775
+        /* "lexer_fast.pyx":776
  *                     in_fstring = 1 if (c == 102) else 0
  *                 else:
  *                     results.append((2, STYLE_STRING))             # <<<<<<<<<<<<<<
@@ -12496,21 +12506,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                     in_string = 1
 */
         /*else*/ {
-          __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 775, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 776, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 775, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 776, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_INCREF(__pyx_mstate_global->__pyx_int_2);
           __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_2);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 775, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_2) != (0)) __PYX_ERR(0, 776, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 775, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 776, __pyx_L1_error);
           __pyx_t_13 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 775, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 776, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-          /* "lexer_fast.pyx":776
+          /* "lexer_fast.pyx":777
  *                 else:
  *                     results.append((2, STYLE_STRING))
  *                     i += 2             # <<<<<<<<<<<<<<
@@ -12519,7 +12529,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_i = (__pyx_v_i + 2);
 
-          /* "lexer_fast.pyx":777
+          /* "lexer_fast.pyx":778
  *                     results.append((2, STYLE_STRING))
  *                     i += 2
  *                     in_string = 1             # <<<<<<<<<<<<<<
@@ -12528,7 +12538,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_string = 1;
 
-          /* "lexer_fast.pyx":778
+          /* "lexer_fast.pyx":779
  *                     i += 2
  *                     in_string = 1
  *                     triple_string = 0             # <<<<<<<<<<<<<<
@@ -12537,7 +12547,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_triple_string = 0;
 
-          /* "lexer_fast.pyx":779
+          /* "lexer_fast.pyx":780
  *                     in_string = 1
  *                     triple_string = 0
  *                     string_delim = next_c             # <<<<<<<<<<<<<<
@@ -12546,7 +12556,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_delim = __pyx_v_next_c;
 
-          /* "lexer_fast.pyx":780
+          /* "lexer_fast.pyx":781
  *                     triple_string = 0
  *                     string_delim = next_c
  *                     in_fstring = 1 if (c == 102) else 0             # <<<<<<<<<<<<<<
@@ -12565,9 +12575,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_v_in_fstring = __pyx_t_25;
         }
-        __pyx_L128:;
+        __pyx_L132:;
 
-        /* "lexer_fast.pyx":781
+        /* "lexer_fast.pyx":782
  *                     string_delim = next_c
  *                     in_fstring = 1 if (c == 102) else 0
  *                 expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -12576,7 +12586,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_expect_docstring = 0;
 
-        /* "lexer_fast.pyx":782
+        /* "lexer_fast.pyx":783
  *                     in_fstring = 1 if (c == 102) else 0
  *                 expect_docstring = 0
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -12585,7 +12595,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":783
+        /* "lexer_fast.pyx":784
  *                 expect_docstring = 0
  *                 prev_id_type = 0
  *                 continue             # <<<<<<<<<<<<<<
@@ -12594,7 +12604,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         goto __pyx_L8_continue;
 
-        /* "lexer_fast.pyx":758
+        /* "lexer_fast.pyx":759
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < end:
  *             next_c = text[i + 1]
  *             if next_c == 34 or next_c == 39:             # <<<<<<<<<<<<<<
@@ -12605,7 +12615,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         default: break;
       }
 
-      /* "lexer_fast.pyx":756
+      /* "lexer_fast.pyx":757
  * 
  *         # String with prefix: f"...", r'...', b"..."
  *         if (c == 102 or c == 114 or c == 98) and i + 1 < end:             # <<<<<<<<<<<<<<
@@ -12614,7 +12624,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":786
+    /* "lexer_fast.pyx":787
  * 
  *         # Regular string
  *         if c == 34 or c == 39:             # <<<<<<<<<<<<<<
@@ -12625,7 +12635,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       case 34:
       case 39:
 
-      /* "lexer_fast.pyx":792
+      /* "lexer_fast.pyx":793
  *             # (the next chunk's state scan sees the full triple and styles
  *             # the remaining quotes correctly).
  *             if i + 2 < end and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
@@ -12640,11 +12650,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L134_bool_binop_done;
+        goto __pyx_L138_bool_binop_done;
       }
       __pyx_t_28 = (__pyx_v_i + 1);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 792, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 793, __pyx_L1_error)
 
       __pyx_t_26 = (__pyx_t_25 == __pyx_v_c);
 
@@ -12655,11 +12665,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L134_bool_binop_done;
+        goto __pyx_L138_bool_binop_done;
       }
       __pyx_t_28 = (__pyx_v_i + 2);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 792, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 793, __pyx_L1_error)
 
       __pyx_t_26 = (__pyx_t_25 == __pyx_v_c);
 
@@ -12667,11 +12677,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L134_bool_binop_done:;
+      __pyx_L138_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":793
+        /* "lexer_fast.pyx":794
  *             # the remaining quotes correctly).
  *             if i + 2 < end and text[i+1] == c and text[i+2] == c:
  *                 if expect_docstring:             # <<<<<<<<<<<<<<
@@ -12683,7 +12693,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":794
+          /* "lexer_fast.pyx":795
  *             if i + 2 < end and text[i+1] == c and text[i+2] == c:
  *                 if expect_docstring:
  *                     string_style = STYLE_DOCSTRING             # <<<<<<<<<<<<<<
@@ -12692,7 +12702,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_DOCSTRING;
 
-          /* "lexer_fast.pyx":795
+          /* "lexer_fast.pyx":796
  *                 if expect_docstring:
  *                     string_style = STYLE_DOCSTRING
  *                     is_docstring = 1             # <<<<<<<<<<<<<<
@@ -12701,17 +12711,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_is_docstring = 1;
 
-          /* "lexer_fast.pyx":793
+          /* "lexer_fast.pyx":794
  *             # the remaining quotes correctly).
  *             if i + 2 < end and text[i+1] == c and text[i+2] == c:
  *                 if expect_docstring:             # <<<<<<<<<<<<<<
  *                     string_style = STYLE_DOCSTRING
  *                     is_docstring = 1
 */
-          goto __pyx_L137;
+          goto __pyx_L141;
         }
 
-        /* "lexer_fast.pyx":797
+        /* "lexer_fast.pyx":798
  *                     is_docstring = 1
  *                 else:
  *                     string_style = STYLE_STRING             # <<<<<<<<<<<<<<
@@ -12721,30 +12731,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         /*else*/ {
           __pyx_v_string_style = __pyx_e_10lexer_fast_STYLE_STRING;
         }
-        __pyx_L137:;
+        __pyx_L141:;
 
-        /* "lexer_fast.pyx":798
+        /* "lexer_fast.pyx":799
  *                 else:
  *                     string_style = STYLE_STRING
  *                 results.append((3, string_style))             # <<<<<<<<<<<<<<
  *                 i += 3
  *                 in_string = 1
 */
-        __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 798, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_string_style); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 799, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 798, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 799, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_3);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_3) != (0)) __PYX_ERR(0, 798, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_3) != (0)) __PYX_ERR(0, 799, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 798, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 799, __pyx_L1_error);
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 798, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 799, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":799
+        /* "lexer_fast.pyx":800
  *                     string_style = STYLE_STRING
  *                 results.append((3, string_style))
  *                 i += 3             # <<<<<<<<<<<<<<
@@ -12753,7 +12763,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 3);
 
-        /* "lexer_fast.pyx":800
+        /* "lexer_fast.pyx":801
  *                 results.append((3, string_style))
  *                 i += 3
  *                 in_string = 1             # <<<<<<<<<<<<<<
@@ -12762,7 +12772,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_string = 1;
 
-        /* "lexer_fast.pyx":801
+        /* "lexer_fast.pyx":802
  *                 i += 3
  *                 in_string = 1
  *                 triple_string = 1             # <<<<<<<<<<<<<<
@@ -12771,7 +12781,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_triple_string = 1;
 
-        /* "lexer_fast.pyx":802
+        /* "lexer_fast.pyx":803
  *                 in_string = 1
  *                 triple_string = 1
  *                 string_delim = c             # <<<<<<<<<<<<<<
@@ -12780,7 +12790,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_string_delim = __pyx_v_c;
 
-        /* "lexer_fast.pyx":803
+        /* "lexer_fast.pyx":804
  *                 triple_string = 1
  *                 string_delim = c
  *                 in_fstring = 0             # <<<<<<<<<<<<<<
@@ -12789,17 +12799,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_fstring = 0;
 
-        /* "lexer_fast.pyx":792
+        /* "lexer_fast.pyx":793
  *             # (the next chunk's state scan sees the full triple and styles
  *             # the remaining quotes correctly).
  *             if i + 2 < end and text[i+1] == c and text[i+2] == c:             # <<<<<<<<<<<<<<
  *                 if expect_docstring:
  *                     string_style = STYLE_DOCSTRING
 */
-        goto __pyx_L133;
+        goto __pyx_L137;
       }
 
-      /* "lexer_fast.pyx":805
+      /* "lexer_fast.pyx":806
  *                 in_fstring = 0
  *             else:
  *                 results.append((1, STYLE_STRING))             # <<<<<<<<<<<<<<
@@ -12807,21 +12817,21 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                 in_string = 1
 */
       /*else*/ {
-        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 805, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_STRING); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 806, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 805, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 806, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
         __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 805, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 806, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 805, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 806, __pyx_L1_error);
         __pyx_t_13 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 805, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 806, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-        /* "lexer_fast.pyx":806
+        /* "lexer_fast.pyx":807
  *             else:
  *                 results.append((1, STYLE_STRING))
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -12830,7 +12840,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":807
+        /* "lexer_fast.pyx":808
  *                 results.append((1, STYLE_STRING))
  *                 i += 1
  *                 in_string = 1             # <<<<<<<<<<<<<<
@@ -12839,7 +12849,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_string = 1;
 
-        /* "lexer_fast.pyx":808
+        /* "lexer_fast.pyx":809
  *                 i += 1
  *                 in_string = 1
  *                 triple_string = 0             # <<<<<<<<<<<<<<
@@ -12848,7 +12858,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_triple_string = 0;
 
-        /* "lexer_fast.pyx":809
+        /* "lexer_fast.pyx":810
  *                 in_string = 1
  *                 triple_string = 0
  *                 string_delim = c             # <<<<<<<<<<<<<<
@@ -12857,7 +12867,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_string_delim = __pyx_v_c;
 
-        /* "lexer_fast.pyx":810
+        /* "lexer_fast.pyx":811
  *                 triple_string = 0
  *                 string_delim = c
  *                 in_fstring = 0             # <<<<<<<<<<<<<<
@@ -12866,9 +12876,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_fstring = 0;
       }
-      __pyx_L133:;
+      __pyx_L137:;
 
-      /* "lexer_fast.pyx":811
+      /* "lexer_fast.pyx":812
  *                 string_delim = c
  *                 in_fstring = 0
  *             expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -12877,7 +12887,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_expect_docstring = 0;
 
-      /* "lexer_fast.pyx":812
+      /* "lexer_fast.pyx":813
  *                 in_fstring = 0
  *             expect_docstring = 0
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -12886,7 +12896,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":813
+      /* "lexer_fast.pyx":814
  *             expect_docstring = 0
  *             prev_id_type = 0
  *             continue             # <<<<<<<<<<<<<<
@@ -12895,7 +12905,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":786
+      /* "lexer_fast.pyx":787
  * 
  *         # Regular string
  *         if c == 34 or c == 39:             # <<<<<<<<<<<<<<
@@ -12906,7 +12916,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       default: break;
     }
 
-    /* "lexer_fast.pyx":816
+    /* "lexer_fast.pyx":817
  * 
  *         # Comment
  *         if c == 35:             # <<<<<<<<<<<<<<
@@ -12918,7 +12928,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":817
+      /* "lexer_fast.pyx":818
  *         # Comment
  *         if c == 35:
  *             in_comment = 1             # <<<<<<<<<<<<<<
@@ -12927,7 +12937,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_in_comment = 1;
 
-      /* "lexer_fast.pyx":818
+      /* "lexer_fast.pyx":819
  *         if c == 35:
  *             in_comment = 1
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -12936,7 +12946,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":819
+      /* "lexer_fast.pyx":820
  *             in_comment = 1
  *             token_start = i
  *             i += 1             # <<<<<<<<<<<<<<
@@ -12945,7 +12955,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":820
+      /* "lexer_fast.pyx":821
  *             token_start = i
  *             i += 1
  *             while i < end and text[i] != 10 and text[i] != 13:             # <<<<<<<<<<<<<<
@@ -12961,9 +12971,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L141_bool_binop_done;
+          goto __pyx_L145_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 820, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 821, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 != 10);
 
 
@@ -12973,20 +12983,20 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L141_bool_binop_done;
+          goto __pyx_L145_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 820, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 821, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 != 13);
 
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L141_bool_binop_done:;
+        __pyx_L145_bool_binop_done:;
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":821
+        /* "lexer_fast.pyx":822
  *             i += 1
  *             while i < end and text[i] != 10 and text[i] != 13:
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -12996,30 +13006,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_v_i = (__pyx_v_i + 1);
       }
 
-      /* "lexer_fast.pyx":822
+      /* "lexer_fast.pyx":823
  *             while i < end and text[i] != 10 and text[i] != 13:
  *                 i += 1
  *             results.append((i - token_start, STYLE_COMMENTS))             # <<<<<<<<<<<<<<
  *             prev_id_type = 0
  *             continue
 */
-      __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 822, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 823, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMENTS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 822, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMENTS); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 823, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 822, __pyx_L1_error)
+      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 823, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_GIVEREF(__pyx_t_3);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 822, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 823, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_13);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 822, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 823, __pyx_L1_error);
       __pyx_t_3 = 0;
       __pyx_t_13 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 822, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 823, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-      /* "lexer_fast.pyx":823
+      /* "lexer_fast.pyx":824
  *                 i += 1
  *             results.append((i - token_start, STYLE_COMMENTS))
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -13028,7 +13038,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":824
+      /* "lexer_fast.pyx":825
  *             results.append((i - token_start, STYLE_COMMENTS))
  *             prev_id_type = 0
  *             continue             # <<<<<<<<<<<<<<
@@ -13037,7 +13047,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":816
+      /* "lexer_fast.pyx":817
  * 
  *         # Comment
  *         if c == 35:             # <<<<<<<<<<<<<<
@@ -13046,7 +13056,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":827
+    /* "lexer_fast.pyx":828
  * 
  *         # Decorator
  *         if c == 64:             # <<<<<<<<<<<<<<
@@ -13058,28 +13068,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":828
+      /* "lexer_fast.pyx":829
  *         # Decorator
  *         if c == 64:
  *             results.append((1, STYLE_DECORATOR))             # <<<<<<<<<<<<<<
  *             i += 1
  *             after_at = 1
 */
-      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DECORATOR); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 828, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DECORATOR); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 829, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 828, __pyx_L1_error)
+      __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 829, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 828, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 829, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_14);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 828, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 829, __pyx_L1_error);
       __pyx_t_14 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 828, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 829, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-      /* "lexer_fast.pyx":829
+      /* "lexer_fast.pyx":830
  *         if c == 64:
  *             results.append((1, STYLE_DECORATOR))
  *             i += 1             # <<<<<<<<<<<<<<
@@ -13088,7 +13098,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":830
+      /* "lexer_fast.pyx":831
  *             results.append((1, STYLE_DECORATOR))
  *             i += 1
  *             after_at = 1             # <<<<<<<<<<<<<<
@@ -13097,7 +13107,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_after_at = 1;
 
-      /* "lexer_fast.pyx":831
+      /* "lexer_fast.pyx":832
  *             i += 1
  *             after_at = 1
  *             expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -13106,7 +13116,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_expect_docstring = 0;
 
-      /* "lexer_fast.pyx":832
+      /* "lexer_fast.pyx":833
  *             after_at = 1
  *             expect_docstring = 0
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -13115,7 +13125,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":833
+      /* "lexer_fast.pyx":834
  *             expect_docstring = 0
  *             prev_id_type = 0
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -13124,7 +13134,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":834
+      /* "lexer_fast.pyx":835
  *             prev_id_type = 0
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -13133,7 +13143,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":827
+      /* "lexer_fast.pyx":828
  * 
  *         # Decorator
  *         if c == 64:             # <<<<<<<<<<<<<<
@@ -13142,18 +13152,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":837
+    /* "lexer_fast.pyx":838
  * 
  *         # Number
  *         if is_digit(c):             # <<<<<<<<<<<<<<
  *             token_start = i
  *             while i < end and (is_alnum(text[i]) or text[i] == 46):
 */
-    __pyx_t_2 = __pyx_f_10lexer_fast_is_digit(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 837, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_10lexer_fast_is_digit(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 838, __pyx_L1_error)
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":838
+      /* "lexer_fast.pyx":839
  *         # Number
  *         if is_digit(c):
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -13162,7 +13172,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":839
+      /* "lexer_fast.pyx":840
  *         if is_digit(c):
  *             token_start = i
  *             while i < end and (is_alnum(text[i]) or text[i] == 46):             # <<<<<<<<<<<<<<
@@ -13178,10 +13188,10 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L148_bool_binop_done;
+          goto __pyx_L152_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 839, __pyx_L1_error)
-        __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 839, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 840, __pyx_L1_error)
+        __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 840, __pyx_L1_error)
 
         if (!__pyx_t_26) {
 
@@ -13189,20 +13199,20 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L148_bool_binop_done;
+          goto __pyx_L152_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 839, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 840, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 == 46);
 
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L148_bool_binop_done:;
+        __pyx_L152_bool_binop_done:;
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":840
+        /* "lexer_fast.pyx":841
  *             token_start = i
  *             while i < end and (is_alnum(text[i]) or text[i] == 46):
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -13212,30 +13222,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_v_i = (__pyx_v_i + 1);
       }
 
-      /* "lexer_fast.pyx":841
+      /* "lexer_fast.pyx":842
  *             while i < end and (is_alnum(text[i]) or text[i] == 46):
  *                 i += 1
  *             results.append((i - token_start, STYLE_NUMBERS))             # <<<<<<<<<<<<<<
  *             expect_docstring = 0
  *             prev_id_type = 0
 */
-      __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 841, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 842, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_NUMBERS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 841, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_NUMBERS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 842, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 841, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_13);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 841, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 842, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_14);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 841, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 842, __pyx_L1_error);
       __pyx_t_13 = 0;
       __pyx_t_14 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 841, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 842, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-      /* "lexer_fast.pyx":842
+      /* "lexer_fast.pyx":843
  *                 i += 1
  *             results.append((i - token_start, STYLE_NUMBERS))
  *             expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -13244,7 +13254,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_expect_docstring = 0;
 
-      /* "lexer_fast.pyx":843
+      /* "lexer_fast.pyx":844
  *             results.append((i - token_start, STYLE_NUMBERS))
  *             expect_docstring = 0
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -13253,7 +13263,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":844
+      /* "lexer_fast.pyx":845
  *             expect_docstring = 0
  *             prev_id_type = 0
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -13262,7 +13272,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":845
+      /* "lexer_fast.pyx":846
  *             prev_id_type = 0
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -13271,7 +13281,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":837
+      /* "lexer_fast.pyx":838
  * 
  *         # Number
  *         if is_digit(c):             # <<<<<<<<<<<<<<
@@ -13280,7 +13290,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":848
+    /* "lexer_fast.pyx":849
  * 
  *         # Dot
  *         if c == 46:             # <<<<<<<<<<<<<<
@@ -13292,28 +13302,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":849
+      /* "lexer_fast.pyx":850
  *         # Dot
  *         if c == 46:
  *             results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *             i += 1
  *             if after_from or after_import:
 */
-      __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 849, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 850, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 849, __pyx_L1_error)
+      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 850, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 849, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 850, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_3);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 849, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 850, __pyx_L1_error);
       __pyx_t_3 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 849, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 850, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-      /* "lexer_fast.pyx":850
+      /* "lexer_fast.pyx":851
  *         if c == 46:
  *             results.append((1, STYLE_DEFAULT))
  *             i += 1             # <<<<<<<<<<<<<<
@@ -13322,7 +13332,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":851
+      /* "lexer_fast.pyx":852
  *             results.append((1, STYLE_DEFAULT))
  *             i += 1
  *             if after_from or after_import:             # <<<<<<<<<<<<<<
@@ -13337,20 +13347,20 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L153_bool_binop_done;
+        goto __pyx_L157_bool_binop_done;
       }
       __pyx_t_26 = (__pyx_v_after_import != 0);
 
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L153_bool_binop_done:;
+      __pyx_L157_bool_binop_done:;
       if (__pyx_t_2) {
 
-        goto __pyx_L152;
+        goto __pyx_L156;
       }
 
-      /* "lexer_fast.pyx":854
+      /* "lexer_fast.pyx":855
  *                 pass
  *             else:
  *                 after_dot = 1             # <<<<<<<<<<<<<<
@@ -13360,7 +13370,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       /*else*/ {
         __pyx_v_after_dot = 1;
 
-        /* "lexer_fast.pyx":855
+        /* "lexer_fast.pyx":856
  *             else:
  *                 after_dot = 1
  *                 dot_owner_type = prev_id_type             # <<<<<<<<<<<<<<
@@ -13369,9 +13379,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_dot_owner_type = __pyx_v_prev_id_type;
       }
-      __pyx_L152:;
+      __pyx_L156:;
 
-      /* "lexer_fast.pyx":856
+      /* "lexer_fast.pyx":857
  *                 after_dot = 1
  *                 dot_owner_type = prev_id_type
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -13380,7 +13390,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":857
+      /* "lexer_fast.pyx":858
  *                 dot_owner_type = prev_id_type
  *             prev_id_type = 0
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -13389,7 +13399,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":858
+      /* "lexer_fast.pyx":859
  *             prev_id_type = 0
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -13398,7 +13408,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":848
+      /* "lexer_fast.pyx":849
  * 
  *         # Dot
  *         if c == 46:             # <<<<<<<<<<<<<<
@@ -13407,39 +13417,39 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":861
+    /* "lexer_fast.pyx":862
  * 
  *         # Brackets
  *         if is_bracket(c):             # <<<<<<<<<<<<<<
  *             results.append((1, STYLE_BRACKETS))
  *             if c == 40 or c == 91 or c == 123:
 */
-    __pyx_t_2 = __pyx_f_10lexer_fast_is_bracket(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 861, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_10lexer_fast_is_bracket(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 862, __pyx_L1_error)
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":862
+      /* "lexer_fast.pyx":863
  *         # Brackets
  *         if is_bracket(c):
  *             results.append((1, STYLE_BRACKETS))             # <<<<<<<<<<<<<<
  *             if c == 40 or c == 91 or c == 123:
  *                 bracket_depth += 1
 */
-      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 862, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BRACKETS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 863, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 862, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 863, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 862, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 863, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_14);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 862, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 863, __pyx_L1_error);
       __pyx_t_14 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 862, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 863, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-      /* "lexer_fast.pyx":863
+      /* "lexer_fast.pyx":864
  *         if is_bracket(c):
  *             results.append((1, STYLE_BRACKETS))
  *             if c == 40 or c == 91 or c == 123:             # <<<<<<<<<<<<<<
@@ -13451,7 +13461,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         case 91:
         case 0x7B:
 
-        /* "lexer_fast.pyx":864
+        /* "lexer_fast.pyx":865
  *             results.append((1, STYLE_BRACKETS))
  *             if c == 40 or c == 91 or c == 123:
  *                 bracket_depth += 1             # <<<<<<<<<<<<<<
@@ -13460,7 +13470,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_bracket_depth = (__pyx_v_bracket_depth + 1);
 
-        /* "lexer_fast.pyx":865
+        /* "lexer_fast.pyx":866
  *             if c == 40 or c == 91 or c == 123:
  *                 bracket_depth += 1
  *                 if c == 40 and after_def:             # <<<<<<<<<<<<<<
@@ -13475,18 +13485,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L157_bool_binop_done;
+          goto __pyx_L161_bool_binop_done;
         }
         __pyx_t_26 = (__pyx_v_after_def != 0);
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L157_bool_binop_done:;
+        __pyx_L161_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":866
+          /* "lexer_fast.pyx":867
  *                 bracket_depth += 1
  *                 if c == 40 and after_def:
  *                     in_def_params = 1             # <<<<<<<<<<<<<<
@@ -13495,7 +13505,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_def_params = 1;
 
-          /* "lexer_fast.pyx":867
+          /* "lexer_fast.pyx":868
  *                 if c == 40 and after_def:
  *                     in_def_params = 1
  *                     param_depth = 1             # <<<<<<<<<<<<<<
@@ -13504,7 +13514,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_param_depth = 1;
 
-          /* "lexer_fast.pyx":868
+          /* "lexer_fast.pyx":869
  *                     in_def_params = 1
  *                     param_depth = 1
  *                     after_def = 0             # <<<<<<<<<<<<<<
@@ -13513,7 +13523,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_after_def = 0;
 
-          /* "lexer_fast.pyx":869
+          /* "lexer_fast.pyx":870
  *                     param_depth = 1
  *                     after_def = 0
  *                     at_type_pos = 0             # <<<<<<<<<<<<<<
@@ -13522,17 +13532,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_at_type_pos = 0;
 
-          /* "lexer_fast.pyx":865
+          /* "lexer_fast.pyx":866
  *             if c == 40 or c == 91 or c == 123:
  *                 bracket_depth += 1
  *                 if c == 40 and after_def:             # <<<<<<<<<<<<<<
  *                     in_def_params = 1
  *                     param_depth = 1
 */
-          goto __pyx_L156;
+          goto __pyx_L160;
         }
 
-        /* "lexer_fast.pyx":870
+        /* "lexer_fast.pyx":871
  *                     after_def = 0
  *                     at_type_pos = 0
  *                 elif in_def_params:             # <<<<<<<<<<<<<<
@@ -13544,7 +13554,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":871
+          /* "lexer_fast.pyx":872
  *                     at_type_pos = 0
  *                 elif in_def_params:
  *                     param_depth += 1             # <<<<<<<<<<<<<<
@@ -13553,7 +13563,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_param_depth = (__pyx_v_param_depth + 1);
 
-          /* "lexer_fast.pyx":870
+          /* "lexer_fast.pyx":871
  *                     after_def = 0
  *                     at_type_pos = 0
  *                 elif in_def_params:             # <<<<<<<<<<<<<<
@@ -13561,9 +13571,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                 at_arg_pos = True
 */
         }
-        __pyx_L156:;
+        __pyx_L160:;
 
-        /* "lexer_fast.pyx":872
+        /* "lexer_fast.pyx":873
  *                 elif in_def_params:
  *                     param_depth += 1
  *                 at_arg_pos = True             # <<<<<<<<<<<<<<
@@ -13572,7 +13582,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_arg_pos = 1;
 
-        /* "lexer_fast.pyx":863
+        /* "lexer_fast.pyx":864
  *         if is_bracket(c):
  *             results.append((1, STYLE_BRACKETS))
  *             if c == 40 or c == 91 or c == 123:             # <<<<<<<<<<<<<<
@@ -13582,7 +13592,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         break;
         case 41:
 
-        /* "lexer_fast.pyx":873
+        /* "lexer_fast.pyx":874
  *                     param_depth += 1
  *                 at_arg_pos = True
  *             elif c == 41 or c == 93 or c == 125:             # <<<<<<<<<<<<<<
@@ -13592,7 +13602,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         case 93:
         case 0x7D:
 
-        /* "lexer_fast.pyx":874
+        /* "lexer_fast.pyx":875
  *                 at_arg_pos = True
  *             elif c == 41 or c == 93 or c == 125:
  *                 if bracket_depth > 0:             # <<<<<<<<<<<<<<
@@ -13604,7 +13614,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":875
+          /* "lexer_fast.pyx":876
  *             elif c == 41 or c == 93 or c == 125:
  *                 if bracket_depth > 0:
  *                     bracket_depth -= 1             # <<<<<<<<<<<<<<
@@ -13613,7 +13623,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_bracket_depth = (__pyx_v_bracket_depth - 1);
 
-          /* "lexer_fast.pyx":874
+          /* "lexer_fast.pyx":875
  *                 at_arg_pos = True
  *             elif c == 41 or c == 93 or c == 125:
  *                 if bracket_depth > 0:             # <<<<<<<<<<<<<<
@@ -13622,7 +13632,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":876
+        /* "lexer_fast.pyx":877
  *                 if bracket_depth > 0:
  *                     bracket_depth -= 1
  *                 if in_def_params:             # <<<<<<<<<<<<<<
@@ -13634,7 +13644,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":877
+          /* "lexer_fast.pyx":878
  *                     bracket_depth -= 1
  *                 if in_def_params:
  *                     param_depth -= 1             # <<<<<<<<<<<<<<
@@ -13643,7 +13653,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_param_depth = (__pyx_v_param_depth - 1);
 
-          /* "lexer_fast.pyx":878
+          /* "lexer_fast.pyx":879
  *                 if in_def_params:
  *                     param_depth -= 1
  *                     if param_depth <= 0:             # <<<<<<<<<<<<<<
@@ -13655,7 +13665,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
           if (__pyx_t_2) {
 
 
-            /* "lexer_fast.pyx":879
+            /* "lexer_fast.pyx":880
  *                     param_depth -= 1
  *                     if param_depth <= 0:
  *                         in_def_params = 0             # <<<<<<<<<<<<<<
@@ -13664,7 +13674,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_in_def_params = 0;
 
-            /* "lexer_fast.pyx":880
+            /* "lexer_fast.pyx":881
  *                     if param_depth <= 0:
  *                         in_def_params = 0
  *                         param_depth = 0             # <<<<<<<<<<<<<<
@@ -13673,7 +13683,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_param_depth = 0;
 
-            /* "lexer_fast.pyx":881
+            /* "lexer_fast.pyx":882
  *                         in_def_params = 0
  *                         param_depth = 0
  *                         at_type_pos = 0             # <<<<<<<<<<<<<<
@@ -13682,7 +13692,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
             __pyx_v_at_type_pos = 0;
 
-            /* "lexer_fast.pyx":878
+            /* "lexer_fast.pyx":879
  *                 if in_def_params:
  *                     param_depth -= 1
  *                     if param_depth <= 0:             # <<<<<<<<<<<<<<
@@ -13691,7 +13701,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           }
 
-          /* "lexer_fast.pyx":876
+          /* "lexer_fast.pyx":877
  *                 if bracket_depth > 0:
  *                     bracket_depth -= 1
  *                 if in_def_params:             # <<<<<<<<<<<<<<
@@ -13700,7 +13710,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":882
+        /* "lexer_fast.pyx":883
  *                         param_depth = 0
  *                         at_type_pos = 0
  *                 at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -13709,7 +13719,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_arg_pos = 0;
 
-        /* "lexer_fast.pyx":873
+        /* "lexer_fast.pyx":874
  *                     param_depth += 1
  *                 at_arg_pos = True
  *             elif c == 41 or c == 93 or c == 125:             # <<<<<<<<<<<<<<
@@ -13720,7 +13730,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         default: break;
       }
 
-      /* "lexer_fast.pyx":883
+      /* "lexer_fast.pyx":884
  *                         at_type_pos = 0
  *                 at_arg_pos = False
  *             i += 1             # <<<<<<<<<<<<<<
@@ -13729,7 +13739,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":884
+      /* "lexer_fast.pyx":885
  *                 at_arg_pos = False
  *             i += 1
  *             after_dot = 0             # <<<<<<<<<<<<<<
@@ -13738,7 +13748,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_after_dot = 0;
 
-      /* "lexer_fast.pyx":885
+      /* "lexer_fast.pyx":886
  *             i += 1
  *             after_dot = 0
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -13747,7 +13757,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":886
+      /* "lexer_fast.pyx":887
  *             after_dot = 0
  *             prev_id_type = 0
  *             continue             # <<<<<<<<<<<<<<
@@ -13756,7 +13766,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":861
+      /* "lexer_fast.pyx":862
  * 
  *         # Brackets
  *         if is_bracket(c):             # <<<<<<<<<<<<<<
@@ -13765,18 +13775,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":889
+    /* "lexer_fast.pyx":890
  * 
  *         # Operators
  *         if is_operator(c):             # <<<<<<<<<<<<<<
  *             token_start = i
  *             i += 1
 */
-    __pyx_t_2 = __pyx_f_10lexer_fast_is_operator(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 889, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_10lexer_fast_is_operator(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 890, __pyx_L1_error)
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":890
+      /* "lexer_fast.pyx":891
  *         # Operators
  *         if is_operator(c):
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -13785,7 +13795,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":891
+      /* "lexer_fast.pyx":892
  *         if is_operator(c):
  *             token_start = i
  *             i += 1             # <<<<<<<<<<<<<<
@@ -13794,7 +13804,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":892
+      /* "lexer_fast.pyx":893
  *             token_start = i
  *             i += 1
  *             if i < end and is_operator(text[i]):             # <<<<<<<<<<<<<<
@@ -13809,19 +13819,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L164_bool_binop_done;
+        goto __pyx_L168_bool_binop_done;
       }
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 892, __pyx_L1_error)
-      __pyx_t_26 = __pyx_f_10lexer_fast_is_operator(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 892, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 893, __pyx_L1_error)
+      __pyx_t_26 = __pyx_f_10lexer_fast_is_operator(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 893, __pyx_L1_error)
 
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L164_bool_binop_done:;
+      __pyx_L168_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":893
+        /* "lexer_fast.pyx":894
  *             i += 1
  *             if i < end and is_operator(text[i]):
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -13830,7 +13840,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_i = (__pyx_v_i + 1);
 
-        /* "lexer_fast.pyx":892
+        /* "lexer_fast.pyx":893
  *             token_start = i
  *             i += 1
  *             if i < end and is_operator(text[i]):             # <<<<<<<<<<<<<<
@@ -13839,30 +13849,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":894
+      /* "lexer_fast.pyx":895
  *             if i < end and is_operator(text[i]):
  *                 i += 1
  *             results.append((i - token_start, STYLE_OPERATORS))             # <<<<<<<<<<<<<<
  *             expect_docstring = 0
  *             if text[token_start] == 45 and (token_start + 1 < end) and text[token_start+1] == 62:
 */
-      __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 894, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 895, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_OPERATORS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 894, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_OPERATORS); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 895, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 894, __pyx_L1_error)
+      __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 895, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_GIVEREF(__pyx_t_3);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 894, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 895, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_14);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 894, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 895, __pyx_L1_error);
       __pyx_t_3 = 0;
       __pyx_t_14 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 894, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 895, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-      /* "lexer_fast.pyx":895
+      /* "lexer_fast.pyx":896
  *                 i += 1
  *             results.append((i - token_start, STYLE_OPERATORS))
  *             expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -13871,14 +13881,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_expect_docstring = 0;
 
-      /* "lexer_fast.pyx":896
+      /* "lexer_fast.pyx":897
  *             results.append((i - token_start, STYLE_OPERATORS))
  *             expect_docstring = 0
  *             if text[token_start] == 45 and (token_start + 1 < end) and text[token_start+1] == 62:             # <<<<<<<<<<<<<<
  *                 if pending_def and bracket_depth == 0:
  *                     after_arrow = 1
 */
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_token_start, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 896, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_token_start, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 897, __pyx_L1_error)
       __pyx_t_26 = (__pyx_t_25 == 45);
 
 
@@ -13888,7 +13898,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L167_bool_binop_done;
+        goto __pyx_L171_bool_binop_done;
       }
       __pyx_t_26 = ((__pyx_v_token_start + 1) < __pyx_v_end);
 
@@ -13898,11 +13908,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L167_bool_binop_done;
+        goto __pyx_L171_bool_binop_done;
       }
       __pyx_t_28 = (__pyx_v_token_start + 1);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 896, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 897, __pyx_L1_error)
 
       __pyx_t_26 = (__pyx_t_25 == 62);
 
@@ -13910,11 +13920,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L167_bool_binop_done:;
+      __pyx_L171_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":897
+        /* "lexer_fast.pyx":898
  *             expect_docstring = 0
  *             if text[token_start] == 45 and (token_start + 1 < end) and text[token_start+1] == 62:
  *                 if pending_def and bracket_depth == 0:             # <<<<<<<<<<<<<<
@@ -13929,18 +13939,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L171_bool_binop_done;
+          goto __pyx_L175_bool_binop_done;
         }
         __pyx_t_26 = (__pyx_v_bracket_depth == 0);
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L171_bool_binop_done:;
+        __pyx_L175_bool_binop_done:;
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":898
+          /* "lexer_fast.pyx":899
  *             if text[token_start] == 45 and (token_start + 1 < end) and text[token_start+1] == 62:
  *                 if pending_def and bracket_depth == 0:
  *                     after_arrow = 1             # <<<<<<<<<<<<<<
@@ -13949,7 +13959,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_after_arrow = 1;
 
-          /* "lexer_fast.pyx":897
+          /* "lexer_fast.pyx":898
  *             expect_docstring = 0
  *             if text[token_start] == 45 and (token_start + 1 < end) and text[token_start+1] == 62:
  *                 if pending_def and bracket_depth == 0:             # <<<<<<<<<<<<<<
@@ -13958,7 +13968,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":896
+        /* "lexer_fast.pyx":897
  *             results.append((i - token_start, STYLE_OPERATORS))
  *             expect_docstring = 0
  *             if text[token_start] == 45 and (token_start + 1 < end) and text[token_start+1] == 62:             # <<<<<<<<<<<<<<
@@ -13967,7 +13977,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":899
+      /* "lexer_fast.pyx":900
  *                 if pending_def and bracket_depth == 0:
  *                     after_arrow = 1
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -13976,7 +13986,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":900
+      /* "lexer_fast.pyx":901
  *                     after_arrow = 1
  *             prev_id_type = 0
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -13985,7 +13995,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":901
+      /* "lexer_fast.pyx":902
  *             prev_id_type = 0
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -13994,7 +14004,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":889
+      /* "lexer_fast.pyx":890
  * 
  *         # Operators
  *         if is_operator(c):             # <<<<<<<<<<<<<<
@@ -14003,7 +14013,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":904
+    /* "lexer_fast.pyx":905
  * 
  *         # Comma
  *         if c == 44:             # <<<<<<<<<<<<<<
@@ -14015,28 +14025,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":905
+      /* "lexer_fast.pyx":906
  *         # Comma
  *         if c == 44:
  *             results.append((1, STYLE_COMMA))             # <<<<<<<<<<<<<<
  *             i += 1
  *             if in_def_params:
 */
-      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMA); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 905, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_COMMA); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 906, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 905, __pyx_L1_error)
+      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 906, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 905, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 906, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_13);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 905, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 906, __pyx_L1_error);
       __pyx_t_13 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 905, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 906, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-      /* "lexer_fast.pyx":906
+      /* "lexer_fast.pyx":907
  *         if c == 44:
  *             results.append((1, STYLE_COMMA))
  *             i += 1             # <<<<<<<<<<<<<<
@@ -14045,7 +14055,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":907
+      /* "lexer_fast.pyx":908
  *             results.append((1, STYLE_COMMA))
  *             i += 1
  *             if in_def_params:             # <<<<<<<<<<<<<<
@@ -14057,7 +14067,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":908
+        /* "lexer_fast.pyx":909
  *             i += 1
  *             if in_def_params:
  *                 at_type_pos = 0             # <<<<<<<<<<<<<<
@@ -14066,7 +14076,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_type_pos = 0;
 
-        /* "lexer_fast.pyx":907
+        /* "lexer_fast.pyx":908
  *             results.append((1, STYLE_COMMA))
  *             i += 1
  *             if in_def_params:             # <<<<<<<<<<<<<<
@@ -14075,7 +14085,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":909
+      /* "lexer_fast.pyx":910
  *             if in_def_params:
  *                 at_type_pos = 0
  *             if not after_import and not in_from_import and not after_from:             # <<<<<<<<<<<<<<
@@ -14090,7 +14100,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L176_bool_binop_done;
+        goto __pyx_L180_bool_binop_done;
       }
       __pyx_t_26 = (!(__pyx_v_in_from_import != 0));
 
@@ -14100,18 +14110,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L176_bool_binop_done;
+        goto __pyx_L180_bool_binop_done;
       }
       __pyx_t_26 = (!(__pyx_v_after_from != 0));
 
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L176_bool_binop_done:;
+      __pyx_L180_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":910
+        /* "lexer_fast.pyx":911
  *                 at_type_pos = 0
  *             if not after_import and not in_from_import and not after_from:
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -14120,7 +14130,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":909
+        /* "lexer_fast.pyx":910
  *             if in_def_params:
  *                 at_type_pos = 0
  *             if not after_import and not in_from_import and not after_from:             # <<<<<<<<<<<<<<
@@ -14129,7 +14139,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":911
+      /* "lexer_fast.pyx":912
  *             if not after_import and not in_from_import and not after_from:
  *                 prev_id_type = 0
  *             at_arg_pos = True             # <<<<<<<<<<<<<<
@@ -14138,7 +14148,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 1;
 
-      /* "lexer_fast.pyx":912
+      /* "lexer_fast.pyx":913
  *                 prev_id_type = 0
  *             at_arg_pos = True
  *             continue             # <<<<<<<<<<<<<<
@@ -14147,7 +14157,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":904
+      /* "lexer_fast.pyx":905
  * 
  *         # Comma
  *         if c == 44:             # <<<<<<<<<<<<<<
@@ -14156,7 +14166,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":915
+    /* "lexer_fast.pyx":916
  * 
  *         # Colon
  *         if c == 58:             # <<<<<<<<<<<<<<
@@ -14168,28 +14178,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":916
+      /* "lexer_fast.pyx":917
  *         # Colon
  *         if c == 58:
  *             results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *             if in_def_params and param_depth == 1:
  *                 at_type_pos = 1
 */
-      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 916, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 917, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 916, __pyx_L1_error)
+      __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 917, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 916, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 917, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_14);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 916, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 917, __pyx_L1_error);
       __pyx_t_14 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 916, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 917, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-      /* "lexer_fast.pyx":917
+      /* "lexer_fast.pyx":918
  *         if c == 58:
  *             results.append((1, STYLE_DEFAULT))
  *             if in_def_params and param_depth == 1:             # <<<<<<<<<<<<<<
@@ -14204,18 +14214,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L181_bool_binop_done;
+        goto __pyx_L185_bool_binop_done;
       }
       __pyx_t_26 = (__pyx_v_param_depth == 1);
 
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L181_bool_binop_done:;
+      __pyx_L185_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":918
+        /* "lexer_fast.pyx":919
  *             results.append((1, STYLE_DEFAULT))
  *             if in_def_params and param_depth == 1:
  *                 at_type_pos = 1             # <<<<<<<<<<<<<<
@@ -14224,17 +14234,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_type_pos = 1;
 
-        /* "lexer_fast.pyx":917
+        /* "lexer_fast.pyx":918
  *         if c == 58:
  *             results.append((1, STYLE_DEFAULT))
  *             if in_def_params and param_depth == 1:             # <<<<<<<<<<<<<<
  *                 at_type_pos = 1
  *             elif bracket_depth == 0 and (pending_def or pending_class):
 */
-        goto __pyx_L180;
+        goto __pyx_L184;
       }
 
-      /* "lexer_fast.pyx":919
+      /* "lexer_fast.pyx":920
  *             if in_def_params and param_depth == 1:
  *                 at_type_pos = 1
  *             elif bracket_depth == 0 and (pending_def or pending_class):             # <<<<<<<<<<<<<<
@@ -14249,7 +14259,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L183_bool_binop_done;
+        goto __pyx_L187_bool_binop_done;
       }
       __pyx_t_26 = (__pyx_v_pending_def != 0);
 
@@ -14259,18 +14269,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L183_bool_binop_done;
+        goto __pyx_L187_bool_binop_done;
       }
       __pyx_t_26 = (__pyx_v_pending_class != 0);
 
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L183_bool_binop_done:;
+      __pyx_L187_bool_binop_done:;
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":920
+        /* "lexer_fast.pyx":921
  *                 at_type_pos = 1
  *             elif bracket_depth == 0 and (pending_def or pending_class):
  *                 expect_docstring = 1             # <<<<<<<<<<<<<<
@@ -14279,7 +14289,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_expect_docstring = 1;
 
-        /* "lexer_fast.pyx":921
+        /* "lexer_fast.pyx":922
  *             elif bracket_depth == 0 and (pending_def or pending_class):
  *                 expect_docstring = 1
  *                 if pending_class:             # <<<<<<<<<<<<<<
@@ -14291,7 +14301,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_2) {
 
 
-          /* "lexer_fast.pyx":922
+          /* "lexer_fast.pyx":923
  *                 expect_docstring = 1
  *                 if pending_class:
  *                     at_class_body = 1             # <<<<<<<<<<<<<<
@@ -14300,7 +14310,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_at_class_body = 1;
 
-          /* "lexer_fast.pyx":921
+          /* "lexer_fast.pyx":922
  *             elif bracket_depth == 0 and (pending_def or pending_class):
  *                 expect_docstring = 1
  *                 if pending_class:             # <<<<<<<<<<<<<<
@@ -14309,7 +14319,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         }
 
-        /* "lexer_fast.pyx":923
+        /* "lexer_fast.pyx":924
  *                 if pending_class:
  *                     at_class_body = 1
  *                 pending_def = 0             # <<<<<<<<<<<<<<
@@ -14318,7 +14328,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_pending_def = 0;
 
-        /* "lexer_fast.pyx":924
+        /* "lexer_fast.pyx":925
  *                     at_class_body = 1
  *                 pending_def = 0
  *                 pending_class = 0             # <<<<<<<<<<<<<<
@@ -14327,7 +14337,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_pending_class = 0;
 
-        /* "lexer_fast.pyx":925
+        /* "lexer_fast.pyx":926
  *                 pending_def = 0
  *                 pending_class = 0
  *                 after_arrow = 0             # <<<<<<<<<<<<<<
@@ -14336,7 +14346,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_arrow = 0;
 
-        /* "lexer_fast.pyx":919
+        /* "lexer_fast.pyx":920
  *             if in_def_params and param_depth == 1:
  *                 at_type_pos = 1
  *             elif bracket_depth == 0 and (pending_def or pending_class):             # <<<<<<<<<<<<<<
@@ -14344,9 +14354,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                 if pending_class:
 */
       }
-      __pyx_L180:;
+      __pyx_L184:;
 
-      /* "lexer_fast.pyx":926
+      /* "lexer_fast.pyx":927
  *                 pending_class = 0
  *                 after_arrow = 0
  *             i += 1             # <<<<<<<<<<<<<<
@@ -14355,7 +14365,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":927
+      /* "lexer_fast.pyx":928
  *                 after_arrow = 0
  *             i += 1
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -14364,7 +14374,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":928
+      /* "lexer_fast.pyx":929
  *             i += 1
  *             prev_id_type = 0
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -14373,7 +14383,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":929
+      /* "lexer_fast.pyx":930
  *             prev_id_type = 0
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -14382,7 +14392,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":915
+      /* "lexer_fast.pyx":916
  * 
  *         # Colon
  *         if c == 58:             # <<<<<<<<<<<<<<
@@ -14391,7 +14401,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":932
+    /* "lexer_fast.pyx":933
  * 
  *         # Semicolon
  *         if c == 59:             # <<<<<<<<<<<<<<
@@ -14403,28 +14413,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":933
+      /* "lexer_fast.pyx":934
  *         # Semicolon
  *         if c == 59:
  *             results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *             i += 1
  *             expect_docstring = 0
 */
-      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 933, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 934, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 933, __pyx_L1_error)
+      __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 934, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 933, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 934, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_13);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 933, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_13) != (0)) __PYX_ERR(0, 934, __pyx_L1_error);
       __pyx_t_13 = 0;
-      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 933, __pyx_L1_error)
+      __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 934, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-      /* "lexer_fast.pyx":934
+      /* "lexer_fast.pyx":935
  *         if c == 59:
  *             results.append((1, STYLE_DEFAULT))
  *             i += 1             # <<<<<<<<<<<<<<
@@ -14433,7 +14443,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_i = (__pyx_v_i + 1);
 
-      /* "lexer_fast.pyx":935
+      /* "lexer_fast.pyx":936
  *             results.append((1, STYLE_DEFAULT))
  *             i += 1
  *             expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -14442,7 +14452,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_expect_docstring = 0;
 
-      /* "lexer_fast.pyx":936
+      /* "lexer_fast.pyx":937
  *             i += 1
  *             expect_docstring = 0
  *             after_from = 0             # <<<<<<<<<<<<<<
@@ -14451,7 +14461,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_after_from = 0;
 
-      /* "lexer_fast.pyx":937
+      /* "lexer_fast.pyx":938
  *             expect_docstring = 0
  *             after_from = 0
  *             after_import = 0             # <<<<<<<<<<<<<<
@@ -14460,7 +14470,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_after_import = 0;
 
-      /* "lexer_fast.pyx":938
+      /* "lexer_fast.pyx":939
  *             after_from = 0
  *             after_import = 0
  *             in_from_import = 0             # <<<<<<<<<<<<<<
@@ -14469,7 +14479,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_in_from_import = 0;
 
-      /* "lexer_fast.pyx":939
+      /* "lexer_fast.pyx":940
  *             after_import = 0
  *             in_from_import = 0
  *             prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -14478,7 +14488,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_prev_id_type = 0;
 
-      /* "lexer_fast.pyx":940
+      /* "lexer_fast.pyx":941
  *             in_from_import = 0
  *             prev_id_type = 0
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -14487,7 +14497,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":941
+      /* "lexer_fast.pyx":942
  *             prev_id_type = 0
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -14496,7 +14506,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":932
+      /* "lexer_fast.pyx":933
  * 
  *         # Semicolon
  *         if c == 59:             # <<<<<<<<<<<<<<
@@ -14505,18 +14515,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":944
+    /* "lexer_fast.pyx":945
  * 
  *         # ============ IDENTIFIER (word) ============
  *         if is_alpha(c):             # <<<<<<<<<<<<<<
  *             token_start = i
  *             while i < end and is_alnum(text[i]):
 */
-    __pyx_t_2 = __pyx_f_10lexer_fast_is_alpha(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 944, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_10lexer_fast_is_alpha(__pyx_v_c); if (unlikely(__pyx_t_2 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 945, __pyx_L1_error)
     if (__pyx_t_2) {
 
 
-      /* "lexer_fast.pyx":945
+      /* "lexer_fast.pyx":946
  *         # ============ IDENTIFIER (word) ============
  *         if is_alpha(c):
  *             token_start = i             # <<<<<<<<<<<<<<
@@ -14525,7 +14535,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_token_start = __pyx_v_i;
 
-      /* "lexer_fast.pyx":946
+      /* "lexer_fast.pyx":947
  *         if is_alpha(c):
  *             token_start = i
  *             while i < end and is_alnum(text[i]):             # <<<<<<<<<<<<<<
@@ -14541,19 +14551,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L191_bool_binop_done;
+          goto __pyx_L195_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 946, __pyx_L1_error)
-        __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 946, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 947, __pyx_L1_error)
+        __pyx_t_26 = __pyx_f_10lexer_fast_is_alnum(__pyx_t_25); if (unlikely(__pyx_t_26 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 947, __pyx_L1_error)
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L191_bool_binop_done:;
+        __pyx_L195_bool_binop_done:;
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":947
+        /* "lexer_fast.pyx":948
  *             token_start = i
  *             while i < end and is_alnum(text[i]):
  *                 i += 1             # <<<<<<<<<<<<<<
@@ -14563,7 +14573,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_v_i = (__pyx_v_i + 1);
       }
 
-      /* "lexer_fast.pyx":949
+      /* "lexer_fast.pyx":950
  *                 i += 1
  * 
  *             token_bytes = text[token_start:i]             # <<<<<<<<<<<<<<
@@ -14572,14 +14582,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       if (unlikely(__pyx_v_text == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not subscriptable");
-        __PYX_ERR(0, 949, __pyx_L1_error)
+        __PYX_ERR(0, 950, __pyx_L1_error)
       }
-      __pyx_t_14 = PySequence_GetSlice(__pyx_v_text, __pyx_v_token_start, __pyx_v_i); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 949, __pyx_L1_error)
+      __pyx_t_14 = PySequence_GetSlice(__pyx_v_text, __pyx_v_token_start, __pyx_v_i); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 950, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
       __Pyx_XDECREF_SET(__pyx_v_token_bytes, ((PyObject*)__pyx_t_14));
       __pyx_t_14 = 0;
 
-      /* "lexer_fast.pyx":950
+      /* "lexer_fast.pyx":951
  * 
  *             token_bytes = text[token_start:i]
  *             token_str = token_bytes.decode('utf-8', errors='replace')             # <<<<<<<<<<<<<<
@@ -14595,13 +14605,13 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         PyObject *__pyx_callargs[3] = {__pyx_t_13, __pyx_mstate_global->__pyx_kp_u_utf_8, __pyx_mstate_global->__pyx_n_u_replace};
         #if CYTHON_VECTORCALL
         __pyx_t_3 = __pyx_mstate_global->__pyx_tuple[0];
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 950, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 951, __pyx_L1_error)
         __Pyx_INCREF(__pyx_t_3);
         #else
         {
           PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_errors};
           __pyx_t_3 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 950, __pyx_L1_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 951, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
         #endif
@@ -14610,14 +14620,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         #if CYTHON_VECTORCALL
         #endif
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 950, __pyx_L1_error)
+        if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 951, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
       }
-      if (!(likely(PyUnicode_CheckExact(__pyx_t_14))||((__pyx_t_14) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_14))) __PYX_ERR(0, 950, __pyx_L1_error)
+      if (!(likely(PyUnicode_CheckExact(__pyx_t_14))||((__pyx_t_14) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_14))) __PYX_ERR(0, 951, __pyx_L1_error)
       __Pyx_XDECREF_SET(__pyx_v_token_str, ((PyObject*)__pyx_t_14));
       __pyx_t_14 = 0;
 
-      /* "lexer_fast.pyx":952
+      /* "lexer_fast.pyx":953
  *             token_str = token_bytes.decode('utf-8', errors='replace')
  * 
  *             followed_by_paren = (i < end and text[i] == 40)             # <<<<<<<<<<<<<<
@@ -14632,19 +14642,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L193_bool_binop_done;
+        goto __pyx_L197_bool_binop_done;
       }
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 952, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 953, __pyx_L1_error)
       __pyx_t_26 = (__pyx_t_25 == 40);
 
 
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L193_bool_binop_done:;
+      __pyx_L197_bool_binop_done:;
       __pyx_v_followed_by_paren = __pyx_t_2;
 
-      /* "lexer_fast.pyx":953
+      /* "lexer_fast.pyx":954
  * 
  *             followed_by_paren = (i < end and text[i] == 40)
  *             followed_by_eq = (i < end and text[i] == 61 and             # <<<<<<<<<<<<<<
@@ -14659,9 +14669,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L195_bool_binop_done;
+        goto __pyx_L199_bool_binop_done;
       }
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 953, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v_i, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 954, __pyx_L1_error)
       __pyx_t_26 = (__pyx_t_25 == 61);
 
 
@@ -14671,10 +14681,10 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L195_bool_binop_done;
+        goto __pyx_L199_bool_binop_done;
       }
 
-      /* "lexer_fast.pyx":954
+      /* "lexer_fast.pyx":955
  *             followed_by_paren = (i < end and text[i] == 40)
  *             followed_by_eq = (i < end and text[i] == 61 and
  *                               (i + 1 >= end or text[i+1] != 61))             # <<<<<<<<<<<<<<
@@ -14689,11 +14699,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L195_bool_binop_done;
+        goto __pyx_L199_bool_binop_done;
       }
       __pyx_t_28 = (__pyx_v_i + 1);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 954, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 955, __pyx_L1_error)
 
       __pyx_t_26 = (__pyx_t_25 != 61);
 
@@ -14701,10 +14711,10 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L195_bool_binop_done:;
+      __pyx_L199_bool_binop_done:;
       __pyx_v_followed_by_eq = __pyx_t_2;
 
-      /* "lexer_fast.pyx":955
+      /* "lexer_fast.pyx":956
  *             followed_by_eq = (i < end and text[i] == 61 and
  *                               (i + 1 >= end or text[i+1] != 61))
  *             _j = i             # <<<<<<<<<<<<<<
@@ -14713,7 +14723,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v__j = __pyx_v_i;
 
-      /* "lexer_fast.pyx":956
+      /* "lexer_fast.pyx":957
  *                               (i + 1 >= end or text[i+1] != 61))
  *             _j = i
  *             while _j < end and (text[_j] == 32 or text[_j] == 9):             # <<<<<<<<<<<<<<
@@ -14729,9 +14739,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L201_bool_binop_done;
+          goto __pyx_L205_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v__j, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 956, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v__j, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 957, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 == 32);
 
 
@@ -14741,20 +14751,20 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_2 = __pyx_t_26;
 
-          goto __pyx_L201_bool_binop_done;
+          goto __pyx_L205_bool_binop_done;
         }
-        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v__j, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 956, __pyx_L1_error)
+        __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v__j, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 957, __pyx_L1_error)
         __pyx_t_26 = (__pyx_t_25 == 9);
 
 
 
         __pyx_t_2 = __pyx_t_26;
 
-        __pyx_L201_bool_binop_done:;
+        __pyx_L205_bool_binop_done:;
 
         if (!__pyx_t_2) break;
 
-        /* "lexer_fast.pyx":957
+        /* "lexer_fast.pyx":958
  *             _j = i
  *             while _j < end and (text[_j] == 32 or text[_j] == 9):
  *                 _j += 1             # <<<<<<<<<<<<<<
@@ -14764,7 +14774,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         __pyx_v__j = (__pyx_v__j + 1);
       }
 
-      /* "lexer_fast.pyx":958
+      /* "lexer_fast.pyx":959
  *             while _j < end and (text[_j] == 32 or text[_j] == 9):
  *                 _j += 1
  *             followed_by_assign = (_j < end and text[_j] == 61 and             # <<<<<<<<<<<<<<
@@ -14779,9 +14789,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L204_bool_binop_done;
+        goto __pyx_L208_bool_binop_done;
       }
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v__j, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 958, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_v__j, int, 1, __Pyx_PyLong_From_int, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 959, __pyx_L1_error)
       __pyx_t_26 = (__pyx_t_25 == 61);
 
 
@@ -14791,10 +14801,10 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L204_bool_binop_done;
+        goto __pyx_L208_bool_binop_done;
       }
 
-      /* "lexer_fast.pyx":959
+      /* "lexer_fast.pyx":960
  *                 _j += 1
  *             followed_by_assign = (_j < end and text[_j] == 61 and
  *                                   (_j + 1 >= end or text[_j+1] != 61))             # <<<<<<<<<<<<<<
@@ -14809,11 +14819,11 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L204_bool_binop_done;
+        goto __pyx_L208_bool_binop_done;
       }
       __pyx_t_28 = (__pyx_v__j + 1);
 
-      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 959, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_GetItemInt_Bytes(__pyx_v_text, __pyx_t_28, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(__pyx_t_25 == -1)) __PYX_ERR(0, 960, __pyx_L1_error)
 
       __pyx_t_26 = (__pyx_t_25 != 61);
 
@@ -14821,37 +14831,37 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L204_bool_binop_done:;
+      __pyx_L208_bool_binop_done:;
       __pyx_v_followed_by_assign = __pyx_t_2;
 
-      /* "lexer_fast.pyx":961
+      /* "lexer_fast.pyx":962
  *                                   (_j + 1 >= end or text[_j+1] != 61))
  * 
  *             if not (token_str == "def" or token_str == "class"):             # <<<<<<<<<<<<<<
  *                 expect_docstring = 0
  * 
 */
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_def, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 961, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_def, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 962, __pyx_L1_error)
       if (!__pyx_t_26) {
 
       } else {
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L209_bool_binop_done;
+        goto __pyx_L213_bool_binop_done;
       }
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_class, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 961, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_class, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 962, __pyx_L1_error)
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L209_bool_binop_done:;
+      __pyx_L213_bool_binop_done:;
       __pyx_t_26 = (!__pyx_t_2);
 
 
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":962
+        /* "lexer_fast.pyx":963
  * 
  *             if not (token_str == "def" or token_str == "class"):
  *                 expect_docstring = 0             # <<<<<<<<<<<<<<
@@ -14860,7 +14870,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_expect_docstring = 0;
 
-        /* "lexer_fast.pyx":961
+        /* "lexer_fast.pyx":962
  *                                   (_j + 1 >= end or text[_j+1] != 61))
  * 
  *             if not (token_str == "def" or token_str == "class"):             # <<<<<<<<<<<<<<
@@ -14869,7 +14879,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       }
 
-      /* "lexer_fast.pyx":965
+      /* "lexer_fast.pyx":966
  * 
  *             # --- Style decision tree (mirrors PyCharm's Python semantics) ---
  *             if after_at:             # <<<<<<<<<<<<<<
@@ -14881,30 +14891,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":966
+        /* "lexer_fast.pyx":967
  *             # --- Style decision tree (mirrors PyCharm's Python semantics) ---
  *             if after_at:
  *                 results.append((i - token_start, STYLE_DECORATOR))             # <<<<<<<<<<<<<<
  *                 after_at = 0
  *                 prev_id_type = 0
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 966, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 967, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DECORATOR); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 966, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DECORATOR); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 967, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 966, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 967, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 966, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 967, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 966, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 967, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 966, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 967, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":967
+        /* "lexer_fast.pyx":968
  *             if after_at:
  *                 results.append((i - token_start, STYLE_DECORATOR))
  *                 after_at = 0             # <<<<<<<<<<<<<<
@@ -14913,7 +14923,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_at = 0;
 
-        /* "lexer_fast.pyx":968
+        /* "lexer_fast.pyx":969
  *                 results.append((i - token_start, STYLE_DECORATOR))
  *                 after_at = 0
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -14922,17 +14932,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":965
+        /* "lexer_fast.pyx":966
  * 
  *             # --- Style decision tree (mirrors PyCharm's Python semantics) ---
  *             if after_at:             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_DECORATOR))
  *                 after_at = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":970
+      /* "lexer_fast.pyx":971
  *                 prev_id_type = 0
  * 
  *             elif token_str in ("self", "cls"):             # <<<<<<<<<<<<<<
@@ -14941,20 +14951,20 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __Pyx_INCREF(__pyx_v_token_str);
       __pyx_t_30 = __pyx_v_token_str;
-      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_self, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 970, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_self, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 971, __pyx_L1_error)
       if (!__pyx_t_2) {
 
       } else {
 
         __pyx_t_26 = __pyx_t_2;
 
-        goto __pyx_L212_bool_binop_done;
+        goto __pyx_L216_bool_binop_done;
       }
-      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_cls, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 970, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_cls, Py_EQ); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 971, __pyx_L1_error)
 
       __pyx_t_26 = __pyx_t_2;
 
-      __pyx_L212_bool_binop_done:;
+      __pyx_L216_bool_binop_done:;
       __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
       __pyx_t_2 = __pyx_t_26;
 
@@ -14962,30 +14972,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_2) {
 
 
-        /* "lexer_fast.pyx":971
+        /* "lexer_fast.pyx":972
  * 
  *             elif token_str in ("self", "cls"):
  *                 results.append((i - token_start, STYLE_SELF_CLS))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 1
  * 
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 971, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 972, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_SELF_CLS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 971, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_SELF_CLS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 972, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 971, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 972, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 971, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 972, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 971, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 972, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 971, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 972, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":972
+        /* "lexer_fast.pyx":973
  *             elif token_str in ("self", "cls"):
  *                 results.append((i - token_start, STYLE_SELF_CLS))
  *                 prev_id_type = 1             # <<<<<<<<<<<<<<
@@ -14994,17 +15004,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 1;
 
-        /* "lexer_fast.pyx":970
+        /* "lexer_fast.pyx":971
  *                 prev_id_type = 0
  * 
  *             elif token_str in ("self", "cls"):             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_SELF_CLS))
  *                 prev_id_type = 1
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":974
+      /* "lexer_fast.pyx":975
  *                 prev_id_type = 1
  * 
  *             elif token_str in ("True", "False", "None"):             # <<<<<<<<<<<<<<
@@ -15013,29 +15023,29 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __Pyx_INCREF(__pyx_v_token_str);
       __pyx_t_30 = __pyx_v_token_str;
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_True, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_True, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 975, __pyx_L1_error)
       if (!__pyx_t_26) {
 
       } else {
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L214_bool_binop_done;
+        goto __pyx_L218_bool_binop_done;
       }
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_False, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_False, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 975, __pyx_L1_error)
       if (!__pyx_t_26) {
 
       } else {
 
         __pyx_t_2 = __pyx_t_26;
 
-        goto __pyx_L214_bool_binop_done;
+        goto __pyx_L218_bool_binop_done;
       }
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_None, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 974, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_t_30, __pyx_mstate_global->__pyx_n_u_None, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 975, __pyx_L1_error)
 
       __pyx_t_2 = __pyx_t_26;
 
-      __pyx_L214_bool_binop_done:;
+      __pyx_L218_bool_binop_done:;
       __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
       __pyx_t_26 = __pyx_t_2;
 
@@ -15043,30 +15053,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":975
+        /* "lexer_fast.pyx":976
  * 
  *             elif token_str in ("True", "False", "None"):
  *                 results.append((i - token_start, STYLE_CONSTANTS))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 0
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 975, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 976, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CONSTANTS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 975, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CONSTANTS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 976, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 975, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 976, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 975, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 976, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 975, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 976, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 975, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 976, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":976
+        /* "lexer_fast.pyx":977
  *             elif token_str in ("True", "False", "None"):
  *                 results.append((i - token_start, STYLE_CONSTANTS))
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15075,51 +15085,51 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":974
+        /* "lexer_fast.pyx":975
  *                 prev_id_type = 1
  * 
  *             elif token_str in ("True", "False", "None"):             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_CONSTANTS))
  *                 prev_id_type = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":978
+      /* "lexer_fast.pyx":979
  *                 prev_id_type = 0
  * 
  *             elif token_str == "def":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_def = 1
 */
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_def, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 978, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_def, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 979, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":979
+        /* "lexer_fast.pyx":980
  * 
  *             elif token_str == "def":
  *                 results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 after_def = 1
  *                 pending_def = 1
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 979, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 980, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 979, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 980, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 979, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 980, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 979, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 980, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 979, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 980, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 979, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 980, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":980
+        /* "lexer_fast.pyx":981
  *             elif token_str == "def":
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_def = 1             # <<<<<<<<<<<<<<
@@ -15128,7 +15138,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_def = 1;
 
-        /* "lexer_fast.pyx":981
+        /* "lexer_fast.pyx":982
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_def = 1
  *                 pending_def = 1             # <<<<<<<<<<<<<<
@@ -15137,7 +15147,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_pending_def = 1;
 
-        /* "lexer_fast.pyx":982
+        /* "lexer_fast.pyx":983
  *                 after_def = 1
  *                 pending_def = 1
  *                 pending_class = 0             # <<<<<<<<<<<<<<
@@ -15146,7 +15156,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_pending_class = 0;
 
-        /* "lexer_fast.pyx":983
+        /* "lexer_fast.pyx":984
  *                 pending_def = 1
  *                 pending_class = 0
  *                 at_class_body = 0             # <<<<<<<<<<<<<<
@@ -15155,7 +15165,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_at_class_body = 0;
 
-        /* "lexer_fast.pyx":984
+        /* "lexer_fast.pyx":985
  *                 pending_class = 0
  *                 at_class_body = 0
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15164,51 +15174,51 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":978
+        /* "lexer_fast.pyx":979
  *                 prev_id_type = 0
  * 
  *             elif token_str == "def":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_def = 1
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":986
+      /* "lexer_fast.pyx":987
  *                 prev_id_type = 0
  * 
  *             elif token_str == "class":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_class = 1
 */
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_class, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 986, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_class, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 987, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":987
+        /* "lexer_fast.pyx":988
  * 
  *             elif token_str == "class":
  *                 results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 after_class = 1
  *                 pending_class = 1
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 987, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 988, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 987, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 988, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 987, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 988, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 987, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 988, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 987, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 988, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 987, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 988, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":988
+        /* "lexer_fast.pyx":989
  *             elif token_str == "class":
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_class = 1             # <<<<<<<<<<<<<<
@@ -15217,7 +15227,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_class = 1;
 
-        /* "lexer_fast.pyx":989
+        /* "lexer_fast.pyx":990
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_class = 1
  *                 pending_class = 1             # <<<<<<<<<<<<<<
@@ -15226,7 +15236,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_pending_class = 1;
 
-        /* "lexer_fast.pyx":990
+        /* "lexer_fast.pyx":991
  *                 after_class = 1
  *                 pending_class = 1
  *                 pending_def = 0             # <<<<<<<<<<<<<<
@@ -15235,7 +15245,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_pending_def = 0;
 
-        /* "lexer_fast.pyx":991
+        /* "lexer_fast.pyx":992
  *                 pending_class = 1
  *                 pending_def = 0
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15244,51 +15254,51 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":986
+        /* "lexer_fast.pyx":987
  *                 prev_id_type = 0
  * 
  *             elif token_str == "class":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_class = 1
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":993
+      /* "lexer_fast.pyx":994
  *                 prev_id_type = 0
  * 
  *             elif token_str == "import":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 if after_from:
 */
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_import, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 993, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_import, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 994, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":994
+        /* "lexer_fast.pyx":995
  * 
  *             elif token_str == "import":
  *                 results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 if after_from:
  *                     after_from = 0
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 994, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 995, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 994, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 995, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 994, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 995, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 994, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 995, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 994, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 995, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 994, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 995, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":995
+        /* "lexer_fast.pyx":996
  *             elif token_str == "import":
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 if after_from:             # <<<<<<<<<<<<<<
@@ -15300,7 +15310,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_26) {
 
 
-          /* "lexer_fast.pyx":996
+          /* "lexer_fast.pyx":997
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 if after_from:
  *                     after_from = 0             # <<<<<<<<<<<<<<
@@ -15309,7 +15319,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_after_from = 0;
 
-          /* "lexer_fast.pyx":997
+          /* "lexer_fast.pyx":998
  *                 if after_from:
  *                     after_from = 0
  *                     in_from_import = 1             # <<<<<<<<<<<<<<
@@ -15318,17 +15328,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_in_from_import = 1;
 
-          /* "lexer_fast.pyx":995
+          /* "lexer_fast.pyx":996
  *             elif token_str == "import":
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 if after_from:             # <<<<<<<<<<<<<<
  *                     after_from = 0
  *                     in_from_import = 1
 */
-          goto __pyx_L217;
+          goto __pyx_L221;
         }
 
-        /* "lexer_fast.pyx":999
+        /* "lexer_fast.pyx":1000
  *                     in_from_import = 1
  *                 else:
  *                     after_import = 1             # <<<<<<<<<<<<<<
@@ -15338,9 +15348,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         /*else*/ {
           __pyx_v_after_import = 1;
         }
-        __pyx_L217:;
+        __pyx_L221:;
 
-        /* "lexer_fast.pyx":1000
+        /* "lexer_fast.pyx":1001
  *                 else:
  *                     after_import = 1
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15349,51 +15359,51 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":993
+        /* "lexer_fast.pyx":994
  *                 prev_id_type = 0
  * 
  *             elif token_str == "import":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 if after_from:
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1002
+      /* "lexer_fast.pyx":1003
  *                 prev_id_type = 0
  * 
  *             elif token_str == "from":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_from = 1
 */
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_from, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1002, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_from, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1003, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1003
+        /* "lexer_fast.pyx":1004
  * 
  *             elif token_str == "from":
  *                 results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 after_from = 1
  *                 prev_id_type = 0
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1003, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1004, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1003, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1004, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1003, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1004, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1003, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1004, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1003, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1004, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1003, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1004, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1004
+        /* "lexer_fast.pyx":1005
  *             elif token_str == "from":
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_from = 1             # <<<<<<<<<<<<<<
@@ -15402,7 +15412,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_from = 1;
 
-        /* "lexer_fast.pyx":1005
+        /* "lexer_fast.pyx":1006
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_from = 1
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15411,51 +15421,51 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":1002
+        /* "lexer_fast.pyx":1003
  *                 prev_id_type = 0
  * 
  *             elif token_str == "from":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_from = 1
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1007
+      /* "lexer_fast.pyx":1008
  *                 prev_id_type = 0
  * 
  *             elif token_str == "as":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_import = 0
 */
-      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_as, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1007, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u_as, Py_EQ); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1008, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1008
+        /* "lexer_fast.pyx":1009
  * 
  *             elif token_str == "as":
  *                 results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 after_import = 0
  *                 in_from_import = 0
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1008, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1009, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1008, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1009, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1008, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1009, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1008, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1009, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1008, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1009, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1008, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1009, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1009
+        /* "lexer_fast.pyx":1010
  *             elif token_str == "as":
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_import = 0             # <<<<<<<<<<<<<<
@@ -15464,7 +15474,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_import = 0;
 
-        /* "lexer_fast.pyx":1010
+        /* "lexer_fast.pyx":1011
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_import = 0
  *                 in_from_import = 0             # <<<<<<<<<<<<<<
@@ -15473,7 +15483,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_in_from_import = 0;
 
-        /* "lexer_fast.pyx":1011
+        /* "lexer_fast.pyx":1012
  *                 after_import = 0
  *                 in_from_import = 0
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15482,17 +15492,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":1007
+        /* "lexer_fast.pyx":1008
  *                 prev_id_type = 0
  * 
  *             elif token_str == "as":             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 after_import = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1013
+      /* "lexer_fast.pyx":1014
  *                 prev_id_type = 0
  * 
  *             elif token_str in keywords:             # <<<<<<<<<<<<<<
@@ -15501,36 +15511,36 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       if (unlikely(__pyx_v_keywords == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not iterable");
-        __PYX_ERR(0, 1013, __pyx_L1_error)
+        __PYX_ERR(0, 1014, __pyx_L1_error)
       }
-      __pyx_t_26 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_keywords, Py_EQ)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1013, __pyx_L1_error)
+      __pyx_t_26 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_keywords, Py_EQ)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1014, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1014
+        /* "lexer_fast.pyx":1015
  * 
  *             elif token_str in keywords:
  *                 results.append((i - token_start, STYLE_KEYWORD))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 0
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1014, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1015, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1014, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYWORD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1015, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1014, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1015, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1014, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1015, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1014, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1015, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1014, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1015, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1015
+        /* "lexer_fast.pyx":1016
  *             elif token_str in keywords:
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -15539,17 +15549,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":1013
+        /* "lexer_fast.pyx":1014
  *                 prev_id_type = 0
  * 
  *             elif token_str in keywords:             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYWORD))
  *                 prev_id_type = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1017
+      /* "lexer_fast.pyx":1018
  *                 prev_id_type = 0
  * 
  *             elif after_def:             # <<<<<<<<<<<<<<
@@ -15561,7 +15571,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1020
+        /* "lexer_fast.pyx":1021
  *                 # Method/function declaration name. Magic methods (dunders)
  *                 # get their own magenta color in PyCharm.
  *                 if token_str in magic_methods:             # <<<<<<<<<<<<<<
@@ -15570,46 +15580,46 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         if (unlikely(__pyx_v_magic_methods == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not iterable");
-          __PYX_ERR(0, 1020, __pyx_L1_error)
+          __PYX_ERR(0, 1021, __pyx_L1_error)
         }
-        __pyx_t_26 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_magic_methods, Py_EQ)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1020, __pyx_L1_error)
+        __pyx_t_26 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_magic_methods, Py_EQ)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1021, __pyx_L1_error)
         if (__pyx_t_26) {
 
 
-          /* "lexer_fast.pyx":1021
+          /* "lexer_fast.pyx":1022
  *                 # get their own magenta color in PyCharm.
  *                 if token_str in magic_methods:
  *                     results.append((i - token_start, STYLE_MAGIC_METHODS))             # <<<<<<<<<<<<<<
  *                 else:
  *                     results.append((i - token_start, STYLE_FUNCTION_DEF))
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1021, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1022, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MAGIC_METHODS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1021, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MAGIC_METHODS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1022, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1021, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1022, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1021, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1022, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1021, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1022, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1021, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1022, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":1020
+          /* "lexer_fast.pyx":1021
  *                 # Method/function declaration name. Magic methods (dunders)
  *                 # get their own magenta color in PyCharm.
  *                 if token_str in magic_methods:             # <<<<<<<<<<<<<<
  *                     results.append((i - token_start, STYLE_MAGIC_METHODS))
  *                 else:
 */
-          goto __pyx_L218;
+          goto __pyx_L222;
         }
 
-        /* "lexer_fast.pyx":1023
+        /* "lexer_fast.pyx":1024
  *                     results.append((i - token_start, STYLE_MAGIC_METHODS))
  *                 else:
  *                     results.append((i - token_start, STYLE_FUNCTION_DEF))             # <<<<<<<<<<<<<<
@@ -15617,25 +15627,25 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  * 
 */
         /*else*/ {
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1023, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1024, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_FUNCTION_DEF); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1023, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_FUNCTION_DEF); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1024, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1023, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1024, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1023, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1024, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1023, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1024, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1023, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1024, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
         }
-        __pyx_L218:;
+        __pyx_L222:;
 
-        /* "lexer_fast.pyx":1024
+        /* "lexer_fast.pyx":1025
  *                 else:
  *                     results.append((i - token_start, STYLE_FUNCTION_DEF))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -15644,17 +15654,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1017
+        /* "lexer_fast.pyx":1018
  *                 prev_id_type = 0
  * 
  *             elif after_def:             # <<<<<<<<<<<<<<
  *                 # Method/function declaration name. Magic methods (dunders)
  *                 # get their own magenta color in PyCharm.
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1026
+      /* "lexer_fast.pyx":1027
  *                 prev_id_type = 3
  * 
  *             elif after_class:             # <<<<<<<<<<<<<<
@@ -15666,30 +15676,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1027
+        /* "lexer_fast.pyx":1028
  * 
  *             elif after_class:
  *                 results.append((i - token_start, STYLE_CLASSES))             # <<<<<<<<<<<<<<
  *                 after_class = 0
  *                 prev_id_type = 2
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1027, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1028, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASSES); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1027, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASSES); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1028, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1027, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1028, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1027, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1028, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1027, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1028, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1027, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1028, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1028
+        /* "lexer_fast.pyx":1029
  *             elif after_class:
  *                 results.append((i - token_start, STYLE_CLASSES))
  *                 after_class = 0             # <<<<<<<<<<<<<<
@@ -15698,7 +15708,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_class = 0;
 
-        /* "lexer_fast.pyx":1029
+        /* "lexer_fast.pyx":1030
  *                 results.append((i - token_start, STYLE_CLASSES))
  *                 after_class = 0
  *                 prev_id_type = 2             # <<<<<<<<<<<<<<
@@ -15707,17 +15717,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 2;
 
-        /* "lexer_fast.pyx":1026
+        /* "lexer_fast.pyx":1027
  *                 prev_id_type = 3
  * 
  *             elif after_class:             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_CLASSES))
  *                 after_class = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1031
+      /* "lexer_fast.pyx":1032
  *                 prev_id_type = 2
  * 
  *             elif after_dot:             # <<<<<<<<<<<<<<
@@ -15729,7 +15739,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1034
+        /* "lexer_fast.pyx":1035
  *                 # Anything CALLED after a dot is violet (method call),
  *                 # anything merely referenced is grey (field).
  *                 if followed_by_paren:             # <<<<<<<<<<<<<<
@@ -15738,40 +15748,40 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         if (__pyx_v_followed_by_paren) {
 
-          /* "lexer_fast.pyx":1035
+          /* "lexer_fast.pyx":1036
  *                 # anything merely referenced is grey (field).
  *                 if followed_by_paren:
  *                     results.append((i - token_start, STYLE_INSTANCE_METHOD))             # <<<<<<<<<<<<<<
  *                 else:
  *                     results.append((i - token_start, STYLE_INSTANCE_FIELD))
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1035, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1036, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_INSTANCE_METHOD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1035, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_INSTANCE_METHOD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1036, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1035, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1036, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1035, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1036, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1035, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1036, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1035, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1036, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":1034
+          /* "lexer_fast.pyx":1035
  *                 # Anything CALLED after a dot is violet (method call),
  *                 # anything merely referenced is grey (field).
  *                 if followed_by_paren:             # <<<<<<<<<<<<<<
  *                     results.append((i - token_start, STYLE_INSTANCE_METHOD))
  *                 else:
 */
-          goto __pyx_L219;
+          goto __pyx_L223;
         }
 
-        /* "lexer_fast.pyx":1037
+        /* "lexer_fast.pyx":1038
  *                     results.append((i - token_start, STYLE_INSTANCE_METHOD))
  *                 else:
  *                     results.append((i - token_start, STYLE_INSTANCE_FIELD))             # <<<<<<<<<<<<<<
@@ -15779,25 +15789,25 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  *                 dot_owner_type = 0
 */
         /*else*/ {
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1037, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1038, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_INSTANCE_FIELD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1037, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_INSTANCE_FIELD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1038, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1037, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1038, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1037, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1038, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1037, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1038, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1037, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1038, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
         }
-        __pyx_L219:;
+        __pyx_L223:;
 
-        /* "lexer_fast.pyx":1038
+        /* "lexer_fast.pyx":1039
  *                 else:
  *                     results.append((i - token_start, STYLE_INSTANCE_FIELD))
  *                 after_dot = 0             # <<<<<<<<<<<<<<
@@ -15806,7 +15816,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_after_dot = 0;
 
-        /* "lexer_fast.pyx":1039
+        /* "lexer_fast.pyx":1040
  *                     results.append((i - token_start, STYLE_INSTANCE_FIELD))
  *                 after_dot = 0
  *                 dot_owner_type = 0             # <<<<<<<<<<<<<<
@@ -15815,7 +15825,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_dot_owner_type = 0;
 
-        /* "lexer_fast.pyx":1040
+        /* "lexer_fast.pyx":1041
  *                 after_dot = 0
  *                 dot_owner_type = 0
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -15824,17 +15834,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1031
+        /* "lexer_fast.pyx":1032
  *                 prev_id_type = 2
  * 
  *             elif after_dot:             # <<<<<<<<<<<<<<
  *                 # Anything CALLED after a dot is violet (method call),
  *                 # anything merely referenced is grey (field).
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1042
+      /* "lexer_fast.pyx":1043
  *                 prev_id_type = 3
  * 
  *             elif in_def_params and param_depth == 1:             # <<<<<<<<<<<<<<
@@ -15849,18 +15859,18 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_26 = __pyx_t_2;
 
-        goto __pyx_L220_bool_binop_done;
+        goto __pyx_L224_bool_binop_done;
       }
       __pyx_t_2 = (__pyx_v_param_depth == 1);
 
 
       __pyx_t_26 = __pyx_t_2;
 
-      __pyx_L220_bool_binop_done:;
+      __pyx_L224_bool_binop_done:;
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1043
+        /* "lexer_fast.pyx":1044
  * 
  *             elif in_def_params and param_depth == 1:
  *                 if at_type_pos:             # <<<<<<<<<<<<<<
@@ -15872,40 +15882,40 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
         if (__pyx_t_26) {
 
 
-          /* "lexer_fast.pyx":1044
+          /* "lexer_fast.pyx":1045
  *             elif in_def_params and param_depth == 1:
  *                 if at_type_pos:
  *                     results.append((i - token_start, STYLE_TYPES))             # <<<<<<<<<<<<<<
  *                 else:
  *                     results.append((i - token_start, STYLE_PARAMETERS))
 */
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1044, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1045, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_TYPES); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1044, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_TYPES); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1045, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1044, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1045, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1044, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1045, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1044, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1045, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1044, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1045, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":1043
+          /* "lexer_fast.pyx":1044
  * 
  *             elif in_def_params and param_depth == 1:
  *                 if at_type_pos:             # <<<<<<<<<<<<<<
  *                     results.append((i - token_start, STYLE_TYPES))
  *                 else:
 */
-          goto __pyx_L222;
+          goto __pyx_L226;
         }
 
-        /* "lexer_fast.pyx":1046
+        /* "lexer_fast.pyx":1047
  *                     results.append((i - token_start, STYLE_TYPES))
  *                 else:
  *                     results.append((i - token_start, STYLE_PARAMETERS))             # <<<<<<<<<<<<<<
@@ -15913,25 +15923,25 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  * 
 */
         /*else*/ {
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1046, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1047, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_PARAMETERS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1046, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_PARAMETERS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1047, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1046, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1047, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1046, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1047, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1046, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1047, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1046, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1047, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
         }
-        __pyx_L222:;
+        __pyx_L226:;
 
-        /* "lexer_fast.pyx":1047
+        /* "lexer_fast.pyx":1048
  *                 else:
  *                     results.append((i - token_start, STYLE_PARAMETERS))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -15940,17 +15950,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1042
+        /* "lexer_fast.pyx":1043
  *                 prev_id_type = 3
  * 
  *             elif in_def_params and param_depth == 1:             # <<<<<<<<<<<<<<
  *                 if at_type_pos:
  *                     results.append((i - token_start, STYLE_TYPES))
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1049
+      /* "lexer_fast.pyx":1050
  *                 prev_id_type = 3
  * 
  *             elif after_arrow:             # <<<<<<<<<<<<<<
@@ -15962,30 +15972,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1050
+        /* "lexer_fast.pyx":1051
  * 
  *             elif after_arrow:
  *                 results.append((i - token_start, STYLE_TYPES))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 2
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1050, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1051, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_TYPES); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1050, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_TYPES); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1051, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1050, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1051, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1050, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1051, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1050, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1051, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1050, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1051, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1051
+        /* "lexer_fast.pyx":1052
  *             elif after_arrow:
  *                 results.append((i - token_start, STYLE_TYPES))
  *                 prev_id_type = 2             # <<<<<<<<<<<<<<
@@ -15994,17 +16004,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 2;
 
-        /* "lexer_fast.pyx":1049
+        /* "lexer_fast.pyx":1050
  *                 prev_id_type = 3
  * 
  *             elif after_arrow:             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_TYPES))
  *                 prev_id_type = 2
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1053
+      /* "lexer_fast.pyx":1054
  *                 prev_id_type = 2
  * 
  *             elif after_from:             # <<<<<<<<<<<<<<
@@ -16016,30 +16026,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1054
+        /* "lexer_fast.pyx":1055
  * 
  *             elif after_from:
  *                 results.append((i - token_start, STYLE_MODULE_NAME))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 0
  * 
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1054, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1055, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MODULE_NAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1054, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MODULE_NAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1055, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1054, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1055, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1054, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1055, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1054, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1055, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1054, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1055, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1055
+        /* "lexer_fast.pyx":1056
  *             elif after_from:
  *                 results.append((i - token_start, STYLE_MODULE_NAME))
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -16048,17 +16058,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":1053
+        /* "lexer_fast.pyx":1054
  *                 prev_id_type = 2
  * 
  *             elif after_from:             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_MODULE_NAME))
  *                 prev_id_type = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1057
+      /* "lexer_fast.pyx":1058
  *                 prev_id_type = 0
  * 
  *             elif after_import:             # <<<<<<<<<<<<<<
@@ -16070,30 +16080,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1058
+        /* "lexer_fast.pyx":1059
  * 
  *             elif after_import:
  *                 results.append((i - token_start, STYLE_MODULE_NAME))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 0
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1058, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1059, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MODULE_NAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1058, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MODULE_NAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1059, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1058, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1059, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1058, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1059, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1058, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1059, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1058, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1059, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1059
+        /* "lexer_fast.pyx":1060
  *             elif after_import:
  *                 results.append((i - token_start, STYLE_MODULE_NAME))
  *                 prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -16102,17 +16112,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 0;
 
-        /* "lexer_fast.pyx":1057
+        /* "lexer_fast.pyx":1058
  *                 prev_id_type = 0
  * 
  *             elif after_import:             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_MODULE_NAME))
  *                 prev_id_type = 0
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1061
+      /* "lexer_fast.pyx":1062
  *                 prev_id_type = 0
  * 
  *             elif in_from_import:             # <<<<<<<<<<<<<<
@@ -16124,14 +16134,14 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1062
+        /* "lexer_fast.pyx":1063
  * 
  *             elif in_from_import:
  *                 if len(token_str) > 0 and token_str[0].isupper():             # <<<<<<<<<<<<<<
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
  *                     prev_id_type = 2
 */
-        __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 1062, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 1063, __pyx_L1_error)
         __pyx_t_2 = (__pyx_t_1 > 0);
 
 
@@ -16141,42 +16151,42 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
           __pyx_t_26 = __pyx_t_2;
 
-          goto __pyx_L224_bool_binop_done;
+          goto __pyx_L228_bool_binop_done;
         }
-        __pyx_t_31 = __Pyx_GetItemInt_Unicode(__pyx_v_token_str, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(__pyx_t_31 == (Py_UCS4)-1)) __PYX_ERR(0, 1062, __pyx_L1_error)
-        __pyx_t_2 = __Pyx_Py_UNICODE_ISUPPER(__pyx_t_31); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1062, __pyx_L1_error)
+        __pyx_t_31 = __Pyx_GetItemInt_Unicode(__pyx_v_token_str, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(__pyx_t_31 == (Py_UCS4)-1)) __PYX_ERR(0, 1063, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_Py_UNICODE_ISUPPER(__pyx_t_31); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1063, __pyx_L1_error)
 
 
         __pyx_t_26 = __pyx_t_2;
 
-        __pyx_L224_bool_binop_done:;
+        __pyx_L228_bool_binop_done:;
         if (__pyx_t_26) {
 
 
-          /* "lexer_fast.pyx":1063
+          /* "lexer_fast.pyx":1064
  *             elif in_from_import:
  *                 if len(token_str) > 0 and token_str[0].isupper():
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))             # <<<<<<<<<<<<<<
  *                     prev_id_type = 2
  *                 else:
 */
-          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1063, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1064, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASS_REFERENCE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1063, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASS_REFERENCE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1064, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1063, __pyx_L1_error)
+          __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1064, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1063, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1064, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1063, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1064, __pyx_L1_error);
           __pyx_t_13 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1063, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1064, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-          /* "lexer_fast.pyx":1064
+          /* "lexer_fast.pyx":1065
  *                 if len(token_str) > 0 and token_str[0].isupper():
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
  *                     prev_id_type = 2             # <<<<<<<<<<<<<<
@@ -16185,17 +16195,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_prev_id_type = 2;
 
-          /* "lexer_fast.pyx":1062
+          /* "lexer_fast.pyx":1063
  * 
  *             elif in_from_import:
  *                 if len(token_str) > 0 and token_str[0].isupper():             # <<<<<<<<<<<<<<
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
  *                     prev_id_type = 2
 */
-          goto __pyx_L223;
+          goto __pyx_L227;
         }
 
-        /* "lexer_fast.pyx":1066
+        /* "lexer_fast.pyx":1067
  *                     prev_id_type = 2
  *                 else:
  *                     results.append((i - token_start, STYLE_MODULE_NAME))             # <<<<<<<<<<<<<<
@@ -16203,23 +16213,23 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  * 
 */
         /*else*/ {
-          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1066, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1067, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MODULE_NAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1066, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_MODULE_NAME); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1067, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1066, __pyx_L1_error)
+          __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1067, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_GIVEREF(__pyx_t_14);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1066, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1067, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_3);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1066, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1067, __pyx_L1_error);
           __pyx_t_14 = 0;
           __pyx_t_3 = 0;
-          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1066, __pyx_L1_error)
+          __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1067, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-          /* "lexer_fast.pyx":1067
+          /* "lexer_fast.pyx":1068
  *                 else:
  *                     results.append((i - token_start, STYLE_MODULE_NAME))
  *                     prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -16228,19 +16238,19 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
           __pyx_v_prev_id_type = 0;
         }
-        __pyx_L223:;
+        __pyx_L227:;
 
-        /* "lexer_fast.pyx":1061
+        /* "lexer_fast.pyx":1062
  *                 prev_id_type = 0
  * 
  *             elif in_from_import:             # <<<<<<<<<<<<<<
  *                 if len(token_str) > 0 and token_str[0].isupper():
  *                     results.append((i - token_start, STYLE_CLASS_REFERENCE))
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1069
+      /* "lexer_fast.pyx":1070
  *                     prev_id_type = 0
  * 
  *             elif (at_arg_pos and followed_by_eq and not in_def_params):             # <<<<<<<<<<<<<<
@@ -16251,47 +16261,47 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       } else {
 
         __pyx_t_26 = __pyx_v_at_arg_pos;
-        goto __pyx_L226_bool_binop_done;
+        goto __pyx_L230_bool_binop_done;
       }
       if (__pyx_v_followed_by_eq) {
       } else {
 
         __pyx_t_26 = __pyx_v_followed_by_eq;
-        goto __pyx_L226_bool_binop_done;
+        goto __pyx_L230_bool_binop_done;
       }
       __pyx_t_2 = (!(__pyx_v_in_def_params != 0));
 
 
       __pyx_t_26 = __pyx_t_2;
 
-      __pyx_L226_bool_binop_done:;
+      __pyx_L230_bool_binop_done:;
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1070
+        /* "lexer_fast.pyx":1071
  * 
  *             elif (at_arg_pos and followed_by_eq and not in_def_params):
  *                 results.append((i - token_start, STYLE_KEYARGS))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 3
  * 
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1070, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1071, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYARGS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1070, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_KEYARGS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1071, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1070, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1071, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1070, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1071, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1070, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1071, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1070, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1071, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1071
+        /* "lexer_fast.pyx":1072
  *             elif (at_arg_pos and followed_by_eq and not in_def_params):
  *                 results.append((i - token_start, STYLE_KEYARGS))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -16300,17 +16310,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1069
+        /* "lexer_fast.pyx":1070
  *                     prev_id_type = 0
  * 
  *             elif (at_arg_pos and followed_by_eq and not in_def_params):             # <<<<<<<<<<<<<<
  *                 results.append((i - token_start, STYLE_KEYARGS))
  *                 prev_id_type = 3
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1073
+      /* "lexer_fast.pyx":1074
  *                 prev_id_type = 3
  * 
  *             elif at_class_body and followed_by_assign:             # <<<<<<<<<<<<<<
@@ -16325,38 +16335,38 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_26 = __pyx_t_2;
 
-        goto __pyx_L229_bool_binop_done;
+        goto __pyx_L233_bool_binop_done;
       }
 
       __pyx_t_26 = __pyx_v_followed_by_assign;
-      __pyx_L229_bool_binop_done:;
+      __pyx_L233_bool_binop_done:;
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1075
+        /* "lexer_fast.pyx":1076
  *             elif at_class_body and followed_by_assign:
  *                 # class-body attribute assignment target -> grey (like PyCharm)
  *                 results.append((i - token_start, STYLE_INSTANCE_FIELD))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 3
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1075, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1076, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_INSTANCE_FIELD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1075, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_INSTANCE_FIELD); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1076, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1075, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1076, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1075, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1076, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1075, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1076, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1075, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1076, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1076
+        /* "lexer_fast.pyx":1077
  *                 # class-body attribute assignment target -> grey (like PyCharm)
  *                 results.append((i - token_start, STYLE_INSTANCE_FIELD))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -16365,17 +16375,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1073
+        /* "lexer_fast.pyx":1074
  *                 prev_id_type = 3
  * 
  *             elif at_class_body and followed_by_assign:             # <<<<<<<<<<<<<<
  *                 # class-body attribute assignment target -> grey (like PyCharm)
  *                 results.append((i - token_start, STYLE_INSTANCE_FIELD))
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1078
+      /* "lexer_fast.pyx":1079
  *                 prev_id_type = 3
  * 
  *             elif token_str in builtins:             # <<<<<<<<<<<<<<
@@ -16384,36 +16394,36 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       if (unlikely(__pyx_v_builtins == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "\047NoneType\047 object is not iterable");
-        __PYX_ERR(0, 1078, __pyx_L1_error)
+        __PYX_ERR(0, 1079, __pyx_L1_error)
       }
-      __pyx_t_26 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_builtins, Py_EQ)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1078, __pyx_L1_error)
+      __pyx_t_26 = (__Pyx_PySet_ContainsTF(__pyx_v_token_str, __pyx_v_builtins, Py_EQ)); if (unlikely((__pyx_t_26 < 0))) __PYX_ERR(0, 1079, __pyx_L1_error)
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1081
+        /* "lexer_fast.pyx":1082
  *                 # Builtins (super, print, str, os, ...) are grey in PyCharm,
  *                 # even when called.
  *                 results.append((i - token_start, STYLE_BUILTINS))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 3
  * 
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1081, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1082, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BUILTINS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1081, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BUILTINS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1082, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1081, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1082, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1081, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1082, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1081, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1082, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1081, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1082, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1082
+        /* "lexer_fast.pyx":1083
  *                 # even when called.
  *                 results.append((i - token_start, STYLE_BUILTINS))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -16422,17 +16432,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1078
+        /* "lexer_fast.pyx":1079
  *                 prev_id_type = 3
  * 
  *             elif token_str in builtins:             # <<<<<<<<<<<<<<
  *                 # Builtins (super, print, str, os, ...) are grey in PyCharm,
  *                 # even when called.
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1084
+      /* "lexer_fast.pyx":1085
  *                 prev_id_type = 3
  * 
  *             elif followed_by_paren:             # <<<<<<<<<<<<<<
@@ -16441,30 +16451,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       if (__pyx_v_followed_by_paren) {
 
-        /* "lexer_fast.pyx":1088
+        /* "lexer_fast.pyx":1089
  *                 # Checked BEFORE the uppercase class-reference branch so that
  *                 # QFont() / QLabel() render as calls, like in PyCharm.
  *                 results.append((i - token_start, STYLE_FUNCTION_CALL))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 3
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1088, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1089, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_FUNCTION_CALL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1088, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_FUNCTION_CALL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1089, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1088, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1089, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1088, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1089, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1088, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1089, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1088, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1089, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1089
+        /* "lexer_fast.pyx":1090
  *                 # QFont() / QLabel() render as calls, like in PyCharm.
  *                 results.append((i - token_start, STYLE_FUNCTION_CALL))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -16473,59 +16483,59 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1084
+        /* "lexer_fast.pyx":1085
  *                 prev_id_type = 3
  * 
  *             elif followed_by_paren:             # <<<<<<<<<<<<<<
  *                 # A called identifier: function call / constructor call (violet).
  *                 # Checked BEFORE the uppercase class-reference branch so that
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1091
+      /* "lexer_fast.pyx":1092
  *                 prev_id_type = 3
  * 
  *             elif (token_str.startswith("__") and token_str.endswith("__")             # <<<<<<<<<<<<<<
  *                     and len(token_str) > 4):
  *                 # Dunder references (e.g. __file__, __name__) -> grey
 */
-      __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u__2, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1091, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u__2, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1092, __pyx_L1_error)
       if (__pyx_t_2) {
 
       } else {
 
         __pyx_t_26 = __pyx_t_2;
 
-        goto __pyx_L231_bool_binop_done;
+        goto __pyx_L235_bool_binop_done;
       }
 
-      /* "lexer_fast.pyx":1092
+      /* "lexer_fast.pyx":1093
  * 
  *             elif (token_str.startswith("__") and token_str.endswith("__")
  *                     and len(token_str) > 4):             # <<<<<<<<<<<<<<
  *                 # Dunder references (e.g. __file__, __name__) -> grey
  *                 results.append((i - token_start, STYLE_BUILTINS))
 */
-      __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u__2, 0, PY_SSIZE_T_MAX, 1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1091, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_token_str, __pyx_mstate_global->__pyx_n_u__2, 0, PY_SSIZE_T_MAX, 1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1092, __pyx_L1_error)
       if (__pyx_t_2) {
 
       } else {
 
         __pyx_t_26 = __pyx_t_2;
 
-        goto __pyx_L231_bool_binop_done;
+        goto __pyx_L235_bool_binop_done;
       }
-      __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 1092, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 1093, __pyx_L1_error)
       __pyx_t_2 = (__pyx_t_1 > 4);
 
 
 
       __pyx_t_26 = __pyx_t_2;
 
-      __pyx_L231_bool_binop_done:;
+      __pyx_L235_bool_binop_done:;
 
-      /* "lexer_fast.pyx":1091
+      /* "lexer_fast.pyx":1092
  *                 prev_id_type = 3
  * 
  *             elif (token_str.startswith("__") and token_str.endswith("__")             # <<<<<<<<<<<<<<
@@ -16535,30 +16545,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1094
+        /* "lexer_fast.pyx":1095
  *                     and len(token_str) > 4):
  *                 # Dunder references (e.g. __file__, __name__) -> grey
  *                 results.append((i - token_start, STYLE_BUILTINS))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 3
  * 
 */
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1094, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1095, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BUILTINS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1094, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_BUILTINS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1095, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1094, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1095, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1094, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1095, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1094, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1095, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1094, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1095, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1095
+        /* "lexer_fast.pyx":1096
  *                 # Dunder references (e.g. __file__, __name__) -> grey
  *                 results.append((i - token_start, STYLE_BUILTINS))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -16567,24 +16577,24 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
 
-        /* "lexer_fast.pyx":1091
+        /* "lexer_fast.pyx":1092
  *                 prev_id_type = 3
  * 
  *             elif (token_str.startswith("__") and token_str.endswith("__")             # <<<<<<<<<<<<<<
  *                     and len(token_str) > 4):
  *                 # Dunder references (e.g. __file__, __name__) -> grey
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1097
+      /* "lexer_fast.pyx":1098
  *                 prev_id_type = 3
  * 
  *             elif len(token_str) > 0 and token_str[0].isupper():             # <<<<<<<<<<<<<<
  *                 # Class reference at usage site -> grey (only the definition
  *                 # site is colored soft red)
 */
-      __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 1097, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyUnicode_GET_LENGTH(__pyx_v_token_str); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 1098, __pyx_L1_error)
       __pyx_t_2 = (__pyx_t_1 > 0);
 
 
@@ -16594,42 +16604,42 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 
         __pyx_t_26 = __pyx_t_2;
 
-        goto __pyx_L234_bool_binop_done;
+        goto __pyx_L238_bool_binop_done;
       }
-      __pyx_t_31 = __Pyx_GetItemInt_Unicode(__pyx_v_token_str, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(__pyx_t_31 == (Py_UCS4)-1)) __PYX_ERR(0, 1097, __pyx_L1_error)
-      __pyx_t_2 = __Pyx_Py_UNICODE_ISUPPER(__pyx_t_31); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1097, __pyx_L1_error)
+      __pyx_t_31 = __Pyx_GetItemInt_Unicode(__pyx_v_token_str, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(__pyx_t_31 == (Py_UCS4)-1)) __PYX_ERR(0, 1098, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_Py_UNICODE_ISUPPER(__pyx_t_31); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 1098, __pyx_L1_error)
 
 
       __pyx_t_26 = __pyx_t_2;
 
-      __pyx_L234_bool_binop_done:;
+      __pyx_L238_bool_binop_done:;
       if (__pyx_t_26) {
 
 
-        /* "lexer_fast.pyx":1100
+        /* "lexer_fast.pyx":1101
  *                 # Class reference at usage site -> grey (only the definition
  *                 # site is colored soft red)
  *                 results.append((i - token_start, STYLE_CLASS_REFERENCE))             # <<<<<<<<<<<<<<
  *                 prev_id_type = 2
  * 
 */
-        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1100, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1101, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASS_REFERENCE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1100, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_CLASS_REFERENCE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1101, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1100, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1101, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_14);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1100, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14) != (0)) __PYX_ERR(0, 1101, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1100, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1101, __pyx_L1_error);
         __pyx_t_14 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1100, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_13); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1101, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
 
-        /* "lexer_fast.pyx":1101
+        /* "lexer_fast.pyx":1102
  *                 # site is colored soft red)
  *                 results.append((i - token_start, STYLE_CLASS_REFERENCE))
  *                 prev_id_type = 2             # <<<<<<<<<<<<<<
@@ -16638,17 +16648,17 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 2;
 
-        /* "lexer_fast.pyx":1097
+        /* "lexer_fast.pyx":1098
  *                 prev_id_type = 3
  * 
  *             elif len(token_str) > 0 and token_str[0].isupper():             # <<<<<<<<<<<<<<
  *                 # Class reference at usage site -> grey (only the definition
  *                 # site is colored soft red)
 */
-        goto __pyx_L211;
+        goto __pyx_L215;
       }
 
-      /* "lexer_fast.pyx":1104
+      /* "lexer_fast.pyx":1105
  * 
  *             else:
  *                 results.append((i - token_start, STYLE_LOCAL_VARIABLE))             # <<<<<<<<<<<<<<
@@ -16656,23 +16666,23 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
  * 
 */
       /*else*/ {
-        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1104, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyLong_From_int((__pyx_v_i - __pyx_v_token_start)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1105, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_LOCAL_VARIABLE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1104, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_LOCAL_VARIABLE); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1105, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1104, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1105, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1104, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13) != (0)) __PYX_ERR(0, 1105, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_3);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1104, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_t_3) != (0)) __PYX_ERR(0, 1105, __pyx_L1_error);
         __pyx_t_13 = 0;
         __pyx_t_3 = 0;
-        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1104, __pyx_L1_error)
+        __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_14); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1105, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
 
-        /* "lexer_fast.pyx":1105
+        /* "lexer_fast.pyx":1106
  *             else:
  *                 results.append((i - token_start, STYLE_LOCAL_VARIABLE))
  *                 prev_id_type = 3             # <<<<<<<<<<<<<<
@@ -16681,9 +16691,9 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
         __pyx_v_prev_id_type = 3;
       }
-      __pyx_L211:;
+      __pyx_L215:;
 
-      /* "lexer_fast.pyx":1107
+      /* "lexer_fast.pyx":1108
  *                 prev_id_type = 3
  * 
  *             at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -16692,7 +16702,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       __pyx_v_at_arg_pos = 0;
 
-      /* "lexer_fast.pyx":1108
+      /* "lexer_fast.pyx":1109
  * 
  *             at_arg_pos = False
  *             continue             # <<<<<<<<<<<<<<
@@ -16701,7 +16711,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
       goto __pyx_L8_continue;
 
-      /* "lexer_fast.pyx":944
+      /* "lexer_fast.pyx":945
  * 
  *         # ============ IDENTIFIER (word) ============
  *         if is_alpha(c):             # <<<<<<<<<<<<<<
@@ -16710,28 +16720,28 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     }
 
-    /* "lexer_fast.pyx":1111
+    /* "lexer_fast.pyx":1112
  * 
  *         # Unknown character
  *         results.append((1, STYLE_DEFAULT))             # <<<<<<<<<<<<<<
  *         i += 1
  *         prev_id_type = 0
 */
-    __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1111, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyLong_From___pyx_anon_enum(__pyx_e_10lexer_fast_STYLE_DEFAULT); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1112, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_14);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1111, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1112, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
     __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 1111, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 1112, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_14);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 1111, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_14) != (0)) __PYX_ERR(0, 1112, __pyx_L1_error);
     __pyx_t_14 = 0;
-    __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1111, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_27 == ((int)-1))) __PYX_ERR(0, 1112, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
 
-    /* "lexer_fast.pyx":1112
+    /* "lexer_fast.pyx":1113
  *         # Unknown character
  *         results.append((1, STYLE_DEFAULT))
  *         i += 1             # <<<<<<<<<<<<<<
@@ -16740,7 +16750,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     __pyx_v_i = (__pyx_v_i + 1);
 
-    /* "lexer_fast.pyx":1113
+    /* "lexer_fast.pyx":1114
  *         results.append((1, STYLE_DEFAULT))
  *         i += 1
  *         prev_id_type = 0             # <<<<<<<<<<<<<<
@@ -16749,7 +16759,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
 */
     __pyx_v_prev_id_type = 0;
 
-    /* "lexer_fast.pyx":1114
+    /* "lexer_fast.pyx":1115
  *         i += 1
  *         prev_id_type = 0
  *         at_arg_pos = False             # <<<<<<<<<<<<<<
@@ -16760,30 +16770,30 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
     __pyx_L8_continue:;
   }
 
-  /* "lexer_fast.pyx":1116
+  /* "lexer_fast.pyx":1117
  *         at_arg_pos = False
  * 
  *     cdef int final_state = pack_state(in_string, in_comment, triple_string,             # <<<<<<<<<<<<<<
  *                              string_delim, in_fstring, escape_next,
  *                              in_fexpr, fexpr_depth, is_docstring,
 */
-  __pyx_t_25 = __pyx_f_10lexer_fast_pack_state(__pyx_v_in_string, __pyx_v_in_comment, __pyx_v_triple_string, __pyx_v_string_delim, __pyx_v_in_fstring, __pyx_v_escape_next, __pyx_v_in_fexpr, __pyx_v_fexpr_depth, __pyx_v_is_docstring, __pyx_v_expect_docstring, __pyx_v_at_class_body); if (unlikely(__pyx_t_25 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1116, __pyx_L1_error)
+  __pyx_t_25 = __pyx_f_10lexer_fast_pack_state(__pyx_v_in_string, __pyx_v_in_comment, __pyx_v_triple_string, __pyx_v_string_delim, __pyx_v_in_fstring, __pyx_v_escape_next, __pyx_v_in_fexpr, __pyx_v_fexpr_depth, __pyx_v_is_docstring, __pyx_v_expect_docstring, __pyx_v_at_class_body); if (unlikely(__pyx_t_25 == ((int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1117, __pyx_L1_error)
   __pyx_v_final_state = __pyx_t_25;
 
-  /* "lexer_fast.pyx":1120
+  /* "lexer_fast.pyx":1121
  *                              in_fexpr, fexpr_depth, is_docstring,
  *                              expect_docstring, at_class_body)
  *     return (final_state, results)             # <<<<<<<<<<<<<<
 */
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_final_state); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1120, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_final_state); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1120, __pyx_L1_error)
+  __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 1120, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 1121, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_results);
   __Pyx_GIVEREF(__pyx_v_results);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_v_results) != (0)) __PYX_ERR(0, 1120, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_v_results) != (0)) __PYX_ERR(0, 1121, __pyx_L1_error);
   __pyx_t_3 = 0;
   {
     PyObject *__pyx_temp;
@@ -16796,7 +16806,7 @@ static PyObject *__pyx_pf_10lexer_fast_2style_chunk(CYTHON_UNUSED PyObject *__py
   __pyx_t_14 = 0;
   goto __pyx_L0;
 
-  /* "lexer_fast.pyx":426
+  /* "lexer_fast.pyx":427
  * # --- The full styler ---
  * 
  * def style_chunk(bytes text, int start, int end, int prev_state,             # <<<<<<<<<<<<<<
@@ -17249,19 +17259,19 @@ __Pyx_RefNannySetupContext("PyInit_lexer_fast", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_compute_state_before, __pyx_t_2) < (0)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "lexer_fast.pyx":426
+  /* "lexer_fast.pyx":427
  * # --- The full styler ---
  * 
  * def style_chunk(bytes text, int start, int end, int prev_state,             # <<<<<<<<<<<<<<
  *                 set keywords, set builtins, set magic_methods):
  *     cdef int length = len(text)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10lexer_fast_3style_chunk, 0, __pyx_mstate_global->__pyx_n_u_style_chunk, NULL, __pyx_mstate_global->__pyx_n_u_lexer_fast, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 426, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10lexer_fast_3style_chunk, 0, __pyx_mstate_global->__pyx_n_u_style_chunk, NULL, __pyx_mstate_global->__pyx_n_u_lexer_fast, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_style_chunk, __pyx_t_2) < (0)) __PYX_ERR(0, 426, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_style_chunk, __pyx_t_2) < (0)) __PYX_ERR(0, 427, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "lexer_fast.pyx":1
@@ -17330,7 +17340,7 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "lexer_fast.pyx":563
+  /* "lexer_fast.pyx":564
  *                     i += 1
  *                 token_bytes = text[token_start:i]
  *                 token_str = token_bytes.decode('utf-8', errors='replace')             # <<<<<<<<<<<<<<
@@ -17339,7 +17349,7 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 */
   {
     PyObject* __pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_errors};
-    __pyx_mstate_global->__pyx_tuple[0] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 563, __pyx_L1_error)
+    __pyx_mstate_global->__pyx_tuple[0] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 564, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   }
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
@@ -17395,39 +17405,39 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
     const struct { const unsigned int length: 8; } str_length_index[] = {{1},{179},{8},{28},{5},{22},{5},{4},{4},{2},{20},{12},{8},{8},{10},{8},{12},{8},{13},{2},{11},{8},{11},{9},{9},{10},{12},{2},{18},{10},{13},{11},{13},{8},{1},{11},{5},{18},{3},{20},{6},{3},{5},{14},{3},{6},{11},{16},{11},{11},{18},{14},{17},{4},{1},{6},{10},{13},{8},{14},{10},{9},{12},{5},{8},{6},{10},{13},{6},{15},{11},{13},{11},{3},{12},{10},{7},{7},{4},{10},{8},{5},{12},{12},{11},{10},{4},{11},{11},{9},{13},{6}};
-    const struct { const unsigned int length: 13; } bytes_length_index[] = {{5},{3},{4911},{1813}};
+    const struct { const unsigned int length: 13; } bytes_length_index[] = {{5},{3},{4895},{1805}};
     #ifndef CYTHON_COMPRESS_STRINGS
       #define CYTHON_COMPRESS_STRINGS 90
     #endif
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (2925 bytes) */
-static const char cstring[] = "BZh91AY&SYs\\h\371\000\005V\177\377\377\377\377\377\377\373\276\377\277\377\377\351\277\377\377\377\300@@@@@@@@@@@@\000@\000`\014\177{\231V\332\205\335\304\256\313e4\350\007v\016\261\241E\331\264\000\200\007\t\"\"\251\275)\351\017\324\375SeCM\351\251\036#S\315O\r\224%=#Ci\036\215@\321\352z \036\246\232\001\240\320\3654\365\036S\324d\365\004\222\0014\320F\221\210\323SFS\t\246(\310\014\232\001\240\310\000\000\017P\031\003\324\320\000\306\240 \311\200\023\000\0010\000\000\000\t\202`\002`\000\t\211\200\000\t\211\210\004\246B\024R\032\014\200h\006\232\007\251\240i\221\220\0004\000\000\000\000\000\0001\000\203&\000L\000\004\300\000\000\000&\t\200\t\200\000&&\000\000&& \021$B\2325OS\323\325\007\251\264\201\241\2044\003O\023H\000\001\220\000\321\240\310\007\250\031\032h\032\006\207\374\216m|\375^\247S\0000\201x\0226\203hT\256\236\223\312\201$d\020r\177\017\333\3719\007&,\345\007\364\037\334\\^\022\210e+e%0\242TD\257\370\364\320%\004\2415/\367\n{\225\372\177o\360\376o_\311\374\3563Ax\200\304X\337}\367\337}\370a\370?\036Id\205\220\226B\324\263\026\2755x\357\277\376\237\371\23130\303\0032\006i\031\000\317\234\316\031\303?]\214\221\337\242\023.\000kVYb\031i\306D\223\203|\3026\216\236.\231]\215i\335\304\0271\006\021Y\021\220\0053$3\t\014\335\321\nC4\255CJ\251\0221DR\014N\312B\204\001-\253\250\n\231\340\204\22222\002,\213\334\031\262\310\300\010\3259\316\007 g8\355A\010\304\325\251\026\30002P\014\3232``AOq\r\2205\034\3259\205\201\216]1\334C\312\245\004\214QkR\026\214\205\016,[\006!\205\255\211v\032:\2038\026LE\305)\334\\\274 U f\242C\010\240\225\005DQ\005\020Q\027\3565\2003\220@\2220\220HFA$T\222@\034\341kYX\260X,+Z\246\241\202\372\244-c+\036\350\026rPZ\330\033\001[\335\235\275\225\275\257\0342E\300\003\020\252H\321\201\230\006d\212\030\003Y\\R\203\255\214a\000L\204D\325\217\240#\002j`np\016H\232\211d\027!(\367\2710\3175oy5k \253\335C,\256XI\024\230\314\006 X\252\325\255x#r`L\250\250\021\324\212@\212\232\014\304\231\222\315\374\2707\366\267\373\037\257\007^<0\3617\243\\N\034\334""\330=4\346r\214\352\2018\233%\307J\013\250z\334\374\306\3667\321\033\343\200p\r\241\027Hr\356\246b\205\023,\206\272\312j\206\177\307H\020\020\\\"\261\000\013\202\352\364\321PX\242\341\230\001\261.W \271\026\0351\034J\t\214\346\224Q2\304\3471\2537\257[\372\372\262\202\017\233g/\227C\0134\277v\357\017GGg\261\263\246\355\302\345\014p\021!b\266\243\204\200\213\004\2709B1N\"EAYm\001\245I\010J\r[\315\232\221\250HBB\232P`\234\250\030\264\001\202\"B&/\006\013\002\340\213Dc\023\357}\211\204\3051M\022Ea\342\222\023\200\t\"\351\035\313\257\010\225f\2157\014QEC\265>\002\357\347\022\030\003l\033yh\270\301(\033\270\264\215\261%\004\003\t\215\302\032\245\025l\260\324\014\226\350b\251\244\344\317\037\323\321AQ \242\002\212\210\240\252wo)J**#\330\347\366c\263^?\n\373\217]\274\237\276\371\3416S\313#\221\330\304\307\325\205\"\tD\224\262\365\261\375\273\372}\215P\313\233_\352\362]\201\246\207H\320hN\265\337\027J\353\014p\215\330\025RJK\300%\261\261S\257\021H\230b\005i(\2040\241E\215\343\030R\2410\266o7{\376\246\224A$)\205n\017RI)\001!I\022\024\220_e\216<6\324*\212\225H\251S\035M)\021\306\007CC\3708\311\331e\003\017\343\374\236}\003\024\276\217\047\227\204\005\033\323\314\342\270\307\006\307\271\326\253\340\361\243X\245|\047XUE>C\271\2751\211r\2365V\263_[V\321\205\356\366\354\367\264Z6\271\375\037\337dk\376]\362~\277\226\375\232\235\261a\352}\223K\3407\265\342\335\3635\357\237\332Q\301\231;`\236\331\031\336\3074f\260b]\223\275\334\027}\034\347\177\207\372\360\251\206SJ\2462\311P[D2$\265\231kU;\375\203W\371\233\315\357U`\324\025@\005z\022\310\267\267\337\357\357\303\002%\374\315\027\231\217\"u\016w\270\3503\333\257\217\307/\2231\264\321\032\001\242Z#E\342<\032\356\016\355\372?\014\316/v\275\374^\025O\213\315&\273aT\212\204T\005J\253\232\367,\351r\2137c\241dw\211\242B\027l\036U\025i\332\323O\216\333\347\347\300-\324\342y\271@\267R\265\304\362\315\317\242\246\014/\000\3068;T\261)\047k\221k\341\217\234\354`D\227\023\320\252}\3347\361\360\307\221r\014d\356W\327\312\342\003\361wi/6=\251\006""\266f\213.\266,\033\306\027+;Y\331\303?j\374\256\335\274\2340g[\026\047GV[\347\003\233\234\232O\334js\341\346]Q\361\345\357\307o%oM\223\034\273N\336\232\242\227\047\205\364w\263\303\000\235\225\334\251\3567\027\216\223H\323I@\337\244\210\305:3{\236\367\214\303\2319\231\234\320\2565\306\224T\241\267\255\330\335m\324\212\006k\352r\022\204X\363\243\250~\362\3754\352\317\224\242\340\270*\024+\3259\354\244\312DV5\024j\362\311mZn\350\305\346zS\255\253\275\313n\316\263f\325z\347\257%\035g)7\203\233s\364\354#\260\274\321u.\332w\202\047ZBP\225H\306\260\211\033\213DH\251\006\035\211\001\205P(\255\312/$\271{\024)`\231\267\2207\220v;M\005\260\327\233\353\334\310\243*\200m\\f4\244\360\213\217?RA\212K\003\024\265\346\214\257\257\007\014\361\257}\206\351\223\243\322\3142\313^\255p\346;W3\354\207\262*\356\200\302\020\254i\315}\034\304\232C\247\261\033\0226#b7\255\362\236]\026t\036\315\010f\350\016\343#c\334\232-\023\255\215\317\246\264\241\321\323j\335\241\271\206\3630\230\376l\271\332\203\355\215\367\234\316mWo\200\025i\302\343\\si\023Uo\305\305s\201\316#\235\0079\3048\0341\357`c\237d\351\333\036=|\374\267\232UU\\\322\3472\334y\010\271aXB\013\000\250\266Q\230!\251T.f~wJ\322\265\236Z\270\350\207\305\345\306\216\323W\027f\314\2645\031\367\036>a\020\343t\311\363\370\327\334o\031\365\005\243\003\315\213&\351\313)?\0326\251_\233\370\r\277\241\366\343\"$\210\361\216@\026b\360=\361NI\016\361C\374\342\226\351\374@l\036\270k\226\345n\201#RE\365\006\022\212F\321o+{:!`,\260mo\n~\374\331z\0006\025\3632\200\301\002\006\347\017\363\335\355\347\262[Q\023\374\357\002(\241\233\324[\264\236~\303\350\260\034\3028X+q#)\261eo\002D\204\002\330Q\313\341`\276k\302<6\020-\022\230Z\255]:\340\034\036A\366\375<\342\013\304\200\234Ar\304\252,_\271\342\031\047>\005wMQ\322S\314L~\013\030\230\337\316,\021\356\336\367L\t\030\301:\023\276>\253\330\254.\005\226\353kX\242\"\323*}\230\003\273\024\205$\311\036\234\210A\334\233\321\350\314\344\01012E|x\3013\344w\007x\235\036\211\305 ;#\025\236\t[ \262a\026\356\001\t!""\376\36401\334r\260\346\332\347\302@\200\306$\332\245\333\242\225!j?\262\232\205\352\\(\276\345.\005\337\327\026\270\374o`8\320\221\t\027q\335\210\266\200\303\374\360@(\324\005\341\312\346Q\365\207\313\350:\355\322\236%\017\027+W\244k80\311\204\233|H\200\341\253@!M\244\021\n\325\027qd\234.\273\206\205\002#\026I\000\332-Aks\243\322\3261Krr2=\3541\206[;\23418\372\0247\010,\220\334\254&\020\027kg\206\033sX\242m\230H[#\231\337\311\264\177i\244=\016\214\240\2065\250 EDfx\341\301\263[2\3570\230\006M\2639\343\303\036\024\344&\025T\336po5\311\343\212;X\355\316#!\322r\352~\244@G\026\"I\237\023\220N\343\365\367\260,\312\332\2711!\207:\315\000\244)h_\014\003/o\277\211\344,t\322\311\233!\340\306\212\331\246\352C\250A\307e<t\025\207\357\332\014\206\323\273\3059\221\230gw2\366\246\023\2310\307\027\2069\014\273\336\276F\313A\002\207\255`\334\224\026\333\250\215\262\3238\247\215\266\001&:\271TH\016\311\362\274\033\253\210\305\361{\357\220\030\213o\341\303\376\343!\t\223\"\365\355\264\211.8\274|.8\305\003\377\320\237\361]sI;\005d\t)\265\n\t\373\025\222\354\251\315\2060H\254i\003\303o\255\273\022\271\261[0M\223\300|s\242\371\204\303\"\270\020\035>\003\251\207b\273\345\376\212\343s\014\031z\261\201\321\3258\257:\276\265K\305\353\327\2675zw\275\326xj\364\315N\200\372\216\016t\027sO\177\237\242\233\315\320\351h0\316s\217;]\271\333\227\003\277u\371\246A\256L\266[\305i^*\263\343\362NN\277\007/\271f\336\355\356\317\026\325\211\374\247\021\244r\367\273\267b\334\375\033v\263\232\353\322\331\361\245\235E\340\316\316\324\021v\301`\231\331i\213D\024\205,\207m\240R\230!G\312\325\272w\027\020\247USi\312J\251\316\304\264<e\321j\021AY\224\030g\031F\264\210\261\265.\341f\257O\024\336\025\353;\251\315\210\316\031(I$!\250\304\270\245\251d\321)H\266\322O\211X6\3420o\347f\310iT\210\224\232.^\332\0316\\\326\224\017l\014\3026\241B\324\247\266LS\311z\325\255\231\306\226\026\215#Zh\313)V\235\0133Q\221\254\314\2158e\342\213E\211\r\3344,\270J\356\244\225\005F\260\030\221,\3158sX\271\263756\362$\320\352\373""\2038\306k(\255N(\313V\246j\235\242\362\301\245Z\307x\245SKY3\263\r\262JMJ\264\210\331\211E\223\234k!%FI\261Fn\035Me\005\243b\265X\036\026I*\211\230*T\252Ra\346F\304\311\263\023\0257sXe*E\326\357\032\224$\357J[5PA(\220n\264M\030\273\342\356\322P{+|\266n\244\3032\006fd\025vpk\235\205\255:M\364y\204G\317\377\213\271\"\234(H9\2564|\200";
-    PyObject *data = __Pyx_DecompressString(cstring, 2925, 2);
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (2919 bytes) */
+static const char cstring[] = "BZh91AY&SY\3520n\201\000\005R\377\377\377\377\377\377\377\373\276\377\277\377\377\351\277\377\377\377\300@@@@@@@@@@@@\000@\000`\014\177{\2602\r)`\233[M(\006\314S\234t\321Y\264\000\200\006\022$IQ\241\241\246M\352\203M=#jdy\352\2363B(\232h\0320\200\323\324\362@=C@z\201\241\246\232\r\250\362\236\240\310\200\230\2044h\3212#j4\323A\000\006\200\000\000\000\001\2402\006\232\000\014@A\223\000&\000\002`\000\000\000\023\004\300\004\300\000\023\023\000\000\023\023\020\t\010D\212H\3204\007\244\003A\243\324\365\003\300(\000i\240h\032\003A\240\000\032d\365\036\246\323S\324\004\0310\002`\000&\000\000\000\0010L\000L\000\00110\000\00111\000\221A4\047\251\241\245\023\312l\247\352\236H\362!\246\206C\312d\000\006@\000\000h\000\r\000\311\265\003M:\310WkW\205\2233\000\233\t0mE\212,\203\207V\325\355\260m\246\306\035\377?\273\336=#\276\260\377A\340\017\366\261f\233J\026\362\026\335&\251\245O\374kJ\250{Il\013\377\266\306\035yz^\327\301\362\364\272\237\224\204\210\023\004\001`6Ns\234\347\223._\177\342\314\226d\214\300\263\013B\316,t\350\350d\311\377\035f\323lc\006\3206\332l\n\324\250T+\257cmm\241\003\246\340g\205)`R\366\233C{\262\270B\213W\330\257!\252\027\311X\220\256\032Li&\320\233\001&\322\033\022\033\343\210V\r\331[M7\253\013\014\0214\203\003m!I\200\210\341\220\020U\244\204\330\201\266\323i\260BM\245\332\227R\204\300\235\352\020\200A\003\204\016,\220\214\r\032\021\\\241\224\314\244\031\323i\203\006\027\016\223\220Dk\324\334\244\364BT\270LJm\333E\020j\252 \246\233 \264\232T\025\240\313\275\026\231\352\2751\341\001\024X%bT\264\271r@\275 n\324\206\"\321+Ej-\021j\013Q\223\\\316\001Q\210\006\332cb\030\323b\033I\r\266\002\250V\265U*\025\n\212\265\274\3200\311zB\304j\247r\013=\212K\026\017(\253\335\033\274+\362<\204\006\221p\000\311^\2224\260l\006\322-2\203\252\270\266\322\025\302r\220&\204L\321\207,FR\212\200k\250\001I\020.\024 TA.\341\315^,F\235\264\r(@\223\026\"\333j5\274\213h6\006\000D\2040\206\263\020\2449\216\220 \301\254\215!\203I\030\227\r\334\225~\376\247K\237\322\364\277.\247:\\\021""\247\351.\\\216\n\3260\262\313\3618zA@O{b\222\303\342\017\037C\016c\254\235c\200p\t\000\\\324\n\305sX\302\320\205\214RyM\203\211\003\254m\001!\005\302/\232I+\202\353\366\255V\213\004\\6\000\360.W\001r*B\2025\026\211\231\350\224\321B\245)A\337H\256\177\357\316\261\244\017*\212|\210\212\350\217\373ts\265\353\343n\345\336\253@7\201e`\207\203a\316F\343\300\016a\256\214i\232\270\225\016\302\367#\003\207m\214l8\311\2748\2424\330\306\307V\321\242\266\321\016\0004%\001R\315\0320\014H\304fa\370|\275\206\305\261m\032G;\351\351\n\000\032G-\036\357\227@0\347\016\016$Pj\313S\035|\307\362\353T\032\003\2329\370K\026\212a&*mV\207\001\201\217V\014\364\344%o:\001\264\255\006\222B @\302\317\243\\A\210 D\000\"bDA\220\345LF111#\247\253\252\354\271,\350N\241\322N\247\3358W\0040\266\321\231lp\263\313l`\360\tx\204-\363,\3730\336\351\343m4\343\365\376\027e4\342\25511G\\\266\t\"\0342\311\265$\302\020m\301\022`8\352\210\372#-\224\240\301\343m&@\261\254$\326\264\351\247\002p8Y\267;+mAb\025\002\320\362&\222\230\023\024\321\220V \311U\206\0339\344\004\210\220\221\"BB\314h\367\207X\321\255\033\367\250\265m\265\242\277\303\361`\363\305\204\372\036\047\203\243b^!\345v\242\327O\t\322\367\257:}\265\306\255\347R^\235\331s\322\231Y\304 \211\327W\306ID\234\251*9\263^\265\030\304r:\2253_\355\225\322\376\027\305\365\273\023\313\215r\232\374o`]6\204\376\271\372<\234\230C\331.\255\020\256PX\226\214SA\245\3205\240\177\030p\360\003\304F\241\333l\360rU\002\216\330;\034Q\006%\026\202\203q\212q\214 \266\370\206\037\323\321\327\351`\023\004\304\022D\310&\321N\267\027\026\025\326\034\047\245\034\301\21008o\205^\272\265\030\233vxboD\031\305\304\\\000\270\233\201\270\363\3077%@r\247s+\30461ra\261\200\275Fq7^\325\313J4\210\322\006\225\247W7V\215\334M\033R\354\364\020\204\215\3021\332\270\301\327p\337\302X\354\363\207h\320)\276\242\030\224\264S|\322\241\013q+\"cZ\003\315\010,\255q\276\301\027\256G\212M\266s\026\306\207\007\354\035\254\213*\334\303g9\331\216`\202\325\275\222\354(he\213\307\047\226\356;\300\310\210\216C""\265\005\000\300 7\242\344\034j\361\177S\266\255\030\0106\264ZX\202\021Y?\0104i\324 K4\014j\306\362*\220c\257\342v|\322\231KP_\234rn\306\342ss\231\025\352\356V\004(j\274\261F\2010\257G\213\256{F\027<9\305]\006+\030\300\210\025\n\242\"\243ed\254\214Lb3\355[*\246\210\270\200\2119\014\301\355r\016c\261\206`\047u\333\370\257\021;\207p\304DK~\020\313\030\010\270\032\014b)+\336s\233\264k\261\203\025\321\332\222\301N|\273F\\\346gT\263Eh\245\351\315\323\241\227n\221\272y`\357\236I^\226\036\345!\264\335\324#\323(\221c\025\016\330j`\330\032v\206\245\333\300\223nD\242B\306\204H\035\332\030hb\342qq#=g\261)\024 R\014\re\252\203\262\310\204\340r\262\244\030$\262\230%\216tf\311~\314\007\021&\312\004\336z\273y\020!\267&<\215\3228\365#(C\020\211.\260+kd\350\351\234U\003\321\341a\224\214\240\214\240e\003\003\203\341n\272+X\210\326\342V\205\330\361\225\212Q\310\341\265\006\206G!-\327\275IUp\320\2019\025\3003M\272\222!\224\262s\032U1\325\203@\027\272J\343\031\347v\024W\277\207R\330\003`F\302\r\203Pl\2338v\231L3\355\233Z\323\331\267U\363\027]u\332\306\315Y\333\0226Tj \201P\005\331\303\244\010G\227\035[\271\272\027\233\367E\373\024\206\3707\331\025\273\036\305\304\210n\030\306.\006\006@\007\001\262\250\010j\350\237m:#\250.\013\005\363\264\233\332>\"\021\372\301\204$\276\236\330g\372\315\206\r\241\r\241h=p$\232Z\177\010\221\354\014\310\220nP\226\356\310\036!\356\0062^\376\320\r\250\333K\312\023\034\"\0254\255\317`\373\201@RLU]\267\350\376gp\000\366)~6\212\031E\036_{\273\373\374\337h\322\372V)\371e\026\214o\345/\311\243\307\371\263\306`y\243YA;(i\305E$\255\203hc\002\262\036g\032iyK\214\036\002c\010\264A\221\204a\325\206\341\273\347\037w\323\321\030\227!\2029\002[\320\311E\373\357~m\036s\t\322R\035\344\217\236\215~*4j\374\202\201\257\200\276\0170\033M1\036\203\370G\355\272&X\024\225\242\252\2104%\023\217\357\250\026\323T\025\023H\363\350C\221tU.m\307r \261\244[\275x\047\035i\002K;\235\303\342\214\027TM$\372\204\352\202M\343J\360\030\333?\357\241\206\273+t.]o9\215\203\004\323C\353D\272\360""\211!\225\017\001\010\313\216\302\027\331\211ak\273\245;]\217\264\035\2066\201\264\273+\3674%&!\237\346\344\202\255@[\270A\234\215\004g\345\302\371\261(\231TN\013Ut4@1\2467$\353\244\035g\214\006<\266\t<vf,(\352x\375f41\246\003`o\021\200C\242\327\006rh\217\237aC\334\235\214\246\3673\216#\233\212A\2761&\271\220\233\233\004\267\273\3368o\274\344\007\276M\2624:\034\246\360;i\320\212\241\031\301\014\321Q\"jcq<\331z\026\266\272\354L\006\237\221\324\257%CU[\nN\356\263z=g\035\377$k\342.\251\327\202\226\345K\257\342\304\023\262\302\212\221+`\232\210#\245\330\314\273\272:\\\313\206GE\3101\006\047,\241\230k\331\354\333\027\013\014X\232o9\271\202(\335\360\256 %(!\253\360\250\240~\335P\316t\341\315H\316\330\342 \321\325\274/\275^\030N%\205\303]\177W;\231\004\342\325\227^\222Z\320\246>\203\270\333\245\316\360J\3709\360\246H\206\243\010\223\347\3463|\036\355\341\"o\265\227/\373q)P\2418\263Y\332Z\267\247\023\335\202\006TG\375*~\366YD\2240\260\221j\243\251IG\267an\302\245\030\314\266\226\217\244\021-n\216\314\313ne\255\205\315D\210\276\352\262\031\214\324-\221\"\024e=,\336\235\271\014\234\245\275\006i5\350\316G+T\333\256\026E\252VW]z\372\274\352\372\216%\253\31659$j@A\311]o/\265\310\323O\310\343\371\274v88\307\223\314|m~(vt\243\3060\037\026\343\031\216\316\032\254\340\360;\355\371\277\346\177\\.\267\003\036\315{\033}=\365\337\031\266yG\013\261\367iM\3624\361\360\374\027\245\030\237\217<N\024\342N\034:\211\303\313\276*\271c\203\340E\261\324\024\311\032n\244\0065\373#\311s\026$\353\213\272\307)\267w+\223|\023[\226cL\260\275\323\rC\266\327\0341a#\251\211\356\363\211\253\223O8\337B\267\2037\250S\033m\214\215j\242\267\305B\254\246\350|\355\316\275\350\347\213G\215\\\271(\335\320\312n3*s\262\025\206U\360\3219\242\032g64\370\2479\321\253\2333\2161\362\336\270z|\0343\216#7\013w\304\261\356\255l\217uDqC5f3\006\3111F=\304\336e\321M\026\270\320j\206\367W\024\253\326V\033\312\272\311\261\270\311y\33073w\246o\212\335\233\217\035U\334\306f\340F\357\215|\207N\343|l\337-I\n-\307O\033\027-S0\255""\353\215\205\026\266V\ro\024\272\275\260\306rx\336\211\247\262\215\331T\213\247N\335\032\233\242A\302\260\325+\254\312\275B\335\263/\303\327\024\306\346q%T8\264\"\231A%\360U\232\314\355xm\264y\217\305|\272\0261\264\r\266\202\370g\223\272\031kZ[H\333\023,\334i\377\213\271\"\234(Hu\0307@\200";
+    PyObject *data = __Pyx_DecompressString(cstring, 2919, 2);
     #define __Pyx_DecompressString_LZSS_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) == 1 /* compression: zlib (3123 bytes) */
-static const char cstring[] = "x\332\255\030MS\333\326\026\177$\241\251yA\330|\025RlL\232\364\275i:\006:\311K\323v\014$\257i\n\215\201\2276\223\231zdY\006\007#\331\222\034p\223\327f\351\245\226w\251\245\226Zj\351%K/\265\364O\340\047\274s\216$\313_\220\264Sf\260\256\256\316=\347\334\363}\316w;\262&&\265C^Kn6\264CYJ\226\325dQ\254\224\013\242\302kb\245\221T5\245,h\242\202@R\362\331\243g_\254\337_O\362R1\251\210\257DAS\223j\275 TxU\025\325\244\\J\026\352\345\212V\226\222Z\243*\252w\223OJ\311\206\\OJ\242XLjr\262\np\275\007\264CQJ\252\242\206\213\344m^\222d\215\327\312\262\224\207\343e\351\340v\262XV\200H\371\265\210\247\037\363\025U\274\313\027\213y\200\023\253\304p^,\2265Y\371\262\"\236\212J\276\304\253\332\335j\343\264\256\225\276\270\277\371\375\243\315\247\317~z\262\263\237\317>{\222\177\376hw\357\311O;\204dG\226\304}\245.\346\341\357Y\343\024\376\267\340\226\371\035\361T\333\025K\371\274\307\t}/\325%\001\237\307|Y\242\247\\\254W\350\213\304\037\323\263V\347+\376Z\023U\r\036e5/\310\212\\\007Q\210\371W|\t$\230\347\025E>\361\226\232\373$9\270\313\242X\362\026\262\367\261\244\310\307\356\252|\\\225\025\215Wy\265!\te\371n\027\265\312k\200\366 _\225qE\330\362\005\271\330\200\027T\000\356\027\024^8\0225\300_\325\016=\355\250\202p(\nGU\271,i*\235\022*\310(\\P\003p\261\000G\204\212*\310\307\325:\010A%Q\024\304\222\254\210EQ\220\213\360[B+9\006^\363\362\211\004,\"9Q*\212pG\0054+\360@]\002q\212\247UP \\J@K\222\016J\260\241\270\314\224\312\022_q\221\227\344JE>\021\213\371B#\017\334\224\017\244\336\035\261\326\373V\345\025QB\331\224]\261\000\323\300\350\261(\341\n\030C\000\376X\205\027\242\205O\000\316w\201K.#\260\362\026j\300]Y\023\217\325#\261q\"+E\265\"J\007\332a`X\307\374AY\310\037\213`vE\025\357\226\027\334\337\256,\211\262{\271*\010\003\020\272:\361_\200\273\252\\\255*\342\353|\271H\"\2435\211@\021\253\025\020\275\"\252\365\212\006\316Q)\201_\240Q\340\253\304W\325CY\003@Es9\315\223\374\275\265\2525*\"\375\0003u\351\010\300\016@\345\240}\220\277\246\311G\242\004\222C\323\244%\241\361\227\n\240\250VDO""\030\257\371J]tM\002h\277\013u\2423\272\3008\226r\242\327\336i\315\325f\316\031\377G\223\307\267\327\315\335f\315\031\237\324C\347\261\261\253\234\036c?\231\031\347\n\247\337d\257\314\t+\347\\\231m\317\3361cV\326\312u\242s,\344D9\235;\237\032\273\362\t\343\234\350\002\3138\321y\\\321\247\233,\347\355\005?\301\036\254:\321E\226u\242\2372\276\023\375\004\371\361_\317\257\216]Yd\231\363\361\261+\343\357~\323\023:\2608\253\327:\364\023\275\336\\nn\000\303\343\261\346\226\036\002\372W\307>\21253N\014q\304\246\364e}C/\262\025V4R\306\232!\230qs\313\212\002\313{v\304\3168\223\323\200-v\243\251\350S:\274\315\352\047\254`\204\215ec\333\342\374\375u\275\316\266\214\220\02176\r\325L\233\373\026g\245\341|\310\231\304\013L\306\001\242\306\"l\215\tF\302\3305\024s\312\\\005\250\204\265osv\312\316\330\233\266\332J9\211\005v\0170o\0325\047\001r\351\014\274;\261\211.\357H8\256g\235\311%VC\002\017\231j\000\202e\374\301\255\340h/\026\272\314$7x\334\275T\304\310\004\000\223zXO\353\373,\3166\210\351=3L\027KX\273\226bO\331\2536\300\315\263\004\313\2218R\310\303=\226f{\200\346\036@\346\210\027`wzNW\330\024[e\273L3\326\r\315\314\230Y3g\nV\334\372\217\275nk\255L+\333\312\265\204\263\370Y\326\231[b\047F\301\214\200\025\315\241\302\007\336\235\304\264\317\372\246\256\262e\266\211\334\203\001x|\317\350\005\026\006\245&fu\215e\340+\310\004\214b~\221\310+\306\024\334p1ep\035\374q\346\346\373\000]\n\375\233i\270w\024\370\335\263\"V\206\276\241\032\006\214\240O\236\304\214\313\007Z\324\212\301\223E\354\201Em\331!;\016\232\256]\202\345\024\354$4\204\345\216\2312\327\315\232\025\362N~J\266\372\320\204\313/\262\247\306\211\311\233\r\373\032 \236\274E\326\225 E\345,\001\350eQ3\017\330\2761g\316[]\023\333\000\251\242\203N/\201V\356\203x\207\367\311\236>hwfh\007\374\231-\320k\324|\002\214\024\354\361Vh\000\2523p\350b\001\210\310!8e\010.\265gG\355\254\275\327\212\2642\227\210\361\rKA\314\350\261\214\270\276\252\357\202Z\327\331\233\001Y\216:\376\033\205\273Qn\361\241\032\272\310Bz\314v\004vt!\367k\014\342d""\257\273C\250\352\000\n\337\203\211\372 \215N`\205\203@D\205\3630\240,\366(\032\321\007\010\335\227\370\350\206U\264Wl\336\256\265B\255xk\263U\033\364Qgn\305\000\307\275c\206\234\271\333\020b\346n\0319oE?\363\203Q\r\235\030x\370\032\244\346\305\247\331\013\251\003\342\005\372Ps\026\323\020W\226\315\r\263`M@\354\031\342\202\374\026\361d\374oa\000\337\266\271a\372\024\037)RN\367)\0226\346X\224e1\320 \2568\305\200e/\250\357\232*\370\217K\347\r8\266G\334\217\t\256\205\325\234!\253\006\035N,\004\231\006\250%\364-\360\017\316\327D\237c\304@\342\0022M\234&\r\370\230\006\345%0`\271+\372\231\036y\030\t\016\335\326\277\350\337/\362\317\014\376\257\313}\300\n\207\256q\331\325\301\274;\203\231x\342\374:\372\312}=\003\0160\230\332\017!\014\323%\275t\356:\332\006\234\237\200L\345\373\331jsO\217\350k`\013\021\226\t<V\353f\017\224\024yy\220\337\373\275\2703\350\325\200\344w\310\211!\014\324~v\300r\306}\245\344\213\327s\313\204\201W\002\306\037\227\277\t(b\004\250m\366\300R\323\020\317\343 +\201B\375\224\265JY\031\2440\r)\233\243\253\361H\373\004*7\264\342\023\200\244\274\201\245\022\227 SE\235\255\223\372kf\310\344(I]\2634\310\311\350\353\\+\335\332;\013\241rk\201;wh5\244X\322\025\206\001_a3\220\204\342\346\017\026\337\371\023\260\316$\356\270R\340Fh\004\002\325\304$\325[~,\327\214\214\2215rT\263m\230Ek\305\342\255Z7\313\202\211e\002\303\351\320j(\352\222\036\220\047\227.\026\035\037\000\343\304p\025CM\366\032O\310\211Q\231F\326G\021\374\303\252\313\001s\034\201v03\240Vzx\350-\016Gy\300-v\nZ\306Jf\037\\<(DF\222\037\215\366\002F0\327\246Y\016\315\352&\212\t\315w\370\360\003=\007\201\257\367p\177:\304Jk\027\242l\312\263\177?8\254c\304 c\241\260A\266\203+,9H\235\250\013.\016\026\"x\225*\226\340hOT\366|K\025_\0023R\2171\314\352oA\023\274\227\263(\210\341\217\253W\272\024\266#}Z\370Z\347Q\340\201^\375\272_c__\036Z\226\334\313j\240\224mb\256n\376h\207\355e{\303\026[\353-\355,s\366\264\375\363/\355_^\266_\376\332\3765\357\326\362\232\361-\205b\272\354\237\320\205W\r\023\301o\214\250\261e""\336p=\3325\335\367 \301X\265o,B\034\360\n\034n\211\362\337#s\321\rv$r\022$\352\304\rP\344\027D\224x\370P^\003v\350\004\311\376\203Ly0\230w\340\363\n\343\331[HK\240\270\217!e\245\314\177Co\221\351\304R\240\377Uc\237\202\244\037\261c\237R\326X1\212\346\n\324\315\252\267\275\344\302b\271\277ijV\006[V\257~\366=9MQ\347+\020k\026p\306\001N\245\210\243\331k6\325\020 \203e2d\314\022\210c\013|\034\277\245?\243\264\230\356z\337\224\337\362aIV\327\177\000\303\235\001\363\377\247\265i\325H\314X4L6kCE\036\345\016\220]\207[\000\34785\206!z>6\254\320E\237\327F\024\220A\206\"\235\372\001\357\"\360~\355_\006I\026CY\034<\321\213\303\227\200\373\271\360\242\357A\232\274\034\250\303M\271\331\356\001e\340\367t\037\356\201\321\267\354E\226y\037\242E?\014\272\307\260\301zH\245\243+\207\277\304\305_\333\306\270\310C\255\212\370\213\346\347`\220\033\326!\230\343`\251E\331q\304\336\324M\010\007Kn\347:\232\010^.\323\271\330\306Pds#\0253>\362\303\324\002\305\323\327\340(\363\366\3478\032\300\222\034r?t\271\212\311\215\246\224\320\263\372K\332\3332?\002?_\266\276\267\263\243)_\300OO\320\231\204\232\311\255\377\306\047\232\356\030\311\031\3070\003S\250\007Pj\034Y\213P\n\337\374\227\371\020<\365\346m\343\177\020\245o~\t\235x4\326\334f\\{\354++\337\312\236\317\214]\231\r\246fo ve=48\000\273\356\r\300h\210E#.\232d\321+\r\273h\036F+\370\320\351\237\2029Qt:w\036v\355]C\277\006\034B\254|\nY\355;\353n+v\266\335~!\264\205j\273\372\373\371\330\330\037\241\2350<v\302/\361\3612\374\n\037\257\302o\361\3616\274\035\201\307vd\047\342D\275\026\250o\\\366#\273\306\352 U\010]\355/\276\261\367[\211\326\213\263b{\367y\373\371\317\355\237_\264_\270I\213o\363\005*I\330U\010d\013\220\340n\264~o\377\027\266\245\266t\n\024\032\241\307H\357qx\037\037\373a\001\037B\270\212\217j\370\017|\374\021\316!/\271\310n\304\017\321\251\316\320\304\356}S\257\013\346[\356n\347\357\030j\241\242\334B6h\241Nzr\311\363\341\231\226\337$\033\317\321h %\334\203\270?\2701z\264\205v\320;\300@\212\367(w\245\3145h\327f\206\353u\277\310\206""\204\362\026<~\323:\261\241\n\037\330 \031\r\214\030\206\210\007\365P/P\337\300mh\362\025\354\326F\264x\303\"\303^*\016<)v\002\314\213k\245@t\233-\365,u\311X\301o\367G\314\022.#\321s2hD}\034\276\205to\023\364gAk\026\\\356\r\224\034^\2070\254\230Lw`\330E\277\320?\215\n\204\177\375o\351\353.\346\341\036\014o\212$\325,\230G\344,si\003\0264{\211\333\275\323\232\241\006\3509\225J\3271\251\245\203\001\326\205]\264\333\261\235x\363Pl7\261zR\206\346\337\243:\255\240p\357%\345\325\350\010\337S6.\rN\316z\233\262\301}\237G\034\312OQC\020\353\261xg\374\343\213\240\260L\336\365k\220Q\344\334\236?l\334\002\207[\353\366\265#\352\346\021<\255w\355\367\rXo\321JQ)\3526\213}\340^m\234\320\263}\255\346\021\204\265_`\224C\047\2733\010l?\036S \013\r\226x\034\200\350%o\004\336S\317\301\252C\214\003\301\361\021zuy\351`\226\354D?\246\016\357\010z\207\2343\263b\374\010\205\347L\222\032\240\231;f\350\377g\257\352\334";
-    PyObject *data = __Pyx_DecompressString(cstring, 3123, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) == 1 /* compression: zlib (3124 bytes) */
+static const char cstring[] = "x\332\255\030MS\333\326\026\177$\241\251y\301\330|\025RlL\232\364\275i:\006:\311K\323v\014$\257i\n\215\201\2276\223\231zdY\006\007#\331\222\034p\223\327f\351\245\226w\251\245\226Zj\351%K/\265\324O\340\047\274s\216$\313_\220\264Sf\260\256\256\316=\347\334\363}\316w;\222*\244\324CNMm6\325CILU\224TI\250V\212\202\314\251B\265\231RT\271\302\253\202\214@b\352\331\243g_\254\337_Oqb)%\013\257\004^URJ\243\310W9E\021\224\224TN\025\033\225\252Z\021Sj\263&(wSO\312\251\246\324H\211\202PJ\251R\252\006p\275\007\324CAL)\202\212\213\324mN\024%\225S+\222X\200\343\025\361\340v\252T\221\201H\345\265\200\247\037sUE\270\313\225J\005\200\023j\304pA(UTI\376\262*\234\nr\241\314)\352\335Z\363\264\241\226\277\270\277\371\375\243\315\247\317~z\262\263_\310={Rx\376hw\357\311O;\204dG\022\205}\271!\024\340\357Y\363\024\376\267\340\226\205\035\341T\335\025\312\205\202\307\t}/7D\036\237\307\\E\244\247TjT\351\213\310\035\323\263\336\340\252\376Z\025\024\025\036\025\245\300K\262\324\000Q\010\205W\\\031$X\340dY:\361\226\252\373$9\270\313\222P\366\026\222\367\261,K\307\356\252r\\\223d\225S8\245)\362\025\351n\027\265\302\251\200\366\240P\223pE\330\nE\251\324\204\027T\000\356\027e\216?\022T\300_S\017=\355(<\177(\360G5\251\"\252\n\235\342\253\310(\\P\005p\241\010G\370\252\302K\307\265\006\010A!Q\024\205\262$\013%\201\227J\360[F+9\006^\013\322\211\010,\"9A,\tpG\0314\313s@]\004q\n\2475P \\\212GK\022\017\312\260!\273\314\224+\"Wu\221\227\245jU:\021J\205b\263\000\334T\016\304\336\035\241\336\373V\343dAD\331T\\\261\000\323\300\350\261 \342\n\030C\000\356X\201\027\242\205O\000.t\201\313.#\260\362\026J\300]E\025\216\225#\241y\"\311%\245*\210\007\352a`X\307\334A\205/\034\013`v%\005\357V\340\335\337\256,\211\262{\271\032\010\003\020\272:\361_\200\273\232T\253\311\302\353B\245D\"\2435\211@\026jU\020\275,(\215\252\n\316Q-\203_\240Q\340\253\310\325\224CI\005@Yu9-\220\374\275\265\2426\253\002\375\0003\r\361\010\300\016@\345\240}\220\277\252JG\202\010\222C\323\244%\241\361\2272\240\250U\005O\030\257\271jCpM\002h\277""\0139\321\031\215gq\226\266\243\327\336\251\255\325V\336\036\377G\213\303\267\327\255\335V\335\036\237\324B\347\261\261\253q-\306~2\262\366\225\270v\223\2752&\314\274}e\2663{\307\210\23193\357D\347X\310\216\306\265\370\371\324\330\225OX\334\216.\260\254\035\235\307\025}\272\311\362\336^\360\023\354\301\312\211.\262\234\035\375\224qN\364\023\344\307\177=\277:ve\221e\317\307\307\256\214\277\373MKj\300\342\254Vw\350\047z\275\265\334\332\000\206\307c\255--\004\364\257\216}\024ke\355\030\342\210Mi\313\332\206Vb+\254\244\247\3655\2357\022\306\226\031\005\226\367\254\210\225\265\047\247\001[\354FK\326\2464x\233\325NXQ\017\353\313\372\266\031\367\367\327\265\006\333\322CzB\337\324\025#c\354\233q3\003\347C\366$^`2\001\020u\026ak\214\327\223\372\256.\033S\306*@%\315}+n\245\255\254\265i)\355\264\235\\`\367\000\363\246^\267\223 \027g\340\335\216MtyG\302\t-gO.\261:\022x\310\024\035\020,\343\017n\005G{\261\320e&\343\203\307\335KE\364l\0000\251\205\265\214\266\317\022l\203\230\3363\302t\261\244\271k\312\326\224\265j\001\334<K\262<\211#\215<\334c\031\266\007h\356\001d\236x\001v\247\3474\231M\261U\266\313T}]W\215\254\2213\362\006o&\314\377X\353\226\332\316\266s\355|\233?K\234\345\354\271%v\242\027\215\010X\321\034*|\340\335NN\373\254oj\n[f\233\310=\030\200\307\367\214VdaPjrVSY\026\276\202L\300(\346\027\211\274\254O\301\r\027\323z\334\301\037{n\276\017\320\245\320\277\231\201{G\201\337=3bf\351\033\252a\300\010\372\344I\314\270|\240E\255\350\034Y\304\036X\324\226\025\262\022\240\351\372%XN\301NBCX\356\030ic\335\250\233!\357\344\247d\253\017\r\270\374\"{\252\237\030\234\321\264\256\001\342\311[d]IRT\336\344\201^\0165\363\200\355\353s\306\274\3315\261\r\220*:\350\364\022h\345>\210wx\237\354\351\203vg\206v\300\237\331\002\275F\215\047\300H\321\032o\207\006\240\234\201C\027\013@@\016\301)Cp\251=+j\345\254\275v\244\235\275D\214oX\032bF\217e$\264Um\027\324\272\316\336\014\310r\324\361\337(\334\215r\213\017\325\320E\026\322c\266#\260\243\013\271_c\020\047{\335\035B\225\003(|\017&\352\2034""\234\300\n\007\201\210J\334\303\200\262\330c\030\262/\361\315\r\263d\255X\234Uo\207\332\211\366f\273>\350\233\366\334\212\016\016{\307\010\331s\267!\264\314\335\322\363\336\212~\346\007\243\031:/\320\376\032\244\345\305\245\331\013\251\003\342\005\372P\267\0273\020O\226\215\r\243hN@\314\031\342\202\374\025\361d\375oa\000\337\266\342\303\364).R\204\234\356S l\314\261(\313a\200A\\\t\266\rI`\0038\361\203\304\033pd\217\250\037\003\\\213\252\333CV\014:\233X\0102\013PIj[\340\017\361\256\344{\317\304@\322<2K\034\246t\370\230\001e%1@\271+\372\231\036y\030\t\016\335\322\277\340\337/\352\317t\356\257\313\333e\037s\240k\216\203\327\270\354\352`\316\316`\346\2358\277\216\276q_\313\202\301\017\246\362C\010\273tI/}\273\216\265\001\347\047 3\371~\265\332\332\323\"\332\032\330@\204e\003\017U\273\331\002%E^\035\344\363~\257u\006\275\030\220\374\01690\204\201\331\317\006X\276\270\257\224l\361znY0\360J\300\370\343\3627\001E\013\017\265\314\036Xh\006\342w\002d\305Sh\2372W)\013\203\024\246!E\307\351j\034\322>\201J-\001\001\344\004 )O`i\024O\222\251\242\316\326I\375u#d\304))]3U\310\301\350\343\361v\246\275w\026B\345\326\0037vh5\244X\322\025\272\277\257\260\031H:\t\343\007\223s\376\004\254=\211;\256\024\342#4\002\001jb\222\352+?v\253zV\317\351y\252\3216\214\222\271brf\275\233U\301\304\262\201\3418\264\032\212\262\244\007\344\311\245\213E\306\007\300\3301\\\305P\223\275\306\023\262cT\226\221\365Q\304\376\260jr\300\034G\240\035\314\004\250\225\036\036z\213\301Q\036p\213\235\202\226\261r\331\007\027\017\n\217\221\344G\243\275\200\021\314\255\031\226G\263\272\211bB\363\035>\374@\313C\340\353=\334\237\376\260\262\332\205\302(\355\331\277\037\034\3261b\220\261P\330 \333\301\025\226\030\244N\324E<\001\026\302{\225)\226\334hOT\346|K\025^\0223Q\2171\314joA\023\234\227\253(\210\341\217\253W\272\024\266\037}Z\370Z\343P\340\201^\375:_e__\036Z\226\334\313\252\240\224mb\256a\374h\205\255ek\303\022\332\353m\365,{\366\264\363\363/\235_^v^\376\332\371\265\340\326\356\252\376-\205b\272\354\237\320\205W""\375\022\301o\364\250\276e\334p=\3325\335\367 \301X\265\257/B\034\360\n\2328\326w\313\372#c\321\rv$r\022$\352\304\rP\344\027D\224x\370P^\003v\350\004\311\376\203Ly0\230;\360y\205q\354-\244%P\334\307\220\262\322\306\277\241\227\310:\2614\350\177U\337\247 \351G\354\330\247\2245V\364\222\261\002u\262\342m/\271\260X\336o\032\252\231\305\026\325\253\227}O\316P\324\371\n\304\232\003\234\t\200S(\342\250\326\232E\265\003\310`\231\014\031\263\004\342\330\002\037\307o\231\317(-f\272\3367\345\267xX\2025\264\037\300pg\300\374\377in\232u\0223\026\r\223\255\372PQG\271\003d\347\304\027\3009N\365a\210\236\217M3t\321\347\265\021\005c\220\241H\247~\300\273\010\274_\373\227A\222\305P\026\007O\364\342\360%\340~.\274\350{\220&/\007r\342Sn\266{@\031\370=\335\206{`\364-{\221e\337\207h\321\017\203\3561l\250\036\202\245\244=9\374%.\376\3326\306E\016jU\304_2>\007\203\3340\017\301\034\007K-\312\216#\366\246nB8Xr;\325\321D\360rY\347b\033C\221\315\215T\314\370\310\017S\013\024O_\203\243\314[\237\343(\000Kq\310\375\320\325\312F|4\245\244\226\323^\322\336\226\361\021\370\371\262\371\275\225\033M\371\002~z\202\316$\324Ln\3757>\321r\307F\3668\206\031\230:=\200R\343\310\\\204R\370\346\277\214\207\340\2517o\353\377\203(}\363K\350\274\243\261\3266\213w\306\2762\013\355\334\371\314\330\225\331`J\366\006bW\316C\203\003\257\353\336\300\213\206V4\322\242\311\025\275\322p\213\346_\264\202\017N\377\324\313\216\242\323\271\363\257k\357\232\3325\340\020b\345S\310j\337\231w\333\261\263\355\316\013\276\303\327:\265\337\317\307\306\376\010\355\204\341\261\023~\211\217\227\341W\370x\025~\213\217\267\341\355\010<\266#;\021;\352\265>}\343\261\037\3315\326\000\251B\350\352|\361\215\265\337N\266_\234\225:\273\317;\317\177\356\374\374\242\363\302MZ\\\207+RI\302\256B [\200\004w\243\375{\347\277\260-v\304S\240\320\014=Fz\217\303\373\370\330\017\363\370\340\3035|\324\302\177\340\343\217p\036y\311Gv#~\210N;C\023\272\367M\271.\230g\271\273\316\3371\304BE\271\205l\320B\235\364\344\222\347\3033,\2779\326\237\243\321@J\270""\007q\177pc\364(\013\355\240w`\201\024\357Q\356J\033k\320\256\315\014\327\353~\221\r\t\345-x\374\246ybA\025>\260A2\032\030)\014\021\017\352\241^\240\276\001\333\320\244+\330\255;A\207:,*\354\241\022\300\213l%\301\254\342\3554\210l\263\255\234\245/\031#\370\355\375\210\331\301e$zN\006\r\250\217\303\267\214\356-\202\276,h\311\202K\275\201R\303\353\014\206\025\222\355\016\006\273\350\027\372\247N\201\320\257\377-\375\334\305<\334\203aM\211\244\232\003\263\210\234e/m\274\202&/y\273w:3\324\370<\247\022\351:&\263L0\250\272\260{v;\265\023o\356\211m&VM\362\320\234{T\207\025\024\354\275\244\274\332\034\341{\312\305\245\301\tYo36\270\357\363\210\303\367)j\004b=\226n\217\177|\021\024\226\307\273~\3551\212\234\333\353\207\365[\340hk\335~vD\275<\202\247\365\256\375\276\001\353-\231i*A\335&\261\017\334\253\211\223Z\256\257\305<\202p\366\013\214p\350dw\366\200m\307c\n`\241\301\322.\016 Z\331\033u\367\324q\260r\210q 8>B\257./\016fG\047\3721uvG\3203\344\355\231\025\375G(8gR\324\370\314\3341B\377\007y\263\340u";
+    PyObject *data = __Pyx_DecompressString(cstring, 3124, 1);
     #define __Pyx_DecompressString_LZSS_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) > 0 && (CYTHON_COMPRESS_STRINGS) <= 90 /* compression: lzss (4255 bytes) */
-static const char cstring[] = "\377?Note th\377at Cytho\377n is del\377iberatel\377y strict\373er!\001n PEP\377-484 and\377 rejects\377 subclas\377ses of b\377uiltin t\377ypes. If\377 you nee?d to p%\000%\t\377then set\376\200\000e \047anno\177tation_<\000\377ing\047 dir\366b\000iv\242\000o Fa\377lse.add_\366%\000ep\254\002_edi\377tor/lexe\377r_fast.p\377yxutf-8C\377HECKPOIN\377T_API_VE\337RSION@\002No\377neTrue_____Pyx\001\000D\343\000\377_NextRef\363__\203\004\033\002func\336$\001main\003\002od\273ul5\002nam=\002q\367ual\004\005test\376S\000is_coro}u\210 e_jaf\277 \277_arrow\004\004t\270\r\003\264\"\030\003def\002\004o\336\026\004from4\003im\377portasas\277yncio.R\006s{atT\000g_po\006\001>\202B_body\024\000\375!\376\024\001bracket\277_depth\227Ds\377ccheckpo\357ints\270Bcli\327ne_\336\000t,\000eb\3760\000clscomp\337ute_s\222@e_\377beforede\327cod\003\000f\242amd?ot_own\367 \354A\257ende\341\000r\210`c\337ape_n\314 ex\275p\243`_doc\306an\353gf\016\000r\207\003fin\373alW\003follo\177wed_by_\310`\267ign\006\teq\024\tp/aren\230!i\221#\223@\316\246\000men\364`\343\000f_\016\036\000ams\252@g\002\004\001\306 E_$\006f\203\003\312@\002\004s\224\007\377itemskey\377wordslen\367gth\317gmagi\377c_method\rs\330\001_c\000\003\303&u\002\344#=p\212 ing_\226\205\002\005\005\376\341@popprev\227_id\340\204\001e\007\002\333\"r\377eplacere\377sultssel\317fset\221a\013\001na\337pshot\206@rt\362\302#_\373\"\005\004styl\374\365`\002\000_chunk\317targ\360@\223`te\177xttoken\327 \360\227\204\001\006\002B\002\020\003strt\357ripl\341Arin\277gvalue\215cd\377ef\200\001\340\004\026\220\377c\230\021\230!\330\004\007\377\200t\2102\210Q\330\010\367\016\210a\n\001v\210R\210\377q\330\010\020\220\001\360\014\377\000\006\021\220\014\230O\250\3771\330\005\021\220\035\230j\377\250\r\260Q\330\005\027\320\377\027(\250\014\260A\260Q\377\340\004\030\230\001\330\004\021\377\220\021\360\022\000\005\032\230\377\021\330\004\033\2301\330\0049\031\006\001\026\002\035\230Q\r\004\024\002\370\031\002\n\007\033\000\340\004\034\230A\377\330\004\036""\230a\340\004\032\374\214\001\007\005\360\006\000\005\034\230\3771\360\010\000\005\010\200z\367\220\024\220\240\000\027\220q\340\375\010\001\001\004\n\210\"\210B~\256\000\010\014\210D\220\001}\000\377\006\000\t\014\2101\330\014\376@\001\014\022\220\"\220B\220\377d\230$\230d\240!\240\3773\240c\250\023\250D\260\375\004\260\000S\270\003\2701\330\373\020\025K\000\014\017\210r\220\373\022\220\013\000\027\220w\230b\377\240\002\240\"\240M\260\021\375\330\021\0044\220u\230D\240\377\001\240\023\240C\240s\250\377#\250T\260\021\260#\260\337S\270\001\330\020\321\001\020\023\377\2204\220q\230\003\2303\377\230c\240\024\240R\240r\357\250\022\2502#\000\024\260T\377\270\021\270!\2701\270C\377\270s\300!\330\024\033\230}7W\000C\240q\330\024\225 =\340\001\014\330\014\r\360\264\005\215\001\377\023\220A\330\020\037\230q\275\330^\000<\230s\240>\000\" \001\001\017\001A\007:\t\310\002\020\261\0045\007\346\317\003\003\240\347\004\035\001\020\220\002\377\220#\220T\230\023\230B\356\260\002S\250\002\324\002\024\260R\377\260r\270\022\2702\270Q\177\330\020\031\230\024\230Q\212\"\375!\200\0017\230#\230S\240w\003\2407\200 Q\330\024\211\000\376\226@\025\030\220r\230\022\230\3772\230R\230t\2404\240\377t\2501\250A\250Q\250\377c\260\023\260G\2704\270\377t\3001\300A\300Q\300\377c\310\023\310A\330\030\037\277\230w\240b\250\003\303`\030\334\355A\001\014\330\024\025\355#\023\220\177C\220s\230\"\230C\371\001\374\215`\240C\020\026\220b\230\002}\230\305 \027\220t\2301\033\000\354\221 \222`\031\034z\002r\240\022\276\337\000\034!\240\021\340\001\001\330/\030\031\330\024\036\010\330n\001\006\014\337#\240S\250\004\255\000S\260\047\003\2601,\002\253\204\001\020\367K\303*\270\210\002\202\003\316a$\240a\215bS>\317`D\270\001\270\023\347@\327C\305\3301\022x\245`\263`7\014(\250\177!\2504\250q\260\001\222b\267\330\020\036\247\204\002<\250\367@\034\377\230K\240w\250a\250yW\270\007\270\206`%\331b\024\327b\347Q\260cm\000\240`\023\220:\177\230T\240\030\250\031\260\332f\331B\343 \235\206\001\025\037\223@8\250\2011\363e\r""\010\313b\213\204\003\000\023;\006\026~-\016\030\230\001\230\033\240a\001\377\004\250I\260Q\260b\270\007\010\300\001U\014\326\204\005\203\005\221\204\003\355\021\373e\240\237\000\250D\260\001\260\377\024\260S\270\004\270A\270\237S\300\003\3001\206$\3711{\257\230!\2301\244!a\223d\023\357\2202\220R\222`4\230{\324\275,\270Qz\352\210\002\020\204\205\020\017\210p\374\201#\212u\254\204\010\342\205\020\023\2207\316\204\004\357\014\021\220\021\343\206\t\032\230!\037\340\014\017\210q\342\204\004\356\204\002\366m&\035\001r\220\220\207\002\260\210\001\020\032\010\326\206\002\351\021;\004\210!S\211\210\002b\240\003\337\2401\360\014\000\211\206\030B\260\377d\270$\270a\270q\300\177\001\300\023\300C\300q\224\206\r\377\330\030$\240A\330\030(\277\250\001\330\030\047\240\034\000%\223\240Q\003\004\n\002\031\306\210\r\301\206\001\020\337\023\220;\230d\345\210\003\340\024\275\027\211\207\026A\330\030\033\266\207\002q\377\330\034#\2407\250\"\250\177B\250b\260\r\270Qt\017\324\310\206\002\346\207\0011\276\207\005\002,\000M\270\221\021n\017\233\211\002\245\211\002\025\235d\260\207\006\030\277\230\004\230A\230Q\225\207\001r\353\230\023\275\207\002\"\316\212\004R\250s\273\260!\256\207\004{\240$\237\210\005\031\364\215\206\004\334cq\271\205\r\020\021\360\006\277\000\r\033\230!\330\343\213\004a\377\330\020\024\220D\230\001\230\275\021\263\212\0012\220S\230\214\205\n\014\317\260B\260c\261\001\224\215\001\024 \377\240\001\330\024#\2401\330O\024!\240\021\003\004\n\002\025(\022\344\357\215\001\244\213\r\024\341\005\241\201O&\240a\340\276\211\004\305\2010\367l\361\207\r\336\032\025\220Q\275\340\366\211\014\014\r\360\n\323\216\0018\357\2201\220A\312\216\016h\240a\370\364\213\003\310\216\004\343\205\003B\230b\240\r\373\250Q\316\215\0062\210S\220\003\377\2203\220b\230\003\2301\202\337\213\007t\265\213\006\273\214\001\203\212\002\326\216\007\255\215\013\340~\244\207\r\014\017\210~\230S\303@\001\020\267\220\001\215\206\003\363\220\001\t\003\267\216\002\326A\241\217\003\360\000\014\323\214\002\331\214""\001\361\216\003\r\210B\210\367c\220\024\256`\002\230#\230\377T\240\023\240B\240c\250\356\347\212\001\022\2602\221\216\002\021\330\014\377\025\220T\230\021\230\"\230wB\230a\231\220\001w\220c\301\204\002\337w\240c\250\021\213\211\002\360\006\247\000\021\024\210\211\002\222\216\0014\217\216\002q\377\250\001\250\021\250#\250S\277\260\007\260t\2704\347\206\002\021\277\300#\300S\310\001\236\215\001q\202\305\206\007\340\336\206\002\322n\242\204\002\203\207\001\244\204\005\026\377\240r\250\023\250J\260aM\340\001(\330\020\346\204\001\313\220\003\021\343\220\003>\205J\360\014\000\r\020\203\222\002\304\212\005\177t\2401\240A\240Q\257\222\002\377B\250d\260$\260a\260\275q\335\215\006\020\023\2201\252\205\007\340\200\303\205\002\303\212\016\222B\343\205\001\303\221\003\342\223\001\001 \330\305\014\363\221\001\014\275\224\001\214\222\005\271a\001\330\001\014\313\224\001\323\223\003\275\212\002\270\223#\200\204\014D\020\212\213\r\207\027\220qx\tq\002\226\223\004\356\204\021%\357\230x\240q\305\220\002T\260\023\001\260\377\217\007\327\224\003\377\204\014\321\007K\t\331\004\223\214\r\177\017\210{\230#\230Q\323a\037\035\230A\330\020\244\210\001\222#\210\t\177:\220Q\220a\330\014\325\214\010\374\272\224\003\276\222\005s\240#\240R\240\327s\250!;\003\020\233\214\0054\230\207q\330\024\324b\324\224\002\212\211\002\337\224\001\025y\026\221\211\003\332\225\002\021\023\2203\343\204\002P\246\224\001\377\225\001\370a\362\220\002>\355\222\002\024\216\214\001>\202h\027\220|\2403\267\210\001\257\214\002\300\300\210\002\306\210\001\246\226\002\362\215\003\246\230\001\320J;\220\341a\355!\254\227\002\225\216\002\212\227\0034\220t\363\230;\275\207\033\243b\017\210t\220\3671\220M\233\227\002u\250L\270\377\002\270\"\270B\270e\300\3774\300t\3101\310K\320\377WX\320X[\320[^\367\320^_\306\226\003t\240>\260\227\023\260A\277\225\002\330\275/\3636q\372\356\220\003\014m\001=\240\004\240D\223\250\017\314\206\003\242\227\003\014\263[\250\210\001T\337\240\034\250S\260\374\223\004\021\037\377\230s\240\"\240E\250""\034\000\307\230\003\233\206\002\321\205\002\360\216\001\333\217\003\267\205\002\241\210\002\256\220\002\000\216\205\002\225\203 \273\205\002\250\205\002\300\205\002\370\232\001\245o\251\212!\377\340\014\032\230$\230a\230\377|\2501\330\014\030\230\013\377\2407\250!\2509\260G\377\2701\340\014!\240\022\240g2\240T\240\211\002\212\232\005\014\036\273\232\002\377$\240d\250$\250a\250\345s\242\232\004\037&\003\353\226\001C\250t\343\2601\257\234\001\271\225\004\206\222\003\022\220#\352\275\223\0025\324 AQ\000\023\250C\373\250s\355\207\002t\2703\270a\327\330\020\026\336\204\001\"\304\204\002t\250\3354?\002D\270\003\027\002#&\223\240b\271\231\004\370\205\003\022\353\232\005\321\222\001u\377\220J\230c\240\026\240s?\250*\260C\260q\202\211\002\261\217\001\361\020\353\222\001\334\227\014\267\213\002\037\230q\340\217\021\033\2304\321\206\001\266\227\016\022\010y8\304A\235\230\0145\0043\230a\360\227\016\230\214\007@\213\211\002\215\211\005g\001\033\021\362\231\002\365F\020>\030\034\203\212\002\274\220\002%\240Q\201\212\004m\030\256\235\002\270\215\030\254\215\007\007\033\340\021\022\350\214\003:\"\375\215\002\024\277\230\n\355\227\016\320\"\022\205\232\016\330\233\002\024\026\003\265\215\0031\247\230\035\034\377\210\005\215#\335\231\001\001<\266\223\002\212\214\003Q2\206\024\235\024\303\005\224\211\001\377a\220{\240\"\240B\240\377d\250)\2601\260B\260wh\270a\332\221\016#\2401\375\231\r\376\361\223\001\340\022\035\230T\240\037\210\264\234\003\322s\272\233\0011\373\221\r\200h\352\217\001\030|\245\241\n\242c\022\360\010\000\021\006\020\373\022\033\313\211\002v\250T\260\031\273\270)\227\237\001\330\024\030\212\222\001\230\337K\240r\250\021T\023\024\220\367A\220[\216\242\002D\250\t\260\177\021\260\"\260H\270Ad\023\334y\024\215\211\010\020\210w\371\222\004\010\r\355\210\301\243\003\330\010\354\223\001\004\033\230\377:\240Q\240k\260\034\270\377Q\330\035+\250<\260q\377\330\035\047\240}\260A\330\377\035/\250q\330\004\014\210\377M\230\021\320\0005\260_\177\300A\360\026\000\005\027\254\245""\007\237{\220\"\220A@\004\375\244\001\n\000\372\244\004\300\244\002\362\244\002\324\244\002\317\244\002\220\245\002\246\245\002\232\245\002\337\034\230A\340\004\371\244\n\330\004\374\222\227\001\020\001\340\004\007\200y\220\377\007\220q\330\t\014\210K\377\220|\240?\260.\300\014\377\310M\320Yc\320cp\377\320p~\360\000\000\177\001\273N\002\004\000N\002[\003\001[\273\002j\n\001j\002|\021\001|\367\002M\003 \000M\003N\003\353\330\004\265\241\004\340\243\245\tL\230\007\357\230u\240D\367\242\001\320-=\377\270T\300\024\300Y\310d\377\320RV\320VW\320W\367Y\320Y\257\214\003a\320ab\377\330\014\027\220q\230\006\230\377c\240\033\250L\270\017\300\367~\320U\024\000n\320nx\356\202\000y\001F\201\001F\002T\356\210\001T\002c\217\001c\002p\356\226\001p\002\177\235\001\177\002Q\276\210\001Q\003R\003\330\234\212\004!\341\340\241\246\016\326\244\035\311\244\024\212\235\002\021\340\014\250\222\244@\376\247\001\230\246\001\330\253\234\010w\301\213\010V\330\302\244\017\324\250\001\241\235\001\240V\261a\270\003\037\2707\300!\340\001\r\305\244\023\257\251\001\332\256\246\003\023\253\226\0067\240\270\214\001!\250\2373\250c\260\026\236\226\017\260\233\005\240\377\026\240|\2601\260C\260Ow\270a\340\305\233\001\005\t\330\200\247\001L\324\237\014\204\222\013q\330\205\221\010\353\247\tq\313\241\t\010\276\247\t\375\245\007\223\251\002q\327\234\005\363\250\001\344\237\002\2371\377q\260\001\260\023\260C\260\367r\270\024\334`\021\300!\300\1771\300C\300s\310!\274\237\030D\313\"\360\235\004\024\204\235\002\303\237\006G\031q\327\246\007\024\367\236\007\341\235\002\025\270\247\004\021\267\241\010\252\232\002\327\251\002z\207\214\005\330\262\251\010{\230$\230\316\003U\020\207O1\250\247\006\024W\005\033\200\244\013;\021\330\330\242\005\n\000\t\225\232@j\027\3377\270$\270d\321\"A\300\177S\310\003\3101\330\024\223\232\027\306\342\232\010\024\047\375\253\004\251\242\002\224\231\016V\240\1772\240S\250\n\260!\255\232\004\360\333\205\003\241\232\020\232\255\005\372\245\001w\230d\240X\214\251\001\353\233\001\272\221""\001r\260\360\254\r\020\374\231\017\341\330\274\232\007\231\233\003\306\206\003\347\222\001\001\330\014\000\214\257\001\343\227\010\220\232\002\256\245\t\211\232\t\010\r\342\236\005\221\256\001\345\022\214\227\002\014\201\224\002\364\245\003\330\010\013\021\210\204\237\t\033\010\317\236\001R\362\255\001\347\230\002\\\020\376\356\236\003\002\240%\240|\2603S\260a\321\234\004\245\225\020\014\202\0174\245\255\006\177{\250$\250d\260!\206\224\002\310\205\260\003\210\247\n\342\240\004\024\352\240\001\340\233\010k\240\037\024\240X\250Q4\003\264\260\006\373\227\001\361F\231\256\002\325\253\005\332\222\006\021\025\220Q\333\220f\246\255\003\330\020\306\222\007 \240{\001\340\214\236\002\014\r\360\010\255\261\001\364\217\241\014\233\250\003\340\242\215\001\340\004\013\210\376\336\232\001k\240\034\250Q\330\026\377$\240L\260\001\330\026 \036\327\241\002\026(\250\001";
-    PyObject *data = __Pyx_DecompressString_LZSS(cstring, 4255, 7779);
+    #elif (CYTHON_COMPRESS_STRINGS) > 0 && (CYTHON_COMPRESS_STRINGS) <= 90 /* compression: lzss (4247 bytes) */
+static const char cstring[] = "\377?Note th\377at Cytho\377n is del\377iberatel\377y strict\373er!\001n PEP\377-484 and\377 rejects\377 subclas\377ses of b\377uiltin t\377ypes. If\377 you nee?d to p%\000%\t\377then set\376\200\000e \047anno\177tation_<\000\377ing\047 dir\366b\000iv\242\000o Fa\377lse.add_\366%\000ep\254\002_edi\377tor/lexe\377r_fast.p\377yxutf-8C\377HECKPOIN\377T_API_VE\337RSION@\002No\377neTrue_____Pyx\001\000D\343\000\377_NextRef\363__\203\004\033\002func\336$\001main\003\002od\273ul5\002nam=\002q\367ual\004\005test\376S\000is_coro}u\210 e_jaf\277 \277_arrow\004\004t\270\r\003\264\"\030\003def\002\004o\336\026\004from4\003im\377portasas\277yncio.R\006s{atT\000g_po\006\001>\202B_body\024\000\375!\376\024\001bracket\277_depth\227Ds\377ccheckpo\357ints\270Bcli\327ne_\336\000t,\000eb\3760\000clscomp\337ute_s\222@e_\377beforede\327cod\003\000f\242amd?ot_own\367 \354A\257ende\341\000r\210`c\337ape_n\314 ex\275p\243`_doc\306an\353gf\016\000r\207\003fin\373alW\003follo\177wed_by_\310`\267ign\006\teq\024\tp/aren\230!i\221#\223@\316\246\000men\364`\343\000f_\016\036\000ams\252@g\002\004\001\306 E_$\006f\203\003\312@\002\004s\224\007\377itemskey\377wordslen\367gth\317gmagi\377c_method\rs\330\001_c\000\003\303&u\002\344#=p\212 ing_\226\205\002\005\005\376\341@popprev\227_id\340\204\001e\007\002\333\"r\377eplacere\377sultssel\317fset\221a\013\001na\337pshot\206@rt\362\302#_\373\"\005\004styl\374\365`\002\000_chunk\317targ\360@\223`te\177xttoken\327 \360\227\204\001\006\002B\002\020\003strt\357ripl\341Arin\277gvalue\215cd\377ef\200\001\340\004\026\220\377c\230\021\230!\330\004\007\377\200t\2102\210Q\330\010\367\016\210a\n\001v\210R\210\377q\330\010\020\220\001\360\014\377\000\006\021\220\014\230O\250\3771\330\005\021\220\035\230j\377\250\r\260Q\330\005\027\320\377\027(\250\014\260A\260Q\377\340\004\030\230\001\330\004\021\377\220\021\360\022\000\005\032\230\377\021\330\004\033\2301\330\0049\031\006\001\026\002\035\230Q\r\004\024\002\370\031\002\n\007\033\000\340\004\034\230A\377\330\004\036""\230a\340\004\032\374\214\001\007\005\360\006\000\005\034\230\3771\360\010\000\005\010\200z\367\220\024\220\240\000\027\220q\340\375\010\001\001\004\n\210\"\210B~\256\000\010\014\210D\220\001}\000\377\006\000\t\014\2101\330\014\376@\001\014\022\220\"\220B\220\377d\230$\230d\240!\240\3773\240c\250\023\250D\260\375\004\260\000S\270\003\2701\330\373\020\025K\000\014\017\210r\220\373\022\220\013\000\027\220w\230b\377\240\002\240\"\240M\260\021\375\330\021\0044\220u\230D\240\377\001\240\023\240C\240s\250\377#\250T\260\021\260#\260\337S\270\001\330\020\321\001\020\023\377\2204\220q\230\003\2303\377\230c\240\024\240R\240r\357\250\022\2502#\000\024\260T\377\270\021\270!\2701\270C\377\270s\300!\330\024\033\230}7W\000C\240q\330\024\225 =\340\001\014\330\014\r\360\264\005\215\001\377\023\220A\330\020\037\230q\275\330^\000<\230s\240>\000\" \001\001\017\001A\007:\t\310\002\020\261\0045\007\346\317\003\003\240\347\004\035\001\020\220\002\377\220#\220T\230\023\230B\356\260\002S\250\002\324\002\024\260R\377\260r\270\022\2702\270Q\177\330\020\031\230\024\230Q\212\"\375!\200\0017\230#\230S\240w\003\2407\200 Q\330\024\211\000\376\226@\025\030\220r\230\022\230\3772\230R\230t\2404\240\377t\2501\250A\250Q\250\377c\260\023\260G\2704\270\377t\3001\300A\300Q\300\377c\310\023\310A\330\030\037\277\230w\240b\250\003\303`\030\334\355A\001\014\330\024\025\355#\023\220\177C\220s\230\"\230C\371\001\374\215`\240C\020\026\220b\230\002}\230\305 \027\220t\2301\033\000\354\221 \222`\031\034z\002r\240\022\276\337\000\034!\240\021\340\001\001\330/\030\031\330\024\036\010\330n\001\006\014\337#\240S\250\004\255\000S\260\047\003\2601,\002\253\204\001\020\367K\303*\270\210\002\202\003\316a$\240a\215bS>\317`D\270\001\270\023\347@\327C\305\3301\022x\245`\263`7\014(\250\177!\2504\250q\260\001\222b\267\330\020\036\247\204\002<\250\367@\034\377\230K\240w\250a\250yW\270\007\270\206`%\331b\024\327b\347Q\260cm\000\240`\023\220:\177\230T\240\030\250\031\260\332f\331B\343 \235\206\001\025\037\223@8\250\2011\363e\r""\010\313b\213\204\003\000\023;\006\026~-\016\030\230\001\230\033\240a\001\377\004\250I\260Q\260b\270\007\010\300\001U\014\326\204\005\203\005\221\204\003\355\021\373e\240\237\000\250D\260\001\260\377\024\260S\270\004\270A\270\237S\300\003\3001\206$\3711{\257\230!\2301\244!a\223d\023\357\2202\220R\222`4\230{\324\275,\270Qz\352\210\002\020\204\205\020\017\210p\374\201#\212u\254\204\010\342\205\020\023\2207\316\204\004\357\014\021\220\021\343\206\t\032\230!\037\340\014\017\210q\342\204\004\356\204\002\366m&\035\001r\220\220\207\002\260\210\001\020\032\010\326\206\002\231\021;\004\210!S\230\257\212\001\201\206\030B\377\260d\270$\270a\270q\377\300\001\300\023\300C\300q\376\214\206\r\330\030$\240A\330\030\177(\250\001\330\030\047\240\034\000\047%\240Q\003\004\n\002\031\276\210\r\271\206\001\277\020\023\220;\230d\335\210\003\340{\024\027\201\207\026A\330\030\033\256\207\002\377q\330\034#\2407\250\"\377\250B\250b\260\r\270Q\250t\017\300\206\002\336\207\0011\266\207\005\002,\000M#\270\021n\017\223\211\002\235\211\002\025\225d\250\207\006\177\030\230\004\230A\230Q\215\207\001\177r\230\023\230M\250\023o\000wc\260\021\236\207\004{\240$\217\210\005\351\031\375\205\004\314cq\251\205\r\020\021\360\177\006\000\r\033\230!\330\323\213\004\376\377`\024\220D\230\001\230\021\346\243\212\0012\220\367 \341\205\t\014\260B\363\260c\251\001\204\215\001\024 \240\001\377\330\024#\2401\330\024!\023\240\021\003\004\n\002\025(\022\337\215\001\224\213\r9\024\331\005\231\201O&\240a\256\211\004\275\2010,\360c\200\215\001b\240\346\213\001\024\315\207\013\336\032\357\025\220Q\340\346\211\014\014\r\360}\n\303\216\0018\2201\220A\272\216\016\307h\240a\344\213\003\270\216\004\323\205\003B\230\337b\240\r\250Q\276\215\0062\210\377S\220\003\2203\220b\230\027\003\2301\317\213\007t\245\213\006\253\214\001\363\211\002\364\306\216\007\235\215\013\340\224\207\r\014\017\210~\013\230S\303@\020\247\220\001\375\205\003\343\220\001\t\003\200\247\216\002\326A\221\217\003\000\014\303\214\002\311\214\001\341\216\003\r""\277\210B\210c\220\024\256`\002\377\230#\230T\240\023\240Bw\240c\250\327\212\001\022\2602\201\216\002\377\021\330\014\025\220T\230\021\277\230\"\230B\230a\211\220\001w\377\220c\230\023\230C\230w\357\240c\250\021\373\210\002\360\006\000\323\021\024\370\210\002\202\216\0014\377\215\002q\250\377\001\250\021\250#\250S\260\337\007\260t\2704\337\206\002\021\300_#\300S\310\001\216\215\001q\275\206\007\301\340\326\206\002\322n\242\204\002\373\206\001\244\204\005\026\240\377r\250\023\250J\260a\340&\001(\330\020\346\204\001\273\220\003\021\323\220\003\205J\237\360\014\000\r\020\363\221\002\264\212\005t\277\2401\240A\240Q\237\222\002B\377\250d\260$\260a\260q^\315\215\006\020\023\2201\252\205\007\340\303\205\002\300\263\212\016\222B\343\205\001\263\221\003\322\223\001\001 \330\014\342\343\221\001\014\255\224\001\374\221\005\271a\001\330\014\200\273\224\001\303\223\003\255\212\002\250\223#\200\204\014D\020\372\212\r\027\303\220qx\tq\002\206\223\004\356\204\021%\230\367x\240q\265\220\002T\260\023\260\200\357\217\007\307\224\003\377\204\014\321\007K\t\331\004\203\214\r\017\277\210{\230#\230Q\323a\035\217\230A\330\020\244\210\001\222#\210\t:?\220Q\220a\330\014\305\214\010\252\224\003\376\256\222\005s\240#\240R\240s\353\250!;\003\020\225\207\0054\230q\303\330\024\324b\304\224\002\212\211\002\317\224\001\025\026<\221\211\003\312\225\002\021\023\2203\343\204\002\226\224\001(\357\225\001\370a\342\220\002>\335\222\002\024\206\214\001\202h\037\027\220|\2403\267\210\001\247\214\002\300\210\002\340\306\210\001\226\226\002\342\215\003\226\230\001\320J;\220a\360\355!\234\227\002\205\216\002\372\226\0034\220t\230\371;\275\207\033\243b\017\210t\2201\373\220M\213\227\002u\250L\270\002\377\270\"\270B\270e\3004\377\300t\3101\310K\320W\377X\320X[\320[^\320\373^_\266\226\003t\240>\260\023K\260A\257\225\002\330\275/\3636q\336\220\003\375\014m\001=\240\004\240D\250\311\017\314\206\003\222\227\003\014\263[\250\210\001T\240\357\034\250S\260\354\223\004\021\037\230\177s\240\"\240E\250\034\267\230\003""\000\233\206\002\321\205\002\350\216\001\313\217\003\267\205\002\241\210\002\236\220\002\216\205\002\200\225\203 \273\205\002\250\205\002\300\205\002\350\232\001\245o\251\212!\340\377\014\032\230$\230a\230|\377\2501\330\014\030\230\013\240\3777\250!\2509\260G\270\3771\340\014!\240\022\2402\263\240T\240\211\002\372\231\005\014\036\253\232\002$\377\240d\250$\250a\250s\362\222\232\004\037&\003\333\226\001C\250t\260q1\237\234\001\251\225\004\366\221\003\022\220#\255\223\002u5\324 AQ\000\023\250C:\000\376\356\207\001t\2703\270a\330\020u\026\336\204\001\"\304\204\002t\2504?\002\367D\270\003\027\002#&\240b\344\251\231\004\370\205\003\022\333\232\005\301\222\001u\220J\377\230c\240\026\240s\250*O\260C\260q\202\211\002\261\217\001\020\333\222\001\374\314\227\014\267\213\002\037\230q\340\021\033#\2304\321\206\001\246\227\016\022\010y\304A\215\230\014\0165\0043\230a\340\227\016\230\214\007\213\211\002\215\211\005\020g\001\033\021\342\231\002\365F\020>\030\203\212\002\274\220\002\007%\240Q\201\212\004m\030\236\235\002\215\030\254\215\007.\007\033\340\021\022\350\214\003:\375\215\002\323\217\013\204\335\227\016\320\"\022\365\231\016\310\233\002\026\003\265\215\0031\"\227\230\035\034\377\210\005\215#\315\231\001<\344`\215\235\002\340\034\036o\024\206\024\017\034\224\211\001a\220{\377\240\"\240B\240d\250)\377\2601\260B\260h\270a\360\314\232\r\335\223\001\355\231\r\017\002\022\035\230T#\240\037\244\234\003\322s\252\233\0011\373\221\r\200h\362\352\217\001\030\225\241\n\242c\022\360\010\000\355\021\006\020\022\033\313\211\002v\250T\357\260\031\270)\207\237\001\330\024\030~\212\222\001\230K\240r\250\021T\023\337\024\220A\220[\376\241\002D\250\377\t\260\021\260\"\260H\270qAd\023y\024\215\211\010\020\210w\371\222\004\267\010\r\210\261\243\003\330\010\354\223\001\004\377\033\230:\240Q\240k\260\377\034\270Q\330\035+\250<\377\260q\330\035\047\240}\260\377A\330\035/\250q\330\004\377\014\210M\230\021\320\0005\377\260_\300A\360\026\000\005}\027\234\245\007{\220\"\220A@\004\002\355\244\001\n""\352\244\004\260\244\002\342\244\002\304\244\002\277\244\002\200\245\002|\226\245\002\212\245\002\034\230A\340\004\351\244\n\363\330\004\222\227\001\020\001\340\004\007\200\377y\220\007\220q\330\t\014\377\210K\220|\240?\260.\377\300\014\310M\320Yc\320\377cp\320p~\360\000\000\357\177\001N\002\004\000N\002[\356\003\001[\002j\n\001j\002|\336\021\001|\002M\003 \000M\003\257N\003\330\004\245\241\004\340\223\245\tL\277\230\007\230u\240D\347\242\001\320\377-=\270T\300\024\300Y\377\310d\320RV\320VW\337\320WY\320Y\257\214\003a\320\377ab\330\014\027\220q\230\377\006\230c\240\033\250L\270\337\017\300~\320U\024\000n\320\273nx\202\000y\001F\201\001F\273\002T\210\001T\002c\217\001c\273\002p\226\001p\002\177\235\001\177\373\002Q\210\001Q\003R\003\330\206\234\212\004!\340\221\246\016\306\244\035\271\244\024\372\234\002\021\243\340\014\202\244@\356\247\001\210\246\001\330\243\234\010wb\301\213\010V\262\244\017\304\250\001\231\235\001\240V\261a\177\270\003\2707\300!\340\001\rh\265\244\023\237\251\001\236\246\003\023\253\226\0067\240\270\214\001\177!\2503\250c\260\026\236\226\017\376\260\233\005\240\026\240|\2601\260?C\260w\270a\340\305\233\001\005\t1\330\360\246\001\304\237\014\204\222\013q\330\205\221\010\333\247\taq\273\241\t\256\247\t\355\245\007\203\251\002q\340\277\222\004\375\001\2271q\260\001\260\023\260\337C\260r\270\024\324`\021\300\377!\3001\300C\300s\310\021!\254\237\030\303\"\350\235\004\024\374\234\002\263\237\006G\031Qq\277\246\007\347\236\007\331\235\002\025\240\247\004\021\237\241\010\350\242\232\002\277\251\002\377\213\005\330\232\251\010{\230$U\230\251\234\003\020\377/1\220\247\006\024W\005\355\033\350\243\013\021\330\300\242\005\n\000\t|\215\232@j\0277\270$\270d\321\"\377A\300S\310\003\3101\330\031\024\213\232\027\332\232\010\024\047\345\253\004\231\242\002\214\231\016\377V\2402\240S\250\n\260\301!\245\232\004\323\205\003\231\232\020\202\255\005\342\245\001w\230cd\240\364\250\001\343\233\001\262\221\001r\260\330\254\r\205\020\364\231\017\330\264\232\007\221\233""\003\276\206\003\337\222\001\001\003\330\014\364\256\001\333\227\010\210\232\002\226\245\t\201\232\t\010\r\224\332\236\005\371\255\001\022\204\227\002\014\371\223\002\334\245\003\330G\010\013\210\374\236\t\033\010\307\236\001R\332\255\001\370\337\230\002\\\020\346\236\003\002\240%\240|O\2603\260a\311\234\004\235\225\020\014\202\017\3754\215\255\006{\250$\250d\260!!\376\223\002\355\257\003\360\246\n\332\240\004\024\342\240\001\330\233\010\177k\240\024\240X\250Q4\003\304\234\260\006\363\227\001F\201\256\002\275\253\005\322\222\006\021\025o\220Q\220f\216\255\003\330\020\276\222\007\357 \240\001\340\204\236\002\014\r\360\321\010\225\261\001\207\241\014\203\250\003\340\232\215\001\340\004\373\013\210\326\232\001k\240\034\250Q\377\330\026$\240L\260\001\330{\026 \317\241\002\026(\250\001";
+    PyObject *data = __Pyx_DecompressString_LZSS(cstring, 4247, 7755);
     #define __Pyx_DecompressString_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (7779 bytes) */
-static const char bytes[] = "?Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the \047annotation_typing\047 directive to False.add_notepython_editor/lexer_fast.pyxutf-8CHECKPOINT_API_VERSIONFalseNoneTrue____Pyx_PyDict_NextRef__annotate____func____main____module____name____qualname____test___is_coroutine_jafter_arrowafter_atafter_classafter_defafter_dotafter_fromafter_importasasyncio.coroutinesat_arg_posat_class_bodyat_type_posbracket_depthbuiltinsccheckpointsclasscline_in_tracebackclscompute_state_beforedecodedefdelimdot_owner_typeenderrorsescape_nextexpect_docstringfexpr_depthfinal_statefollowed_by_assignfollowed_by_eqfollowed_by_parenfromiimportin_commentin_def_paramsin_fexprin_from_importin_fstringin_stringis_docstringitemskeywordslengthlexer_fastmagic_methodsnext_cnext_checkpointparam_depthpending_classpending_defpopprev_id_typeprev_statereplaceresultsselfsetdefaultsnapshotstartstring_delimstring_stylestyle_chunktarget_postexttoken_bytestoken_starttoken_strtriple_stringvaluesclassdef\200\001\340\004\026\220c\230\021\230!\330\004\007\200t\2102\210Q\330\010\016\210a\330\004\007\200v\210R\210q\330\010\020\220\001\360\014\000\006\021\220\014\230O\2501\330\005\021\220\035\230j\250\r\260Q\330\005\027\320\027(\250\014\260A\260Q\340\004\030\230\001\330\004\021\220\021\360\022\000\005\032\230\021\330\004\033\2301\330\004\031\230\021\330\004\030\230\001\330\004\035\230Q\330\004\033\2301\330\004\033\2301\330\004\033\2301\330\004\035\230Q\330\004\033\2301\330\004\035\230Q\340\004\034\230A\330\004\036\230a\340\004\032\230!\330\004\034\230A\330\004\036\230a\360\006\000\005\034\2301\360\010\000\005\010\200z\220\024\220Q\330\010\027\220q\340\010\027\220q\340\004\n\210\"\210B\210a\330\010\014\210D\220\001\220\021\360\006\000\t\014\2101\330\014\032\230!\330\014\022\220\"\220B\220d\230$\230d\240!\2403\240c\250\023\250D\260\004\260A\260S\270\003\2701\330\020\025\220Q\330\014\017\210r\220\022\2201\330\020\027\220w\230b\240""\002\240\"\240M\260\021\330\014\017\210r\220\022\2204\220u\230D\240\001\240\023\240C\240s\250#\250T\260\021\260#\260S\270\001\330\020\035\230Q\330\020\023\2204\220q\230\003\2303\230c\240\024\240R\240r\250\022\2502\250T\260\024\260T\270\021\270!\2701\270C\270s\300!\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\340\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\014\r\360\006\000\t\014\2101\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\023\220<\230s\240!\330\024\"\240!\330\024\037\230q\330\024\033\2307\240\"\240C\240q\340\024\033\2307\240\"\240C\240q\330\020\025\220Q\330\020\021\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\021\330\014\020\220\002\220#\220T\230\023\230B\230c\240\024\240S\250\002\250#\250T\260\024\260R\260r\270\022\2702\270Q\330\020\031\230\024\230Q\230b\240\002\240!\330\020\023\2207\230#\230S\240\003\2407\250#\250Q\330\024\"\240!\360\006\000\025\030\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260G\2704\270t\3001\300A\300Q\300c\310\023\310A\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\340\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\024\025\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\036\230a\330\020\025\220Q\330\020\026\220b\230\002\230!\330\024\027\220t\2301\230C\230s\240!\360\010\000\031\034\2302\230R\230r\240\022\2401\330\034!\240\021\340\034!\240\021\330\030\031\330\024\027\220t\2301\230C\230s\240!\330\030\035\230Q\330\030\031\330\024\027\220t\2301\230C\230s\240#\240S\250\004\250A\250S\260\003\2601\330\030\031\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210r\220\023\220A\330\020\036\230a\330\020\026\220b\230\002\230$\230d\240$\240a\240s\250#\250S\260\004\260D\270\001\270\023\270C\270q\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210x\220q\230\001\330\020\036\230a\330\020\026\220b\230\002\230$\230d\240(\250!\2504\250q\260""\001\330\024\031\230\021\330\020\036\230d\240!\240<\250q\330\020\034\230K\240w\250a\250y\270\007\270q\330\020%\240R\240r\250\024\250T\260\024\260Q\260c\270\023\270A\330\020\023\220:\230T\240\030\250\031\260!\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\037\230t\2408\2501\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\037\230s\240!\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\037\230s\240!\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\026\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\030\230\001\230\033\240B\240b\250\004\250I\260Q\260b\270\010\300\001\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\021\330\014\017\210x\220q\230\001\330\020\036\230a\330\020\026\220b\230\002\230$\230e\2408\2501\250D\260\001\260\024\260S\270\004\270A\270S\300\003\3001\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210{\230!\2301\330\020\036\230a\330\020\025\220Q\330\020\023\2202\220R\220t\2304\230{\250!\2504\250q\260\001\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210z\230\021\230!\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\021\330\014\017\210x\220q\230\001\330\020\036\230a\330\020\026\220b\230\002\230$\230d\240(\250!\2504\250q\260\001\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\021\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\r\360\006\000\t\014\2101\330\014\032\230!\340\014\017\210q\330\020\025\220Q\330\020\036\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\340\014\017\210r\220\023\220A\330\020\025\220Q\330\020\036\230a\330\020\027\220w\230b\240\003\2401\330\020\021\340\014\017\210q\330\020\023\2202\220S\230\003\2303\230b\240\003\2401\360\014\000\025\030\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260""\023\260B\260d\270$\270a\270q\300\001\300\023\300C\300q\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\030$\240A\330\030(\250\001\330\030\047\240q\330\030%\240Q\330\030\047\240q\330\030\047\240q\330\030\031\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\025\330\020\023\220;\230d\240\"\240C\240q\340\024\027\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260A\330\030\033\2302\230R\230q\330\034#\2407\250\"\250B\250b\260\r\270Q\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\030\031\330\024\027\220r\230\022\2301\330\030\037\230w\240b\250\002\250\"\250M\270\021\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\037\230q\330\024\"\240!\330\024\025\330\020\036\230a\330\020\026\220b\230\002\230!\330\024\030\230\004\230A\230Q\330\024\027\220r\230\023\230C\230s\240\"\240C\240s\250#\250R\250s\260!\330\030\031\330\024\027\220{\240$\240b\250\003\2501\330\030\031\330\024\031\230\021\330\020\023\2202\220R\220q\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\021\360\006\000\r\033\230!\330\014\022\220\"\220B\220a\330\020\024\220D\230\001\230\021\330\020\023\2202\220S\230\001\330\024\033\2307\240\"\240B\240b\250\014\260B\260c\270\021\330\024\031\230\021\330\024 \240\001\330\024#\2401\330\024!\240\021\330\024#\2401\330\024#\2401\330\024\025\330\020\023\2202\220S\230\001\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\"\240!\330\024\025\330\020\023\220;\230d\240\"\240C\240q\340\024\027\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260A\330\030\033\2302\230R\230q\330\034#\2407\250\"\250B\250b\260\r\270Q\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\030&\240a\330\030\031\330\024\027\220r\230\022\2301\330\030\037\230w\240b\250\002\250\"\250M\270\021\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\037\230q\330\024\"\240!\330\024\025\330\020\023\2202\220S\230\003\2303\230b\240\003\2401\330\024\033\2307\240\"\240B\240b\250\r\260Q""\330\024 \240\001\330\024#\2401\330\024!\240\021\330\024#\2401\330\024#\2401\330\024\025\330\020\025\220Q\340\020\027\220w\230b\240\002\240\"\240M\260\021\330\014\r\360\n\000\t\014\2108\2201\220A\330\014\032\230!\330\014\022\220\"\220B\220d\230$\230h\240a\240t\2501\250A\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\r\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\330\014\017\210r\220\023\220C\220t\2302\230R\230r\240\022\2404\240t\2504\250q\260\001\260\021\260#\260S\270\001\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\340\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\014\017\210~\230S\240\001\330\020\034\230A\330\020\036\230a\330\020\033\2301\330\020\034\230A\330\020\037\230q\330\020!\240\021\330\020\035\230Q\330\020\037\230q\330\020!\240\021\330\020\035\230Q\330\020\036\230a\330\020\036\230a\330\014\r\360\006\000\t\r\210B\210c\220\024\220S\230\002\230#\230T\240\023\240B\240c\250\024\250T\260\022\2602\260R\260r\270\021\330\014\025\220T\230\021\230\"\230B\230a\330\014\017\210w\220c\230\023\230C\230w\240c\250\021\330\020\036\230a\360\006\000\021\024\2202\220R\220r\230\022\2304\230t\2404\240q\250\001\250\021\250#\250S\260\007\260t\2704\270q\300\001\300\021\300#\300S\310\001\330\024\027\220q\330\030\047\240q\330\030\047\240q\340\030\047\240q\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024 \240\001\330\024$\240A\330\024#\2401\330\024!\240\026\240r\250\023\250J\260a\340\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024 \240\001\330\024$\240A\330\024#\2401\330\024!\240\026\240r\250\023\250J\260a\330\020#\2401\330\020\037\230q\330\020\021\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\360\014\000\r\020\210r\220\022\2202\220R\220t\2304\230t\2401\240A\240Q\240c\250\023\250B\250d\260$\260a\260q\270\001\270\023\270C\270q\330\020\023\2201\330\024#\2401\330\024#\2401\340\024#\2401\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230Q""\340\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230Q\330\014\037\230q\330\014\033\2301\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\031\230\021\330\014\032\230!\330\014\021\220\021\330\014\022\220\"\220B\220d\230$\230d\240!\2403\240c\250\023\250D\260\004\260A\260S\270\003\2701\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\033\2301\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\027\220q\330\014\037\230q\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2108\2201\220A\330\014\032\230!\330\014\022\220\"\220B\220d\230%\230x\240q\250\004\250A\250T\260\023\260D\270\001\270\023\270C\270q\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\037\230q\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\017\210{\230#\230Q\360\006\000\021\035\230A\330\020!\240\021\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\210:\220Q\220a\330\014\023\2207\230\"\230C\230q\330\014\017\210r\220\023\220C\220s\230\"\230C\230s\240#\240R\240s\250!\330\020!\240\021\330\020\023\2202\220S\230\003\2304\230q\330\024$\240A\330\024\"\240!\330\024 \240\001\330\024\"\240!\330\025\026\330\024#\2401\330\020\035\230Q\330\021\023\2203\220c\230\023\230B\230c\240\023\240C\240r\250\023\250A\330\020\023\220>\240\022\2401\330\024%\240Q\330\020\023\2201\330\024#\2401\330\024\027\220|\2403\240a\330\030(\250\001\330\030&\240a\330\030&\240a\330\020\035\230Q\330\014\021\220\021\330\014\030\230\001\330\014\033\2301\330\014\r\360\006\000\t\014\210;\220a\220q\330\014\032\230!\330\014\021\220\021\330\014\017\210r\220\022\2204\220t\230;\240a\240t\2501\250A\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\037\230q\330\014\017\210t\2201\220M\240\023\240C\240u\250L\270\002\270\"\270B\270e\3004\300t\3101\310K\320WX""\320X[\320[^\320^_\330\020\023\220<\230t\240>\260\023\260A\330\024\"\240!\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\017\210q\330\020\036\230a\330\014\017\210t\220=\240\004\240D\250\017\260t\2704\270q\330\020\037\230q\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\017\210~\230T\240\034\250S\260\001\330\020\036\230a\330\021\037\230s\240\"\240E\250\034\260S\270\001\330\020#\2401\330\020\023\2201\330\024$\240A\330\020\036\230a\330\020 \240\001\330\020\036\230a\330\014\021\220\021\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\037\230q\330\014\031\230\021\330\014\033\2301\330\014\035\230Q\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2108\2201\220A\330\014\032\230!\330\014\022\220\"\220B\220d\230$\230h\240a\240t\2501\250A\330\020\025\220Q\340\014\032\230$\230a\230|\2501\330\014\030\230\013\2407\250!\2509\260G\2701\340\014!\240\022\2402\240T\250\024\250T\260\021\260#\260S\270\001\330\014\036\230b\240\002\240$\240d\250$\250a\250s\260#\260S\270\001\330\037!\240\022\2402\240S\250\004\250C\250t\2601\260A\260Q\260c\270\023\270A\330\014\021\220\021\330\014\022\220#\220R\220t\2305\240\004\240A\240T\250\023\250C\250s\260$\260a\260t\2703\270a\330\020\026\220a\330\014\"\240#\240R\240t\2504\250t\2601\260D\270\003\2703\270a\330#&\240b\250\002\250#\250T\260\023\260D\270\001\270\022\2701\270C\270s\300!\340\014\017\210u\220J\230c\240\026\240s\250*\260C\260q\330\020#\2401\360\006\000\r\020\210q\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\033\2301\330\020\037\230q\340\021\033\2304\230x\240q\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\033\2304\230x\240y\260\001\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240""\002\240\"\240M\260\021\330\020\034\230A\330\020\036\230a\330\020 \240\001\330\020 \240\001\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\036\230a\330\020 \240\001\330\020\036\230a\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\023\2201\330\024!\240\021\330\024%\240Q\340\024#\2401\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\035\230Q\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\330\020!\240\021\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\360\006\000\021\024\220:\230S\240\001\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\036\230a\330\020\037\230q\340\021\022\360\006\000\021\024\2201\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\034\230A\330\020!\240\021\330\020\037\230q\340\021\037\230t\240<\250s\260!\330\020\023\2201\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\330\020\023\2203\220a\220{\240\"\240B\240d\250)\2601\260B\260h\270a\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\024#\2401\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\024#\2401\340\022\035\230T\240\037\260\004\260D\270\001\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\037\230t\2401\340\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\033\2303\230a\360\006\000\021\030\220w\230b\240\002\240\"\240M\260""\021\330\020\037\230q\340\021\022\360\010\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\022\033\230;\240a\240v\250T\260\031\270)\3001\300A\330\024\030\230\003\2301\230K\240r\250\021\340\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\024\220A\220[\240\002\240\"\240D\250\t\260\021\260\"\260H\270A\360\006\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\360\006\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\014\031\230\021\330\014\r\360\006\000\t\020\210w\220b\230\003\2301\330\010\r\210Q\330\010\027\220q\330\010\025\220Q\340\004\033\230:\240Q\240k\260\034\270Q\330\035+\250<\260q\330\035\047\240}\260A\330\035/\250q\330\004\014\210M\230\021\320\0005\260_\300A\360\026\000\005\027\220c\230\021\230!\330\004\007\200{\220\"\220A\330\010\025\220Q\340\004\021\220\021\360\n\000\005\032\230\021\330\004\032\230!\330\004\035\230Q\330\004\034\230A\330\004\032\230!\330\004\033\2301\330\004\030\230\001\330\004\033\2301\330\004\034\230A\340\004\035\230Q\330\004\033\2301\330\004\035\230Q\330\004 \240\001\330\004\035\230Q\340\004\007\200y\220\007\220q\330\t\014\210K\220|\240?\260.\300\014\310M\320Yc\320cp\320p~\360\000\000\177\001N\002\360\000\000N\002[\002\360\000\000[\002j\002\360\000\000j\002|\002\360\000\000|\002M\003\360\000\000M\003N\003\330\004\026\220b\230\002\230!\340\004\n\210\"\210B\210a\330\010\014\210L\230\007\230u\240D\250\002\250#\320-=\270T\300\024\300Y\310d\320RV\320VW\320WY\320Y[\320[^\320^a\320ab\330\014\027\220q\230\006\230c\240\033\250L\270\017\300~\320Ua\320an\320nx\360\000\000y\001F\002\360\000\000F\002T\002\360\000\000T\002c\002\360\000\000c\002p\002\360\000\000p\002\177\002\360\000\000\177\002Q\003\360\000\000Q\003R\003\330\014\036\230b\240\002\240!\340\010\014\210D\220\001\220\021\360\006\000\t\014\2101\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\023\220<\230s\240!\330\024\"\240!\330\024\037\230q\330\020\025\220Q\330\020\021\330\014\017\210r\220\023\220A\330\020""\037\230q\330\020\025\220Q\330\020\021\340\014\020\220\002\220#\220T\230\023\230B\230c\240\024\240S\250\002\250#\250T\260\024\260R\260r\270\022\2702\270Q\330\020\031\230\024\230Q\230b\240\002\240!\330\020\023\2207\230#\230S\240\003\2407\250#\250Q\330\024\034\230A\330\024\031\230\021\330\024\027\220r\230\022\2302\230R\230w\240d\250$\250a\250s\260#\260V\2704\270t\3001\300A\300Q\300c\310\023\310A\330\030\035\230Q\330\030$\240A\240V\250<\260q\270\003\2707\300!\340\030$\240A\240V\250<\260q\270\003\2707\300!\330\024\025\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\030\230\001\330\020\025\220Q\330\020\023\2202\220R\220r\230\022\2307\240$\240d\250!\2503\250c\260\026\260t\2704\270q\300\001\300\021\300#\300S\310\001\330\024\031\230\021\330\024 \240\001\240\026\240|\2601\260C\260w\270a\340\024 \240\001\240\026\240|\2601\260C\260w\270a\330\020\021\330\014\021\220\021\330\014\r\360\006\000\t\014\2101\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\035\230Q\330\014\021\220\021\330\014\r\360\006\000\t\014\2101\330\014\017\210q\330\020\036\230a\330\020\025\220Q\330\020\021\330\014\017\210r\220\023\220A\330\020\036\230a\330\020\025\220Q\330\020\021\330\014\017\210q\330\020\023\2202\220S\230\003\2303\230b\240\003\2401\330\024\027\220r\230\022\2302\230R\230w\240d\250$\250a\250q\260\001\260\023\260C\260r\270\024\270T\300\021\300!\3001\300C\300s\310!\330\030$\240A\330\030(\250\001\330\030\047\240q\330\030%\240Q\330\030\047\240q\330\030\035\230Q\330\030\031\330\024\031\230\021\330\024\025\330\020\023\220;\230d\240\"\240C\240q\330\024\027\220r\230\022\2302\230R\230w\240d\250$\250a\250q\260\001\260\023\260C\260q\330\030\035\230Q\330\030\031\330\024\037\230q\330\024\"\240!\330\024\031\230\021\330\024\025\330\020\025\220Q\330\020\021\340\014\017\210r\220\023\220A\330\020\034\230A\330\020\037\230q\330\020\035\230Q\330\020\037\230q\330\020\025\220Q\330\020\021\330\014\017\210{\230$\230b\240\003\2401\330\020\023\2202\220R\220r\230\022\2307\240$\240d\250!\2501\250A\250S""\260\003\2601\330\024\031\230\021\330\024\025\330\020\033\2301\330\020\036\230a\330\020\025\220Q\330\020\021\330\014\021\220\021\330\014\r\360\n\000\t\r\210B\210c\220\024\220S\230\002\230#\230T\240\023\240B\240c\250\024\250T\260\022\2602\260R\260r\270\021\330\014\025\220T\230\021\230\"\230B\230a\330\014\017\210w\220c\230\023\230C\230w\240c\250\021\330\020\023\2202\220R\220r\230\022\2307\240$\240d\250!\2501\250A\250S\260\003\2607\270$\270d\300!\3001\300A\300S\310\003\3101\330\024 \240\001\330\024$\240A\330\024#\2401\330\024!\240\026\240r\250\023\250J\260a\330\024\027\220q\330\030\047\240q\330\024\047\240q\330\024\031\230\021\330\024\025\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230V\2402\240S\250\n\260!\330\020#\2401\330\020\025\220Q\330\020\021\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\330\014\017\210r\220\022\2202\220R\220w\230d\240$\240a\240q\250\001\250\023\250C\250r\260\024\260T\270\021\270!\2701\270C\270s\300!\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230Q\330\020\023\2201\330\024#\2401\330\020#\2401\330\020\025\220Q\330\020\021\330\014\030\230\001\330\014\034\230A\330\014\033\2301\330\014\031\230\021\330\014\037\230q\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\031\230\021\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2303\230c\240\022\2403\240a\330\014\035\230Q\330\014\021\220\021\330\014\r\330\010\013\2102\210S\220\003\2203\220b\230\003\2303\230c\240\022\2403\240a\330\014\017\210~\230R\230q\330\020!\240\021\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\017\210~\230S\240\002\240%\240|\2603\260a\330\020#\2401\330\020\023\2201\330\024$\240A\330\020\036\230a\330\020 \240\001\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\003\2204\220r\230\022\2302\230R\230{\250$\250d\260!\2601\260A\260S\270\003\2701\330\014\021\220\021\330\014\r\360\006\000\t\014\2108\2201\220A\330\014\024\220A\330\014\021\220""\021\330\014\022\220\"\220B\220k\240\024\240X\250Q\250d\260!\2601\330\020\025\220Q\330\014\017\210t\2201\220F\230#\230S\240\001\330\020\036\230a\330\020 \240\001\330\020 \240\001\330\021\025\220Q\220f\230C\230s\240!\330\020 \240\001\330\020\036\230a\330\020 \240\001\340\020#\2401\330\014\r\360\010\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\330\014\021\220\021\330\014\r\340\010\r\210Q\340\004\013\210:\220Q\220k\240\034\250Q\330\026$\240L\260\001\330\026 \240\r\250Q\330\026(\250\001";
+    #else /* compression: none (7755 bytes) */
+static const char bytes[] = "?Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the \047annotation_typing\047 directive to False.add_notepython_editor/lexer_fast.pyxutf-8CHECKPOINT_API_VERSIONFalseNoneTrue____Pyx_PyDict_NextRef__annotate____func____main____module____name____qualname____test___is_coroutine_jafter_arrowafter_atafter_classafter_defafter_dotafter_fromafter_importasasyncio.coroutinesat_arg_posat_class_bodyat_type_posbracket_depthbuiltinsccheckpointsclasscline_in_tracebackclscompute_state_beforedecodedefdelimdot_owner_typeenderrorsescape_nextexpect_docstringfexpr_depthfinal_statefollowed_by_assignfollowed_by_eqfollowed_by_parenfromiimportin_commentin_def_paramsin_fexprin_from_importin_fstringin_stringis_docstringitemskeywordslengthlexer_fastmagic_methodsnext_cnext_checkpointparam_depthpending_classpending_defpopprev_id_typeprev_statereplaceresultsselfsetdefaultsnapshotstartstring_delimstring_stylestyle_chunktarget_postexttoken_bytestoken_starttoken_strtriple_stringvaluesclassdef\200\001\340\004\026\220c\230\021\230!\330\004\007\200t\2102\210Q\330\010\016\210a\330\004\007\200v\210R\210q\330\010\020\220\001\360\014\000\006\021\220\014\230O\2501\330\005\021\220\035\230j\250\r\260Q\330\005\027\320\027(\250\014\260A\260Q\340\004\030\230\001\330\004\021\220\021\360\022\000\005\032\230\021\330\004\033\2301\330\004\031\230\021\330\004\030\230\001\330\004\035\230Q\330\004\033\2301\330\004\033\2301\330\004\033\2301\330\004\035\230Q\330\004\033\2301\330\004\035\230Q\340\004\034\230A\330\004\036\230a\340\004\032\230!\330\004\034\230A\330\004\036\230a\360\006\000\005\034\2301\360\010\000\005\010\200z\220\024\220Q\330\010\027\220q\340\010\027\220q\340\004\n\210\"\210B\210a\330\010\014\210D\220\001\220\021\360\006\000\t\014\2101\330\014\032\230!\330\014\022\220\"\220B\220d\230$\230d\240!\2403\240c\250\023\250D\260\004\260A\260S\270\003\2701\330\020\025\220Q\330\014\017\210r\220\022\2201\330\020\027\220w\230b\240""\002\240\"\240M\260\021\330\014\017\210r\220\022\2204\220u\230D\240\001\240\023\240C\240s\250#\250T\260\021\260#\260S\270\001\330\020\035\230Q\330\020\023\2204\220q\230\003\2303\230c\240\024\240R\240r\250\022\2502\250T\260\024\260T\270\021\270!\2701\270C\270s\300!\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\340\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\014\r\360\006\000\t\014\2101\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\023\220<\230s\240!\330\024\"\240!\330\024\037\230q\330\024\033\2307\240\"\240C\240q\340\024\033\2307\240\"\240C\240q\330\020\025\220Q\330\020\021\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\021\330\014\020\220\002\220#\220T\230\023\230B\230c\240\024\240S\250\002\250#\250T\260\024\260R\260r\270\022\2702\270Q\330\020\031\230\024\230Q\230b\240\002\240!\330\020\023\2207\230#\230S\240\003\2407\250#\250Q\330\024\"\240!\360\006\000\025\030\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260G\2704\270t\3001\300A\300Q\300c\310\023\310A\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\340\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\024\025\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\036\230a\330\020\025\220Q\330\020\026\220b\230\002\230!\330\024\027\220t\2301\230C\230s\240!\360\010\000\031\034\2302\230R\230r\240\022\2401\330\034!\240\021\340\034!\240\021\330\030\031\330\024\027\220t\2301\230C\230s\240!\330\030\035\230Q\330\030\031\330\024\027\220t\2301\230C\230s\240#\240S\250\004\250A\250S\260\003\2601\330\030\031\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210r\220\023\220A\330\020\036\230a\330\020\026\220b\230\002\230$\230d\240$\240a\240s\250#\250S\260\004\260D\270\001\270\023\270C\270q\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210x\220q\230\001\330\020\036\230a\330\020\026\220b\230\002\230$\230d\240(\250!\2504\250q\260""\001\330\024\031\230\021\330\020\036\230d\240!\240<\250q\330\020\034\230K\240w\250a\250y\270\007\270q\330\020%\240R\240r\250\024\250T\260\024\260Q\260c\270\023\270A\330\020\023\220:\230T\240\030\250\031\260!\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\037\230t\2408\2501\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\037\230s\240!\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\037\230s\240!\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\026\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\025\030\230\001\230\033\240B\240b\250\004\250I\260Q\260b\270\010\300\001\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\021\330\014\017\210x\220q\230\001\330\020\036\230a\330\020\026\220b\230\002\230$\230e\2408\2501\250D\260\001\260\024\260S\270\004\270A\270S\300\003\3001\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210{\230!\2301\330\020\036\230a\330\020\025\220Q\330\020\023\2202\220R\220t\2304\230{\250!\2504\250q\260\001\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210z\230\021\230!\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\021\330\014\017\210x\220q\230\001\330\020\036\230a\330\020\026\220b\230\002\230$\230d\240(\250!\2504\250q\260\001\330\024\031\230\021\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\021\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\r\360\006\000\t\014\2101\330\014\032\230!\340\014\017\210q\330\020\025\220Q\330\020\036\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\021\340\014\017\210r\220\023\220A\330\020\025\220Q\330\020\036\230a\330\020\027\220w\230b\240\003\2401\330\020\021\340\014\017\210q\330\020\023\2202\220S\230\001\360\014\000\025\030\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260B\260d\270$\270a""\270q\300\001\300\023\300C\300q\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\030$\240A\330\030(\250\001\330\030\047\240q\330\030%\240Q\330\030\047\240q\330\030\047\240q\330\030\031\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\025\330\020\023\220;\230d\240\"\240C\240q\340\024\027\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260A\330\030\033\2302\230R\230q\330\034#\2407\250\"\250B\250b\260\r\270Q\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\030\031\330\024\027\220r\230\022\2301\330\030\037\230w\240b\250\002\250\"\250M\270\021\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\037\230q\330\024\"\240!\330\024\025\330\020\036\230a\330\020\026\220b\230\002\230!\330\024\030\230\004\230A\230Q\330\024\027\220r\230\023\230M\250\023\250B\250c\260\021\330\030\031\330\024\027\220{\240$\240b\250\003\2501\330\030\031\330\024\031\230\021\330\020\023\2202\220R\220q\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\021\360\006\000\r\033\230!\330\014\022\220\"\220B\220a\330\020\024\220D\230\001\230\021\330\020\023\2202\220S\230\001\330\024\033\2307\240\"\240B\240b\250\014\260B\260c\270\021\330\024\031\230\021\330\024 \240\001\330\024#\2401\330\024!\240\021\330\024#\2401\330\024#\2401\330\024\025\330\020\023\2202\220S\230\001\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\"\240!\330\024\025\330\020\023\220;\230d\240\"\240C\240q\340\024\027\220r\230\022\2302\230R\230t\2404\240t\2501\250A\250Q\250c\260\023\260A\330\030\033\2302\230R\230q\330\034#\2407\250\"\250B\250b\260\r\270Q\330\030\037\230w\240b\250\003\2501\330\030\035\230Q\330\030&\240a\330\030\031\330\024\027\220r\230\022\2301\330\030\037\230w\240b\250\002\250\"\250M\270\021\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024\037\230q\330\024\"\240!\330\024\025\330\020\023\2202\220S\230\003\2303\230b\240\003\2401\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\024 \240\001\330\024#\2401\330\024!""\240\021\330\024#\2401\330\024#\2401\330\024\025\330\020\025\220Q\340\020\027\220w\230b\240\002\240\"\240M\260\021\330\014\r\360\n\000\t\014\2108\2201\220A\330\014\032\230!\330\014\022\220\"\220B\220d\230$\230h\240a\240t\2501\250A\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\r\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\330\014\017\210r\220\023\220C\220t\2302\230R\230r\240\022\2404\240t\2504\250q\260\001\260\021\260#\260S\270\001\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\340\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\014\017\210~\230S\240\001\330\020\034\230A\330\020\036\230a\330\020\033\2301\330\020\034\230A\330\020\037\230q\330\020!\240\021\330\020\035\230Q\330\020\037\230q\330\020!\240\021\330\020\035\230Q\330\020\036\230a\330\020\036\230a\330\014\r\360\006\000\t\r\210B\210c\220\024\220S\230\002\230#\230T\240\023\240B\240c\250\024\250T\260\022\2602\260R\260r\270\021\330\014\025\220T\230\021\230\"\230B\230a\330\014\017\210w\220c\230\023\230C\230w\240c\250\021\330\020\036\230a\360\006\000\021\024\2202\220R\220r\230\022\2304\230t\2404\240q\250\001\250\021\250#\250S\260\007\260t\2704\270q\300\001\300\021\300#\300S\310\001\330\024\027\220q\330\030\047\240q\330\030\047\240q\340\030\047\240q\330\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024 \240\001\330\024$\240A\330\024#\2401\330\024!\240\026\240r\250\023\250J\260a\340\024\033\2307\240\"\240C\240q\330\024\031\230\021\330\024 \240\001\330\024$\240A\330\024#\2401\330\024!\240\026\240r\250\023\250J\260a\330\020#\2401\330\020\037\230q\330\020\021\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\360\014\000\r\020\210r\220\022\2202\220R\220t\2304\230t\2401\240A\240Q\240c\250\023\250B\250d\260$\260a\260q\270\001\270\023\270C\270q\330\020\023\2201\330\024#\2401\330\024#\2401\340\024#\2401\330\020\027\220w\230b\240\003\2401\330\020\025\220Q\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230Q\340\020\027\220w\230b\240\003\2401\330\020""\025\220Q\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230Q\330\014\037\230q\330\014\033\2301\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\031\230\021\330\014\032\230!\330\014\021\220\021\330\014\022\220\"\220B\220d\230$\230d\240!\2403\240c\250\023\250D\260\004\260A\260S\270\003\2701\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\033\2301\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\027\220q\330\014\037\230q\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2108\2201\220A\330\014\032\230!\330\014\022\220\"\220B\220d\230%\230x\240q\250\004\250A\250T\260\023\260D\270\001\270\023\270C\270q\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\037\230q\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\017\210{\230#\230Q\360\006\000\021\035\230A\330\020!\240\021\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\210:\220Q\220a\330\014\023\2207\230\"\230C\230q\330\014\017\210r\220\023\220C\220s\230\"\230C\230s\240#\240R\240s\250!\330\020!\240\021\330\020\023\2202\220S\230\003\2304\230q\330\024$\240A\330\024\"\240!\330\024 \240\001\330\024\"\240!\330\025\026\330\024#\2401\330\020\035\230Q\330\021\023\2203\220c\230\023\230B\230c\240\023\240C\240r\250\023\250A\330\020\023\220>\240\022\2401\330\024%\240Q\330\020\023\2201\330\024#\2401\330\024\027\220|\2403\240a\330\030(\250\001\330\030&\240a\330\030&\240a\330\020\035\230Q\330\014\021\220\021\330\014\030\230\001\330\014\033\2301\330\014\r\360\006\000\t\014\210;\220a\220q\330\014\032\230!\330\014\021\220\021\330\014\017\210r\220\022\2204\220t\230;\240a\240t\2501\250A\330\020\025\220Q\330\014\023\2207\230\"\230B\230b\240\r\250Q\330\014\037\230q\330\014\017\210t\2201\220M\240\023\240C\240u\250L\270\002\270\"\270B\270e\3004\300t\3101\310K\320WX\320X[\320[^\320^_\330\020\023\220<\230t""\240>\260\023\260A\330\024\"\240!\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\017\210q\330\020\036\230a\330\014\017\210t\220=\240\004\240D\250\017\260t\2704\270q\330\020\037\230q\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\017\210~\230T\240\034\250S\260\001\330\020\036\230a\330\021\037\230s\240\"\240E\250\034\260S\270\001\330\020#\2401\330\020\023\2201\330\024$\240A\330\020\036\230a\330\020 \240\001\330\020\036\230a\330\014\021\220\021\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\023\2207\230\"\230C\230q\330\014\021\220\021\330\014\037\230q\330\014\031\230\021\330\014\033\2301\330\014\035\230Q\330\014\033\2301\330\014\031\230\021\330\014\r\360\006\000\t\014\2108\2201\220A\330\014\032\230!\330\014\022\220\"\220B\220d\230$\230h\240a\240t\2501\250A\330\020\025\220Q\340\014\032\230$\230a\230|\2501\330\014\030\230\013\2407\250!\2509\260G\2701\340\014!\240\022\2402\240T\250\024\250T\260\021\260#\260S\270\001\330\014\036\230b\240\002\240$\240d\250$\250a\250s\260#\260S\270\001\330\037!\240\022\2402\240S\250\004\250C\250t\2601\260A\260Q\260c\270\023\270A\330\014\021\220\021\330\014\022\220#\220R\220t\2305\240\004\240A\240T\250\023\250C\250s\260$\260a\260t\2703\270a\330\020\026\220a\330\014\"\240#\240R\240t\2504\250t\2601\260D\270\003\2703\270a\330#&\240b\250\002\250#\250T\260\023\260D\270\001\270\022\2701\270C\270s\300!\340\014\017\210u\220J\230c\240\026\240s\250*\260C\260q\330\020#\2401\360\006\000\r\020\210q\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\033\2301\330\020\037\230q\340\021\033\2304\230x\240q\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\033\2304\230x\240y\260\001\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\034\230A""\330\020\036\230a\330\020 \240\001\330\020 \240\001\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\036\230a\330\020 \240\001\330\020\036\230a\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\023\2201\330\024!\240\021\330\024%\240Q\340\024#\2401\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\035\230Q\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\330\020!\240\021\330\020\037\230q\340\021\033\2303\230a\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\360\006\000\021\024\220:\230S\240\001\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\036\230a\330\020\037\230q\340\021\022\360\006\000\021\024\2201\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\034\230A\330\020!\240\021\330\020\037\230q\340\021\037\230t\240<\250s\260!\330\020\023\2201\330\024\033\2307\240\"\240B\240b\250\r\260Q\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\330\020\023\2203\220a\220{\240\"\240B\240d\250)\2601\260B\260h\270a\330\024\033\2307\240\"\240B\240b\250\r\260Q\330\024#\2401\340\024\033\2307\240\"\240B\240b\250\r\260Q\330\024#\2401\340\022\035\230T\240\037\260\004\260D\270\001\330\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\037\230t\2401\340\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\033\2303\230a\360\006\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\022\360\010""\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\022\033\230;\240a\240v\250T\260\031\270)\3001\300A\330\024\030\230\003\2301\230K\240r\250\021\340\020\027\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\021\024\220A\220[\240\002\240\"\240D\250\t\260\021\260\"\260H\270A\360\006\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\360\006\000\021\030\220w\230b\240\002\240\"\240M\260\021\330\020\037\230q\340\014\031\230\021\330\014\r\360\006\000\t\020\210w\220b\230\003\2301\330\010\r\210Q\330\010\027\220q\330\010\025\220Q\340\004\033\230:\240Q\240k\260\034\270Q\330\035+\250<\260q\330\035\047\240}\260A\330\035/\250q\330\004\014\210M\230\021\320\0005\260_\300A\360\026\000\005\027\220c\230\021\230!\330\004\007\200{\220\"\220A\330\010\025\220Q\340\004\021\220\021\360\n\000\005\032\230\021\330\004\032\230!\330\004\035\230Q\330\004\034\230A\330\004\032\230!\330\004\033\2301\330\004\030\230\001\330\004\033\2301\330\004\034\230A\340\004\035\230Q\330\004\033\2301\330\004\035\230Q\330\004 \240\001\330\004\035\230Q\340\004\007\200y\220\007\220q\330\t\014\210K\220|\240?\260.\300\014\310M\320Yc\320cp\320p~\360\000\000\177\001N\002\360\000\000N\002[\002\360\000\000[\002j\002\360\000\000j\002|\002\360\000\000|\002M\003\360\000\000M\003N\003\330\004\026\220b\230\002\230!\340\004\n\210\"\210B\210a\330\010\014\210L\230\007\230u\240D\250\002\250#\320-=\270T\300\024\300Y\310d\320RV\320VW\320WY\320Y[\320[^\320^a\320ab\330\014\027\220q\230\006\230c\240\033\250L\270\017\300~\320Ua\320an\320nx\360\000\000y\001F\002\360\000\000F\002T\002\360\000\000T\002c\002\360\000\000c\002p\002\360\000\000p\002\177\002\360\000\000\177\002Q\003\360\000\000Q\003R\003\330\014\036\230b\240\002\240!\340\010\014\210D\220\001\220\021\360\006\000\t\014\2101\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\023\220<\230s\240!\330\024\"\240!\330\024\037\230q\330\020\025\220Q\330\020\021\330\014\017\210r\220\023\220A\330\020\037\230q\330\020\025\220Q\330\020\021\340""\014\020\220\002\220#\220T\230\023\230B\230c\240\024\240S\250\002\250#\250T\260\024\260R\260r\270\022\2702\270Q\330\020\031\230\024\230Q\230b\240\002\240!\330\020\023\2207\230#\230S\240\003\2407\250#\250Q\330\024\034\230A\330\024\031\230\021\330\024\027\220r\230\022\2302\230R\230w\240d\250$\250a\250s\260#\260V\2704\270t\3001\300A\300Q\300c\310\023\310A\330\030\035\230Q\330\030$\240A\240V\250<\260q\270\003\2707\300!\340\030$\240A\240V\250<\260q\270\003\2707\300!\330\024\025\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\030\230\001\330\020\025\220Q\330\020\023\2202\220R\220r\230\022\2307\240$\240d\250!\2503\250c\260\026\260t\2704\270q\300\001\300\021\300#\300S\310\001\330\024\031\230\021\330\024 \240\001\240\026\240|\2601\260C\260w\270a\340\024 \240\001\240\026\240|\2601\260C\260w\270a\330\020\021\330\014\021\220\021\330\014\r\360\006\000\t\014\2101\330\014\017\210r\220\023\220C\220s\230\"\230C\230q\330\020\035\230Q\330\014\021\220\021\330\014\r\360\006\000\t\014\2101\330\014\017\210q\330\020\036\230a\330\020\025\220Q\330\020\021\330\014\017\210r\220\023\220A\330\020\036\230a\330\020\025\220Q\330\020\021\330\014\017\210q\340\020\023\2202\220S\230\001\330\024\027\220r\230\022\2302\230R\230w\240d\250$\250a\250q\260\001\260\023\260C\260r\270\024\270T\300\021\300!\3001\300C\300s\310!\330\030$\240A\330\030(\250\001\330\030\047\240q\330\030%\240Q\330\030\047\240q\330\030\035\230Q\330\030\031\330\024\031\230\021\330\024\025\330\020\023\220;\230d\240\"\240C\240q\330\024\027\220r\230\022\2302\230R\230w\240d\250$\250a\250q\260\001\260\023\260C\260q\330\030\035\230Q\330\030\031\330\024\037\230q\330\024\"\240!\330\024\031\230\021\330\024\025\330\020\025\220Q\330\020\021\340\014\017\210r\220\023\220A\330\020\034\230A\330\020\037\230q\330\020\035\230Q\330\020\037\230q\330\020\025\220Q\330\020\021\330\014\017\210{\230$\230b\240\003\2401\330\020\023\2202\220R\220r\230\022\2307\240$\240d\250!\2501\250A\250S\260\003\2601\330\024\031\230\021\330\024\025\330\020\033\2301""\330\020\036\230a\330\020\025\220Q\330\020\021\330\014\021\220\021\330\014\r\360\n\000\t\r\210B\210c\220\024\220S\230\002\230#\230T\240\023\240B\240c\250\024\250T\260\022\2602\260R\260r\270\021\330\014\025\220T\230\021\230\"\230B\230a\330\014\017\210w\220c\230\023\230C\230w\240c\250\021\330\020\023\2202\220R\220r\230\022\2307\240$\240d\250!\2501\250A\250S\260\003\2607\270$\270d\300!\3001\300A\300S\310\003\3101\330\024 \240\001\330\024$\240A\330\024#\2401\330\024!\240\026\240r\250\023\250J\260a\330\024\027\220q\330\030\047\240q\330\024\047\240q\330\024\031\230\021\330\024\025\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230V\2402\240S\250\n\260!\330\020#\2401\330\020\025\220Q\330\020\021\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\330\014\017\210r\220\022\2202\220R\220w\230d\240$\240a\240q\250\001\250\023\250C\250r\260\024\260T\270\021\270!\2701\270C\270s\300!\330\020\034\230A\330\020 \240\001\330\020\037\230q\330\020\035\230Q\330\020\023\2201\330\024#\2401\330\020#\2401\330\020\025\220Q\330\020\021\330\014\030\230\001\330\014\034\230A\330\014\033\2301\330\014\031\230\021\330\014\037\230q\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\031\230\021\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\003\2203\220b\230\003\2303\230c\240\022\2403\240a\330\014\035\230Q\330\014\021\220\021\330\014\r\330\010\013\2102\210S\220\003\2203\220b\230\003\2303\230c\240\022\2403\240a\330\014\017\210~\230R\230q\330\020!\240\021\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\001\330\014\017\210~\230S\240\002\240%\240|\2603\260a\330\020#\2401\330\020\023\2201\330\024$\240A\330\020\036\230a\330\020 \240\001\330\014\021\220\021\330\014\r\360\006\000\t\014\2102\210S\220\003\2204\220r\230\022\2302\230R\230{\250$\250d\260!\2601\260A\260S\270\003\2701\330\014\021\220\021\330\014\r\360\006\000\t\014\2108\2201\220A\330\014\024\220A\330\014\021\220\021\330\014\022\220\"\220B\220k\240\024\240X\250Q\250d\260!\2601""\330\020\025\220Q\330\014\017\210t\2201\220F\230#\230S\240\001\330\020\036\230a\330\020 \240\001\330\020 \240\001\330\021\025\220Q\220f\230C\230s\240!\330\020 \240\001\330\020\036\230a\330\020 \240\001\340\020#\2401\330\014\r\360\010\000\t\014\2102\210S\220\003\2203\220b\230\003\2301\330\014\021\220\021\330\014\r\340\010\r\210Q\340\004\013\210:\220Q\220k\240\034\250Q\330\026$\240L\260\001\330\026 \240\r\250Q\330\026(\250\001";
     PyObject *data = NULL;
     #define __Pyx_DecompressString_UNUSED
     #define __Pyx_DecompressString_LZSS_UNUSED
@@ -17555,7 +17565,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_python_editor_lexer_fast_pyx, __pyx_mstate->__pyx_n_u_compute_state_before, __pyx_mstate->__pyx_kp_b_iso88591_5_A_c_A_Q_Q_A_1_1_A_Q_1_Q_Q_y_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {7, 0, 0, 49, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 426};
+    const __Pyx_PyCode_New_function_description descr = {7, 0, 0, 49, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 427};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_text, __pyx_mstate->__pyx_n_u_start, __pyx_mstate->__pyx_n_u_end, __pyx_mstate->__pyx_n_u_prev_state, __pyx_mstate->__pyx_n_u_keywords, __pyx_mstate->__pyx_n_u_builtins, __pyx_mstate->__pyx_n_u_magic_methods, __pyx_mstate->__pyx_n_u_length, __pyx_mstate->__pyx_n_u_in_string, __pyx_mstate->__pyx_n_u_in_comment, __pyx_mstate->__pyx_n_u_triple_string, __pyx_mstate->__pyx_n_u_string_delim, __pyx_mstate->__pyx_n_u_in_fstring, __pyx_mstate->__pyx_n_u_escape_next, __pyx_mstate->__pyx_n_u_in_fexpr, __pyx_mstate->__pyx_n_u_fexpr_depth, __pyx_mstate->__pyx_n_u_is_docstring, __pyx_mstate->__pyx_n_u_expect_docstring, __pyx_mstate->__pyx_n_u_at_class_body, __pyx_mstate->__pyx_n_u_results, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_token_start, __pyx_mstate->__pyx_n_u_c, __pyx_mstate->__pyx_n_u_token_bytes, __pyx_mstate->__pyx_n_u_token_str, __pyx_mstate->__pyx_n_u_next_c, __pyx_mstate->__pyx_n_u_string_style, __pyx_mstate->__pyx_n_u_after_def, __pyx_mstate->__pyx_n_u_after_class, __pyx_mstate->__pyx_n_u_after_dot, __pyx_mstate->__pyx_n_u_after_at, __pyx_mstate->__pyx_n_u_in_def_params, __pyx_mstate->__pyx_n_u_param_depth, __pyx_mstate->__pyx_n_u_at_type_pos, __pyx_mstate->__pyx_n_u_after_arrow, __pyx_mstate->__pyx_n_u_bracket_depth, __pyx_mstate->__pyx_n_u_pending_def, __pyx_mstate->__pyx_n_u_pending_class, __pyx_mstate->__pyx_n_u_prev_id_type, __pyx_mstate->__pyx_n_u_dot_owner_type, __pyx_mstate->__pyx_n_u_after_from, __pyx_mstate->__pyx_n_u_after_import, __pyx_mstate->__pyx_n_u_in_from_import, __pyx_mstate->__pyx_n_u_followed_by_paren, __pyx_mstate->__pyx_n_u_followed_by_eq, __pyx_mstate->__pyx_n_u_at_arg_pos, __pyx_mstate->__pyx_n_u_followed_by_assign, __pyx_mstate->__pyx_n_u_j, __pyx_mstate->__pyx_n_u_final_state};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_python_editor_lexer_fast_pyx, __pyx_mstate->__pyx_n_u_style_chunk, __pyx_mstate->__pyx_kp_b_iso88591_c_t2Q_a_vRq_O1_j_Q_AQ_1_Q_1_1_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }

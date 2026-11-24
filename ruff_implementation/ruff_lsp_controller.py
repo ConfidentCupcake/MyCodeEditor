@@ -10,6 +10,7 @@ from PyQt5.QtCore import QObject, QPoint, QTimer, pyqtSignal
 from PyQt5.QtWidgets import QMenu, QMessageBox, QToolTip
 
 from code_intelligence.performance import timed
+from code_intelligence.lsp_coordinates import lsp_to_character
 from ruff_implementation.ruff_diagnostics_model import RuffDiagnostic, RuffPosition, RuffSeverity
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.workspace_edit import WorkspaceEditApplier, WorkspaceEditError
@@ -166,19 +167,15 @@ class RuffLspController(QObject):
         )
 
     def _lsp_column_to_character(self, line: int, column: int) -> int:
-        """Translate negotiated LSP units into QScintilla character columns."""
-        if line < 0 or line >= self.editor.lines():
-            return 0
-        value = self.editor.text(line).rstrip("\r\n")
-        column = max(0, int(column))
-        encoding = getattr(self.client, "position_encoding", "utf-16")
-        if encoding == "utf-8":
-            raw = value.encode("utf-8")[:column]
-            return len(raw.decode("utf-8", errors="ignore"))
-        if encoding == "utf-16":
-            raw = value.encode("utf-16-le")[: column * 2]
-            return len(raw.decode("utf-16-le", errors="ignore"))
-        return min(column, len(value))
+            """Convert a negotiated LSP column on one current editor line.
+
+            Do not use lineLength here: it counts bytes, while indicator range
+            APIs accept character indices. Full-document copying is unnecessary.
+            """
+            if line < 0 or line >= self.editor.lines():
+                return 0
+            text = self.editor.text(line).rstrip("\r\n")
+            return lsp_to_character(text, column, self.client.position_encoding)
     
     @timed("gui.ruff_publish")
     def _on_diagnostics_published(self, uri: str, raw_diagnostics, version):
@@ -188,7 +185,11 @@ class RuffLspController(QObject):
         if version is not None and version != self.document_version:
             return
 
-        diagnostics = [self._to_diagnostic(raw) for raw in raw_diagnostics]
+        try:
+            diagnostics = [self._to_diagnostic(raw) for raw in raw_diagnostics]
+        except (ValueError, TypeError, AttributeError, OverflowError):
+            self.client.server_error.emit("Ruff sent invalid diagnostic coordinates or fields.")
+            return
         self.view.render(diagnostics)
         # MainWindow owns the cat/XP state; the controller only reports data.
         self.diagnostics_changed.emit(self.editor, diagnostics)
@@ -242,13 +243,10 @@ class RuffLspController(QObject):
             QToolTip.hideText()
             return False
 
-        # Convert byte position to a zero-based line number. UTF-8 decode with
-        # errors=ignore handles a pointer position inside a multi-byte character.
-        prefix = self.editor.text().encode("utf-8")[:byte_position].decode(
-            "utf-8",
-            errors="ignore",
-        )
-        diagnostic = self.view.at_line(prefix.count("\n"))
+        # Ask Scintilla to map its own byte position to a line, without copying
+        # or decoding the entire document for a hover event.
+        line = self.editor.SendScintilla(self.editor.SCI_LINEFROMPOSITION, byte_position)
+        diagnostic = self.view.at_line(line)
 
         if diagnostic:
             QToolTip.showText(

@@ -272,7 +272,8 @@ def compute_state_before(bytes text, int target_pos, snapshot=None, checkpoints=
                 i += 1
                 continue
             if triple_string:
-                if c == 34 or c == 39:
+                
+                if c == string_delim:
                     if i + 2 < length and text[i+1] == c and text[i+2] == c:
                         in_string = 0
                         triple_string = 0
@@ -625,7 +626,7 @@ def style_chunk(bytes text, int start, int end, int prev_state,
                 continue
 
             if triple_string:
-                if c == 34 or c == 39:
+                if c == string_delim:
                     # CHUNK-SAFETY: the closing '"""' may straddle the chunk
                     # end. Only consume 3 quote bytes when ALL of them are
                     # inside THIS chunk (i + 2 < end, NOT < length). Styling
@@ -662,7 +663,7 @@ def style_chunk(bytes text, int start, int end, int prev_state,
                 token_start = i
                 while i < end:
                     c = text[i]
-                    if c == 34 or c == 39 or c == 92:
+                    if c == string_delim or c == 92:
                         break
                     if in_fstring and c == 123:
                         break
