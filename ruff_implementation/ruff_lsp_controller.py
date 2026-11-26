@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from itertools import count
+from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
 from PyQt5.QtCore import QObject, QPoint, QTimer, pyqtSignal
 from PyQt5.QtWidgets import QMenu, QMessageBox, QToolTip
 
-from code_intelligence.performance import timed
 from code_intelligence.lsp_coordinates import lsp_to_character
+from code_intelligence.performance import timed
 from ruff_implementation.ruff_diagnostics_model import RuffDiagnostic, RuffPosition, RuffSeverity
 from ruff_implementation.ruff_diagnostics_view import RuffDiagnosticView
 from ruff_implementation.workspace_edit import WorkspaceEditApplier, WorkspaceEditError
@@ -114,7 +114,7 @@ class RuffLspController(QObject):
         except TypeError:
             pass
         self._retire_display()
-        self.client - client
+        self.client = client
         self._opened = False
         client.server_ready.connect(self.open_document)
         client.server_stopped.connect(self._on_server_stopped)

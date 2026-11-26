@@ -15,7 +15,7 @@ def settings_for(interpreter: str) -> dict[str, Any]:
         "basedpyright": {
             "diableOrganizeImports": True,
             "analysis": {
-                "diagnosticMode": "openFilesOlny",
+                "diagnosticMode": "openFilesOnly",
                 "typeCheckingMode": "standard",
                 "autoSearchPaths": True,
                 "useLibraryCodeForTypes": True,

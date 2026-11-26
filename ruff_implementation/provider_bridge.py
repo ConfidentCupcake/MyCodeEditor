@@ -136,7 +136,7 @@ class ProviderBridge(QObject):
             self._error(f"Reject diagnostic snapshot: {error}")
             return
         self.window.diagnostics_manager.replace("basedpyright", uri, result)
-        paint_document(document, "basedpyright", [])
+        paint_document(document, "basedpyright", result)
 
     def restart(self, interpreter=None):
         """Replace the process after workspace/interpreter changes, retaining ownership.

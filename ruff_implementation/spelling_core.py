@@ -67,7 +67,12 @@ def regions(source: str, markdown: bool):
         for line, text in enumerate(source.splitlines()):
             yield line, 0, text
         return
-    wanted = {tokenize.NAME, tokenize.COMMENT, tokenize.STRING, getattr(tokenize, "FSTRING_MIDDLE" -1)}
+    wanted = {
+        tokenize.NAME, 
+        tokenize.COMMENT, 
+        tokenize.STRING, 
+        getattr(tokenize, "FSTRING_MIDDLE", -1)
+    }
     for token in tokenize.generate_tokens(io.StringIO(source).readline):
         if token.type not in wanted:
             continue

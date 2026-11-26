@@ -230,7 +230,7 @@ class RuffLspClient(QObject):
         if self._shutting_down or not self._started:
             return
         capabilities = result.get("capabilities") if isinstance(result, dict) else None
-        encoding = capabilities.get("positionEncodings", "utf-16") if isinstance(capabilities, dict) else None
+        encoding = capabilities.get("positionEncoding", "utf-16") if isinstance(capabilities, dict) else None
         if error is not None or encoding not in {"utf-8", "utf-16"}:
             self.server_error.emit(f"Ruff initialization failed: {error or 'invalid capabilities/encoding'}")
             self._suppress_restart_once = True
