@@ -13,7 +13,7 @@ def settings_for(interpreter: str) -> dict[str, Any]:
     return {
         "python": {"pythonPath": interpreter},
         "basedpyright": {
-            "diableOrganizeImports": True,
+            "disableOrganizeImports": True,
             "analysis": {
                 "diagnosticMode": "openFilesOnly",
                 "typeCheckingMode": "standard",

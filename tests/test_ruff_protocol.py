@@ -44,7 +44,9 @@ class Process:
     def setWorkingDirectory(self, value): self.directory = value
     def start(self, program, arguments): self.launched = (program, arguments)
 
-
+    def kill(self):
+        """Imitate QProcess.kill() for the invalid-header regression test."""
+        self.killed = True
 def client():
     """Load real methods without executing Qt imports or its constructor."""
     path = ROOT / "ruff_implementation/ruff_lsp_client.py"
@@ -126,7 +128,7 @@ class RuffProtocolTests(unittest.TestCase):
         obj = client()
         obj.process.stdout = b"Content-Length: broken\r\n\r\n"
         obj._read_stdout()
-        self.assertTrue(obj.process.kill)
+        self.assertTrue(obj.process.killed)
 
     def test_stop_finishes_pending_and_bounds_retries(self):
         obj = client(); results = []

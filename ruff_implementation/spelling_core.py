@@ -12,6 +12,7 @@ from functools import lru_cache
 from pathlib import Path
 
 WORD = re.compile(r"[^\W\d_]+", re.UNICODE)
+INLINE_CODE = re.compile(r"`[^`\n]*`")
 IGNORED = frozenset(word.casefold() for word in [*keyword.kwlist, *dir(builtins)])
 
 
@@ -56,46 +57,78 @@ def pieces(text: str):
 
 
 def regions(source: str, markdown: bool):
-    """Yield source-position text regions without evaluating strings.
+    """Yield source-position natural-language regions, retaining original offsets.
     
-    Markdown is checked as literal source lines, including fenced code and link text.
-    Python includes NAME, COMMENT, STRING and available f-string middle tokens.
-    String prefixes/quotes are excluded while preserving their offsets.
-    tokenize may fail on unfinished input; check_words handles that explicitly.
+    Markdown stays unchanged. For Python, check comments, docstrings and sentence-
+    like string literals. Skip identifiers, bytes, raw literals, and single-word/
+    configuration values. Avoid interpreting f-string expressions.
     """
     if markdown:
         for line, text in enumerate(source.splitlines()):
             yield line, 0, text
         return
-    wanted = {
-        tokenize.NAME, 
-        tokenize.COMMENT, 
-        tokenize.STRING, 
-        getattr(tokenize, "FSTRING_MIDDLE", -1)
-    }
+    
+    fstring_middle = getattr(tokenize, "FSTRING_MIDDLE", - 1)
     for token in tokenize.generate_tokens(io.StringIO(source).readline):
-        if token.type not in wanted:
+        if token.type == tokenize.COMMENT:
+            # Remove the comment marker, while keeping absolute columns correction.
+            text = token.string[1:]
+            offset = 1
+            # Linter pragnas and encoding declarations aren't human prose.
+            if text.lstrip().lower().startswith(("noqa", "type:", "pyright", "pylint:", "ruff:", "fmt:", "isort:", "coding:", "region", "endregion")):
+                continue
+        elif token.type == tokenize.STRING:
+            opening = re.match(r"(?i:([rubf]*))(\"\"\"|'''|\"|')", token.string)
+            if opening is None:
+                continue
+            prefix, quote = opening.group(1).lower(), opening.group(2)
+            if "b:" in prefix or "r" in prefix:
+                continue
+            text = token.string[opening.end():-len(quote)]
+            offset = opening.end()
+            # A single quoted technical value is typically an identifier or 
+            # configuration item, not text for spellchecking.
+            if len(quote) == 1 and not any(char.isspace() for char in text):
+                continue
+        
+        elif token.type == fstring_middle:
+            text = token.string
+            offset = 0
+            if not any(char.isspace() for char in text):
+                continue
+            
+        else:
             continue
-        text = token.string
-        offset = 0
-        if token.type == tokenize.STRING:
-            opening = re.match(r"(?i:[rubf]*)(\"\"\"|'''|\"|')", text)
-            if opening:
-                offset = opening.end()
-                text = text[offset:-len(opening.group(1))]
+        
         for extra, row in enumerate(text.splitlines()):
             base = token.start[1] + offset if extra == 0 else 0
             yield token.start[0] - 1 + extra, base, row
-            
+        
+
+def _is_technical_atom(atom: str) -> bool:
+    """Reject individual programming tokens within otherwise prose-like regions.
+
+    The scanner does not try to infer whether a whole comment is code.
+    Instead, skip obvious code atoms (filenames, escapes, identifiers, paths, Unicode/UTF
+    notations, numertical constants and all-caps acronyms
+    """
+    value = atom.strip(',.:;!?()[]{}"\'')
+    if not value:
+        return True
+    if any(char in value for char in "_./\\`<>=%@"):
+        return True
+    if any(char.isdigit() for char in value):
+        return True
+    if len(value) > 1 and value.isupper():
+        return True
+    if re.search(r"[a-z][A-Z]", value):
+        return True
+    if "-" in value:
+        return True
+    return False
 
 def check_words(source: str, markdown: bool, allow=frozenset(), known=None, cancelled=None, limit: int = 500) -> SpellingResult:
-    """Check an immutable snapshot and return exact character ranges.
-    
-    known(word) is injectable for deterministic test. Production uses the union
-    of English/German dictionaries. Accepted whole words and identifier parts are
-    case-folded. Single-letter names are ignore. Cancellation raises CancelledError;
-    incomplete Python tokenization is not reported as clean code.
-    """
+    """Check an immutable snapshot and return exact character ranges."""
     if known is None:
         spell = dictionary()
         known = lambda word: bool(spell.known([word]))
@@ -108,23 +141,32 @@ def check_words(source: str, markdown: bool, allow=frozenset(), known=None, canc
                 raise CancelledError()
             if text.casefold() in accepted:
                 continue
-            for match in WORD.finditer(text):
-                whole = match.group()
-                if whole.casefold() in accepted:
+            # Preserve offsets while masking inline `code spans` in Python prose.
+            scanned = (INLINE_CODE.sub(lambda match: " " * len(match.group()), text)
+                       if not markdown else text)
+            # Process each whitespace-delimited atom once. In Python prose,
+            # never report words extracted from obvious technical atoms.
+            for atom_match in re.finditer(r"\S+", scanned):
+                atom = atom_match.group()
+                if not markdown and _is_technical_atom(atom):
                     continue
-                for start, end, word in pieces(whole):
-                    if cancelled is not None and cancelled.is_set():
-                        raise CancelledError()
-                    folded = word.casefold()
-                    if len(word) < 2 or folded in accepted:
+                for match in WORD.finditer(atom):
+                    whole = match.group()
+                    if whole.casefold() in accepted:
                         continue
-                    if folded not in decisions:
-                        decisions[folded] = bool(known(folded))
-                    if not decisions[folded]:
-                        column = base + match.start()
-                        results.append((line, column + start, column + end, word))
-                        if len(results) >= limit:
-                            return SpellingResult(tuple(results), limited = True)
+                    for start, end, word in pieces(whole):
+                        if cancelled is not None and cancelled.is_set():
+                            raise CancelledError()
+                        folded = word.casefold()
+                        if len(word) < 2 or folded in accepted:
+                            continue
+                        if folded not in decisions:
+                            decisions[folded] = bool(known(folded))
+                        if not decisions[folded]:
+                            column = base + atom_match.start() + match.start()
+                            results.append((line, column + start, column + end, word))
+                            if len(results) >= limit:
+                                return SpellingResult(tuple(results), limited=True)
     except (tokenize.TokenError, IndentationError, SyntaxError):
         return SpellingResult(tuple(results), complete=False)
     return SpellingResult(tuple(results))

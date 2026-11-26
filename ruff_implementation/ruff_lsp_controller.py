@@ -233,6 +233,17 @@ class RuffLspController(QObject):
         self._pending_diagnostics = False
         self.view.render(diagnostics)
         self.diagnostics_changed.emit(self.editor, diagnostics)
+        print(
+            "[Ruff diagnostics]",
+            f"uri_match={uri == self.uri}",
+            f"received_version={version!r}",
+            f"current_version={self.document_version}",
+            f"opened={self._opened}",
+            f"ready={self.client.is_ready}",
+            f"closed={self._closed}",
+            f"count={len(raw_diagnostics) if isinstance(raw_diagnostics, list) else 'INVALID'}",
+            flush=True,
+        )
 
     def _to_diagnostic(self, raw: dict) -> RuffDiagnostic:
         """Validate one complete diagnostic against current source coordinates.

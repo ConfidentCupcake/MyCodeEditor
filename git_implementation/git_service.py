@@ -1,13 +1,15 @@
 """Asynchronously retrieve bounded Git history without invoking a shell."""
 
-from pathlib import Path
+import os
 import subprocess
 import time
+from pathlib import Path
 
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 
-from git_implementation.history import GitSnapshot, parse_log
 from code_intelligence.performance import timed
+from git_implementation.history import GitSnapshot, parse_log
+
 
 class GitHistoryWorker(QThread):
     """Fetch one immutable Git snapshot outside the GUI thread."""
@@ -78,21 +80,17 @@ class GitHistoryWorker(QThread):
         ) as error:
             self.failed.emit(str(error))
 
-    def _run(
-        self,
-        cwd: Path,
-        *arguments: str,
-    ) -> subprocess.CompletedProcess[str]:
-        """Run Git with a timeout that remains responsive to cancellation.
-
-        ``subprocess.run()`` cannot observe ``requestInterruption()`` while it
-        waits. Short ``communicate()`` timeouts let shutdown terminate a Git
-        child before Qt destroys the worker thread.
+    def _run(self, cwd: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
+        """Run one quiet Git child while observing interruption and a deadline.
+        
+        This worker owns and drains the child through communicate(). Short waits allow interruption checks;
+        terminate is followed by kill if necessary. CREATE_NO_WINDOW affects Windows presentation, not pipes or ownership.
         """
         command = ["git", *arguments]
         process = subprocess.Popen(
             command,
             cwd=str(cwd),
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
             text=True,
             encoding="utf-8",
             errors="replace",

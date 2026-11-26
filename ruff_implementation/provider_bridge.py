@@ -43,11 +43,14 @@ class ProviderBridge(QObject):
         client.diagnostics_published.connect(self.receive_types)
         client.server_error.connect(self._error)
         return client
-    
-    
+
+
     def _error(self, message):
-        """Label inherited infrastructure errors without treating them as clean code,"""
-        self.window.statusBar().showMessage("Basedpyright: " + message.replace("Ruff", "LSP"), 8000)
+        """Show Basedpyright infrastructure errors in both terminal and status bar."""
+        detail = "Basedpyright: " + message.replace("Ruff", "LSP")
+        print("[Basedpyright LSP]", detail, flush=True)
+        self.window.statusBar().showMessage(detail, 8000)
+
 
     def buffers(self):
         """Return live URI -> (shared document, owner controller) on the GUI thread."""

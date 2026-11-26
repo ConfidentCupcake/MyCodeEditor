@@ -1,9 +1,11 @@
+import os
 import subprocess
 from pathlib import Path
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
 from code_intelligence.performance import timed
+
 
 class GitStatusChecker(QThread):
     """
@@ -43,6 +45,7 @@ class GitStatusChecker(QThread):
         result = subprocess.run(
             ["git", *args],
             cwd=self.repo_path,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
             capture_output=True,
             text=not binary,
             encoding=None if binary else "utf-8",
