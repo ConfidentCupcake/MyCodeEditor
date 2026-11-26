@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from itertools import count
 from typing import Any
 from uuid import uuid4
 
@@ -19,6 +20,7 @@ from ruff_implementation.workspace_edit import WorkspaceEditApplier, WorkspaceEd
 class RuffLspController(QObject):
     """Keep one QScintilla Python document synchronized with Ruff LSP."""
     diagnostics_changed = pyqtSignal(object, list)
+    _document_versions = count(1)
     
     def __init__(self, editor, client, parent=None):
         # Parent this controller to the editor unless a different explicit parent was supplied.
@@ -34,11 +36,13 @@ class RuffLspController(QObject):
         self.view = RuffDiagnosticView(editor)
         
         # LSP versions begin at an integer and must increase for every didChange.
-        self.document_version = 1
+        self.document_version = next(self._document_versions)
         
         # didOpen must be sent exactly once per URI/server lifecycle.
         self._opened = False
         self._closed = False
+        self._action_generation = 0
+        self._pending_diagnostics = False
         
         # Full-buffer updates are delayed slightly while a user is typing.
         # This prevents sending one didChange messafe for every individual keypress.
@@ -70,18 +74,35 @@ class RuffLspController(QObject):
             path = Path.cwd() / f"untitled-{uuid4().hex}.py"
         return Path(path).resolve().as_uri()
 
+    def _retire_display(self):
+        """Withdraw Ruff state after an identity or server-lifecycle change.
+
+        Unlike an ordinary edit, relocation. source replacement or server
+        replacement must not retain old paint. Stop a queued send, invalidate
+        action menus, remove hover/Problems data and clear Ruff-owned visuals.
+        This does not emit diagnostics_changed: retirement is not a clean result.
+        """
+        self.change_timer.stop()
+        self._action_generation += 1
+        self._pending_diagnostics = True
+        QToolTip.hideText()
+        self.view.clear()
+        self._clear_problem_rows()
+
     def _on_server_stopped(self):
+        """Retire a stopped session before server_ready can reopen this buffer."""
         self._opened = False
+        self._retire_display()
 
     def relocate(self, path):
         """Migrate this open buffer to a new URI after Save As or rename."""
-        self._clear_problem_rows()
+        self._retire_display()
         old_uri = self._uri
         if self._opened and self.client.is_ready:
             self.client.close_document(old_uri)
         self._uri = self._uri_for_path(path)
         self._opened = False
-        self.document_version += 1
+        self.document_version = next(self._document_versions)
         self.open_document()
 
     def set_client(self, client):
@@ -92,7 +113,8 @@ class RuffLspController(QObject):
             self.client.diagnostics_published.disconnect(self._on_diagnostics_published)
         except TypeError:
             pass
-        self.client = client
+        self._retire_display()
+        self.client - client
         self._opened = False
         client.server_ready.connect(self.open_document)
         client.server_stopped.connect(self._on_server_stopped)
@@ -113,13 +135,13 @@ class RuffLspController(QObject):
         self._opened = True
         
     def sync_from_editor(self):
-        """Syncronize editor text after programmatic loading with blocked signals."""
+        """Synchronize editor text after programmatic loading with blocked signals."""
         if self._closed:
             return
-            
+        self._retire_display()
         # setTextSafely() blocks editor.textChanged while loading a disk file.
         # Therefore this method manually creates a new LSP document version for the newly loaded source text.
-        self.document_version += 1
+        self.document_version = next(self._document_versions)
         
         if not self._opened:
             # Ruff may still be starting. If it is ready, this sends didOpen with the current loaded text.
@@ -136,23 +158,26 @@ class RuffLspController(QObject):
     
     @timed("gui.ruff_edit")
     def _on_text_changed(self):
-        """Advance document version and schedule one debounced didChange."""
-        self._clear_problem_rows()
+        """Advance the source revision while retaining only visual pending ranges.
+
+        On the first edit of a pending burst, remove stale hover/action metadata
+        and Problems rows. Scintilla retains and adjusts existing indicator
+        ranges as text changes. No full-buffer copy occurs on the normal open
+        path; the existing single-shot timer sends after typing becomes quiet.
+        """
         if self._closed:
             return
-        
-        # Each text state must have a stricly newer version that the last.
-        self.document_version += 1
-        
-        # Normally MainWindow starts Ruff before editors are made. This fallback
-        # makes the controller safe if a tab is created during server startup.
+        if not self._pending_diagnostics:
+            self._pending_diagnostics = True
+            self.view.by_line.clear()
+            QToolTip.hideText()
+            self._clear_problem_rows()
+        self.document_version = next(self._document_versions)
         if not self._opened:
             self.open_document()
-        
         if self._opened:
-            # Calling start() again on s single-shot timer resets its countdown.
-            # One change is sent only after typing has been idle for 180 ms.
             self.change_timer.start()
+
     
     @timed("gui.ruff_send")
     def _send_change(self):
@@ -167,71 +192,86 @@ class RuffLspController(QObject):
         )
 
     def _lsp_column_to_character(self, line: int, column: int) -> int:
-            """Convert a negotiated LSP column on one current editor line.
+        """Convert one current line and reject clamped or split-character offsets.
 
-            Do not use lineLength here: it counts bytes, while indicator range
-            APIs accept character indices. Full-document copying is unnecessary.
-            """
-            if line < 0 or line >= self.editor.lines():
-                return 0
-            text = self.editor.text(line).rstrip("\r\n")
-            return lsp_to_character(text, column, self.client.position_encoding)
+        The shared converter remains available to other features. This stricter
+        diagnostic boundary verifies a round trip so malformed provider data
+        cannot be silently painted over a neighboring character.
+        """
+        if type(line) is not int or not 0 <= line < self.editor.lines():
+            raise ValueError("Diagnostic line is outside the document")
+        text = self.editor.text(line).rstrip("\r\n")
+        encoding = self.client.position_encoding
+        character = lsp_to_character(text, column, encoding)
+        prefix = text[:character]
+        units = {"utf-8": lambda: len(prefix.encode("utf-8")),
+                 "utf-16": lambda: len(prefix.encode("utf-16-le")) // 2,
+                 "utf-32": lambda: len(prefix)}[encoding]()
+        if units != column:
+            raise ValueError("Diagnostic column exceeds a line or splits a character")
+        return character
     
     @timed("gui.ruff_publish")
     def _on_diagnostics_published(self, uri: str, raw_diagnostics, version):
-        """Render only current diagnostics belonging to this document."""
-        if self._closed or uri != self.uri:
-            return
-        if version is not None and version != self.document_version:
-            return
+        """Replace Ruff paint only for a complete current successful snapshot.
 
+        Empty lists are meaningful successes and clear old ranges. Unversioned,
+        stale, malformed or stopped-session data cannot clear pending paint.
+        Validation finishes before the first visual or Problems mutation.
+        """
+        if (self._closed or not self._opened or not self.client.is_ready or uri != self.uri
+                or type(version) is not int or version != self.document_version):
+            return
+        if not isinstance(raw_diagnostics, list):
+            self.client.server_error.emit("Ruff diagnostics must be a list.")
+            return
         try:
             diagnostics = [self._to_diagnostic(raw) for raw in raw_diagnostics]
-        except (ValueError, TypeError, AttributeError, OverflowError):
+        except (ValueError, TypeError, AttributeError, OverflowError, UnicodeError):
             self.client.server_error.emit("Ruff sent invalid diagnostic coordinates or fields.")
             return
+        self._pending_diagnostics = False
         self.view.render(diagnostics)
-        # MainWindow owns the cat/XP state; the controller only reports data.
         self.diagnostics_changed.emit(self.editor, diagnostics)
 
     def _to_diagnostic(self, raw: dict) -> RuffDiagnostic:
-        """Convert one LSP diagnostic, including negotiated column units."""
-        raw_range = raw.get("range") or {}
-        start = raw_range.get("start") or {}
-        end = raw_range.get("end") or start
-        start_line = max(0, int(start.get("line", 0)))
-        last_line = max(0, self.editor.lines() - 1)
-        start_line = min(start_line, last_line)
-        end_line = min(last_line, max(start_line, int(end.get("line", start_line))))
+        """Validate one complete diagnostic against current source coordinates.
 
-        severity_by_number = {
-            1: RuffSeverity.ERROR,
-            2: RuffSeverity.WARNING,
-            3: RuffSeverity.INFO,
-            4: RuffSeverity.INFO,
-        }
-        code = raw.get("code", "Ruff")
-        if not isinstance(code, str):
-            code = str(code)
-
+        Required nested ranges and message text are checked before constructing
+        the display object. Endpoints use the negotiated encoding. Raw protocol
+        data is preserved so Topic 04 can request the matching Ruff code action.
+        """
+        if not isinstance(raw, dict) or not isinstance(raw.get("message"), str):
+            raise ValueError("Invalid diagnostic object/message")
+        span = raw.get("range")
+        if not isinstance(span, dict):
+            raise ValueError("Invalid diagnostic range")
+        points = []
+        for name in ("start", "end"):
+            point = span.get(name)
+            if not isinstance(point, dict):
+                raise ValueError("Invalid diagnostic endpoint")
+            line, column = point.get("line"), point.get("character")
+            points.append(RuffPosition(line, self._lsp_column_to_character(line, column)))
+        start, end = points
+        if (end.line, end.column) < (start.line, start.column):
+            raise ValueError("Reversed diagnostic range")
+        severity = raw.get("severity", 2)
+        if type(severity) is not int or severity not in (1, 2, 3, 4):
+            raise ValueError("Invalid diagnostic severity")
         return RuffDiagnostic(
-            code=code,
-            message=str(raw.get("message", "Ruff diagnostic")),
-            severity=severity_by_number.get(raw.get("severity"), RuffSeverity.WARNING),
-            start=RuffPosition(
-                start_line,
-                self._lsp_column_to_character(start_line, start.get("character", 0)),
-            ),
-            end=RuffPosition(
-                end_line,
-                self._lsp_column_to_character(end_line, end.get("character", 0)),
-            ),
-            revision=self.document_version,
-            raw=raw,
+            code=str(raw.get("code", "Ruff")), message=raw["message"],
+            severity={1: RuffSeverity.ERROR, 2: RuffSeverity.WARNING,
+                      3: RuffSeverity.INFO, 4: RuffSeverity.INFO}[severity],
+            start=start, end=end, revision=self.document_version, raw=raw,
         )
 
+
     def hover(self, position) -> bool:
-        """Show a short diagnostic tooltip for the current line, if any."""
+        """Show current Ruff hover text; retained pending paint is noninteractive."""
+        if self._closed or self._pending_diagnostics or not self._opened:
+            QToolTip.hideText()
+            return False
         # SCI_POSITIONFROMPOINT (2022) returns a Scintilla byte position at the
         # mouse coordinate. -1 means the pointer is outside text content.
         byte_position = self.editor.SendScintilla(
@@ -260,41 +300,64 @@ class RuffLspController(QObject):
         return False
 
     def context_menu(self, event: Any, view: Any=None) -> bool | None:
-        """Display current Ruff quick fixes without retaining the temporary Qt event."""
+        """Request fixes for the exact current diagnostic under the pointer.
+
+        view may be a split view sharing the controller's document. Its mouse
+        coordinates identify a Scintilla byte position in that shared buffer.
+        Only QPoint is retained after this method returns, since Qt owns the
+        temporary event object. Return False to preserve the editor's fallback
+        context menu when no current diagnostic covers the clicked position.
+        """
         view = view or self.editor
         position = view.SendScintilla(view.SCI_POSITIONFROMPOINT, event.pos().x(), event.pos().y())
         if position < 0:
             return False
-        line, _column = self.editor.lineIndexFromPosition(position)
-        diagnostic = self.view.at_line(line)
+        location = self.editor.lineIndexFromPosition(position)
+        candidates = []
+        for group in self.view.by_line.values():
+            for diagnostic in group:
+                start = diagnostic.start.line, diagnostic.start.column
+                end = diagnostic.end.line, diagnostic.end.column
+                if diagnostic.revision == self.document_version and (start <= location < end or start == end == location):
+                    candidates.append(diagnostic)
+        diagnostic = max(candidates, key=lambda item: item.severity, default=None)
         if diagnostic is None:
             return False
         point = QPoint(event.globalPos())
+        identity = self._action_identity()
         
         def receive(actions: Any, error: Any, uri: Any, revision: Any) -> None:
-            """Show returned action titles and apply only the explicitly selected item."""
+            """Build a temporary menu, then recheck identity after its event loop."""
+            if not self._action_is_current(identity):
+                return
             if error:
                 QMessageBox.warning(self.editor, "Quick fixes", str(error))
                 return
             menu = QMenu(self.editor)
-            pairs = []
-            for action in actions:
-                if not isinstance(action, dict):
-                    continue
-                item = menu.addAction(str(action.get("title", "Quick fix")))
-                item.setEnabled(not bool(action.get("disabled")))
-                pairs.append((item, action))
+            try:
+                pairs = []
+                for action in actions:
+                    if not isinstance(action, dict):
+                        continue
+                    item = menu.addAction(str(action.get("title", "Quick fix")))
+                    item.setEnabled(not bool(action.get("disabled")))
+                    pairs.append((item, action))
                 
-            if not pairs:
-                menu.addAction("No quick fix available").setEnabled(False)
-            chosen = menu.exec_(point)
-            for item, action in pairs:
-                if chosen is item:
-                    try:
-                        self.apply_code_action(action, uri, revision)
-                    except WorkspaceEditError as error:
-                        QMessageBox.warning(self.editor, "Quick fixes", str(error))
-                    break
+                if not pairs:
+                    menu.addAction("No quick fix available").setEnabled(False)
+                chosen = menu.exec_(point)
+                if not self._action_is_current(identity):
+                    return
+                for item, action in pairs:
+                    if chosen is item:
+                        try:
+                            self.apply_code_action(action, uri, revision)
+                        except WorkspaceEditError as error:
+                            QMessageBox.warning(self.editor, "Quick fixes", str(error))
+                        break
+            finally:
+                menu.deleteLater()
+
         self.request_quick_fixes(diagnostic, receive)
         return True
                     
@@ -322,32 +385,73 @@ class RuffLspController(QObject):
         """Remove this URI's Problems rows when its text or lifecycle changes."""
         manager = getattr(self.editor.window(), "diagnostics_manager", None)
         if manager is not None:
-            manager.clear_document(self.uri)
+            manager.clear_collection("ruff", self.uri)
             
     def request_quick_fixes(self, diagnostic: Any, callback: Any) -> None:
-        """Request actions with raw provider data and capture the exact document identity."""
-        uri, revision, client = self.uri, self.document_version, self.client
-        if self._closed or diagnostic.revision != revision or not client.is_ready:
-            callback([], {"message": "Diagnostic is stale"}, uri, revision)
+        """Request fixes for a current diagnostic and discard obsolete replies.
+
+        callback receives (actions, error, uri, revision) on the GUI thread.
+        The raw LSP diagnostic supplies its original negotiated range and data.
+        A stale request is reported immediately. A reply whose document or server
+        identity changed is dropped because the menu no longer describes that
+        document. The existing transport owns request IDs and response delivery.
+        """
+        identity = self._action_identity()
+        uri, revision, client, generation = identity
+        raw = diagnostic.raw
+        if (not self._action_is_current(identity) or diagnostic.revision != revision
+                or not isinstance(raw, dict) or not isinstance(raw.get("range"), dict)):
+            callback([], {"message": "Diagnostic is stale or has no LSP range"}, uri, revision)
             return
-        
         self.change_timer.stop()
         self._send_change()
-        def recieve(result: Any, error: Any) -> None:
-            """Discard replies after closure, relocation, editing or server replacement."""
-            if self._closed or client is not self.client or self.uri != uri or self.document_version != revision:
+
+        def receive(result: Any, error: Any) -> None:
+            """Release a reply only while its captured action identity is valid."""
+            if not self._action_is_current(identity):
                 return
+            if error is None and not isinstance(result, (list, type(None))):
+                error = {"message": "Malformed code-action response"}
             callback(result if isinstance(result, list) else [], error, uri, revision)
+
         client.request("textDocument/codeAction", {
-            "textDocument": {"uri": uri}, "range": diagnostic.raw["range"],
-            "context": {"diagnostics": [diagnostic.raw], "only": ["quickfix"], "triggerKind": 1}}, recieve)
-    
+            "textDocument": {"uri": uri},
+            "range": raw["range"],
+            "context": {"diagnostics": [raw], "only": ["quickfix"], "triggerKind": 1},
+        }, receive)
     def apply_code_action(self, action: Any, uri: Any, revision: Any) -> None:
-        """Apply direct edit completely or report an unsupported action form."""
-        if action.get("disabled") or action.get("command") or not isinstance(action.get("edit"), dict):
-            raise WorkspaceEditError("This action needs and unsupported command or resolve step")
+        """Validate a complete direct WorkspaceEdit and apply it as one Undo group.
+
+        Args:
+            action: Selected LSP CodeAction dictionary, including its edit.
+            uri: Document URI captured when requesting this action.
+            revision: Local buffer revision captured with that URI.
+
+        Raises:
+            WorkspaceEditError: The action is disabled, malformed, requires a
+                command/resolve step, or its edit fails identity/range validation.
+
+        The caller checks server identity immediately  before invoking this method.
+        WorkspaceEditApplier checks document identity and read-only state again.
+        No prefix of a rejected edit is applied
+        """
+        if (not isinstance(action, dict) or action.get("disabled") or action.get("command") or not isinstance(action.get("edit"), dict)):
+            raise WorkspaceEditError("This action requires an unsupported command or resolve step")
         WorkspaceEditApplier(self).apply(action["edit"], uri, revision)
-            
+
+    def _action_identity(self):
+        """Return the current document and server-session identity.
+
+        The client object detects interpreter replacement. The generation detects
+        a process restart within that object. URI/revision detect relocation and edits,
+        including Undo/Redo through the existing revision counter.
+        """
+        return self.uri, self.document_version, self.client, self._action_generation
+
+    def _action_is_current(self, identity) -> bool:
+        """Require a live open document, ready server and unchanged identity."""
+        return (not self._closed and self._opened and self.client.is_ready and self._action_identity() == identity)
+
         
         
         

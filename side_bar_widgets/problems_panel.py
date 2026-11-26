@@ -13,8 +13,8 @@ class ProblemsPanel(QTreeWidget):
     def __init__(self, parent: Any=None) -> None:
         """Configure six columns and connect row activation to diagnostic navigation."""
         super().__init__(parent)
-        self.setColumnCount(6)
-        self.setHeaderLabels(("Severity", "File", "Line", "Column", "Code", "Message"))
+        self.setColumnCount(7)
+        self.setHeaderLabels(("Severity", "Provider", "File", "Line", "Column", "Code", "Message"))
         self.itemActivated.connect(self._activate)
         
     def set_diagnostics(self, diagnostics: list[Diagnostic]) -> None:
@@ -28,7 +28,7 @@ class ProblemsPanel(QTreeWidget):
         for diagnostic in diagnostics:
             start = diagnostic.source_range.start
             row = QTreeWidgetItem((
-                labels[diagnostic.severity],
+                labels[diagnostic.severity], diagnostic.provider,
                 diagnostic.path.name if diagnostic.path else diagnostic.uri,
                 str(start.line + 1), str(start.column + 1),
                 diagnostic.code, diagnostic.message,

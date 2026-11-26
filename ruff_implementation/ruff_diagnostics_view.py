@@ -61,18 +61,21 @@ class RuffDiagnosticView:
             self.editor.markerDefine(QsciScintilla.Circle, marker)
             self.editor.setMarkerForegroundColor(QColor(color), marker)
             self.editor.setMarkerBackgroundColor(QColor(color), marker)
-    
+
     def clear(self):
-        """Remoce only Ruff visual state across the current document."""
-        lines = self.editor.lines()
-        if lines:
-            end = self.editor.lineLength(lines - 1)
-            for indicator in (self.ERROR_INDICATOR, self.WARNING_INDICATOR, self.INFO_INDICATOR, self.FIX_INDICATOR):
-                self.editor.clearIndicatorRange(0, 0, lines - 1, end, indicator)
-                
+        """Remove only Ruff-owned indicators, markers and interaction metadata.
+
+        Raw Scintilla indicator operations use byte offsets and byte lengths.
+        editor.length() therefore matches SCI_INDICATORCLEARRANGE even when the
+        last line contains multibyte characters. Other providers keep their IDs.
+        """
+        for indicator in (self.ERROR_INDICATOR, self.WARNING_INDICATOR,
+                          self.INFO_INDICATOR, self.FIX_INDICATOR):
+            self.editor.SendScintilla(self.editor.SCI_SETINDICATORCURRENT, indicator)
+            self.editor.SendScintilla(self.editor.SCI_INDICATORCLEARRANGE, 0, self.editor.length())
         for marker in (self.ERROR_MARKER, self.WARNING_MARKER, self.INFO_MARKER, self.FIX_MARKER):
             self.editor.markerDeleteAll(marker)
-        self.by_line = {}
+        self.by_line.clear()
     
     @timed("gui.ruff_paint") 
     def render(self, diagnostics: list[RuffDiagnostic]):
@@ -85,7 +88,8 @@ class RuffDiagnosticView:
             end_line = max(diagnostic.end.line, diagnostic.start.line)
             end_column = diagnostic.end.column
             if end_line == diagnostic.start.line and end_column <= diagnostic.start.column:
-                end_column = min(diagnostic.start.column + 1, self.editor.lineLength(diagnostic.start.line))
+                line_text = self.editor.text(diagnostic.start.line).rstrip("\r\n")
+                end_column = min(diagnostic.start.column + 1, len(line_text))
             indicator = {RuffSeverity.ERROR: self.ERROR_INDICATOR, RuffSeverity.WARNING: self.WARNING_INDICATOR, RuffSeverity.INFO: self.INFO_INDICATOR}[diagnostic.severity]
             marker = {RuffSeverity.ERROR: self.ERROR_MARKER, RuffSeverity.WARNING: self.WARNING_MARKER, RuffSeverity.INFO: self.INFO_MARKER}[diagnostic.severity]
             self.editor.fillIndicatorRange(diagnostic.start.line, diagnostic.start.column, end_line, end_column, indicator)

@@ -56,7 +56,7 @@ class WorkspaceEditApplier:
             raise WorkspaceEditError("Document changed after this action was requested")
         if editor.isReadOnly() or not isinstance(payload, dict):
             raise WorkspaceEditError("Document is read-only or edit is malformed")
-        if payload.get("changedAnnotations"):
+        if payload.get("changeAnnotations"):
             raise WorkspaceEditError("Annotated edits require a separate approval UI")
         if "changes" in payload and "documentChanges" in payload:
             raise WorkspaceEditError("Ambiguous workspace edit")
@@ -73,6 +73,11 @@ class WorkspaceEditApplier:
             if not isinstance(entry, dict) or "kind" in entry:
                 raise WorkspaceEditError("File creation, rename and deletion are not supported")
             document = entry.get("textDocument", {})
+            if not isinstance(document, dict):
+                raise WorkspaceEditError("Malformed textDocument identity")
+            edit_version = document.get("version")
+            if edit_version is not None and type(edit_version) is not int:
+                raise WorkspaceEditError("Malformed textDocument version")
             if document.get("uri") != uri or document.get("version") not in (None, version):
                 raise WorkspaceEditError("Action refers to another document or revision")
             raw_edits = entry.get("edits")
@@ -83,8 +88,11 @@ class WorkspaceEditApplier:
         for raw in raw_edits:
             if not isinstance(raw, dict) or not isinstance(raw.get("newText"), str) or "annotationId" in raw:
                 raise WorkspaceEditError("Malformed or annotated text edit")
-            value = raw.get("range", {})
-            start, end = self._position(value.get("start")), self._position(value.get("end"))
+            value = raw.get("range")
+            if not isinstance(value, dict):
+                raise WorkspaceEditError("Malformed or annotated text edit range")
+            start = self._position(value.get("start"))
+            end = self._position(value.get("end"))
             if end < start:
                 raise WorkspaceEditError("Reversed edit range")
             edits.append(EditorTextEdit(start, end, raw["newText"]))

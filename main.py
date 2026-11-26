@@ -59,6 +59,8 @@ from ruff_implementation.diagnostics_model import (
 )
 from ruff_implementation.ruff_diagnostics_model import RuffSeverity
 from ruff_implementation.ruff_lsp_client import RuffLspClient
+from ruff_implementation.provider_bridge import ProviderBridge
+from ruff_implementation.spelling import SpellingProvider
 from ruff_implementation.ruff_lsp_controller import RuffLspController
 from side_bar_widgets.breadcrumbs import Breadcrumbs
 from side_bar_widgets.code_outline import CodeOutlineTree
@@ -257,6 +259,8 @@ class MainWindow(QMainWindow):
         self._install_document_tabs()
         self._install_references()
         self._install_problems()
+        self.providers = ProviderBridge(self)
+        self.spelling = SpellingProvider(self)
         self._install_command_palette()
         
         self.outline_empty = EmptyState(self.outline_tree, 'No outline entries.\nOpen a document with headings or declarations.')
@@ -945,6 +949,8 @@ class MainWindow(QMainWindow):
         executable = python_executable or self.python_runner.interpreter
         root = Path(workspace_root or self._workspace_root).resolve()
         self._workspace_root = root
+        if hasattr(self, "providers"):
+            self.providers.restart(executable)
         
         self.diagnostics_manager.clear_provider("ruff")
         self.references_panel.set_locations([])
@@ -3319,6 +3325,12 @@ class MainWindow(QMainWindow):
         The method is polled by `_finish_pending_close()` through QTimer. It
         must only inspect state and must never block the GUI thread.
         """
+        if self.spelling.is_running():
+            return True
+        
+        if self.providers.is_running():
+            return True
+        
         if self.file_watcher.is_running():
             return True
         
@@ -3401,6 +3413,8 @@ class MainWindow(QMainWindow):
         else:
             # Compatibility until Fix 5 replaces PythonRunner.
             self.python_runner.stop()
+        self.spelling.shutdown()
+        self.providers.shutdown()
         self.ruff_lsp_client.shutdown()
         if hasattr(self.search_worker, "shutdown"):
             self.search_worker.shutdown()
@@ -3795,6 +3809,7 @@ class MainWindow(QMainWindow):
         self.problems_panel.diagnosticActivated.connect(self._open_problem)
         menu = self.menuBar().addMenu("Diagnostics")
         menu.addAction(self.problems_dock.toggleViewAction())
+        menu.addAction("Reload Spelling").triggered.connect(lambda: self.spelling.reload())
         
     def _publish_problems(self, editor: Any, rows: Any) -> None:
         """Convert Ruff records into generic diafnostics without losing their raw payload."""
@@ -3816,9 +3831,22 @@ class MainWindow(QMainWindow):
     def _open_problem(self, diagnostic: Any) -> None:
         """Navigate to a live URI owner, including an unsaved Python document."""
         point = diagnostic.source_range.start
+        if diagnostic.provider == "spelling":
+            key = self.spelling.buffers().get(diagnostic.uri)
+            if key is None or key[2] != diagnostic.revision:
+                self.statusBar().showMessage("This spelling result is no longer current.", 4000)
+                return
+            self.tab_view.focus_editor(key[1])
+            key[1].setCursorPosition(point.line, point.column)
+            return
+        
         for editor in self.tab_view.all_editors():
             controller = getattr(editor, "ruff_lsp", None)
             if controller is not None and controller.uri == diagnostic.uri:
+                if (diagnostic.revision is not None
+                        and diagnostic.revision != controller.document_version):
+                    self.statusBar().showMessage("This problem belongs to an older document revision.", 4000)
+                    return
                 self.tab_view.focus_editor(editor)
                 editor.setCursorPosition(point.line, point.column)
                 return

@@ -1,0 +1,133 @@
+{
+  "capacity": 4000,
+  "retained": 4000,
+  "overwritten": 22712,
+  "operations": [
+    {
+      "name": "gui.breadcrumbs",
+      "count": 376,
+      "mean_ms": 0.2325146277414999,
+      "p95_ms": 0.5476000005728565,
+      "max_ms": 11.213599998882273,
+      "failures": 0
+    },
+    {
+      "name": "gui.dirty",
+      "count": 116,
+      "mean_ms": 0.2884887932442984,
+      "p95_ms": 0.4014000005554408,
+      "max_ms": 0.48489999971934594,
+      "failures": 0
+    },
+    {
+      "name": "gui.folding",
+      "count": 51,
+      "mean_ms": 1.2142039216568639,
+      "p95_ms": 0.8425000014540274,
+      "max_ms": 40.49480000321637,
+      "failures": 0
+    },
+    {
+      "name": "gui.markdown_render",
+      "count": 96,
+      "mean_ms": 0.024105208467517514,
+      "p95_ms": 0.03609999839682132,
+      "max_ms": 0.04600000102072954,
+      "failures": 0
+    },
+    {
+      "name": "gui.outline",
+      "count": 18,
+      "mean_ms": 0.5866833335959301,
+      "p95_ms": 1.5816999984963331,
+      "max_ms": 1.5816999984963331,
+      "failures": 0
+    },
+    {
+      "name": "gui.preview_scroll",
+      "count": 117,
+      "mean_ms": 0.08224529901625884,
+      "p95_ms": 0.1114999977289699,
+      "max_ms": 0.2319999985047616,
+      "failures": 0
+    },
+    {
+      "name": "gui.ruff_edit",
+      "count": 116,
+      "mean_ms": 0.25975258637933213,
+      "p95_ms": 0.42300000131945126,
+      "max_ms": 0.6686999986413866,
+      "failures": 0
+    },
+    {
+      "name": "gui.ruff_paint",
+      "count": 45,
+      "mean_ms": 0.0896888890161386,
+      "p95_ms": 0.14450000162469223,
+      "max_ms": 0.3338000024086796,
+      "failures": 0
+    },
+    {
+      "name": "gui.ruff_publish",
+      "count": 144,
+      "mean_ms": 0.1366201386948281,
+      "p95_ms": 0.5706000010832213,
+      "max_ms": 0.9248999995179474,
+      "failures": 0
+    },
+    {
+      "name": "gui.ruff_send",
+      "count": 48,
+      "mean_ms": 0.10370208360654942,
+      "p95_ms": 0.23489999875891954,
+      "max_ms": 0.2671999973244965,
+      "failures": 0
+    },
+    {
+      "name": "gui.status",
+      "count": 416,
+      "mean_ms": 0.14167235588047333,
+      "p95_ms": 0.21580000247922726,
+      "max_ms": 0.6317999977909494,
+      "failures": 0
+    },
+    {
+      "name": "gui.timer_lateness",
+      "count": 1662,
+      "mean_ms": 12.659489169674318,
+      "p95_ms": 21.17609999841079,
+      "max_ms": 100.7809000031557,
+      "failures": 0
+    },
+    {
+      "name": "lexer.total",
+      "count": 132,
+      "mean_ms": 0.6122545454755627,
+      "p95_ms": 0.216199998249067,
+      "max_ms": 47.914000002492685,
+      "failures": 0
+    },
+    {
+      "name": "worker.git_history",
+      "count": 334,
+      "mean_ms": 224.45334311386088,
+      "p95_ms": 274.63429999988875,
+      "max_ms": 898.1891999974323,
+      "failures": 0
+    },
+    {
+      "name": "worker.git_status",
+      "count": 329,
+      "mean_ms": 125.53541155013707,
+      "p95_ms": 157.13989999858313,
+      "max_ms": 748.0484999978216,
+      "failures": 0
+    }
+  ],
+  "runtime": {
+    "python": "3.14.10",
+    "qt": "5.15.2",
+    "pyqt": "5.15.11",
+    "cython_lexer_loaded": true
+  }
+}

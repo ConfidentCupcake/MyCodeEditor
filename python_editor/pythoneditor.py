@@ -556,13 +556,21 @@ class PythonEditor(QsciScintilla):
 
     def setTextSafely(self, text: str):
         self._loading_text = True
+        invalidate = getattr(getattr(self, "py_lexer", None), "_invalidate_source", None)
+        if invalidate is not None:
+            invalidate()
+        previous_blocked = self.blockSignals(True)
         try:
-            self.blockSignals(True)
             self.setText(text)
             self.setModified(False)
         finally:
-            self.blockSignals(False)
+            # A load supresses textChanged, do refresh the lexer explicitly.
+            # Repaeat after setText in case styling was requested furing the load.
+            if invalidate is not None:
+                invalidate()
+            self.blockSignals(previous_blocked)
             self._loading_text = False
+        self.recolor()
             
         self.folding_controller.schedule()
         self.minimap.schedule_refresh()
